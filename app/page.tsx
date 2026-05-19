@@ -2,8 +2,6 @@
 
 import React, { useMemo, useState } from "react";
 
-const PARTY_ICON_SRC = "/party-icon.jpeg";
-
 type LangMode = "both" | "en" | "hi";
 type PageId =
   | "home"
@@ -633,16 +631,6 @@ function BilingualText({ value, mode, hiClassName = "text-sm leading-4" }: { val
   );
 }
 
-function PartyEmblem({ size = "large" }: { size?: "small" | "large" }) {
-  const boxClass = size === "small" ? "h-16 w-16 rounded-2xl" : "h-44 w-44 rounded-[2.5rem] md:h-56 md:w-56";
-
-  return (
-    <div className={`flex ${boxClass} items-center justify-center overflow-hidden border border-black/10 bg-white shadow-xl`}>
-      <img src={PARTY_ICON_SRC} alt="Cockroach India Party emblem" className="h-full w-full object-cover" />
-    </div>
-  );
-}
-
 function PageEyebrow({ value, mode }: { value: I18n; mode: LangMode }) {
   return (
     <p className="text-xl font-black uppercase tracking-[0.22em] text-black/45">
@@ -661,7 +649,7 @@ function PageTitle({ value, mode }: { value: I18n; mode: LangMode }) {
 
 function ManifestoCard({ section, index, mode }: { section: ManifestoSection; index: number; mode: LangMode }) {
   return (
-    <div className="group rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-xl md:p-8">
+    <div className="reveal-card group rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl md:p-8">
       <div className="flex items-start gap-5">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-black text-xl text-white transition group-hover:scale-105">
           {section.icon}
@@ -718,10 +706,10 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
           </p>
 
           <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <button onClick={() => setPage("contact")} className="rounded-full bg-black px-8 py-5 text-lg font-black text-white hover:bg-black/85">
+            <button onClick={() => setPage("contact")} className="rounded-full bg-black px-8 py-5 text-lg font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl">
               Join the Movement →
             </button>
-            <button onClick={() => setPage("manifesto")} className="rounded-full border border-black/15 bg-white px-8 py-5 text-lg font-black hover:bg-black/5">
+            <button onClick={() => setPage("manifesto")} className="rounded-full border border-black/15 bg-white px-8 py-5 text-lg font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl">
               Read Full Manifesto
             </button>
           </div>
@@ -734,7 +722,7 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
             { en: "Technology", hi: "तकनीक" },
             { en: "Justice", hi: "न्याय" },
           ].map((item) => (
-            <div key={item.en} className="rounded-[2rem] border border-black/10 bg-white p-8 text-center shadow-sm">
+            <div key={item.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-2xl font-black tracking-[-0.045em]">
                 <BilingualText value={item} mode={mode} hiClassName="text-sm leading-4" />
               </p>
@@ -765,7 +753,7 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
 
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {targets.map((target) => (
-              <div key={target.en} className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm">
+              <div key={target.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
                 <p className="text-xl font-black tracking-[-0.02em]">
                   <BilingualText value={target} mode={mode} hiClassName="text-sm leading-4" />
                 </p>
@@ -835,7 +823,7 @@ function ConstitutionPage({ mode }: { mode: LangMode }) {
       <PageTitle value={{ en: "Rules before power.", hi: "सत्ता से पहले नियम।" }} mode={mode} />
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         {constitutionItems.map((item, index) => (
-          <div key={item.en} className="rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm">
+          <div key={item.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
             <p className="text-base font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
             <p className="mt-4 text-2xl font-black leading-tight tracking-[-0.04em]">
               <BilingualText value={item} mode={mode} hiClassName="text-sm leading-4" />
@@ -871,7 +859,7 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
         </div>
         <div className="grid gap-5">
           {section.points.map((point, index) => (
-            <div key={point.en} className="rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm">
+            <div key={point.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-base font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
               <p className="mt-3 text-xl font-bold leading-6 text-black/75">
                 <BilingualText value={point} mode={mode} hiClassName="text-sm leading-4" />
@@ -950,7 +938,7 @@ function PrivacyPage({ mode }: { mode: LangMode }) {
       <PageTitle value={{ en: "Simple and transparent data use.", hi: "सरल और पारदर्शी डेटा उपयोग।" }} mode={mode} />
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         {items.map((item) => (
-          <div key={item.en} className="rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm">
+          <div key={item.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-7 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
             <p className="text-xl font-bold leading-6 text-black/75">
               <BilingualText value={item} mode={mode} hiClassName="text-sm leading-4" />
             </p>
@@ -1014,11 +1002,26 @@ export default function CockroachIndiaParty() {
       className="min-h-screen bg-white text-[#0f0f0f] tracking-[-0.01em]"
       style={{ fontFamily: 'Inter, "SF Pro Display", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif' }}
     >
+      <style>{`
+        html { scroll-behavior: smooth; }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes softScale {
+          from { opacity: 0; transform: scale(0.985); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        section { animation: softScale 0.55s ease-out both; }
+        .reveal-card { animation: fadeUp 0.7s ease-out both; }
+        button, select, input, textarea {
+          transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
+        }
+        button:hover, select:hover, input:focus, textarea:focus { transform: translateY(-1px); }
+      `}</style>
       <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-5">
-          <button onClick={() => setActivePage("home")} className="flex items-center gap-3 text-left">
-            <PartyEmblem size="small" />
-            <div>
+          <button onClick={() => setActivePage("home")} className="flex items-center gap-3 text-left"><div>
               <p className="text-2xl font-black tracking-tight">Cockroach India Party</p>
               <HindiShadow text="कॉकरोच इंडिया पार्टी" className="text-sm leading-4" />
               <p className="text-sm font-bold text-black/50">India First. Citizens First.</p>
@@ -1044,7 +1047,7 @@ export default function CockroachIndiaParty() {
               <option value="en">English</option>
               <option value="hi">हिंदी</option>
             </select>
-            <button onClick={() => setActivePage("contact")} className="rounded-full bg-black px-6 py-4 text-base font-bold text-white hover:bg-black/85">
+            <button onClick={() => setActivePage("contact")} className="rounded-full bg-black px-6 py-4 text-base font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl">
               Join
             </button>
           </div>
