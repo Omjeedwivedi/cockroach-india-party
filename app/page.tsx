@@ -407,6 +407,63 @@ const constitutionItems: I18n[] = [
   { en: "Minister selection must be performance-based, not dynasty-based.", hi: "मंत्री चयन प्रदर्शन के आधार पर होगा, वंशवाद के आधार पर नहीं।" },
 ];
 
+const publicAccountabilityIssues: { title: I18n; explanation: I18n }[] = [
+  {
+    title: { en: "Ethanol Blending & Fuel Price Transparency", hi: "एथेनॉल ब्लेंडिंग और ईंधन मूल्य पारदर्शिता" },
+    explanation: {
+      en: "Citizens deserve a transparent audit of ethanol blending, petrol pricing, tax collection, mileage impact, farmer benefit, oil company benefit, and whether consumers actually received fair savings.",
+      hi: "नागरिकों को एथेनॉल ब्लेंडिंग, पेट्रोल कीमत, टैक्स, माइलेज प्रभाव, किसान लाभ, तेल कंपनी लाभ और उपभोक्ता बचत की पारदर्शी जांच मिलनी चाहिए।",
+    },
+  },
+  {
+    title: { en: "Demonetization Impact Audit", hi: "नोटबंदी प्रभाव जांच" },
+    explanation: {
+      en: "A full public audit must show the real impact of demonetization on jobs, small businesses, cash economy, banking stress, black money recovery, and the hardship faced by ordinary families.",
+      hi: "नोटबंदी का रोजगार, छोटे व्यवसाय, नकद अर्थव्यवस्था, बैंकिंग दबाव, काले धन की रिकवरी और आम परिवारों की कठिनाई पर पूरा सार्वजनिक ऑडिट होना चाहिए।",
+    },
+  },
+  {
+    title: { en: "Electoral Funding & Political Donation Transparency", hi: "चुनावी फंडिंग और राजनीतिक दान पारदर्शिता" },
+    explanation: {
+      en: "Every political donation must be traceable to the public. Citizens must know who funded which party, whether donors received contracts, and whether policy decisions benefited donors.",
+      hi: "हर राजनीतिक दान जनता के लिए ट्रेस करने योग्य हो। नागरिक जानें किसने किस पार्टी को पैसा दिया, क्या दाताओं को ठेके मिले और क्या नीति से उन्हें लाभ हुआ।",
+    },
+  },
+  {
+    title: { en: "Public Infrastructure Cost & Quality Audit", hi: "सार्वजनिक इंफ्रास्ट्रक्चर लागत और गुणवत्ता जांच" },
+    explanation: {
+      en: "Roads, bridges, airports, smart city works, public buildings, and large contracts must be audited for inflated cost, poor quality, repeated repairs, delays, and contractor-politician links.",
+      hi: "सड़क, पुल, एयरपोर्ट, स्मार्ट सिटी, सरकारी भवन और बड़े ठेकों की बढ़ी लागत, खराब गुणवत्ता, बार-बार मरम्मत, देरी और ठेकेदार-नेता संबंधों पर जांच हो।",
+    },
+  },
+  {
+    title: { en: "Loan Write-Offs, NPAs & Crony Benefit Audit", hi: "लोन राइट-ऑफ, NPA और करीबी लाभ जांच" },
+    explanation: {
+      en: "Large loan write-offs, NPAs, bank losses, corporate relief, and recovery failures must be publicly audited so common taxpayers do not pay the price for powerful defaulters.",
+      hi: "बड़े लोन राइट-ऑफ, NPA, बैंक घाटे, कॉरपोरेट राहत और रिकवरी विफलता का सार्वजनिक ऑडिट हो ताकि आम टैक्सपेयर ताकतवर डिफॉल्टरों की कीमत न चुकाए।",
+    },
+  },
+];
+
+const politicianLifestylePromises: I18n[] = [
+  {
+    en: "All elected representatives must publicly disclose salary, allowances, assets, vehicles, bungalows, security expense, foreign travel, gifts, and family-linked business interests every year.",
+    hi: "हर जनप्रतिनिधि हर साल वेतन, भत्ता, संपत्ति, गाड़ी, बंगला, सुरक्षा खर्च, विदेश यात्रा, उपहार और पारिवारिक व्यापारिक हित सार्वजनिक करे।",
+  },
+  {
+    en: "Luxury lifestyle growth must be compared with declared income, tax records, election affidavits, and public contracts to detect unexplained wealth.",
+    hi: "लग्जरी जीवनशैली की तुलना घोषित आय, टैक्स रिकॉर्ड, चुनावी शपथपत्र और सार्वजनिक ठेकों से की जाए ताकि अघोषित संपत्ति पकड़ी जा सके।",
+  },
+  {
+    en: "Public office must not become a route to royal living. Politics must be treated as service, not a shortcut to wealth, power, and family privilege.",
+    hi: "सार्वजनिक पद शाही जीवन का रास्ता नहीं होना चाहिए। राजनीति सेवा हो, धन, शक्ति और पारिवारिक विशेषाधिकार का शॉर्टकट नहीं।",
+  },
+  {
+    en: "If a politician cannot explain sudden wealth, luxury assets, or lifestyle upgrades, an independent inquiry must begin automatically.",
+    hi: "अगर कोई नेता अचानक बढ़ी संपत्ति, लग्जरी संपत्ति या जीवनशैली अपग्रेड नहीं समझा पाता, तो स्वतः स्वतंत्र जांच शुरू हो।",
+  },
+];
+
 function runSelfTests() {
   return {
     hasEnoughManifestoSections: manifesto.length >= 10,
@@ -635,7 +692,7 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
         </div>
       </section>
 
-      <LaunchChecklist mode={mode} />
+      <PublicAccountabilitySection mode={mode} />
     </>
   );
 }
@@ -831,6 +888,68 @@ function ContactPage({ mode }: { mode: LangMode }) {
   );
 }
 
+function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mt-20 rounded-[3rem] border border-black/10 bg-[#fafafa] p-6 md:p-10">
+      <div className="mb-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+        <div>
+          <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
+          <PageTitle value={{ en: "Where citizens suffered, power must answer.", hi: "जहां जनता ने कष्ट झेला, सत्ता जवाब दे।" }} mode={mode} />
+        </div>
+        <p className="text-base font-bold leading-7 text-black/65">
+          <BilingualText
+            value={{
+              en: "These are public-interest audit demands. Every major policy that affected common citizens must be reviewed with data, documents, hearings, and legal due process.",
+              hi: "ये सार्वजनिक हित की ऑडिट मांगें हैं। आम नागरिकों को प्रभावित करने वाली हर बड़ी नीति की डेटा, दस्तावेज, सुनवाई और कानूनी प्रक्रिया से समीक्षा हो।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4"
+          />
+        </p>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-2">
+        {publicAccountabilityIssues.map((issue, index) => (
+          <div key={issue.title.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <p className="text-sm font-black text-black/35">Audit {String(index + 1).padStart(2, "0")}</p>
+            <h3 className="mt-2 text-2xl font-black tracking-[-0.04em]">
+              <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal" />
+            </h3>
+            <p className="mt-4 text-sm font-bold leading-6 text-black/70">
+              <BilingualText value={issue.explanation} mode={mode} hiClassName="text-[11px] leading-4" />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PoliticianLifestyleSection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="border-y border-black/10 bg-[#fafafa]">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+          <div>
+            <PageEyebrow value={{ en: "Rich Life of Politicians", hi: "नेताओं की अमीर जीवनशैली" }} mode={mode} />
+            <PageTitle value={{ en: "Public service cannot become private luxury.", hi: "जनसेवा निजी विलासिता नहीं बन सकती।" }} mode={mode} />
+          </div>
+          <div className="grid gap-4">
+            {politicianLifestylePromises.map((item, index) => (
+              <div key={item.en} className="rounded-[2rem] border border-black/10 bg-white p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+                <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
+                <p className="mt-3 text-sm font-bold leading-6 text-black/75">
+                  <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PrivacyPage({ mode }: { mode: LangMode }) {
   const items: I18n[] = [
     { en: "We do not collect personal details on the Join page.", hi: "Join पेज पर हम निजी जानकारी नहीं लेते।" },
@@ -1004,6 +1123,7 @@ export default function CockroachIndiaParty() {
       {activePage === "antiCorruption" && <FocusPage mode={mode} sectionId="asset-verification" eyebrow={{ en: "Anti-Corruption Guarantee", hi: "भ्रष्टाचार विरोध गारंटी" }} />}
       {activePage === "contact" && <ContactPage mode={mode} />}
       {activePage === "privacy" && <PrivacyPage mode={mode} />}
+      <PoliticianLifestyleSection mode={mode} />
 
       <footer className="border-t border-black/10 px-6 py-10 text-center text-sm font-bold text-black/45">
         <div className="mx-auto mb-6 flex max-w-7xl flex-wrap justify-center gap-3">
