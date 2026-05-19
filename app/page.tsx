@@ -873,50 +873,56 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
 }
 
 function ContactPage({ mode }: { mode: LangMode }) {
+  const instagramUrl = "https://www.instagram.com/cockroachindiaparty_?igsh=ZTA2ejhxbDFrdXR2&utm_source=qr";
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="overflow-hidden rounded-[3rem] border border-black/10 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-[3rem] border border-black/10 bg-white shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
         <div className="grid md:grid-cols-2">
           <div className="p-8 md:p-12">
-            <PageEyebrow value={{ en: "Join Us", hi: "हमसे जुड़ें" }} mode={mode} />
-            <PageTitle value={{ en: "Help build India's future-first movement.", hi: "भारत के भविष्य-प्रथम आंदोलन को बनाने में मदद करें।" }} mode={mode} />
-            <p className="mt-6 text-xl font-bold leading-6 text-black/65">
-              <BilingualText value={{ en: "Volunteer, share ideas, organize local conversations, and help build a citizen-led platform for jobs, education, technology, justice, and national growth.", hi: "स्वयंसेवक बनें, विचार साझा करें, स्थानीय संवाद करें और रोजगार, शिक्षा, तकनीक, न्याय व राष्ट्रीय विकास के लिए नागरिक मंच बनाएं।" }} mode={mode} hiClassName="text-base leading-5" />
+            <PageEyebrow value={{ en: "Join Now", hi: "अभी जुड़ें" }} mode={mode} />
+            <PageTitle value={{ en: "Follow the movement on Instagram.", hi: "Instagram पर आंदोलन को फॉलो करें।" }} mode={mode} />
+            <p className="mt-6 text-xl font-bold leading-8 text-black/65">
+              <BilingualText
+                value={{
+                  en: "Stay connected with updates, announcements, manifesto ideas, volunteer calls, and public movement content directly through our Instagram page.",
+                  hi: "अपडेट, घोषणाएं, घोषणापत्र विचार, स्वयंसेवक कॉल और आंदोलन से जुड़ी जानकारी सीधे हमारे Instagram पेज पर देखें।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5"
+              />
             </p>
-            <div className="mt-8 rounded-[2rem] border border-black/10 bg-[#fafafa] p-6">
-              <p className="text-lg font-black">contact@cockroachindiaparty.com</p>
-              <p className="mt-3 text-sm font-bold text-black/45">Replace this with your real official email before launch.</p>
-            </div>
           </div>
 
-          <div className="bg-[#fafafa] p-8 md:p-12">
-            <h3 className="text-3xl font-black tracking-[-0.06em]">
-              <BilingualText value={{ en: "Volunteer Interest Form", hi: "स्वयंसेवक रुचि फॉर्म" }} mode={mode} hiClassName="text-base leading-5 tracking-normal" />
-            </h3>
-            <form action="/api/join" method="post" className="mt-6 grid gap-4">
-              <input name="name" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="Full name / पूरा नाम" required />
-              <input name="mobile" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="Mobile number / मोबाइल नंबर" required />
-              <input name="email" type="email" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="Email / ईमेल" />
-              <div className="grid gap-4 sm:grid-cols-2">
-                <input name="city" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="City / शहर" required />
-                <input name="state" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="State / राज्य" required />
-              </div>
-              <select name="profession" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" defaultValue="">
-                <option value="" disabled>Profession / पेशा</option>
-                {professions.map((item) => <option key={item} value={item}>{item}</option>)}
-              </select>
-              <select name="joinAs" className="rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" defaultValue="">
-                <option value="" disabled>Want to join as / किस रूप में जुड़ना चाहते हैं</option>
-                {joinRoles.map((item) => <option key={item} value={item}>{item}</option>)}
-              </select>
-              <textarea name="message" className="min-h-36 rounded-2xl border border-black/10 bg-white px-4 py-4 text-lg font-bold outline-none focus:border-black" placeholder="Why do you want to join? / आप क्यों जुड़ना चाहते हैं?" />
-              <button type="submit" className="rounded-full bg-black py-6 text-lg font-black text-white hover:bg-black/85">
-                Submit Interest
-              </button>
-            </form>
-            <p className="mt-4 text-sm font-bold text-black/45">
-              This form is frontend-ready. Create /api/join or connect it to Google Sheets, Airtable, Supabase, or Firebase before launch.
-            </p>
+          <div className="flex flex-col justify-center bg-[#fafafa] p-8 md:p-12">
+            <div className="rounded-[2rem] border border-black/10 bg-white p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <p className="text-5xl">📸</p>
+              <h3 className="mt-5 text-3xl font-black tracking-[-0.04em]">
+                <BilingualText
+                  value={{ en: "Cockroach India Party", hi: "कॉकरोच इंडिया पार्टी" }}
+                  mode={mode}
+                  hiClassName="text-base leading-5 tracking-normal"
+                />
+              </h3>
+              <p className="mt-3 text-base font-bold text-black/50">@cockroachindiaparty_</p>
+
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-black px-8 py-5 text-lg font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl"
+              >
+                Follow on Instagram →
+              </a>
+
+              <p className="mt-5 text-sm font-bold text-black/45">
+                <BilingualText
+                  value={{ en: "No form. No personal details required.", hi: "कोई फॉर्म नहीं। कोई निजी जानकारी नहीं चाहिए।" }}
+                  mode={mode}
+                  hiClassName="text-xs"
+                />
+              </p>
+            </div>
           </div>
         </div>
       </div>
