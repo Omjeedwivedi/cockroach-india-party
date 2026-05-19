@@ -30,14 +30,14 @@ type ManifestoSection = {
 const INSTAGRAM_URL =
   "https://www.instagram.com/cockroachindiaparty_?igsh=ZTA2ejhxbDFrdXR2&utm_source=qr";
 
+
 const navItems: { id: PageId; label: I18n }[] = [
   { id: "home", label: { en: "Home", hi: "होम" } },
   { id: "manifesto", label: { en: "Manifesto", hi: "घोषणापत्र" } },
   { id: "about", label: { en: "About", hi: "परिचय" } },
-  { id: "constitution", label: { en: "Constitution", hi: "संविधान" } },
+  { id: "constitution", label: { en: "Vision", hi: "दृष्टि" } },
   { id: "student", label: { en: "Student First", hi: "छात्र प्रथम" } },
   { id: "antiCorruption", label: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" } },
-  { id: "contact", label: { en: "Join", hi: "जुड़ें" } },
 ];
 
 const manifesto: ManifestoSection[] = [
@@ -579,7 +579,7 @@ function ManifestoCard({ section, index, mode }: { section: ManifestoSection; in
       <ul className="mt-6 space-y-3 border-t border-black/10 pt-5">
         {section.points.map((point) => (
           <li key={point.en} className="flex gap-3 text-sm font-bold leading-6 text-black/75">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-black" />
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 magnetic-btn rounded-full bg-black" />
             <span>
               <BilingualText value={point} mode={mode} hiClassName="text-[11px] leading-4" />
             </span>
@@ -590,14 +590,22 @@ function ManifestoCard({ section, index, mode }: { section: ManifestoSection; in
   );
 }
 
-function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) => void }) {
+function HomePage({
+  mode,
+  setPage,
+  scrollToJoin,
+}: {
+  mode: LangMode;
+  setPage: (page: PageId) => void;
+  scrollToJoin: () => void;
+}) {
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:pb-24 md:pt-28">
         <div className="mx-auto max-w-5xl text-center">
-          <div className="mx-auto mb-7 inline-flex flex-col items-center gap-1 rounded-full border border-black/10 bg-white px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mx-auto mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 bg-[#B6FF00] px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <span>✓ Vision 2047 Manifesto</span>
-            <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />
+            {mode !== "en" && <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />}
           </div>
 
           <h1 className="text-5xl font-black leading-[0.92] tracking-[-0.065em] md:text-7xl lg:text-8xl">
@@ -611,8 +619,8 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
           <p className="mx-auto mt-8 max-w-3xl text-lg font-bold leading-8 text-black/65">
             <BilingualText
               value={{
-                en: "A political movement focused on jobs, education, technology, discipline, justice, and national growth - not caste politics, hate, or empty slogans.",
-                hi: "रोजगार, शिक्षा, तकनीक, अनुशासन, न्याय और राष्ट्रीय विकास पर केंद्रित आंदोलन - जाति राजनीति, नफरत या खाली नारों पर नहीं।",
+                en: "A movement for students, workers, taxpayers, farmers, small business owners, and ordinary families who want accountability - not caste politics, hate, or empty slogans.",
+                hi: "छात्रों, कर्मचारियों, टैक्सपेयर्स, किसानों, छोटे व्यापारियों और आम परिवारों के लिए आंदोलन जो जवाबदेही चाहते हैं - जाति राजनीति, नफरत या खाली नारों पर नहीं।",
               }}
               mode={mode}
               hiClassName="text-sm leading-5"
@@ -621,14 +629,14 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
 
           <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
             <button
-              onClick={() => setPage("contact")}
-              className="rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl"
+              onClick={scrollToJoin}
+              className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
             >
               Join the Movement →
             </button>
             <button
               onClick={() => setPage("manifesto")}
-              className="rounded-full border border-black/15 bg-white px-8 py-4 text-base font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl"
+              className="magnetic-btn rounded-full border border-black/15 bg-white px-8 py-4 text-base font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl"
             >
               Read Full Manifesto
             </button>
@@ -644,7 +652,7 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
           ].map((item) => (
             <div
               key={item.en}
-              className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
             >
               <p className="text-2xl font-black tracking-[-0.04em]">
                 <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
@@ -681,7 +689,7 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
             {targets.map((target) => (
               <div
                 key={target.en}
-                className="reveal-card rounded-[2rem] border border-black/10 bg-white p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+                className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
               >
                 <p className="text-base font-black tracking-[-0.02em]">
                   <BilingualText value={target} mode={mode} hiClassName="text-xs leading-4" />
@@ -692,7 +700,16 @@ function HomePage({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) =
         </div>
       </section>
 
+      <MovementCounterSection mode={mode} />
+      <WhyMovementExistsSection mode={mode} />
+      <JanataPainPointsSection mode={mode} />
+      <StudentFirstHomeSection mode={mode} />
+      <WorkerRightsHomeSection mode={mode} />
+      <MovementRulesSection mode={mode} />
+      <HundredDayPlanSection mode={mode} />
       <PublicAccountabilitySection mode={mode} />
+      <ReportLocalIssueSection mode={mode} />
+      <ContactPage mode={mode} />
     </>
   );
 }
@@ -773,13 +790,37 @@ function AboutPage({ mode }: { mode: LangMode }) {
 function ConstitutionPage({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20">
-      <PageEyebrow value={{ en: "Party Constitution", hi: "पार्टी संविधान" }} mode={mode} />
-      <PageTitle value={{ en: "Rules before power.", hi: "सत्ता से पहले नियम।" }} mode={mode} />
+      <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div>
+          <PageEyebrow value={{ en: "Vision", hi: "दृष्टि" }} mode={mode} />
+          <PageTitle value={{ en: "India 2047 Vision.", hi: "भारत 2047 दृष्टि।" }} mode={mode} />
+          <p className="mt-6 text-base font-bold leading-7 text-black/65">
+            <BilingualText
+              value={{
+                en: "A movement built to question power, demand transparency, protect students and workers, and make politics answerable to ordinary citizens.",
+                hi: "एक ऐसा आंदोलन जो सत्ता से सवाल करे, पारदर्शिता मांगे, छात्रों और कर्मचारियों की रक्षा करे और राजनीति को आम नागरिकों के प्रति जवाबदेह बनाए।",
+              }}
+              mode={mode}
+              hiClassName="text-xs leading-4"
+            />
+          </p>
+        </div>
+        <div className="reveal-card rounded-[2.5rem] border border-black/10 bg-black p-8 text-white shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_32px_80px_rgba(0,0,0,0.22)]">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-white/45">Vision Summary</p>
+          <h2 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.055em]">
+            India First. Citizens First.
+          </h2>
+          <p className="mt-6 text-sm font-bold leading-6 text-white/65">
+            A clear national direction built on transparency, students, workers, jobs, technology, justice, and accountable leadership.
+          </p>
+        </div>
+      </div>
+
       <div className="mt-12 grid gap-5 md:grid-cols-2">
         {constitutionItems.map((item, index) => (
           <div
             key={item.en}
-            className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
           >
             <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
             <p className="mt-4 text-xl font-black leading-7 tracking-[-0.03em]">
@@ -818,7 +859,7 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
           {section.points.map((point, index) => (
             <div
               key={point.en}
-              className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
             >
               <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
               <p className="mt-3 text-base font-bold leading-7 text-black/75">
@@ -834,8 +875,8 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
 
 function ContactPage({ mode }: { mode: LangMode }) {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="overflow-hidden rounded-[3rem] border border-black/10 bg-white shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
+    <section id="join" className="mx-auto max-w-7xl px-6 py-20">
+      <div className="overflow-hidden glass-card rounded-[3rem] border border-black/10 shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
         <div className="grid md:grid-cols-2">
           <div className="p-8 md:p-12">
             <PageEyebrow value={{ en: "Join Now", hi: "अभी जुड़ें" }} mode={mode} />
@@ -868,7 +909,7 @@ function ContactPage({ mode }: { mode: LangMode }) {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl"
+                className="mt-8 inline-flex w-full items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
               >
                 Follow on Instagram →
               </a>
@@ -882,6 +923,290 @@ function ContactPage({ mode }: { mode: LangMode }) {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AnnouncementBar() {
+  return (
+    <div className="border-b border-black/10 bg-[#B6FF00] px-6 py-3 text-center text-sm font-black text-black">
+      Janata First. Power Accountable. Follow the movement on Instagram.
+    </div>
+  );
+}
+
+function MovementCounterSection({ mode }: { mode: LangMode }) {
+  const counters: I18n[] = [
+    { en: "0 Rupee Corruption Tolerance", hi: "भ्रष्टाचार पर शून्य सहनशीलता" },
+    { en: "5-Day Work Week Demand", hi: "5 दिन कार्य सप्ताह मांग" },
+    { en: "100-Day Action Plan", hi: "100 दिन कार्य योजना" },
+    { en: "2047 India Vision", hi: "2047 भारत दृष्टि" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-12">
+      <div className="grid gap-4 md:grid-cols-4">
+        {counters.map((item) => (
+          <div
+            key={item.en}
+            className="reveal-card micro-lift shine-card soft-green-glow rounded-[2rem] border border-black/10 bg-[#B6FF00] p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+          >
+            <p className="text-xl font-black leading-7 tracking-[-0.04em] text-black">
+              <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function StickyInstagramButton() {
+  return (
+    <a
+      href={INSTAGRAM_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-5 right-5 z-50 magnetic-btn rounded-full border border-black/10 bg-[#B6FF00] px-5 py-3 text-sm font-black text-black shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+    >
+      Follow / Report Issue
+    </a>
+  );
+}
+
+function WhyMovementExistsSection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+        <div>
+          <PageEyebrow value={{ en: "Why This Movement Exists", hi: "यह आंदोलन क्यों है" }} mode={mode} />
+          <PageTitle value={{ en: "For ordinary Indians who survive pressure every day.", hi: "उन आम भारतीयों के लिए जो हर दिन दबाव झेलते हैं।" }} mode={mode} />
+        </div>
+        <div className="reveal-card rounded-[2rem] border border-black/10 bg-[#fafafa] p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+          <p className="text-base font-bold leading-7 text-black/70">
+            <BilingualText
+              value={{
+                en: "This movement is for students, employees, farmers, small business owners, taxpayers, and families who survive pressure every day. The cockroach symbol means survival, adaptability, discipline, and refusal to disappear. We are not here for hate politics. We are here for accountability, jobs, education, justice, and public dignity.",
+                hi: "यह आंदोलन छात्रों, कर्मचारियों, किसानों, छोटे व्यापारियों, टैक्सपेयर्स और परिवारों के लिए है जो हर दिन दबाव झेलते हैं। कॉकरोच प्रतीक संघर्ष, अनुकूलन, अनुशासन और हार न मानने का प्रतीक है। हम नफरत की राजनीति के लिए नहीं, जवाबदेही, रोजगार, शिक्षा, न्याय और जनसम्मान के लिए हैं।",
+              }}
+              mode={mode}
+              hiClassName="text-xs leading-4"
+            />
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function JanataPainPointsSection({ mode }: { mode: LangMode }) {
+  const painPoints: I18n[] = [
+    { en: "Unemployment after education", hi: "पढ़ाई के बाद बेरोजगारी" },
+    { en: "Paper leaks and delayed exams", hi: "पेपर लीक और परीक्षा देरी" },
+    { en: "Toxic private-sector work culture", hi: "निजी क्षेत्र की विषाक्त कार्य संस्कृति" },
+    { en: "Unpaid overtime", hi: "बिना भुगतान ओवरटाइम" },
+    { en: "Rising fuel and living costs", hi: "बढ़ती ईंधन और जीवन लागत" },
+    { en: "Corruption in local offices", hi: "स्थानीय कार्यालयों में भ्रष्टाचार" },
+    { en: "Expensive healthcare", hi: "महंगा स्वास्थ्य इलाज" },
+    { en: "Poor roads, drainage, and garbage systems", hi: "खराब सड़क, ड्रेनेज और कचरा व्यवस्था" },
+    { en: "Political luxury while citizens struggle", hi: "जनता संघर्ष में, नेता विलासिता में" },
+    { en: "No accountability after failed policies", hi: "असफल नीतियों के बाद जवाबदेही नहीं" },
+  ];
+
+  return (
+    <section className="border-y border-black/10 bg-[#fafafa]">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 max-w-4xl">
+          <PageEyebrow value={{ en: "What Ordinary Indians Are Facing", hi: "आम भारतीय क्या झेल रहे हैं" }} mode={mode} />
+          <PageTitle value={{ en: "Real problems, not empty slogans.", hi: "वास्तविक समस्याएं, खाली नारे नहीं।" }} mode={mode} />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {painPoints.map((item) => (
+            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <p className="text-sm font-black leading-6 text-black/75">
+                <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StudentFirstHomeSection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="rounded-[3rem] border border-black/10 bg-black p-8 text-white shadow-2xl md:p-10">
+        <PageEyebrow value={{ en: "Student First Movement", hi: "छात्र प्रथम आंदोलन" }} mode={mode} />
+        <h2 className="mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
+          <BilingualText
+            value={{ en: "No nation becomes powerful by ignoring students.", hi: "छात्रों को नजरअंदाज करके कोई राष्ट्र शक्तिशाली नहीं बनता।" }}
+            mode={mode}
+            hiClassName="text-lg leading-6 text-white/35 tracking-normal md:text-2xl"
+          />
+        </h2>
+        <p className="mt-8 max-w-4xl text-base font-bold leading-7 text-white/70">
+          <BilingualText
+            value={{
+              en: "Our first government priority will be students: fair exams, no paper leaks, fast results, job-linked education, internships, mental health support, affordable colleges, and direct student councils at district, state, and national level.",
+              hi: "हमारी पहली सरकारी प्राथमिकता छात्र होंगे: निष्पक्ष परीक्षा, पेपर लीक बंद, तेज परिणाम, नौकरी से जुड़ी शिक्षा, इंटर्नशिप, मानसिक स्वास्थ्य सहायता, किफायती कॉलेज और जिला, राज्य व राष्ट्रीय स्तर पर छात्र परिषद।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4 text-white/35"
+          />
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function WorkerRightsHomeSection({ mode }: { mode: LangMode }) {
+  const demands: I18n[] = [
+    { en: "5-day work week", hi: "5 दिन का कार्य सप्ताह" },
+    { en: "Paid overtime", hi: "भुगतान वाला ओवरटाइम" },
+    { en: "No forced weekend work", hi: "जबरन वीकेंड काम नहीं" },
+    { en: "Labour law audits", hi: "श्रम कानून ऑडिट" },
+    { en: "Protection from toxic managers", hi: "विषाक्त मैनेजरों से सुरक्षा" },
+    { en: "Fast employee complaint system", hi: "तेज कर्मचारी शिकायत प्रणाली" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-start">
+        <div>
+          <PageEyebrow value={{ en: "Private Employee Rights Movement", hi: "निजी कर्मचारी अधिकार आंदोलन" }} mode={mode} />
+          <PageTitle value={{ en: "Private employees are also nation builders.", hi: "निजी कर्मचारी भी राष्ट्र निर्माता हैं।" }} mode={mode} />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {demands.map((item) => (
+            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <p className="text-sm font-black leading-6 text-black/75">
+                <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MovementRulesSection({ mode }: { mode: LangMode }) {
+  const rules: I18n[] = [
+    { en: "No hate politics", hi: "नफरत की राजनीति नहीं" },
+    { en: "No caste or religion targeting", hi: "जाति या धर्म को निशाना नहीं" },
+    { en: "No fake news", hi: "फेक न्यूज़ नहीं" },
+    { en: "No violence", hi: "हिंसा नहीं" },
+    { en: "No paid propaganda", hi: "पेड प्रोपेगैंडा नहीं" },
+    { en: "Only citizen issues, evidence, and accountability", hi: "केवल नागरिक मुद्दे, प्रमाण और जवाबदेही" },
+  ];
+
+  return (
+    <section className="border-y border-black/10 bg-[#fafafa]">
+      <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-10 max-w-4xl">
+          <PageEyebrow value={{ en: "Movement Rules", hi: "आंदोलन के नियम" }} mode={mode} />
+          <PageTitle value={{ en: "Discipline before politics.", hi: "राजनीति से पहले अनुशासन।" }} mode={mode} />
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {rules.map((rule) => (
+            <div key={rule.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <p className="text-sm font-black leading-6 text-black/75">
+                ✓ <BilingualText value={rule} mode={mode} hiClassName="text-[11px] leading-4" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HundredDayPlanSection({ mode }: { mode: LangMode }) {
+  const actions: I18n[] = [
+    { en: "Public expense dashboard", hi: "सार्वजनिक खर्च डैशबोर्ड" },
+    { en: "Leader asset verification", hi: "नेताओं की संपत्ति जांच" },
+    { en: "Student paper leak law", hi: "पेपर लीक कानून" },
+    { en: "Private overtime complaint portal", hi: "निजी ओवरटाइम शिकायत पोर्टल" },
+    { en: "Fuel price audit", hi: "ईंधन मूल्य ऑडिट" },
+    { en: "Government recruitment calendar", hi: "सरकारी भर्ती कैलेंडर" },
+    { en: "Corruption fast-track courts", hi: "भ्रष्टाचार फास्ट-ट्रैक कोर्ट" },
+    { en: "District problem dashboards", hi: "जिला समस्या डैशबोर्ड" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-10 grid gap-6 md:grid-cols-[0.85fr_1.15fr] md:items-end">
+        <div>
+          <PageEyebrow value={{ en: "First 100 Days If Given Power", hi: "सत्ता मिलने पर पहले 100 दिन" }} mode={mode} />
+          <PageTitle value={{ en: "Action, not speeches.", hi: "भाषण नहीं, कार्रवाई।" }} mode={mode} />
+        </div>
+        <p className="text-base font-bold leading-7 text-black/65">
+          <BilingualText
+            value={{
+              en: "The first 100 days must prove whether politics is serious about accountability, students, workers, jobs, and clean governance.",
+              hi: "पहले 100 दिन साबित करेंगे कि राजनीति जवाबदेही, छात्रों, कर्मचारियों, रोजगार और स्वच्छ शासन को लेकर गंभीर है या नहीं।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4"
+          />
+        </p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {actions.map((action, index) => (
+          <div key={action.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <p className="text-sm font-black text-black/35">Day Plan {String(index + 1).padStart(2, "0")}</p>
+            <p className="mt-3 text-sm font-black leading-6 text-black/75">
+              <BilingualText value={action} mode={mode} hiClassName="text-[11px] leading-4" />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="glass-card rounded-[3rem] border border-black/10 p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl md:p-10">
+        <PageEyebrow value={{ en: "Report Public Problems", hi: "जन समस्याएं भेजें" }} mode={mode} />
+        <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
+          <BilingualText
+            value={{
+              en: "Send issues or corruption videos on Instagram.",
+              hi: "समस्याएं या भ्रष्टाचार वीडियो Instagram पर भेजें।",
+            }}
+            mode={mode}
+            hiClassName="text-lg leading-6 tracking-normal md:text-2xl"
+          />
+        </h2>
+        <p className="mx-auto mt-6 max-w-3xl text-base font-bold leading-7 text-black/65">
+          <BilingualText
+            value={{
+              en: "Bad roads, corruption, drainage, garbage, exam delays, hospital problems, local injustice, public office harassment, or corruption videos — send evidence, location, date, and short details to our Instagram.",
+              hi: "खराब सड़क, भ्रष्टाचार, ड्रेनेज, कचरा, परीक्षा देरी, अस्पताल समस्या, स्थानीय अन्याय, सरकारी कार्यालय उत्पीड़न या भ्रष्टाचार वीडियो — प्रमाण, स्थान, तारीख और छोटी जानकारी Instagram पर भेजें।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4"
+          />
+        </p>
+        <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-black/10 bg-[#B6FF00] p-4 text-left text-xs font-black leading-5 text-black">
+          Safety note: Do not put yourself in danger while recording. Share only truthful, lawful, and evidence-based information.
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
+          >
+            Send Issue or Corruption Video ↓
+          </a>
         </div>
       </div>
     </section>
@@ -910,7 +1235,7 @@ function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
 
       <div className="grid gap-5 lg:grid-cols-2">
         {publicAccountabilityIssues.map((issue, index) => (
-          <div key={issue.title.en} className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+          <div key={issue.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
             <p className="text-sm font-black text-black/35">Audit {String(index + 1).padStart(2, "0")}</p>
             <h3 className="mt-2 text-2xl font-black tracking-[-0.04em]">
               <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal" />
@@ -966,7 +1291,7 @@ function PrivacyPage({ mode }: { mode: LangMode }) {
         {items.map((item) => (
           <div
             key={item.en}
-            className="reveal-card rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
           >
             <p className="text-base font-bold leading-7 text-black/75">
               <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
@@ -1021,7 +1346,23 @@ function LaunchChecklist({ mode }: { mode: LangMode }) {
 
 export default function CockroachIndiaParty() {
   const [activePage, setActivePage] = useState<PageId>("home");
-  const [mode, setMode] = useState<LangMode>("both");
+  const [mode, setMode] = useState<LangMode>("en");
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const navigateToPage = (page: PageId) => {
+    setActivePage(page);
+    setTimeout(scrollToTop, 50);
+  };
+
+  const scrollToJoin = () => {
+    setActivePage("home");
+    setTimeout(() => {
+      document.getElementById("join")?.scrollIntoView({ behavior: "smooth" });
+    }, 80);
+  };
 
   const pageTitle = useMemo(() => {
     if (activePage === "privacy") return { en: "Privacy", hi: "गोपनीयता" };
@@ -1044,6 +1385,103 @@ export default function CockroachIndiaParty() {
           from { opacity: 0; transform: scale(0.985); }
           to { opacity: 1; transform: scale(1); }
         }
+        .glass-card {
+          background: rgba(255, 255, 255, 0.72);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          box-shadow: 0 18px 60px rgba(0, 0, 0, 0.08);
+        }
+        .clay-card {
+          background: #ffffff;
+          box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.08), 0 18px 50px rgba(0, 0, 0, 0.08);
+        }
+        .soft-green-glow {
+          box-shadow: 0 0 0 1px rgba(182, 255, 0, 0.45), 0 20px 70px rgba(182, 255, 0, 0.16);
+        }
+        .shine-card { position: relative; overflow: hidden; }
+        .shine-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.55) 45%, transparent 65%);
+          transform: translateX(-120%);
+          transition: transform 700ms ease;
+          pointer-events: none;
+        }
+        .shine-card:hover::before { transform: translateX(120%); }
+        .micro-lift { transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background-color 260ms ease; }
+        .micro-lift:hover { transform: translateY(-8px) scale(1.01); }
+        .magnetic-btn { transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease; }
+        .magnetic-btn:hover { transform: translateY(-3px) scale(1.03); }
+        @keyframes parallaxDriftOne {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(38px, -32px, 0) scale(1.08); }
+          100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes parallaxDriftTwo {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          50% { transform: translate3d(-44px, 36px, 0) scale(1.06); }
+          100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+        @keyframes gridMove {
+          from { background-position: 0 0; }
+          to { background-position: 64px 64px; }
+        }
+        .parallax-background {
+          pointer-events: none;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          background: radial-gradient(circle at 20% 10%, rgba(182, 255, 0, 0.18), transparent 26%), radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.06), transparent 24%), #ffffff;
+        }
+        .parallax-grid {
+          position: absolute;
+          inset: -80px;
+          opacity: 0.22;
+          background-image: linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+          background-size: 64px 64px;
+          animation: gridMove 18s linear infinite;
+        }
+        .parallax-orb-one,
+        .parallax-orb-two,
+        .parallax-orb-three {
+          position: absolute;
+          border-radius: 9999px;
+          filter: blur(18px);
+          opacity: 0.48;
+        }
+        .parallax-orb-one {
+          left: 7%;
+          top: 18%;
+          height: 260px;
+          width: 260px;
+          background: rgba(182, 255, 0, 0.45);
+          animation: parallaxDriftOne 10s ease-in-out infinite;
+        }
+        .parallax-orb-two {
+          right: 6%;
+          top: 42%;
+          height: 320px;
+          width: 320px;
+          background: rgba(0, 0, 0, 0.08);
+          animation: parallaxDriftTwo 13s ease-in-out infinite;
+        }
+        .parallax-orb-three {
+          left: 36%;
+          bottom: 8%;
+          height: 220px;
+          width: 220px;
+          background: rgba(182, 255, 0, 0.28);
+          animation: parallaxDriftTwo 16s ease-in-out infinite reverse;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .parallax-grid,
+          .parallax-orb-one,
+          .parallax-orb-two,
+          .parallax-orb-three { animation: none; }
+        }
+        section, nav, footer, .page-layer { position: relative; z-index: 1; }
         section { animation: softScale 0.55s ease-out both; }
         .reveal-card { animation: fadeUp 0.7s ease-out both; }
         button, select, input, textarea, a {
@@ -1051,16 +1489,24 @@ export default function CockroachIndiaParty() {
         }
         button:hover, select:hover, input:focus, textarea:focus, a:hover { transform: translateY(-1px); }
       `}</style>
+      <div className="parallax-background" aria-hidden="true">
+        <div className="parallax-grid" />
+        <div className="parallax-orb-one" />
+        <div className="parallax-orb-two" />
+        <div className="parallax-orb-three" />
+      </div>
+
+      <AnnouncementBar />
 
       <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-5">
-          <button onClick={() => setActivePage("home")} className="flex items-center gap-3 text-left">
+          <button onClick={() => navigateToPage("home")} className="flex items-center gap-3 text-left">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black text-white shadow-sm">
               <CockroachIcon className="h-7 w-7" />
             </div>
             <div>
               <p className="text-xl font-black tracking-tight">Cockroach India Party</p>
-              <HindiShadow text="कॉकरोच इंडिया पार्टी" className="text-xs leading-3" />
+              {mode !== "en" && <HindiShadow text="कॉकरोच इंडिया पार्टी" className="text-xs leading-3" />}
               <p className="text-xs font-bold text-black/50">India First. Citizens First.</p>
             </div>
           </button>
@@ -1069,7 +1515,7 @@ export default function CockroachIndiaParty() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => setActivePage(item.id)}
+                onClick={() => navigateToPage(item.id)}
                 className={`hover:text-black ${activePage === item.id ? "text-black" : ""}`}
               >
                 <BilingualText value={item.label} mode={mode} hiClassName="text-[10px] leading-3" />
@@ -1081,16 +1527,16 @@ export default function CockroachIndiaParty() {
             <select
               value={mode}
               onChange={(event) => setMode(event.target.value as LangMode)}
-              className="rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-black outline-none"
+              className="magnetic-btn rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-black outline-none"
               aria-label="Language mode"
             >
-              <option value="both">English + हिंदी</option>
               <option value="en">English</option>
               <option value="hi">हिंदी</option>
+              <option value="both">English + हिंदी</option>
             </select>
             <button
-              onClick={() => setActivePage("contact")}
-              className="rounded-full bg-black px-6 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/85 hover:shadow-xl"
+              onClick={scrollToJoin}
+              className="magnetic-btn rounded-full bg-black px-6 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
             >
               Join
             </button>
@@ -1101,7 +1547,7 @@ export default function CockroachIndiaParty() {
           {navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => setActivePage(item.id)}
+              onClick={() => navigateToPage(item.id)}
               className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black ${activePage === item.id ? "border-black bg-black text-white" : "border-black/10 bg-white text-black/65"}`}
             >
               {mode === "hi" ? item.label.hi : item.label.en}
@@ -1112,38 +1558,46 @@ export default function CockroachIndiaParty() {
 
       <div className="border-b border-black/10 bg-[#fafafa] px-6 py-4 text-center text-sm font-black text-black/45">
         Current page: {pageTitle.en}
-        <HindiShadow text={pageTitle.hi} className="text-[10px]" />
+        {mode !== "en" && <HindiShadow text={pageTitle.hi} className="text-[10px]" />}
       </div>
 
-      {activePage === "home" && <HomePage mode={mode} setPage={setActivePage} />}
+      {activePage === "home" && <HomePage mode={mode} setPage={navigateToPage} scrollToJoin={scrollToJoin} />}
       {activePage === "manifesto" && <ManifestoPage mode={mode} />}
       {activePage === "about" && <AboutPage mode={mode} />}
       {activePage === "constitution" && <ConstitutionPage mode={mode} />}
       {activePage === "student" && <FocusPage mode={mode} sectionId="student-first" eyebrow={{ en: "Student First Government", hi: "छात्र प्रथम सरकार" }} />}
       {activePage === "antiCorruption" && <FocusPage mode={mode} sectionId="asset-verification" eyebrow={{ en: "Anti-Corruption Guarantee", hi: "भ्रष्टाचार विरोध गारंटी" }} />}
-      {activePage === "contact" && <ContactPage mode={mode} />}
       {activePage === "privacy" && <PrivacyPage mode={mode} />}
       <PoliticianLifestyleSection mode={mode} />
+      <StickyInstagramButton />
 
       <footer className="border-t border-black/10 px-6 py-10 text-center text-sm font-bold text-black/45">
         <div className="mx-auto mb-6 flex max-w-7xl flex-wrap justify-center gap-3">
           {[...navItems, { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } }].map((item) => (
             <button
               key={item.id}
-              onClick={() => setActivePage(item.id)}
-              className="rounded-full border border-black/10 px-4 py-2 hover:bg-black hover:text-white"
+              onClick={() => navigateToPage(item.id)}
+              className="magnetic-btn rounded-full border border-black/10 px-4 py-2 hover:bg-black hover:text-white"
             >
               {mode === "hi" ? item.label.hi : item.label.en}
             </button>
           ))}
         </div>
-        <p>
-          © 2026 Cockroach India Party. Public movement website draft. Add official registration details only after legal registration.
-          <HindiShadow
-            text="© 2026 कॉकरोच इंडिया पार्टी। सार्वजनिक आंदोलन वेबसाइट ड्राफ्ट। कानूनी पंजीकरण के बाद ही आधिकारिक विवरण जोड़ें।"
-            className="text-[10px]"
-          />
-        </p>
+
+        <div>
+          <p className="mb-3 text-base font-black text-black">
+            Public office is service, not luxury.
+          </p>
+          <span>
+            © 2026 Cockroach India Party. Public movement website draft. Add official registration details only after legal registration.
+          </span>
+          {mode !== "en" ? (
+            <HindiShadow
+              text="© 2026 कॉकरोच इंडिया पार्टी। सार्वजनिक आंदोलन वेबसाइट ड्राफ्ट। कानूनी पंजीकरण के बाद ही आधिकारिक विवरण जोड़ें।"
+              className="text-[10px]"
+            />
+          ) : null}
+        </div>
       </footer>
     </main>
   );
