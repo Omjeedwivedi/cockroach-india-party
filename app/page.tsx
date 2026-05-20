@@ -3095,18 +3095,31 @@ export default function CockroachIndiaParty() {
   };
 
   const shareMovement = async () => {
+    type BrowserNavigatorWithShare = Navigator & {
+      share?: (data: { title: string; text: string; url: string }) => Promise<void>;
+      clipboard?: {
+        writeText?: (text: string) => Promise<void>;
+      };
+    };
+
     const shareData = {
       title: "Cockroach India Party",
       text: "Student First. Public Accountability. India 2047 Movement.",
       url: INSTAGRAM_URL,
     };
 
+    const browserNavigator: BrowserNavigatorWithShare | null =
+      typeof window !== "undefined" ? (window.navigator as BrowserNavigatorWithShare) : null;
+
     try {
-      if (typeof navigator !== "undefined" && "share" in navigator) {
-        await navigator.share(shareData);
-      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText(INSTAGRAM_URL);
-        alert("Movement link copied.");
+      if (browserNavigator?.share) {
+        await browserNavigator.share(shareData);
+        return;
+      }
+
+      if (browserNavigator?.clipboard?.writeText) {
+        await browserNavigator.clipboard.writeText(INSTAGRAM_URL);
+        window.alert("Movement link copied.");
       }
     } catch {
       // User cancelled sharing or browser blocked it.
