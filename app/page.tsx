@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type LangMode = "both" | "en" | "hi";
 
@@ -472,20 +472,6 @@ const politicianLifestylePromises: I18n[] = [
   },
 ];
 
-function runSelfTests() {
-  return {
-    hasEnoughManifestoSections: manifesto.length >= 10,
-    hasAssetVerification: manifesto.some((item) => item.id === "asset-verification"),
-    hasStudentFirst: manifesto.some((item) => item.id === "student-first"),
-    hasWorkerRights: manifesto.some((item) => item.id === "worker-rights"),
-    allSectionsHaveHindi: manifesto.every(
-      (item) => item.title.hi && item.goal.hi && item.points.every((point) => point.hi),
-    ),
-    allSectionsHaveFivePoints: manifesto.every((item) => item.points.length >= 5),
-    hasConstitution: constitutionItems.length >= 6,
-  };
-}
-
 function CockroachIcon({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -512,499 +498,6 @@ function CockroachIcon({ className = "" }: { className?: string }) {
       <circle cx="27" cy="18" r="2" fill="white" />
       <circle cx="37" cy="18" r="2" fill="white" />
     </svg>
-  );
-}
-
-function PartyEmblem({ className = "" }: { className?: string }) {
-  const spokes = Array.from({ length: 24 });
-  const petals = Array.from({ length: 16 });
-  const roaches = Array.from({ length: 6 });
-
-  return (
-    <svg
-      viewBox="0 0 600 600"
-      className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="Cockroach India Party emblem"
-    >
-      <defs>
-        <radialGradient id="emblemWood" cx="50%" cy="42%" r="62%">
-          <stop offset="0%" stopColor="#E9B07A" />
-          <stop offset="45%" stopColor="#8B4D2E" />
-          <stop offset="100%" stopColor="#2A1710" />
-        </radialGradient>
-        <linearGradient id="emblemCopper" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FFE0B4" />
-          <stop offset="45%" stopColor="#B4683E" />
-          <stop offset="100%" stopColor="#4A2416" />
-        </linearGradient>
-        <filter id="emblemShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="12" stdDeviation="14" floodColor="#000000" floodOpacity="0.22" />
-        </filter>
-      </defs>
-
-      <circle cx="300" cy="300" r="270" fill="url(#emblemWood)" opacity="0.18" filter="url(#emblemShadow)" />
-
-      {petals.map((_, index) => (
-        <g key={`petal-${index}`} transform={`rotate(${index * 22.5} 300 300)`}>
-          <path
-            d="M300 40 C335 102 335 175 300 238 C265 175 265 102 300 40Z"
-            fill="url(#emblemCopper)"
-            stroke="#102436"
-            strokeWidth="7"
-            strokeLinejoin="round"
-            opacity={index % 2 === 0 ? 0.95 : 0.55}
-          />
-          <path d="M300 72 C318 124 318 165 300 214 C282 165 282 124 300 72Z" stroke="#F4C18D" strokeWidth="4" opacity="0.65" />
-        </g>
-      ))}
-
-      <circle cx="300" cy="300" r="178" fill="#1E1714" opacity="0.9" stroke="#102436" strokeWidth="10" />
-      <circle cx="300" cy="300" r="143" fill="#F8FAFC" stroke="#0E3C70" strokeWidth="14" />
-      <circle cx="300" cy="300" r="103" fill="#ffffff" stroke="#0E3C70" strokeWidth="5" />
-      <circle cx="300" cy="300" r="20" fill="#0E3C70" />
-
-      {spokes.map((_, index) => (
-        <line
-          key={`spoke-${index}`}
-          x1="300"
-          y1="300"
-          x2="300"
-          y2="205"
-          stroke="#0E3C70"
-          strokeWidth="4"
-          strokeLinecap="round"
-          transform={`rotate(${index * 15} 300 300)`}
-        />
-      ))}
-
-      {roaches.map((_, index) => (
-        <g key={`roach-${index}`} transform={`rotate(${index * 60} 300 300) translate(300 96)`}>
-          <path d="M-42 -12 C-78 -70 -120 -86 -160 -92" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <path d="M42 -12 C78 -70 120 -86 160 -92" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <ellipse cx="0" cy="30" rx="34" ry="72" fill="url(#emblemCopper)" stroke="#102436" strokeWidth="8" />
-          <ellipse cx="0" cy="-38" rx="26" ry="23" fill="#D5905E" stroke="#102436" strokeWidth="8" />
-          <path d="M0 -24 V92" stroke="#5C2E1E" strokeWidth="5" strokeLinecap="round" />
-          <path d="M-30 8 L-78 -12" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <path d="M30 8 L78 -12" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <path d="M-27 45 L-75 62" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <path d="M27 45 L75 62" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
-          <circle cx="-10" cy="-42" r="5" fill="#102436" />
-          <circle cx="10" cy="-42" r="5" fill="#102436" />
-        </g>
-      ))}
-
-      <circle cx="300" cy="300" r="151" fill="none" stroke="#ffffff" strokeWidth="8" opacity="0.9" />
-      <circle cx="300" cy="300" r="190" fill="none" stroke="#C88654" strokeWidth="7" opacity="0.7" />
-    </svg>
-  );
-}
-
-function CockroachArtworkBackground() {
-  return (
-    <svg
-      className="cockroach-artwork-background"
-      viewBox="0 0 1600 900"
-      preserveAspectRatio="xMidYMid slice"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="cockroachMotionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#E9FFE8" />
-          <stop offset="45%" stopColor="#B6FF00" />
-          <stop offset="100%" stopColor="#67E66E" />
-        </linearGradient>
-        <filter id="cockroachArtworkGlow">
-          <feGaussianBlur stdDeviation="7" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <g className="artwork-soft-waves">
-        <path d="M-120 560 C 180 430, 340 760, 620 570 S 1050 310, 1360 480 S 1600 710, 1760 520" />
-        <path d="M-80 760 C 160 610, 410 760, 640 640 S 1010 490, 1280 620 S 1540 820, 1710 690" />
-      </g>
-
-      <g className="artwork-hand" transform="translate(840 480)">
-        <path d="M-10 105 C 80 38, 200 25, 360 46 C 468 60, 560 118, 653 199" />
-        <path d="M-96 330 C -32 222, 18 154, 84 112" />
-        <path d="M92 116 C 65 160, 46 196, 48 235 C 50 282, 86 310, 130 315" />
-        <path d="M128 173 C 100 217, 104 266, 145 286 C 174 300, 212 296, 244 276" />
-        <path d="M-2 238 C 25 290, 62 336, 120 354 C 174 372, 224 360, 260 330" />
-        <path d="M208 256 C 270 220, 342 202, 420 214" />
-      </g>
-
-      <g className="artwork-cockroach" transform="translate(990 270) rotate(-14)">
-        <ellipse cx="0" cy="0" rx="52" ry="25" fill="#111111" />
-        <ellipse cx="-8" cy="0" rx="38" ry="18" fill="#252525" stroke="#050505" strokeWidth="5" />
-        <circle cx="45" cy="-4" r="24" fill="#1f1f1f" stroke="#050505" strokeWidth="5" />
-        <path d="M55 -24 C 82 -70, 120 -87, 160 -90" className="artwork-dark-line" />
-        <path d="M48 -27 C 58 -82, 82 -116, 122 -140" className="artwork-dark-line" />
-        <path d="M-10 22 L-32 54" className="artwork-dark-line" />
-        <path d="M8 24 L-2 65" className="artwork-dark-line" />
-        <path d="M25 18 L34 57" className="artwork-dark-line" />
-        <path d="M52 -10 Q60 -2 56 7" stroke="white" strokeWidth="5" strokeLinecap="round" fill="none" />
-      </g>
-
-      <g className="artwork-motion-trails">
-        <path d="M760 350 C 820 290, 890 260, 960 260" />
-        <path d="M720 410 C 790 330, 880 300, 965 300" />
-        <path d="M690 460 C 770 365, 860 330, 950 340" />
-      </g>
-
-      <g className="artwork-sparkles">
-        <path d="M1300 220 L1314 250 L1344 264 L1314 278 L1300 308 L1286 278 L1256 264 L1286 250 Z" />
-        <circle cx="410" cy="680" r="9" />
-        <circle cx="520" cy="355" r="5" />
-        <circle cx="1315" cy="590" r="6" />
-        <path d="M760 600 L766 612 L778 618 L766 624 L760 636 L754 624 L742 618 L754 612 Z" />
-      </g>
-    </svg>
-  );
-}
-
-function SvgAnimatedBackground() {
-  return (
-    <svg
-      className="svg-animated-background"
-      viewBox="0 0 1440 1100"
-      preserveAspectRatio="xMidYMid slice"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="svgFlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#E9FFE8" />
-          <stop offset="32%" stopColor="#B6FF00" />
-          <stop offset="68%" stopColor="#7CFF6B" />
-          <stop offset="100%" stopColor="#F6FFE8" />
-        </linearGradient>
-        <filter id="svgSoftGlow">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <path
-        d="M-80 220 C 160 80, 280 420, 520 260 S 920 20, 1140 250 S 1350 520, 1520 320"
-        className="svg-flow-line svg-flow-line-one"
-      />
-      <path
-        d="M-120 620 C 180 450, 330 780, 610 580 S 990 360, 1190 570 S 1370 820, 1540 640"
-        className="svg-flow-line svg-flow-line-two"
-      />
-      <path
-        d="M120 1060 C 300 820, 540 1000, 720 780 S 1060 520, 1280 760 S 1470 1030, 1580 860"
-        className="svg-flow-line svg-flow-line-three"
-      />
-
-      <circle cx="210" cy="250" r="7" className="svg-floating-node svg-delay-1" />
-      <circle cx="520" cy="260" r="10" className="svg-floating-node svg-delay-2" />
-      <circle cx="930" cy="165" r="8" className="svg-floating-node svg-delay-3" />
-      <circle cx="1180" cy="570" r="9" className="svg-floating-node svg-delay-4" />
-      <circle cx="720" cy="780" r="8" className="svg-floating-node svg-delay-2" />
-    </svg>
-  );
-}
-
-function WebGLBackground() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const gl = canvas.getContext("webgl", {
-      alpha: true,
-      antialias: true,
-      preserveDrawingBuffer: false,
-    });
-
-    if (!gl) return;
-
-    const vertexShaderSource = `
-      attribute vec2 position;
-      void main() {
-        gl_Position = vec4(position, 0.0, 1.0);
-      }
-    `;
-
-    const fragmentShaderSource = `
-      precision mediump float;
-      uniform vec2 resolution;
-      uniform float time;
-      uniform vec2 pointer;
-
-      float circle(vec2 uv, vec2 pos, float radius, float blur) {
-        return smoothstep(radius, radius - blur, length(uv - pos));
-      }
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / resolution.xy;
-        vec2 p = pointer;
-        float wave = sin((uv.x + time * 0.06) * 8.0) * 0.015 + cos((uv.y - time * 0.05) * 9.0) * 0.015;
-
-        float blue = circle(uv + wave, vec2(0.18, 0.82), 0.42, 0.34);
-        float violet = circle(uv - wave, vec2(0.82, 0.22), 0.38, 0.30);
-        float pink = circle(uv, vec2(0.72, 0.76), 0.34, 0.28);
-        float cursor = circle(uv, p, 0.24, 0.20);
-
-        vec3 color = vec3(1.0);
-        color = mix(color, vec3(0.78, 1.0, 0.78), blue * 0.44);
-        color = mix(color, vec3(0.58, 1.0, 0.38), violet * 0.38);
-        color = mix(color, vec3(0.90, 1.0, 0.58), pink * 0.32);
-        color = mix(color, vec3(0.70, 1.0, 0.10), cursor * 0.30);
-
-        float alpha = max(max(blue, violet), max(pink, cursor)) * 0.55;
-        gl_FragColor = vec4(color, alpha);
-      }
-    `;
-
-    const createShader = (type: number, source: string) => {
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        gl.deleteShader(shader);
-        return null;
-      }
-      return shader;
-    };
-
-    const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
-    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
-    if (!vertexShader || !fragmentShader) return;
-
-    const program = gl.createProgram();
-    if (!program) return;
-
-    gl.attachShader(program, vertexShader);
-    gl.attachShader(program, fragmentShader);
-    gl.linkProgram(program);
-
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
-
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
-      gl.STATIC_DRAW,
-    );
-
-    const positionLocation = gl.getAttribLocation(program, "position");
-    const resolutionLocation = gl.getUniformLocation(program, "resolution");
-    const timeLocation = gl.getUniformLocation(program, "time");
-    const pointerLocation = gl.getUniformLocation(program, "pointer");
-
-    let animationFrame = 0;
-    let startTime = performance.now();
-    let pointerX = 0.5;
-    let pointerY = 0.5;
-
-    const resize = () => {
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(window.innerWidth * pixelRatio);
-      canvas.height = Math.floor(window.innerHeight * pixelRatio);
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      gl.viewport(0, 0, canvas.width, canvas.height);
-    };
-
-    const onPointerMove = (event: PointerEvent) => {
-      pointerX = event.clientX / Math.max(window.innerWidth, 1);
-      pointerY = 1 - event.clientY / Math.max(window.innerHeight, 1);
-    };
-
-    const render = () => {
-      const now = performance.now();
-      gl.useProgram(program);
-      gl.enableVertexAttribArray(positionLocation);
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-      gl.uniform1f(timeLocation, (now - startTime) * 0.001);
-      gl.uniform2f(pointerLocation, pointerX, pointerY);
-      gl.clearColor(0, 0, 0, 0);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
-      animationFrame = requestAnimationFrame(render);
-    };
-
-    resize();
-    render();
-    window.addEventListener("resize", resize);
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(animationFrame);
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("pointermove", onPointerMove);
-      gl.deleteProgram(program);
-      gl.deleteShader(vertexShader);
-      gl.deleteShader(fragmentShader);
-      gl.deleteBuffer(buffer);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="webgl-background" aria-hidden="true" />;
-}
-
-function CockroachCursor() {
-  const [cursor, setCursor] = useState({ x: -100, y: -100, label: "", visible: true, active: false, moving: false });
-  const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
-  const moveTimerRef = useRef<number | null>(null);
-  const trailIdRef = useRef(0);
-
-  useEffect(() => {
-    const getActionLabel = (element: Element | null) => {
-      const interactive = element?.closest("button, a, select");
-      if (!interactive) return "";
-
-      const text = (interactive.textContent || "").toLowerCase();
-      if (text.includes("join")) return "Join";
-      if (text.includes("manifesto")) return "Read";
-      if (text.includes("follow")) return "Open";
-      if (text.includes("report") || text.includes("issue")) return "Send";
-      if (text.includes("privacy")) return "View";
-      return "Go";
-    };
-
-    const shouldHideOnText = (element: Element | null) => {
-      if (!element) return false;
-      const isInteractive = element.closest("button, a, select");
-      const isCard = element.closest(".micro-lift, .reveal-card, .glass-card, .clay-card");
-      const isText = element.closest("p, h1, h2, h3, h4, li, span");
-      return Boolean(isText && !isInteractive && !isCard);
-    };
-
-    const onPointerMove = (event: PointerEvent) => {
-      const target = document.elementFromPoint(event.clientX, event.clientY);
-      const label = getActionLabel(target);
-      const isCard = Boolean(target?.closest(".micro-lift, .reveal-card, .glass-card, .clay-card"));
-      const hideOnText = shouldHideOnText(target);
-      const active = Boolean(label || isCard);
-
-      setCursor({
-        x: event.clientX,
-        y: event.clientY,
-        label,
-        visible: !hideOnText,
-        active,
-        moving: true,
-      });
-
-      trailIdRef.current += 1;
-      const nextDot = { x: event.clientX, y: event.clientY, id: trailIdRef.current };
-      setTrail((previous) => [nextDot, ...previous].slice(0, 4));
-
-      if (moveTimerRef.current) window.clearTimeout(moveTimerRef.current);
-      moveTimerRef.current = window.setTimeout(() => {
-        setCursor((previous) => ({ ...previous, moving: false }));
-      }, 140);
-    };
-
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
-    return () => {
-      window.removeEventListener("pointermove", onPointerMove);
-      if (moveTimerRef.current) window.clearTimeout(moveTimerRef.current);
-    };
-  }, []);
-
-  return (
-    <>
-      {trail.map((dot, index) => (
-        <span
-          key={dot.id}
-          className="cockroach-trail-dot"
-          style={{
-            transform: `translate3d(${dot.x - 3}px, ${dot.y - 3}px, 0)`,
-            opacity: cursor.visible ? Math.max(0, 0.26 - index * 0.055) : 0,
-          }}
-          aria-hidden="true"
-        />
-      ))}
-
-      <div
-        className={`cockroach-pointer ${cursor.active ? "cockroach-pointer-active" : ""} ${cursor.moving ? "cockroach-pointer-moving" : ""} ${cursor.visible ? "" : "cockroach-pointer-hidden"}`}
-        style={{
-          transform: `translate3d(${cursor.x - 7}px, ${cursor.y - 7}px, 0) rotate(-18deg)`,
-        }}
-        aria-hidden="true"
-      >
-        <svg
-          viewBox="0 0 120 120"
-          className="h-8 w-8"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="cursorBodyShine" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#2a1710" />
-              <stop offset="48%" stopColor="#111111" />
-              <stop offset="100%" stopColor="#050505" />
-            </linearGradient>
-          </defs>
-
-          <path
-            d="M39 34 C28 21, 18 22, 16 36 C14 53, 27 66, 49 66 C47 52, 44 42, 39 34Z"
-            fill="#101010"
-            stroke="#050505"
-            strokeWidth="3"
-            className="cursor-wing-left"
-          />
-          <path
-            d="M71 33 C84 19, 96 22, 99 37 C102 54, 87 67, 63 66 C64 51, 67 41, 71 33Z"
-            fill="#101010"
-            stroke="#050505"
-            strokeWidth="3"
-            className="cursor-wing-right"
-          />
-
-          <ellipse cx="57" cy="58" rx="31" ry="21" fill="url(#cursorBodyShine)" stroke="#050505" strokeWidth="4" />
-          <path d="M31 58 C42 50, 72 50, 84 58" stroke="#3a2115" strokeWidth="2.2" strokeLinecap="round" />
-          <path d="M34 68 C47 60, 68 60, 80 68" stroke="#3a2115" strokeWidth="2.2" strokeLinecap="round" />
-          <path d="M57 38 V78" stroke="#4a2a1c" strokeWidth="2.2" strokeLinecap="round" opacity="0.8" />
-
-          <ellipse cx="83" cy="52" rx="15" ry="13" fill="#151515" stroke="#050505" strokeWidth="3" />
-          <ellipse cx="94" cy="49" rx="10" ry="9" fill="#111111" stroke="#050505" strokeWidth="3" />
-          <circle cx="98" cy="46" r="1.6" fill="#B6FF00" />
-          <circle cx="92" cy="51" r="1.2" fill="#B6FF00" />
-
-          <path d="M99 43 C150 5, 210 -24, 285 -34" className="cursor-antenna cursor-antenna-a" />
-          <path d="M94 39 C132 -30, 205 -72, 270 -112" className="cursor-antenna cursor-antenna-b" />
-          <path d="M96 46 C158 33, 230 18, 310 28" className="cursor-antenna cursor-antenna-c" />
-
-          <path d="M39 48 C27 43, 18 36, 10 27" className="cursor-leg cursor-leg-a" />
-          <path d="M35 58 C20 60, 9 65, -1 75" className="cursor-leg cursor-leg-b" />
-          <path d="M42 73 C30 85, 20 95, 8 107" className="cursor-leg cursor-leg-c" />
-          <path d="M72 47 C82 40, 91 34, 103 27" className="cursor-leg cursor-leg-d" />
-          <path d="M76 61 C91 62, 103 68, 115 77" className="cursor-leg cursor-leg-e" />
-          <path d="M68 75 C78 89, 88 100, 101 112" className="cursor-leg cursor-leg-f" />
-
-          <g transform="translate(16 70) rotate(-12)">
-            <rect x="0" y="0" width="19" height="14" rx="2.5" fill="#B6FF00" stroke="#071107" strokeWidth="2.2" />
-            <line x1="9.5" y1="2" x2="9.5" y2="12" stroke="#071107" strokeWidth="1.5" />
-            <line x1="3" y1="5" x2="7" y2="5" stroke="#071107" strokeWidth="1.2" />
-            <line x1="12" y1="5" x2="16" y2="5" stroke="#071107" strokeWidth="1.2" />
-            <line x1="3" y1="8" x2="7" y2="8" stroke="#071107" strokeWidth="1.2" />
-            <line x1="12" y1="8" x2="16" y2="8" stroke="#071107" strokeWidth="1.2" />
-          </g>
-        </svg>
-
-        {cursor.label ? <span className="cursor-action-label">{cursor.label}</span> : null}
-      </div>
-    </>
   );
 }
 
@@ -1197,10 +690,126 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
           </p>
           <button
             onClick={scrollToJoin}
-            className="magnetic-btn rounded-full bg-white px-8 py-4 text-base font-black text-black transition-all duration-300 hover:apple-gradient-bg hover:text-black"
+            className="premium-toggle premium-toggle-light rounded-full px-8 py-4 text-base font-black transition-all duration-300"
           >
-            Yes, I Am Eligible →
+            Yes, I Am Eligible
           </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RunningCockroachEffect() {
+  const runners = Array.from({ length: 110 });
+
+  return (
+    <div className="running-cockroach-layer" aria-hidden="true">
+      {runners.map((_, index) => (
+        <span
+          key={index}
+          className="running-cockroach"
+          style={{
+            top: `${4 + ((index * 7) % 92)}%`,
+            animationDelay: `${-(index * 1.7)}s`,
+            animationDuration: `${10 + (index % 12) * 1.4}s`,
+            opacity: 0.12 + (index % 5) * 0.035,
+            transform: `scale(${0.42 + (index % 6) * 0.1})`,
+          }}
+        >
+          <svg viewBox="0 0 80 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 8 C7 -8, -7 -12, -22 -12" className="runner-antenna" />
+            <path d="M26 7 C20 -10, 8 -19, -5 -24" className="runner-antenna" />
+            <ellipse cx="39" cy="24" rx="24" ry="13" fill="currentColor" />
+            <circle cx="17" cy="22" r="9" fill="currentColor" />
+            <path d="M32 12 C40 19, 40 29, 32 36" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeLinecap="round" />
+            <path d="M34 13 L27 2" className="runner-leg runner-leg-a" />
+            <path d="M42 13 L47 1" className="runner-leg runner-leg-b" />
+            <path d="M49 16 L64 7" className="runner-leg runner-leg-a" />
+            <path d="M34 35 L26 46" className="runner-leg runner-leg-b" />
+            <path d="M43 36 L48 48" className="runner-leg runner-leg-a" />
+            <path d="M50 32 L66 42" className="runner-leg runner-leg-b" />
+          </svg>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function CommandCenterSection({ mode }: { mode: LangMode }) {
+  const metrics: { value: string; label: I18n }[] = [
+    { value: "000", label: { en: "Reports", hi: "रिपोर्ट" } },
+    { value: "000", label: { en: "Districts", hi: "जिले" } },
+    { value: "000", label: { en: "Volunteers", hi: "स्वयंसेवक" } },
+    { value: "005", label: { en: "Public Audits", hi: "जन ऑडिट" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="command-center apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Janata Command Center", hi: "जनता कमांड सेंटर" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+              <BilingualText
+                value={{
+                  en: "Every issue should become visible.",
+                  hi: "हर समस्या visible होनी चाहिए।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="rounded-[2.75rem] bg-white/10 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-white md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "The movement will track reports, districts, volunteers, and public audits like a civic product — not like a poster campaign.",
+                  hi: "Movement reports, districts, volunteers और public audits को civic product की तरह track करेगा — poster campaign की तरह नहीं।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-4">
+          {metrics.map((metric) => (
+            <div key={metric.label.en} className="command-metric rounded-[2.5rem] bg-white/10 p-7 text-center backdrop-blur-xl">
+              <p className="text-6xl font-black leading-none tracking-[-0.08em] text-[#B6FF00] md:text-8xl">{metric.value}</p>
+              <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/55">
+                <BilingualText value={metric.label} mode={mode} hiClassName="text-[10px] leading-3 text-white/35" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CinematicStickyStorySection({ mode }: { mode: LangMode }) {
+  const statements: I18n[] = [
+    { en: "No hate politics.", hi: "नफरत की राजनीति नहीं।" },
+    { en: "No hidden wealth.", hi: "छिपी संपत्ति नहीं।" },
+    { en: "No paper leaks.", hi: "पेपर लीक नहीं।" },
+    { en: "No unpaid overtime.", hi: "बिना भुगतान ओवरटाइम नहीं।" },
+    { en: "No luxury politics.", hi: "विलासिता वाली राजनीति नहीं।" },
+    { en: "Only public accountability.", hi: "केवल सार्वजनिक जवाबदेही।" },
+  ];
+
+  return (
+    <section className="cinematic-story mx-auto max-w-7xl px-6 py-16">
+      <div className="sticky top-24 rounded-[3.75rem] bg-white/76 p-8 text-center shadow-[0_28px_90px_rgba(0,0,0,0.08)] backdrop-blur-2xl md:p-12">
+        <PageEyebrow value={{ en: "Cinematic Story", hi: "मुख्य विचार" }} mode={mode} />
+        <div className="mx-auto mt-7 max-w-6xl space-y-1 text-5xl font-black uppercase leading-[0.86] tracking-[-0.075em] text-black md:text-7xl lg:text-8xl">
+          {statements.map((statement, index) => (
+            <p key={statement.en} className={index % 2 === 0 ? "" : "text-black/42"}>
+              <BilingualText value={statement} mode={mode} hiClassName="text-base leading-5 tracking-normal text-black/40 md:text-xl" />
+            </p>
+          ))}
         </div>
       </div>
     </section>
@@ -1218,7 +827,8 @@ function HomePage({
 }) {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+      <RunningCockroachEffect />
+      <section className="hero-cinematic mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-8 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full apple-clean-pill apple-gradient-bg px-6 py-3 text-sm font-black transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <span>India 2047 Movement</span>
@@ -1250,9 +860,9 @@ function HomePage({
           <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
             <button
               onClick={scrollToJoin}
-              className="magnetic-btn rounded-full bg-black px-9 py-5 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
+              className="premium-toggle premium-toggle-dark rounded-full px-9 py-5 text-base font-black transition-all duration-300 ease-out"
             >
-              Join the Movement →
+              Join the Movement
             </button>
             <button
               onClick={() => setPage("manifesto")}
@@ -1264,19 +874,41 @@ function HomePage({
         </div>
       </section>
 
+      <SlidingTextBanner
+        variant="dark"
+        speed="slow"
+        items={[
+          "NO PAPER LEAKS",
+          "NO HIDDEN WEALTH",
+          "NO UNPAID OVERTIME",
+          "NO LUXURY POLITICS",
+          "STUDENT FIRST",
+          "POWER ACCOUNTABLE",
+        ]}
+      />
+      <PremiumSlidingStatement mode={mode} />
+      <CommandCenterSection mode={mode} />
+      <CinematicStickyStorySection mode={mode} />
+      <SlidingTextBanner
+        variant="green"
+        speed="normal"
+        items={[
+          "DEGREE READY. JOB LOADING.",
+          "EXAM DELAYED. FUTURE DELAYED.",
+          "PAPER LEAK IS CAREER MURDER.",
+          "UNPAID OVERTIME IS THEFT.",
+        ]}
+      />
       <JoinEligibilitySection mode={mode} scrollToJoin={scrollToJoin} />
       <BerozgariEmergencySection mode={mode} />
       <PublicAccountabilitySection mode={mode} />
-      <WhyCockroachStorySection mode={mode} />
-      <ManifestoQuickViewSection mode={mode} setPage={setPage} />
-      <BeforeAfterSection mode={mode} />
       <OfficialStatusSection mode={mode} />
       <FoundingPrinciplesSection mode={mode} />
       <VolunteerRolesSection mode={mode} />
       <ReportFormatSection mode={mode} />
       <DistrictProblemDashboardSection mode={mode} />
       <SocialProofSection mode={mode} />
-      <FAQSection mode={mode} />
+      <FAQAccordionSection mode={mode} />
       <ContactPage mode={mode} />
     </>
   );
@@ -1503,18 +1135,18 @@ function AboutPage({ mode }: { mode: LangMode }) {
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
           <PageEyebrow value={{ en: "What This Movement Is", hi: "यह आंदोलन क्या है" }} mode={mode} />
-          <div className="mt-6 grid gap-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] md:text-7xl lg:text-8xl">
+          <div className="mx-auto mt-7 max-w-6xl space-y-0.5 text-5xl font-black uppercase leading-[0.82] tracking-[-0.08em] text-black md:text-7xl lg:text-8xl">
             <p>Not a caste movement.</p>
-            <p className="text-white/45">Not a hate movement.</p>
+            <p className="text-black/42">Not a hate movement.</p>
             <p>Not a dynasty movement.</p>
-            <p className="text-white/45">A citizen accountability movement.</p>
+            <p className="text-black/42">A citizen accountability movement.</p>
           </div>
           {mode !== "en" ? (
             <HindiShadow
               text="जाति आंदोलन नहीं। नफरत आंदोलन नहीं। वंशवाद आंदोलन नहीं। नागरिक जवाबदेही आंदोलन।"
-              className="mt-8 text-sm leading-5 text-white/30"
+              className="mx-auto mt-6 max-w-4xl text-sm leading-5 text-black/45"
             />
           ) : null}
         </div>
@@ -1882,6 +1514,19 @@ function ConstitutionPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
+      <SlidingTextBanner
+        variant="green"
+        speed="slow"
+        items={[
+          "THE INDIAN DREAM",
+          "OPPORTUNITY NATION",
+          "WORLD-CLASS UNIVERSITIES",
+          "INNOVATION ECONOMY",
+          "RULE OF LAW",
+          "GLOBAL LEADERSHIP",
+        ]}
+      />
+
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
@@ -2224,6 +1869,19 @@ function StudentFirstDetailedPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
+      <SlidingTextBanner
+        variant="green"
+        speed="slow"
+        items={[
+          "NO PAPER LEAKS",
+          "NO EXAM DELAYS",
+          "PAID INTERNSHIPS",
+          "SKILL + DEGREE",
+          "STUDENT COUNCILS",
+          "NO FUTURE LEFT BEHIND",
+        ]}
+      />
+
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-5 md:grid-cols-5">
           {promises.map((promise) => (
@@ -2419,6 +2077,19 @@ function AntiCorruptionDetailedPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
+      <SlidingTextBanner
+        variant="dark"
+        speed="slow"
+        items={[
+          "ASSET CHECK",
+          "CID VERIFICATION",
+          "PUBLIC DASHBOARD",
+          "10 YEARS JAIL",
+          "ASSET SEIZURE",
+          "LIFETIME BAN",
+        ]}
+      />
+
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-5 md:grid-cols-4">
           {[
@@ -2519,46 +2190,6 @@ function AntiCorruptionDetailedPage({ mode }: { mode: LangMode }) {
   );
 }
 
-function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: string; eyebrow: I18n }) {
-  const section = manifesto.find((item) => item.id === sectionId);
-
-  if (!section) {
-    return (
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <p className="text-xl font-black">Section not found.</p>
-      </section>
-    );
-  }
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
-      <PageEyebrow value={eyebrow} mode={mode} />
-      <PageTitle value={section.title} mode={mode} />
-      <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-[2.25rem] border border-black/10 bg-black p-8 text-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
-          <div className="text-5xl">{section.icon}</div>
-          <p className="mt-8 text-xl font-black leading-7 tracking-[-0.03em]">
-            <BilingualText value={section.goal} mode={mode} hiClassName="text-xs leading-4 text-white/35" />
-          </p>
-        </div>
-        <div className="grid gap-5">
-          {section.points.map((point, index) => (
-            <div
-              key={point.en}
-              className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
-              <p className="mt-3 text-base font-bold leading-7 text-black/75">
-                <BilingualText value={point} mode={mode} hiClassName="text-xs leading-4" />
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ContactPage({ mode }: { mode: LangMode }) {
   return (
     <section id="join" className="mx-auto max-w-7xl px-6 py-20">
@@ -2595,9 +2226,9 @@ function ContactPage({ mode }: { mode: LangMode }) {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex w-full items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
+                className="premium-toggle premium-toggle-dark mt-8 inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
               >
-                Follow on Instagram →
+                Follow on Instagram
               </a>
 
               <p className="mt-5 text-xs font-bold text-black/45">
@@ -2655,27 +2286,6 @@ function ScrollProgressBar({ progress }: { progress: number }) {
   );
 }
 
-function BigStatementSection({ mode }: { mode: LangMode }) {
-  const lines: I18n[] = [
-    { en: "No hate politics.", hi: "नफरत की राजनीति नहीं।" },
-    { en: "No hidden wealth.", hi: "छिपी संपत्ति नहीं।" },
-    { en: "No luxury politics.", hi: "विलासिता वाली राजनीति नहीं।" },
-    { en: "Only public accountability.", hi: "केवल सार्वजनिक जवाबदेही।" },
-  ];
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="glass-card rounded-[3.25rem] border border-black/10 p-8 text-center md:p-12">
-        {lines.map((line) => (
-          <h2 key={line.en} className="apple-gradient-text text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-7xl">
-            <BilingualText value={line} mode={mode} hiClassName="text-lg leading-6 tracking-normal md:text-2xl" />
-          </h2>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function WhyCockroachStorySection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -2728,7 +2338,7 @@ function ManifestoQuickViewSection({ mode, setPage }: { mode: LangMode; setPage:
           onClick={() => setPage("manifesto")}
           className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
         >
-          Read Full Manifesto →
+          Read Full Manifesto
         </button>
       </div>
       <div className="grid gap-5 md:grid-cols-3">
@@ -2789,6 +2399,184 @@ function BeforeAfterSection({ mode }: { mode: LangMode }) {
   );
 }
 
+function PremiumPageLoader() {
+  return (
+    <div className="premium-loader" aria-hidden="true">
+      <div className="premium-loader-card">
+        <div className="premium-loader-mark">
+          <CockroachIcon className="h-8 w-8" />
+        </div>
+        <h1>Cockroach India Party</h1>
+        <p>We survive. We rebuild. We rise.</p>
+      </div>
+    </div>
+  );
+}
+
+function MobileMenuOverlay({
+  open,
+  mode,
+  activePage,
+  onOpen,
+  onClose,
+  onNavigate,
+}: {
+  open: boolean;
+  mode: LangMode;
+  activePage: PageId;
+  onOpen: () => void;
+  onClose: () => void;
+  onNavigate: (page: PageId) => void;
+}) {
+  return (
+    <>
+      <button type="button" onClick={onOpen} className="mobile-menu-hint" aria-label="Open menu">
+        Menu
+      </button>
+
+      <div className={`mobile-menu-panel ${open ? "mobile-menu-panel-open" : ""}`} aria-hidden={!open}>
+        <div className="mobile-menu-card">
+          <div className="mb-8 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-black/35">Movement Menu</p>
+              <h2 className="mt-2 text-4xl font-black tracking-[-0.06em] text-black">Navigate</h2>
+            </div>
+            <button type="button" onClick={onClose} className="premium-toggle premium-toggle-light rounded-full px-5 py-3 text-sm font-black">
+              Close
+            </button>
+          </div>
+
+          <div className="grid gap-3">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => {
+                  onNavigate(item.id);
+                  onClose();
+                }}
+                className={`mobile-menu-link ${activePage === item.id ? "mobile-menu-link-active" : ""}`}
+              >
+                {mode === "hi" ? item.label.hi : item.label.en}
+              </button>
+            ))}
+          </div>
+
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="premium-toggle premium-toggle-dark mt-8 flex w-full rounded-full px-8 py-4 text-base font-black"
+          >
+            Follow on Instagram
+          </a>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function FinalCinematicCTA({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-14">
+        <PageEyebrow value={{ en: "Join the Movement", hi: "आंदोलन से जुड़ें" }} mode={mode} />
+        <h2 className="mx-auto mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.88] tracking-[-0.075em] text-black md:text-8xl">
+          <BilingualText
+            value={{
+              en: "India does not need more excuses. India needs accountability.",
+              hi: "भारत को और बहाने नहीं। भारत को जवाबदेही चाहिए।",
+            }}
+            mode={mode}
+            hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+          />
+        </h2>
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="premium-toggle premium-toggle-dark mt-10 inline-flex rounded-full px-9 py-5 text-base font-black"
+        >
+          Follow on Instagram
+        </a>
+      </div>
+    </section>
+  );
+}
+
+function FAQAccordionSection({ mode }: { mode: LangMode }) {
+  const [openIndex, setOpenIndex] = useState<number>(0);
+  const faqs: { question: I18n; answer: I18n }[] = [
+    {
+      question: { en: "Is Cockroach India Party officially registered?", hi: "क्या Cockroach India Party officially registered है?" },
+      answer: { en: "Official registration details will be updated after legal registration is completed. Until then, this website represents a citizen-first political movement.", hi: "कानूनी पंजीकरण पूरा होने के बाद official registration details अपडेट होंगे। तब तक यह वेबसाइट citizen-first political movement को represent करती है।" },
+    },
+    {
+      question: { en: "Why the name Cockroach?", hi: "नाम Cockroach क्यों?" },
+      answer: { en: "It symbolizes survival, adaptability, discipline, and refusal to disappear — the story of ordinary Indians who survive broken systems every day.", hi: "यह survival, adaptability, discipline और मिटने से इनकार का प्रतीक है — उन आम भारतीयों की कहानी जो हर दिन टूटे सिस्टम को survive करते हैं।" },
+    },
+    {
+      question: { en: "What does the movement stand for?", hi: "यह movement किसके लिए है?" },
+      answer: { en: "Student-first governance, jobs, anti-corruption, worker rights, public accountability, clean politics, and the Indian Dream for every citizen.", hi: "Student-first governance, jobs, anti-corruption, worker rights, public accountability, clean politics और हर citizen के Indian Dream के लिए।" },
+    },
+    {
+      question: { en: "How can students join?", hi: "Students कैसे join कर सकते हैं?" },
+      answer: { en: "Students can follow the Instagram page, join as campus volunteers, report education problems, and help build student-first issue campaigns.", hi: "Students Instagram page follow करके, campus volunteer बनकर, education problems report करके और student-first issue campaigns बनाकर join कर सकते हैं।" },
+    },
+    {
+      question: { en: "How can I report corruption or local problems?", hi: "मैं corruption या local problem कैसे report करूं?" },
+      answer: { en: "Send location, date, short description, and video/photo proof on Instagram. Do not risk your safety or record illegally.", hi: "Location, date, short description और video/photo proof Instagram पर भेजें। अपनी safety risk में न डालें और illegal recording न करें।" },
+    },
+    {
+      question: { en: "Do you support hate politics?", hi: "क्या आप hate politics support करते हैं?" },
+      answer: { en: "No. The movement rejects hate politics, caste or religion targeting, fake news, paid propaganda, and violence.", hi: "नहीं। यह movement hate politics, caste/religion targeting, fake news, paid propaganda और violence को reject करता है।" },
+    },
+    {
+      question: { en: "Can private employees join?", hi: "क्या private employees join कर सकते हैं?" },
+      answer: { en: "Yes. Private employees are nation builders. The movement supports 5-day work week, paid overtime, labour law audits, and protection from toxic work culture.", hi: "हाँ। Private employees nation builders हैं। Movement 5-day work week, paid overtime, labour law audits और toxic work culture से protection support करता है।" },
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+        <div>
+          <PageEyebrow value={{ en: "FAQ", hi: "सवाल-जवाब" }} mode={mode} />
+          <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText value={{ en: "Clear answers. No confusion.", hi: "साफ जवाब। कोई confusion नहीं।" }} mode={mode} hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl" />
+          </h2>
+        </div>
+        <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+          <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+            <BilingualText value={{ en: "A serious movement must explain itself clearly.", hi: "एक serious movement को खुद को साफ समझाना चाहिए।" }} mode={mode} hiClassName="text-sm leading-5 text-black/55 md:text-lg" />
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-4">
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          return (
+            <div key={faq.question.en} className={`faq-accordion-item ${isOpen ? "faq-accordion-open" : ""}`}>
+              <button type="button" onClick={() => setOpenIndex(isOpen ? -1 : index)} className="faq-accordion-button">
+                <span>
+                  <BilingualText value={faq.question} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                </span>
+                <span className="faq-accordion-icon">{isOpen ? "−" : "+"}</span>
+              </button>
+              <div className="faq-accordion-answer">
+                <p>
+                  <BilingualText value={faq.answer} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function AnnouncementBar() {
   return (
     <div className="border-b border-black/10 apple-gradient-bg px-6 py-3 text-center text-sm font-black text-black">
@@ -2797,113 +2585,50 @@ function AnnouncementBar() {
   );
 }
 
-function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    const duration = 1400;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayValue(Math.round(value * eased));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-
-    requestAnimationFrame(tick);
-  }, [value]);
-
+function SlidingTextBanner({
+  items,
+  variant = "light",
+  speed = "normal",
+}: {
+  items: string[];
+  variant?: "light" | "dark" | "green";
+  speed?: "slow" | "normal" | "fast";
+}) {
   return (
-    <span className="counter-number">
-      {displayValue}
-      {suffix}
-    </span>
-  );
-}
-
-function MovementCounterSection({ mode }: { mode: LangMode }) {
-  const counters: { number: number; suffix?: string; label: I18n }[] = [
-    { number: 0, label: { en: "Rupee Corruption Tolerance", hi: "रुपये भ्रष्टाचार सहनशीलता" } },
-    { number: 5, suffix: "-Day", label: { en: "Work Week Demand", hi: "कार्य सप्ताह मांग" } },
-    { number: 100, suffix: "-Day", label: { en: "Action Plan", hi: "कार्य योजना" } },
-    { number: 2047, label: { en: "India Vision", hi: "भारत दृष्टि" } },
-  ];
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-12">
-      <div className="grid gap-4 md:grid-cols-4">
-        {counters.map((item) => (
-          <div
-            key={item.label.en}
-            className="reveal-card micro-lift shine-card soft-gradient-glow rounded-[2.75rem] bg-white/74 p-7 text-center backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
-          >
-            <AnimatedCounter value={item.number} suffix={item.suffix} />
-            <p className="mt-3 text-lg font-black leading-6 tracking-[-0.04em] text-black/75">
-              <BilingualText value={item.label} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function WhyMovementExistsSection({ mode }: { mode: LangMode }) {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
-        <div>
-          <PageEyebrow value={{ en: "Why This Movement Exists", hi: "यह आंदोलन क्यों है" }} mode={mode} />
-          <PageTitle value={{ en: "For ordinary Indians who survive pressure every day.", hi: "उन आम भारतीयों के लिए जो हर दिन दबाव झेलते हैं।" }} mode={mode} />
-        </div>
-        <div className="reveal-card rounded-[2.25rem] border border-black/10 bg-[#fafafa] p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-          <p className="text-base font-bold leading-7 text-black/70">
-            <BilingualText
-              value={{
-                en: "This movement is for students, employees, farmers, small business owners, taxpayers, and families who survive pressure every day. The cockroach symbol means survival, adaptability, discipline, and refusal to disappear. We are not here for hate politics. We are here for accountability, jobs, education, justice, and public dignity.",
-                hi: "यह आंदोलन छात्रों, कर्मचारियों, किसानों, छोटे व्यापारियों, टैक्सपेयर्स और परिवारों के लिए है जो हर दिन दबाव झेलते हैं। कॉकरोच प्रतीक संघर्ष, अनुकूलन, अनुशासन और हार न मानने का प्रतीक है। हम नफरत की राजनीति के लिए नहीं, जवाबदेही, रोजगार, शिक्षा, न्याय और जनसम्मान के लिए हैं।",
-              }}
-              mode={mode}
-              hiClassName="text-xs leading-4"
-            />
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function JanataPainPointsSection({ mode }: { mode: LangMode }) {
-  const painPoints: I18n[] = [
-    { en: "Unemployment after education", hi: "पढ़ाई के बाद बेरोजगारी" },
-    { en: "Paper leaks and delayed exams", hi: "पेपर लीक और परीक्षा देरी" },
-    { en: "Toxic private-sector work culture", hi: "निजी क्षेत्र की विषाक्त कार्य संस्कृति" },
-    { en: "Unpaid overtime", hi: "बिना भुगतान ओवरटाइम" },
-    { en: "Rising fuel and living costs", hi: "बढ़ती ईंधन और जीवन लागत" },
-    { en: "Corruption in local offices", hi: "स्थानीय कार्यालयों में भ्रष्टाचार" },
-    { en: "Expensive healthcare", hi: "महंगा स्वास्थ्य इलाज" },
-    { en: "Poor roads, drainage, and garbage systems", hi: "खराब सड़क, ड्रेनेज और कचरा व्यवस्था" },
-    { en: "Political luxury while citizens struggle", hi: "जनता संघर्ष में, नेता विलासिता में" },
-    { en: "No accountability after failed policies", hi: "असफल नीतियों के बाद जवाबदेही नहीं" },
-  ];
-
-  return (
-    <section className="border-y border-black/10 bg-[#fafafa]">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 max-w-4xl">
-          <PageEyebrow value={{ en: "What Ordinary Indians Are Facing", hi: "आम भारतीय क्या झेल रहे हैं" }} mode={mode} />
-          <PageTitle value={{ en: "Real problems, not empty slogans.", hi: "वास्तविक समस्याएं, खाली नारे नहीं।" }} mode={mode} />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {painPoints.map((item) => (
-            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-              <p className="text-sm font-black leading-6 text-black/75">
-                <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
-              </p>
-            </div>
+    <section className="mx-auto max-w-7xl px-6 py-8">
+      <div className={`auto-slide-banner auto-slide-${variant}`}>
+        <div className={`auto-slide-track auto-slide-${speed}`}>
+          {[...items, ...items, ...items].map((item, index) => (
+            <span key={`${item}-${index}`} className="auto-slide-word">
+              {item}
+            </span>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function PremiumSlidingStatement({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-10">
+      <div className="premium-statement-banner apple-borderless overflow-hidden rounded-[3.75rem] bg-white/78 p-8 text-center backdrop-blur-2xl md:p-12">
+        <div className="premium-statement-line premium-statement-line-one">
+          <span>India does not need more excuses. India needs accountability.</span>
+          <span>India does not need more excuses. India needs accountability.</span>
+          <span>India does not need more excuses. India needs accountability.</span>
+        </div>
+        <div className="premium-statement-line premium-statement-line-two mt-4">
+          <span>Students first. Workers respected. Public money visible. Power audited.</span>
+          <span>Students first. Workers respected. Public money visible. Power audited.</span>
+          <span>Students first. Workers respected. Public money visible. Power audited.</span>
+        </div>
+        {mode !== "en" ? (
+          <HindiShadow
+            text="भारत को और बहाने नहीं, जवाबदेही चाहिए। छात्र प्रथम। कर्मचारी सम्मानित। जनता का पैसा visible। सत्ता audited।"
+            className="mx-auto mt-6 max-w-4xl text-sm leading-5 text-black/45"
+          />
+        ) : null}
       </div>
     </section>
   );
@@ -2965,139 +2690,6 @@ function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
             />
           </p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function StudentFirstHomeSection({ mode }: { mode: LangMode }) {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="rounded-[3.25rem] border border-black/10 bg-black p-8 text-white shadow-2xl md:p-10">
-        <PageEyebrow value={{ en: "Student First Movement", hi: "छात्र प्रथम आंदोलन" }} mode={mode} />
-        <h2 className="mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
-          <BilingualText
-            value={{ en: "No nation becomes powerful by ignoring students.", hi: "छात्रों को नजरअंदाज करके कोई राष्ट्र शक्तिशाली नहीं बनता।" }}
-            mode={mode}
-            hiClassName="text-lg leading-6 text-white/35 tracking-normal md:text-2xl"
-          />
-        </h2>
-        <p className="mt-8 max-w-4xl text-base font-bold leading-7 text-white/70">
-          <BilingualText
-            value={{
-              en: "Our first government priority will be students: fair exams, no paper leaks, fast results, job-linked education, internships, mental health support, affordable colleges, and direct student councils at district, state, and national level.",
-              hi: "हमारी पहली सरकारी प्राथमिकता छात्र होंगे: निष्पक्ष परीक्षा, पेपर लीक बंद, तेज परिणाम, नौकरी से जुड़ी शिक्षा, इंटर्नशिप, मानसिक स्वास्थ्य सहायता, किफायती कॉलेज और जिला, राज्य व राष्ट्रीय स्तर पर छात्र परिषद।",
-            }}
-            mode={mode}
-            hiClassName="text-xs leading-4 text-white/35"
-          />
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function WorkerRightsHomeSection({ mode }: { mode: LangMode }) {
-  const demands: I18n[] = [
-    { en: "5-day work week", hi: "5 दिन का कार्य सप्ताह" },
-    { en: "Paid overtime", hi: "भुगतान वाला ओवरटाइम" },
-    { en: "No forced weekend work", hi: "जबरन वीकेंड काम नहीं" },
-    { en: "Labour law audits", hi: "श्रम कानून ऑडिट" },
-    { en: "Protection from toxic managers", hi: "विषाक्त मैनेजरों से सुरक्षा" },
-    { en: "Fast employee complaint system", hi: "तेज कर्मचारी शिकायत प्रणाली" },
-  ];
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-start">
-        <div>
-          <PageEyebrow value={{ en: "Private Employee Rights Movement", hi: "निजी कर्मचारी अधिकार आंदोलन" }} mode={mode} />
-          <PageTitle value={{ en: "Private employees are also nation builders.", hi: "निजी कर्मचारी भी राष्ट्र निर्माता हैं।" }} mode={mode} />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {demands.map((item) => (
-            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-              <p className="text-sm font-black leading-6 text-black/75">
-                <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function MovementRulesSection({ mode }: { mode: LangMode }) {
-  const rules: I18n[] = [
-    { en: "No hate politics", hi: "नफरत की राजनीति नहीं" },
-    { en: "No caste or religion targeting", hi: "जाति या धर्म को निशाना नहीं" },
-    { en: "No fake news", hi: "फेक न्यूज़ नहीं" },
-    { en: "No violence", hi: "हिंसा नहीं" },
-    { en: "No paid propaganda", hi: "पेड प्रोपेगैंडा नहीं" },
-    { en: "Only citizen issues, evidence, and accountability", hi: "केवल नागरिक मुद्दे, प्रमाण और जवाबदेही" },
-  ];
-
-  return (
-    <section className="border-y border-black/10 bg-[#fafafa]">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-10 max-w-4xl">
-          <PageEyebrow value={{ en: "Movement Rules", hi: "आंदोलन के नियम" }} mode={mode} />
-          <PageTitle value={{ en: "Discipline before politics.", hi: "राजनीति से पहले अनुशासन।" }} mode={mode} />
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {rules.map((rule) => (
-            <div key={rule.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-              <p className="text-sm font-black leading-6 text-black/75">
-                ✓ <BilingualText value={rule} mode={mode} hiClassName="text-[11px] leading-4" />
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function HundredDayPlanSection({ mode }: { mode: LangMode }) {
-  const actions: I18n[] = [
-    { en: "Public expense dashboard", hi: "सार्वजनिक खर्च डैशबोर्ड" },
-    { en: "Leader asset verification", hi: "नेताओं की संपत्ति जांच" },
-    { en: "Student paper leak law", hi: "पेपर लीक कानून" },
-    { en: "Private overtime complaint portal", hi: "निजी ओवरटाइम शिकायत पोर्टल" },
-    { en: "Fuel price audit", hi: "ईंधन मूल्य ऑडिट" },
-    { en: "Government recruitment calendar", hi: "सरकारी भर्ती कैलेंडर" },
-    { en: "Corruption fast-track courts", hi: "भ्रष्टाचार फास्ट-ट्रैक कोर्ट" },
-    { en: "District problem dashboards", hi: "जिला समस्या डैशबोर्ड" },
-  ];
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="mb-10 grid gap-6 md:grid-cols-[0.85fr_1.15fr] md:items-end">
-        <div>
-          <PageEyebrow value={{ en: "First 100 Days If Given Power", hi: "सत्ता मिलने पर पहले 100 दिन" }} mode={mode} />
-          <PageTitle value={{ en: "Action, not speeches.", hi: "भाषण नहीं, कार्रवाई।" }} mode={mode} />
-        </div>
-        <p className="text-base font-bold leading-7 text-black/65">
-          <BilingualText
-            value={{
-              en: "The first 100 days must prove whether politics is serious about accountability, students, workers, jobs, and clean governance.",
-              hi: "पहले 100 दिन साबित करेंगे कि राजनीति जवाबदेही, छात्रों, कर्मचारियों, रोजगार और स्वच्छ शासन को लेकर गंभीर है या नहीं।",
-            }}
-            mode={mode}
-            hiClassName="text-xs leading-4"
-          />
-        </p>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {actions.map((action, index) => (
-          <div key={action.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-            <p className="text-sm font-black text-black/35">Day Plan {String(index + 1).padStart(2, "0")}</p>
-            <p className="mt-3 text-sm font-black leading-6 text-black/75">
-              <BilingualText value={action} mode={mode} hiClassName="text-[11px] leading-4" />
-            </p>
-          </div>
-        ))}
       </div>
     </section>
   );
@@ -3188,67 +2780,90 @@ function FoundingPrinciplesSection({ mode }: { mode: LangMode }) {
 }
 
 function VolunteerRolesSection({ mode }: { mode: LangMode }) {
-  const roles: { title: I18n; body: I18n }[] = [
-    { title: { en: "Campus Volunteer", hi: "Campus Volunteer" }, body: { en: "Build student-first discussion circles and collect real education issues.", hi: "Student-first चर्चा समूह बनाएं और वास्तविक शिक्षा मुद्दे collect करें।" } },
-    { title: { en: "District Issue Reporter", hi: "District Issue Reporter" }, body: { en: "Report local problems with evidence, location, and short facts.", hi: "स्थानीय समस्याएं evidence, location और short facts के साथ report करें।" } },
-    { title: { en: "Social Media Volunteer", hi: "Social Media Volunteer" }, body: { en: "Turn citizen issues into clean, non-hateful public awareness content.", hi: "Citizen issues को साफ, non-hateful public awareness content में बदलें।" } },
-    { title: { en: "Research Volunteer", hi: "Research Volunteer" }, body: { en: "Study policies, data, budgets, tenders, exams, and job claims.", hi: "Policies, data, budgets, tenders, exams और job claims का अध्ययन करें।" } },
-    { title: { en: "Legal Awareness Volunteer", hi: "Legal Awareness Volunteer" }, body: { en: "Help citizens understand basic rights, complaint formats, and due process.", hi: "Citizens को basic rights, complaint formats और due process समझने में मदद करें।" } },
-    { title: { en: "Tech Volunteer", hi: "Tech Volunteer" }, body: { en: "Help build dashboards, forms, data systems, websites, and automation.", hi: "Dashboards, forms, data systems, websites और automation बनाने में मदद करें।" } },
-    { title: { en: "Video Editor", hi: "Video Editor" }, body: { en: "Make short, fact-based videos on student, worker, and corruption issues.", hi: "Student, worker और corruption issues पर short fact-based videos बनाएं।" } },
-    { title: { en: "Local Problem Reporter", hi: "Local Problem Reporter" }, body: { en: "Send roads, drainage, garbage, hospital, exam, and office problems.", hi: "Roads, drainage, garbage, hospital, exam और office problems भेजें।" } },
+  const roles: { icon: string; title: I18n; body: I18n; tag: string }[] = [
+    { icon: "🎓", title: { en: "Campus Volunteer", hi: "Campus Volunteer" }, body: { en: "Build student-first discussion circles and collect real education issues.", hi: "Student-first चर्चा समूह बनाएं और वास्तविक शिक्षा मुद्दे collect करें।" }, tag: "Campus" },
+    { icon: "📍", title: { en: "District Issue Reporter", hi: "District Issue Reporter" }, body: { en: "Report local problems with evidence, location, and short facts.", hi: "स्थानीय समस्याएं evidence, location और short facts के साथ report करें।" }, tag: "Ground" },
+    { icon: "📣", title: { en: "Social Media Volunteer", hi: "Social Media Volunteer" }, body: { en: "Turn citizen issues into clean, non-hateful public awareness content.", hi: "Citizen issues को साफ, non-hateful public awareness content में बदलें।" }, tag: "Media" },
+    { icon: "🔎", title: { en: "Research Volunteer", hi: "Research Volunteer" }, body: { en: "Study policies, data, budgets, tenders, exams, and job claims.", hi: "Policies, data, budgets, tenders, exams और job claims का अध्ययन करें।" }, tag: "Research" },
+    { icon: "⚖️", title: { en: "Legal Awareness Volunteer", hi: "Legal Awareness Volunteer" }, body: { en: "Help citizens understand basic rights, complaint formats, and due process.", hi: "Citizens को basic rights, complaint formats और due process समझने में मदद करें।" }, tag: "Rights" },
+    { icon: "💻", title: { en: "Tech Volunteer", hi: "Tech Volunteer" }, body: { en: "Help build dashboards, forms, data systems, websites, and automation.", hi: "Dashboards, forms, data systems, websites और automation बनाने में मदद करें।" }, tag: "Tech" },
+    { icon: "🎬", title: { en: "Video Editor", hi: "Video Editor" }, body: { en: "Make short, fact-based videos on student, worker, and corruption issues.", hi: "Student, worker और corruption issues पर short fact-based videos बनाएं।" }, tag: "Creative" },
+    { icon: "🏙️", title: { en: "Local Problem Reporter", hi: "Local Problem Reporter" }, body: { en: "Send roads, drainage, garbage, hospital, exam, and office problems.", hi: "Roads, drainage, garbage, hospital, exam और office problems भेजें।" }, tag: "Local" },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-          <div>
-            <PageEyebrow value={{ en: "Volunteer Roles", hi: "Volunteer Roles" }} mode={mode} />
-            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
-              <BilingualText
-                value={{ en: "Choose your role. Build the movement.", hi: "अपनी भूमिका चुनें। आंदोलन बनाएं।" }}
-                mode={mode}
-                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
-              />
-            </h2>
-          </div>
-          <div className="apple-clean-card rounded-[2.75rem] bg-white/70 p-6 backdrop-blur-xl">
-            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
-              <BilingualText
-                value={{
-                  en: "A real movement needs students, workers, researchers, creators, coders, editors, and local reporters.",
-                  hi: "एक real movement को students, workers, researchers, creators, coders, editors और local reporters चाहिए।",
-                }}
-                mode={mode}
-                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
-              />
-            </p>
-          </div>
-        </div>
+      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
+            <div>
+              <PageEyebrow value={{ en: "Volunteer Roles", hi: "Volunteer Roles" }} mode={mode} />
+              <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
+                <BilingualText
+                  value={{ en: "Choose your role. Build the movement.", hi: "अपनी भूमिका चुनें। आंदोलन बनाएं।" }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                />
+              </h2>
+            </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-4">
-          {roles.map((role, index) => (
-            <div key={role.title.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/75 p-6 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Role {String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-3 text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black">
-                <BilingualText value={role.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
-              </h3>
-              <p className="mt-4 text-sm font-bold leading-6 text-black/68">
-                <BilingualText value={role.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+            <div className="mt-10 rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
+              <p className="text-[6rem] font-black leading-none tracking-[-0.1em] md:text-[8rem]">08</p>
+              <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Ways to serve</p>
+              <p className="mt-5 text-2xl font-black leading-8 tracking-[-0.04em] text-black md:text-3xl">
+                <BilingualText
+                  value={{
+                    en: "Not just followers. Builders, reporters, researchers, creators, and problem solvers.",
+                    hi: "सिर्फ followers नहीं। Builders, reporters, researchers, creators और problem solvers।",
+                  }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-black/55"
+                />
               </p>
             </div>
-          ))}
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {roles.map((role, index) => (
+              <article
+                key={role.title.en}
+                className="reveal-card micro-lift group rounded-[2.75rem] bg-white p-5 text-black shadow-[0_22px_70px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_95px_rgba(182,255,0,0.16)] md:p-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-[1.65rem] bg-black text-3xl text-white shadow-2xl transition duration-500 group-hover:bg-[#B6FF00] group-hover:text-black">
+                    {role.icon}
+                  </div>
+                  <span className="rounded-full bg-black/5 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black/45">
+                    {role.tag}
+                  </span>
+                </div>
+                <p className="mt-6 text-sm font-black uppercase tracking-[0.18em] text-black/35">Role {String(index + 1).padStart(2, "0")}</p>
+                <h3 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-3xl">
+                  <BilingualText value={role.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                </h3>
+                <p className="mt-4 text-sm font-bold leading-6 text-black/66 md:text-base md:leading-7">
+                  <BilingualText value={role.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-10 flex flex-col items-center justify-between gap-5 rounded-[2.75rem] bg-white/10 p-6 backdrop-blur-xl md:flex-row">
+          <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl">
+            <BilingualText
+              value={{ en: "Start small. Report honestly. Build publicly.", hi: "छोटा शुरू करें। ईमानदारी से report करें। Publicly build करें।" }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+            />
+          </p>
           <a
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic-btn inline-flex rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
+            className="premium-toggle premium-toggle-light inline-flex rounded-full px-8 py-4 text-base font-black"
           >
-            Choose Your Role on Instagram →
+            Choose Your Role on Instagram
           </a>
         </div>
       </div>
@@ -3257,47 +2872,91 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
 }
 
 function ReportFormatSection({ mode }: { mode: LangMode }) {
-  const reportItems: I18n[] = [
-    { en: "Location", hi: "स्थान" },
-    { en: "Date", hi: "तारीख" },
-    { en: "Short description", hi: "छोटी जानकारी" },
-    { en: "Video/photo proof", hi: "वीडियो/फोटो प्रमाण" },
-    { en: "Department/person involved if known", hi: "विभाग/व्यक्ति यदि पता हो" },
-    { en: "Your contact is optional", hi: "आपका contact optional है" },
+  const reportItems: { icon: string; title: I18n; body: I18n }[] = [
+    { icon: "📍", title: { en: "Location", hi: "स्थान" }, body: { en: "City, district, road, college, office, hospital, or exact place if safe to share.", hi: "City, district, road, college, office, hospital या exact place अगर share करना safe हो।" } },
+    { icon: "📅", title: { en: "Date", hi: "तारीख" }, body: { en: "Mention when it happened or when the video/photo was captured.", hi: "कब हुआ या video/photo कब capture हुआ, यह लिखें।" } },
+    { icon: "📝", title: { en: "Short Description", hi: "छोटी जानकारी" }, body: { en: "Write the issue in 2–3 lines. Keep it factual, clean, and direct.", hi: "Issue को 2–3 lines में लिखें। Factual, clean और direct रखें।" } },
+    { icon: "🎥", title: { en: "Video or Photo Proof", hi: "वीडियो या फोटो प्रमाण" }, body: { en: "Send clear proof only if it is lawful and safe to capture.", hi: "Clear proof भेजें, लेकिन तभी जब capture करना legal और safe हो।" } },
+    { icon: "🏢", title: { en: "Department / Person", hi: "विभाग / व्यक्ति" }, body: { en: "Mention the department, office, contractor, or person involved if you know.", hi: "अगर पता हो तो department, office, contractor या involved person लिखें।" } },
+    { icon: "🔒", title: { en: "Contact Optional", hi: "Contact Optional" }, body: { en: "Your contact is optional. Do not share private details publicly.", hi: "आपका contact optional है। Private details publicly share न करें।" } },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-        <div>
-          <PageEyebrow value={{ en: "Report Format", hi: "Report Format" }} mode={mode} />
-          <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
-            <BilingualText value={{ en: "Send proof, not rumours.", hi: "अफवाह नहीं, प्रमाण भेजें।" }} mode={mode} hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl" />
-          </h2>
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <div className="flex flex-col justify-between rounded-[3rem] bg-white/70 p-7 backdrop-blur-xl md:p-9">
+            <div>
+              <PageEyebrow value={{ en: "Report Format", hi: "Report Format" }} mode={mode} />
+              <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-black md:text-8xl">
+                <BilingualText
+                  value={{ en: "Send proof, not rumours.", hi: "अफवाह नहीं, प्रमाण भेजें।" }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+                />
+              </h2>
+            </div>
+
+            <div className="mt-10 rounded-[2.5rem] bg-black p-6 text-white shadow-2xl">
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-[#B6FF00]">Safety rule</p>
+              <p className="mt-4 text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
+                <BilingualText
+                  value={{
+                    en: "Do not risk your safety. Do not record illegally. Send only truthful and lawful information.",
+                    hi: "अपनी safety risk में न डालें। Illegal recording न करें। केवल truthful और lawful information भेजें।",
+                  }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+                />
+              </p>
+            </div>
+          </div>
+
+          <div className="relative rounded-[3rem] bg-black p-5 text-white shadow-[0_28px_90px_rgba(0,0,0,0.18)] md:p-7">
+            <div className="absolute bottom-10 left-12 top-10 hidden w-px bg-gradient-to-b from-[#B6FF00] via-white/20 to-transparent md:block" aria-hidden="true" />
+            <div className="grid gap-4">
+              {reportItems.map((item, index) => (
+                <article
+                  key={item.title.en}
+                  className="reveal-card micro-lift group grid gap-4 rounded-[2.4rem] bg-white p-5 text-black shadow-[0_18px_55px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(182,255,0,0.18)] md:grid-cols-[4.5rem_1fr] md:items-center"
+                >
+                  <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-[1.55rem] bg-[#B6FF00] text-3xl text-black shadow-xl transition duration-500 group-hover:scale-105 group-hover:bg-black group-hover:text-white">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div className="mb-2 flex flex-wrap items-center gap-3">
+                      <span className="rounded-full bg-black px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#B6FF00]">
+                        Step {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="rounded-full bg-black/5 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black/45">
+                        Evidence Protocol
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-3xl">
+                      <BilingualText value={item.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                    </h3>
+                    <p className="mt-3 text-sm font-bold leading-6 text-black/66">
+                      <BilingualText value={item.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
-          <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+
+        <div className="mt-10 rounded-[2.75rem] bg-white/72 p-6 text-center backdrop-blur-xl">
+          <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-black md:text-4xl md:leading-[3rem]">
             <BilingualText
               value={{
-                en: "Do not risk your safety. Do not record illegally. Send only truthful, lawful, and evidence-based information.",
-                hi: "अपनी सुरक्षा जोखिम में न डालें। गैरकानूनी recording न करें। केवल सत्य, कानूनी और evidence-based जानकारी भेजें।",
+                en: "Clean reports create public pressure. Fake reports damage the movement.",
+                hi: "Clean reports public pressure बनाती हैं। Fake reports movement को नुकसान पहुंचाती हैं।",
               }}
               mode={mode}
               hiClassName="text-sm leading-5 text-black/55 md:text-lg"
             />
           </p>
         </div>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-6">
-        {reportItems.map((item, index) => (
-          <div key={item.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
-            <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
-            <p className="mt-3 text-xl font-black leading-7 tracking-[-0.045em] text-black">
-              <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
-            </p>
-          </div>
-        ))}
       </div>
     </section>
   );
@@ -3371,6 +3030,8 @@ function SocialProofSection({ mode }: { mode: LangMode }) {
 }
 
 function FAQSection({ mode }: { mode: LangMode }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
   const faqs: { question: I18n; answer: I18n }[] = [
     {
       question: { en: "Is Cockroach India Party officially registered?", hi: "क्या Cockroach India Party officially registered है?" },
@@ -3404,141 +3065,111 @@ function FAQSection({ mode }: { mode: LangMode }) {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-        <div>
-          <PageEyebrow value={{ en: "FAQ", hi: "सवाल-जवाब" }} mode={mode} />
-          <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
-            <BilingualText value={{ en: "Clear answers. No confusion.", hi: "साफ जवाब। कोई confusion नहीं।" }} mode={mode} hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl" />
-          </h2>
-        </div>
-        <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
-          <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
-            <BilingualText value={{ en: "A serious movement must explain itself clearly.", hi: "एक serious movement को खुद को साफ समझाना चाहिए।" }} mode={mode} hiClassName="text-sm leading-5 text-black/55 md:text-lg" />
-          </p>
-        </div>
+      <div className="mb-10 max-w-4xl">
+        <PageEyebrow value={{ en: "FAQ", hi: "सवाल-जवाब" }} mode={mode} />
+        <PageTitle value={{ en: "Clear answers. No confusion.", hi: "साफ जवाब। कोई confusion नहीं।" }} mode={mode} />
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
-        {faqs.map((faq, index) => (
-          <div key={faq.question.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.75rem] bg-white/76 p-7 backdrop-blur-xl">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Question {String(index + 1).padStart(2, "0")}</p>
-            <h3 className="mt-3 text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black">
-              <BilingualText value={faq.question} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
-            </h3>
-            <p className="mt-5 text-sm font-bold leading-6 text-black/68">
-              <BilingualText value={faq.answer} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="glass-card rounded-[3.25rem] border border-black/10 p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl md:p-10">
-        <PageEyebrow value={{ en: "Report Public Problems", hi: "जन समस्याएं भेजें" }} mode={mode} />
-        <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
-          <BilingualText
-            value={{
-              en: "Send issues or corruption videos on Instagram.",
-              hi: "समस्याएं या भ्रष्टाचार वीडियो Instagram पर भेजें।",
-            }}
-            mode={mode}
-            hiClassName="text-lg leading-6 tracking-normal md:text-2xl"
-          />
-        </h2>
-        <p className="mx-auto mt-6 max-w-3xl text-base font-bold leading-7 text-black/65">
-          <BilingualText
-            value={{
-              en: "Bad roads, corruption, drainage, garbage, exam delays, hospital problems, local injustice, public office harassment, or corruption videos — send evidence, location, date, and short details to our Instagram.",
-              hi: "खराब सड़क, भ्रष्टाचार, ड्रेनेज, कचरा, परीक्षा देरी, अस्पताल समस्या, स्थानीय अन्याय, सरकारी कार्यालय उत्पीड़न या भ्रष्टाचार वीडियो — प्रमाण, स्थान, तारीख और छोटी जानकारी Instagram पर भेजें।",
-            }}
-            mode={mode}
-            hiClassName="text-xs leading-4"
-          />
-        </p>
-        <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-black/10 apple-gradient-bg p-4 text-left text-xs font-black leading-5 text-black">
-          Safety note: Do not put yourself in danger while recording. Share only truthful, lawful, and evidence-based information.
-        </div>
-
-        <div className="mt-8 flex justify-center">
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
-          >
-            Send Issue or Corruption Video ↓
-          </a>
-        </div>
+      <div className="grid gap-3">
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          return (
+            <div key={faq.question.en} className="apple-clean-card overflow-hidden rounded-[2rem] bg-white/78 backdrop-blur-xl">
+              <button
+                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                className="flex w-full items-center justify-between gap-5 px-6 py-5 text-left"
+                aria-expanded={isOpen}
+              >
+                <span className="text-lg font-extrabold leading-6 text-black md:text-xl">
+                  <BilingualText value={faq.question} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+                </span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white">
+                  {isOpen ? "−" : "+"}
+                </span>
+              </button>
+              {isOpen ? (
+                <p className="px-6 pb-6 text-sm font-bold leading-7 text-black/68">
+                  <BilingualText value={faq.answer} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                </p>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
 }
 
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
+  const auditIcons = ["⛽", "📝", "💼", "🧑‍💻", "🎓"];
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div>
-            <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
-            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
-              <BilingualText
-                value={{
-                  en: "Power must answer when people suffer.",
-                  hi: "जनता कष्ट झेले तो सत्ता जवाब दे।",
-                }}
-                mode={mode}
-                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
-              />
-            </h2>
-          </div>
-
-          <div className="apple-clean-card rounded-[2.75rem] bg-white/70 p-6 backdrop-blur-xl">
-            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
-              <BilingualText
-                value={{
-                  en: "Not slogans. Not excuses. Public data, legal process, and citizen-first audits.",
-                  hi: "नारे नहीं। बहाने नहीं। सार्वजनिक डेटा, कानूनी प्रक्रिया और नागरिक-प्रथम ऑडिट।",
-                }}
-                mode={mode}
-                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
-              />
-            </p>
-            <p className="mt-5 text-sm font-bold leading-6 text-black/65">
-              <BilingualText
-                value={{
-                  en: "Every major policy that affected common citizens must be reviewed with data, documents, public hearings, and due process.",
-                  hi: "आम नागरिकों को प्रभावित करने वाली हर बड़ी नीति की डेटा, दस्तावेज, सार्वजनिक सुनवाई और कानूनी प्रक्रिया से समीक्षा हो।",
-                }}
-                mode={mode}
-                hiClassName="text-[11px] leading-4 text-black/55"
-              />
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-5 lg:grid-cols-5">
-          {publicAccountabilityIssues.map((issue, index) => (
-            <div
-              key={issue.title.en}
-              className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.75rem] bg-white/75 p-6 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-xl font-black text-white shadow-xl">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <h3 className="text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black">
-                <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
-              </h3>
-              <p className="mt-5 text-sm font-bold leading-6 text-black/68">
-                <BilingualText value={issue.explanation} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
-              </p>
+      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+          <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
+            <div>
+              <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
+              <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
+                <BilingualText
+                  value={{
+                    en: "Power must answer when people suffer.",
+                    hi: "जनता कष्ट झेले तो सत्ता जवाब दे।",
+                  }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                />
+              </h2>
             </div>
-          ))}
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
+                <p className="text-[7rem] font-black leading-none tracking-[-0.1em] md:text-[9rem]">05</p>
+                <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Citizen audits</p>
+              </div>
+              <div className="rounded-[2.5rem] bg-white/10 p-6 backdrop-blur-xl">
+                <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
+                  <BilingualText
+                    value={{
+                      en: "Not slogans. Not excuses. Public data, documents, hearings, and due process.",
+                      hi: "नारे नहीं। बहाने नहीं। सार्वजनिक डेटा, दस्तावेज, सुनवाई और कानूनी प्रक्रिया।",
+                    }}
+                    mode={mode}
+                    hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {publicAccountabilityIssues.map((issue, index) => (
+              <article
+                key={issue.title.en}
+                className="reveal-card micro-lift group grid gap-5 rounded-[2.75rem] bg-white p-5 text-black shadow-[0_22px_70px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_95px_rgba(182,255,0,0.16)] md:grid-cols-[5.5rem_1fr] md:items-center md:p-6"
+              >
+                <div className="flex h-20 w-20 items-center justify-center rounded-[2rem] bg-black text-3xl text-white shadow-2xl transition duration-500 group-hover:scale-105 group-hover:bg-[#B6FF00] group-hover:text-black">
+                  {auditIcons[index] ?? "🔎"}
+                </div>
+                <div>
+                  <div className="mb-3 flex flex-wrap items-center gap-3">
+                    <span className="rounded-full bg-black px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#B6FF00]">
+                      Audit {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="rounded-full bg-black/5 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black/45">
+                      Public Review
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-4xl">
+                    <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                  </h3>
+                  <p className="mt-4 text-sm font-bold leading-6 text-black/66 md:text-base md:leading-7">
+                    <BilingualText value={issue.explanation} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -3622,52 +3253,13 @@ function PrivacyPage({ mode }: { mode: LangMode }) {
   );
 }
 
-function LaunchChecklist({ mode }: { mode: LangMode }) {
-  const checks = runSelfTests();
-  const passed = Object.values(checks).every(Boolean);
-
-  const launchItems: I18n[] = [
-    { en: "Update app/layout.tsx metadata", hi: "app/layout.tsx metadata अपडेट करें" },
-    { en: "Create favicon from the cockroach icon", hi: "कॉकरोच आइकन से favicon बनाएं" },
-    { en: "Add Google Search Console verification", hi: "Google Search Console verification जोड़ें" },
-    { en: "Add privacy-safe analytics", hi: "privacy-safe analytics जोड़ें" },
-    { en: "Create 1200x630 social share image", hi: "1200x630 social share image बनाएं" },
-    { en: "Deploy on Vercel and connect domain DNS", hi: "Vercel पर deploy करें और domain DNS connect करें" },
-  ];
-
-  return (
-    <section className="border-y border-black/10 bg-black text-white">
-      <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div>
-            <p className="text-base font-black uppercase tracking-[0.22em] text-white/45">Launch Checklist</p>
-            <h2 className="mt-4 text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
-              Ready for serious launch.
-            </h2>
-            <p className="mt-8 text-base font-bold leading-7 text-white/55">
-              Internal validation: {passed ? "Passed" : "Needs review"}
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {launchItems.map((item) => (
-              <div key={item.en} className="rounded-[2.25rem] border border-white/10 bg-white/5 p-5 transition-all duration-500 hover:-translate-y-2 hover:bg-white/10">
-                <p className="text-sm font-black leading-6">
-                  ✓ <BilingualText value={item} mode={mode} hiClassName="text-[10px] leading-3 text-white/30" />
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function CockroachIndiaParty() {
   const [activePage, setActivePage] = useState<PageId>("home");
   const [mode, setMode] = useState<LangMode>("both");
   const [scrollY, setScrollY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showLoader, setShowLoader] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Cockroach India Party | Student First, Anti-Corruption & India 2047 Movement";
@@ -3757,6 +3349,11 @@ export default function CockroachIndiaParty() {
     };
   }, [activePage]);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowLoader(false), 950);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -3773,22 +3370,23 @@ export default function CockroachIndiaParty() {
     }, 80);
   };
 
-  const pageTitle = useMemo(() => {
-    if (activePage === "privacy") return { en: "Privacy", hi: "गोपनीयता" };
-    const found = navItems.find((item) => item.id === activePage);
-    return found?.label ?? { en: "Home", hi: "होम" };
-  }, [activePage]);
-
-  return (
+    return (
     <main
-      className="min-h-screen bg-white text-[#0f0f0f] tracking-[-0.01em]"
+      className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] tracking-[-0.018em]"
       style={{
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif',
+        fontFamily: '"SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif',
         "--scroll-y": `${scrollY}px`,
       } as React.CSSProperties}
     >
       <style>{`
         html { scroll-behavior: smooth; }
+        html, body {
+          font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: geometricPrecision;
+          background: #f5f5f7;
+        }
         @keyframes premiumSectionReveal {
           from { opacity: 0; transform: translateY(46px) scale(0.965); filter: blur(10px); }
           to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
@@ -3828,6 +3426,67 @@ export default function CockroachIndiaParty() {
           color: #071107;
           animation: counterGlow 2.6s ease-in-out infinite;
         }
+        @keyframes cockroachRunAcross {
+          from { left: -12vw; }
+          to { left: 112vw; }
+        }
+        @keyframes runnerLegMoveA {
+          0%, 100% { transform: rotate(-16deg); }
+          50% { transform: rotate(18deg); }
+        }
+        @keyframes runnerLegMoveB {
+          0%, 100% { transform: rotate(16deg); }
+          50% { transform: rotate(-18deg); }
+        }
+        @keyframes runnerFeelersMove {
+          0%, 100% { transform: rotate(-5deg); }
+          50% { transform: rotate(9deg); }
+        }
+        .running-cockroach-layer {
+          pointer-events: none;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          mix-blend-mode: multiply;
+        }
+        .running-cockroach {
+          position: absolute;
+          left: -12vw;
+          width: 76px;
+          height: 46px;
+          color: #071107;
+          filter: drop-shadow(0 8px 18px rgba(0,0,0,0.20)) drop-shadow(0 0 12px rgba(182,255,0,0.30));
+          animation-name: cockroachRunAcross;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          will-change: left;
+        }
+        .running-cockroach svg {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+        .runner-antenna {
+          stroke: currentColor;
+          stroke-width: 3;
+          stroke-linecap: round;
+          transform-box: fill-box;
+          transform-origin: 20px 10px;
+          animation: runnerFeelersMove 0.55s ease-in-out infinite;
+        }
+        .runner-leg {
+          stroke: currentColor;
+          stroke-width: 4;
+          stroke-linecap: round;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+        .runner-leg-a { animation: runnerLegMoveA 0.24s ease-in-out infinite; }
+        .runner-leg-b { animation: runnerLegMoveB 0.24s ease-in-out infinite; }
+        @media (max-width: 768px) {
+          .running-cockroach { width: 48px; height: 30px; opacity: 0.04 !important; }
+        }
         @supports (animation-timeline: view()) {
           section {
             animation: premiumSectionReveal linear both;
@@ -3858,10 +3517,11 @@ export default function CockroachIndiaParty() {
         }
         .apple-gradient-bg {
           background:
-            radial-gradient(circle at 18% 18%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.48) 18%, transparent 38%),
-            linear-gradient(135deg, #E9FFE8 0%, #B6FF00 30%, #7CFF6B 58%, #D8FF7A 78%, #F6FFE8 100%);
-          background-size: 180% 180%;
-          color: #071107;
+            radial-gradient(circle at 18% 16%, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.62) 20%, transparent 42%),
+            radial-gradient(circle at 82% 20%, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.34) 22%, transparent 44%),
+            linear-gradient(135deg, #f7fff4 0%, #d8ff8a 34%, #b6ff00 58%, #eaffc7 78%, #ffffff 100%);
+          background-size: 170% 170%;
+          color: #1d1d1f;
         }
         .apple-gradient-soft {
           background:
@@ -3879,15 +3539,17 @@ export default function CockroachIndiaParty() {
         }
         .apple-borderless {
           border-color: transparent !important;
-          box-shadow: 0 28px 90px rgba(0,0,0,0.08);
+          box-shadow: 0 36px 110px rgba(0,0,0,0.08);
         }
         .apple-clean-card {
           border-color: transparent !important;
-          box-shadow: 0 18px 55px rgba(0,0,0,0.055);
+          background: rgba(255,255,255,0.74);
+          box-shadow: 0 22px 70px rgba(0,0,0,0.06);
         }
         .apple-clean-pill {
           border-color: transparent !important;
-          box-shadow: 0 10px 28px rgba(0,0,0,0.055);
+          background: rgba(255,255,255,0.76);
+          box-shadow: 0 12px 34px rgba(0,0,0,0.055);
         }
         .shine-card { position: relative; overflow: hidden; }
         .shine-card::before {
@@ -3920,23 +3582,131 @@ export default function CockroachIndiaParty() {
           border-color: rgba(0, 0, 0, 0.18);
         }
         .micro-lift:active { transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateY(-2px) scale(0.995); }
+        @keyframes smoothTogglePress {
+          0% { transform: translateY(0) scale(1); }
+          45% { transform: translateY(1px) scale(0.96); }
+          100% { transform: translateY(-2px) scale(1.01); }
+        }
+        @keyframes smoothToggleGlow {
+          0% { box-shadow: 0 0 0 0 rgba(182,255,0,0.34); }
+          100% { box-shadow: 0 0 0 10px rgba(182,255,0,0); }
+        }
         .magnetic-btn {
           position: relative;
           overflow: hidden;
-          transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+          isolation: isolate;
+          border: 1px solid rgba(0,0,0,0.10);
+          transform: translateY(0) scale(1);
+          transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, background-color 240ms ease, color 240ms ease, border-color 240ms ease;
         }
         .magnetic-btn::after {
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.42) 48%, transparent 70%);
+          z-index: -1;
+          border-radius: inherit;
+          background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.36) 48%, transparent 70%);
           transform: translateX(-120%);
-          transition: transform 520ms ease;
+          transition: transform 620ms ease;
           pointer-events: none;
         }
-        .magnetic-btn:hover { transform: translateY(-3px) scale(1.03); }
+        .magnetic-btn:hover {
+          transform: translateY(-3px) scale(1.025);
+          box-shadow: 0 20px 55px rgba(0,0,0,0.12) !important;
+        }
         .magnetic-btn:hover::after { transform: translateX(120%); }
-        .magnetic-btn:active { transform: translateY(0) scale(0.97); }
+        .magnetic-btn:active {
+          animation: smoothTogglePress 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+          box-shadow: 0 10px 26px rgba(0,0,0,0.12) !important;
+        }
+        .sticker-chip {
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(0,0,0,0.10) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.055) !important;
+          transform: translateY(0) scale(1);
+          transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+        }
+        .sticker-chip:hover {
+          transform: translateY(-2px) scale(1.015);
+          box-shadow: 0 18px 42px rgba(0,0,0,0.09) !important;
+        }
+        .sticker-chip:active {
+          animation: smoothTogglePress 260ms cubic-bezier(0.16, 1, 0.3, 1) both, smoothToggleGlow 520ms ease-out both;
+        }
+        .premium-toggle {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.7rem;
+          min-height: 44px;
+          border: 1px solid rgba(7,17,7,0.10) !important;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.52), 0 18px 48px rgba(0,0,0,0.10) !important;
+          transform: translateY(0) scale(1);
+          white-space: nowrap;
+          transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, background 240ms ease, color 240ms ease, border-color 240ms ease;
+        }
+        .premium-toggle::before {
+          content: "";
+          height: 0.78rem;
+          width: 0.78rem;
+          flex: 0 0 auto;
+          border-radius: 9999px;
+          background: #B6FF00;
+          box-shadow: 0 0 0 5px rgba(182,255,0,0.16), 0 0 22px rgba(182,255,0,0.74);
+          transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), background 260ms ease, box-shadow 260ms ease;
+        }
+        .premium-toggle::after {
+          content: "";
+          position: absolute;
+          inset: 2px;
+          z-index: -1;
+          border-radius: inherit;
+          background: radial-gradient(circle at 30% 15%, rgba(255,255,255,0.56), transparent 36%), linear-gradient(120deg, transparent 22%, rgba(255,255,255,0.24) 48%, transparent 70%);
+          transform: translateX(-115%);
+          transition: transform 680ms ease;
+          pointer-events: none;
+        }
+        .premium-toggle:hover {
+          transform: translateY(-3px) scale(1.025);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.58), 0 24px 62px rgba(0,0,0,0.14) !important;
+        }
+        .premium-toggle:hover::before {
+          transform: translateX(4px) scale(1.16);
+        }
+        .premium-toggle:hover::after { transform: translateX(115%); }
+        .premium-toggle:active {
+          transform: translateY(1px) scale(0.98);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 10px 28px rgba(0,0,0,0.12) !important;
+        }
+        .premium-toggle-dark {
+          background: #071107 !important;
+          color: #ffffff !important;
+        }
+        .premium-toggle-dark:hover,
+        .premium-toggle-dark:focus-visible {
+          background: linear-gradient(135deg, #E9FFE8 0%, #B6FF00 45%, #64E986 100%) !important;
+          color: #071107 !important;
+        }
+        .premium-toggle-dark:hover::before,
+        .premium-toggle-dark:focus-visible::before {
+          background: #071107;
+          box-shadow: 0 0 0 5px rgba(7,17,7,0.12), 0 0 20px rgba(7,17,7,0.34);
+        }
+        .premium-toggle-light {
+          background: rgba(255,255,255,0.86) !important;
+          color: #071107 !important;
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .premium-toggle-light:hover,
+        .premium-toggle-light:focus-visible {
+          background: linear-gradient(135deg, #ffffff 0%, #E9FFE8 48%, #B6FF00 100%) !important;
+          color: #071107 !important;
+        }
         .nav-link {
           position: relative;
           padding-bottom: 6px;
@@ -3955,6 +3725,7 @@ export default function CockroachIndiaParty() {
           transition: transform 240ms ease;
         }
         .nav-link:hover::after { transform: scaleX(1); }
+        .nav-link:active { animation: smoothTogglePress 260ms cubic-bezier(0.16, 1, 0.3, 1) both; }
         .icon-bump { transition: transform 260ms ease, box-shadow 260ms ease; }
         .icon-bump:hover { animation: iconWiggle 520ms ease; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
         .manifesto-bullet { animation: softPulse 2.6s ease-in-out infinite; }
@@ -3973,6 +3744,103 @@ export default function CockroachIndiaParty() {
         @keyframes eligibilityMarquee {
           from { transform: translateX(0); }
           to { transform: translateX(-33.333%); }
+        }
+        @keyframes premiumAutoSlide {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.333%); }
+        }
+        @keyframes premiumAutoSlideReverse {
+          from { transform: translateX(-33.333%); }
+          to { transform: translateX(0); }
+        }
+        .auto-slide-banner {
+          position: relative;
+          overflow: hidden;
+          white-space: nowrap;
+          border-radius: 9999px;
+          padding: 1rem 0;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          box-shadow: 0 24px 80px rgba(0,0,0,0.075);
+        }
+        .auto-slide-track {
+          display: inline-flex;
+          width: max-content;
+          align-items: center;
+          gap: 1rem;
+          animation: premiumAutoSlide 36s linear infinite;
+          will-change: transform;
+        }
+        .auto-slide-slow { animation-duration: 52s; }
+        .auto-slide-normal { animation-duration: 38s; }
+        .auto-slide-fast { animation-duration: 26s; }
+        .auto-slide-banner:hover .auto-slide-track { animation-play-state: paused; }
+        .auto-slide-word {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          padding: 0.9rem 1.35rem;
+          font-size: clamp(1rem, 2.2vw, 2rem);
+          font-weight: 900;
+          letter-spacing: -0.055em;
+          line-height: 1;
+        }
+        .auto-slide-dark {
+          background: #050805;
+          color: #B6FF00;
+        }
+        .auto-slide-dark .auto-slide-word {
+          background: rgba(182,255,0,0.08);
+          border: 1px solid rgba(182,255,0,0.18);
+          text-shadow: 0 0 24px rgba(182,255,0,0.28);
+        }
+        .auto-slide-light {
+          background: rgba(255,255,255,0.78);
+          color: #1d1d1f;
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+        }
+        .auto-slide-light .auto-slide-word {
+          background: rgba(0,0,0,0.04);
+          border: 1px solid rgba(0,0,0,0.06);
+        }
+        .auto-slide-green {
+          background: linear-gradient(135deg, #f7fff4 0%, #d8ff8a 34%, #b6ff00 58%, #eaffc7 78%, #ffffff 100%);
+          color: #071107;
+        }
+        .auto-slide-green .auto-slide-word {
+          background: rgba(255,255,255,0.66);
+          border: 1px solid rgba(0,0,0,0.08);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .premium-statement-banner {
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+        }
+        .premium-statement-line {
+          display: inline-flex;
+          width: max-content;
+          gap: 4rem;
+          font-size: clamp(2rem, 5.8vw, 7rem);
+          font-weight: 900;
+          letter-spacing: -0.075em;
+          line-height: 0.9;
+          color: #1d1d1f;
+          will-change: transform;
+        }
+        .premium-statement-line span {
+          white-space: nowrap;
+        }
+        .premium-statement-line-one {
+          animation: premiumAutoSlide 56s linear infinite;
+        }
+        .premium-statement-line-two {
+          animation: premiumAutoSlideReverse 62s linear infinite;
+          color: rgba(29,29,31,0.46);
+        }
+        .premium-statement-banner:hover .premium-statement-line {
+          animation-play-state: paused;
         }
         .eligibility-section {
           position: relative;
@@ -4166,8 +4034,8 @@ export default function CockroachIndiaParty() {
           left: 0;
           top: 0;
           z-index: 80;
-          height: 32px;
-          width: 32px;
+          height: 24px;
+          width: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -4179,23 +4047,20 @@ export default function CockroachIndiaParty() {
         .cockroach-pointer-hidden {
           opacity: 0;
         }
-        .cockroach-pointer-active {
-          opacity: 1;
-          filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 12px rgba(182,255,0,0.38));
-        }
+
         .cockroach-pointer svg {
           overflow: visible;
         }
         .cursor-antenna {
           stroke: #050505;
-          stroke-width: 4;
+          stroke-width: 2.2;
           stroke-linecap: round;
           fill: none;
           filter: drop-shadow(0 0 7px rgba(182,255,0,0.72));
         }
         .cursor-leg {
           stroke: #050505;
-          stroke-width: 9;
+          stroke-width: 2.4;
           stroke-linecap: round;
           fill: none;
           transform-box: fill-box;
@@ -4258,36 +4123,11 @@ export default function CockroachIndiaParty() {
         .cockroach-pointer-moving .cursor-leg-f {
           animation: legWalkB 0.18s ease-in-out infinite;
         }
-        .cockroach-trail-dot {
-          pointer-events: none;
-          position: fixed;
-          left: 0;
-          top: 0;
-          z-index: 78;
-          height: 6px;
-          width: 6px;
-          border-radius: 9999px;
-          background: #B6FF00;
-          box-shadow: 0 0 16px rgba(182,255,0,0.75);
-          transition: transform 80ms linear, opacity 220ms ease;
-        }
-        .cursor-action-label {
-          position: absolute;
-          left: 28px;
-          top: -12px;
-          border-radius: 9999px;
-          background: #071107;
-          color: #B6FF00;
-          padding: 6px 10px;
-          font-size: 11px;
-          font-weight: 1000;
-          letter-spacing: -0.02em;
-          box-shadow: 0 14px 34px rgba(0,0,0,0.18);
-          white-space: nowrap;
-        }
+
+
+
         @media (max-width: 768px) {
-          .cockroach-pointer,
-          .cockroach-trail-dot { display: none; }
+          .cockroach-pointer { display: none; }
         }
         .premium-soft-background {
           pointer-events: none;
@@ -4385,12 +4225,447 @@ export default function CockroachIndiaParty() {
           transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
         }
         button:hover, select:hover, input:focus, textarea:focus, a:hover { transform: translateY(-1px); }
+        .magnetic-btn:hover { transform: translateY(-3px) scale(1.025); }
+        .sticker-chip:hover { transform: translateY(-2px) scale(1.015); }
+
+        /* FINAL RESPONSIVE READABILITY FIX */
+        *, *::before, *::after {
+          box-sizing: border-box;
+        }
+
+        html,
+        body {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+
+        main {
+          overflow-x: hidden;
+        }
+
+        section,
+        nav,
+        footer {
+          width: 100%;
+        }
+
+        section.mx-auto,
+        nav .mx-auto,
+        footer .mx-auto,
+        .mx-auto.max-w-7xl {
+          max-width: min(1840px, calc(100vw - 32px)) !important;
+        }
+
+        .max-w-6xl {
+          max-width: min(100%, 1420px) !important;
+        }
+        .max-w-5xl {
+          max-width: min(100%, 1280px) !important;
+        }
+        .max-w-4xl {
+          max-width: min(100%, 1120px) !important;
+        }
+        .max-w-3xl,
+        .max-w-2xl {
+          max-width: min(100%, 920px) !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        p,
+        span,
+        button,
+        a,
+        li {
+          overflow-wrap: anywhere;
+          word-break: normal;
+        }
+
+        h1,
+        h2,
+        h3 {
+          text-transform: none !important;
+        }
+
+        h1 {
+          font-size: clamp(4rem, 8.2vw, 10.4rem) !important;
+          line-height: 0.88 !important;
+          letter-spacing: -0.078em !important;
+          font-weight: 800 !important;
+        }
+
+        h2 {
+          font-size: clamp(3rem, 6.4vw, 8.1rem) !important;
+          line-height: 0.9 !important;
+          letter-spacing: -0.07em !important;
+          font-weight: 800 !important;
+        }
+
+        h3 {
+          font-size: clamp(1.55rem, 2.7vw, 3rem) !important;
+          line-height: 1.02 !important;
+          letter-spacing: -0.052em !important;
+          font-weight: 800 !important;
+        }
+
+        p,
+        li {
+          font-weight: 650 !important;
+          line-height: 1.45 !important;
+        }
+
+        .text-xl,
+        .text-2xl,
+        .text-3xl,
+        .text-4xl,
+        .text-5xl,
+        .text-6xl,
+        .text-7xl,
+        .text-8xl,
+        .text-9xl {
+          line-height: 1.12 !important;
+        }
+
+        .apple-borderless,
+        .apple-gradient-bg,
+        .glass-card,
+        .apple-clean-card,
+        .clay-card {
+          border-radius: clamp(1.6rem, 3vw, 2.75rem) !important;
+        }
+
+        section[class*="py-24"],
+        section[class*="py-20"],
+        section[class*="py-16"] {
+          padding-top: clamp(3rem, 5.2vw, 6.5rem) !important;
+          padding-bottom: clamp(3rem, 5.2vw, 6.5rem) !important;
+        }
+
+        .apple-gradient-bg,
+        .glass-card,
+        .apple-borderless,
+        .apple-clean-card {
+          box-shadow: 0 24px 80px rgba(0,0,0,0.075) !important;
+        }
+
+        @media (min-width: 1025px) {
+          .apple-gradient-bg,
+          .apple-borderless,
+          .glass-card,
+          .apple-clean-card,
+          .clay-card {
+            padding: clamp(2.75rem, 4.2vw, 5.75rem) !important;
+          }
+        }
+
+        .word-reveal-word {
+          white-space: normal;
+        }
+
+        .eligibility-pill {
+          font-size: 13px !important;
+          padding: 9px 15px !important;
+          font-weight: 800 !important;
+        }
+
+        @media (min-width: 1200px) {
+          section.mx-auto,
+          nav .mx-auto,
+          footer .mx-auto,
+          .mx-auto.max-w-7xl {
+            max-width: min(1880px, calc(100vw - 48px)) !important;
+          }
+
+          .grid.lg\:grid-cols-5 {
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+          }
+        }
+
+        @media (max-width: 1024px) {
+          h1 {
+            font-size: clamp(3rem, 10vw, 6.1rem) !important;
+          }
+
+          h2 {
+            font-size: clamp(2.35rem, 8.2vw, 4.8rem) !important;
+          }
+
+          .grid,
+          [class*="grid-cols-"] {
+            min-width: 0;
+          }
+        }
+
+        @media (max-width: 768px) {
+          section.mx-auto,
+          nav .mx-auto,
+          footer .mx-auto,
+          .mx-auto.max-w-7xl {
+            max-width: calc(100vw - 20px) !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
+
+          section[class*="py-24"],
+          section[class*="py-20"],
+          section[class*="py-16"],
+          section[class*="py-12"],
+          section[class*="py-10"] {
+            padding-top: 2.2rem !important;
+            padding-bottom: 2.2rem !important;
+          }
+
+          h1 {
+            font-size: clamp(2.45rem, 12vw, 4rem) !important;
+            line-height: 0.94 !important;
+            letter-spacing: -0.06em !important;
+          }
+
+          h2 {
+            font-size: clamp(2rem, 9.6vw, 3.3rem) !important;
+            line-height: 0.98 !important;
+            letter-spacing: -0.052em !important;
+          }
+
+          h3 {
+            font-size: clamp(1.28rem, 6vw, 1.9rem) !important;
+            line-height: 1.06 !important;
+          }
+
+          p,
+          li {
+            font-size: 0.94rem !important;
+            line-height: 1.62 !important;
+          }
+
+          .apple-gradient-bg,
+          .glass-card,
+          .apple-borderless,
+          .apple-clean-card,
+          .clay-card {
+            border-radius: 1.6rem !important;
+            padding: 1.25rem !important;
+          }
+
+          .rounded-\[3\.75rem\],
+          .rounded-\[3\.25rem\],
+          .rounded-\[3rem\],
+          .rounded-\[2\.75rem\],
+          .rounded-\[2\.5rem\],
+          .rounded-\[2\.25rem\] {
+            border-radius: 1.6rem !important;
+          }
+
+          .eligibility-marquee {
+            margin-top: 1.5rem !important;
+            padding-top: 0.55rem !important;
+            padding-bottom: 0.55rem !important;
+          }
+
+          .eligibility-marquee-track {
+            animation-duration: 58s !important;
+          }
+
+          .eligibility-pill {
+            font-size: 11px !important;
+            padding: 8px 12px !important;
+          }
+
+          .page-transition {
+            animation-duration: 0.28s !important;
+          }
+
+          @supports (animation-timeline: view()) {
+            section {
+              animation: none !important;
+            }
+          }
+        }
+      .premium-loader {
+          position: fixed;
+          inset: 0;
+          z-index: 999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(245,245,247,0.92);
+          backdrop-filter: blur(22px);
+          -webkit-backdrop-filter: blur(22px);
+          animation: loaderFade 1s ease both;
+        }
+        @keyframes loaderFade {
+          0%, 72% { opacity: 1; }
+          100% { opacity: 0; pointer-events: none; }
+        }
+        .premium-loader-card {
+          text-align: center;
+          animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+        .premium-loader-mark {
+          margin: 0 auto 18px;
+          display: flex;
+          height: 72px;
+          width: 72px;
+          align-items: center;
+          justify-content: center;
+          border-radius: 24px;
+          background: #071107;
+          color: #B6FF00;
+          box-shadow: 0 24px 80px rgba(0,0,0,0.16);
+        }
+        .premium-loader-card h1 {
+          font-size: clamp(2rem, 5vw, 5rem) !important;
+          line-height: 0.9 !important;
+        }
+        .premium-loader-card p {
+          margin-top: 14px;
+          font-size: 1rem;
+          font-weight: 900 !important;
+          color: rgba(0,0,0,0.55);
+        }
+        .mobile-menu-hint {
+          display: none;
+        }
+        .mobile-menu-panel {
+          position: fixed;
+          inset: 0;
+          z-index: 95;
+          pointer-events: none;
+          opacity: 0;
+          background: rgba(245,245,247,0.78);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          transition: opacity 260ms ease;
+        }
+        .mobile-menu-panel-open {
+          pointer-events: auto;
+          opacity: 1;
+        }
+        .mobile-menu-card {
+          margin: 16px;
+          min-height: calc(100vh - 32px);
+          border-radius: 2.25rem;
+          background: rgba(255,255,255,0.82);
+          padding: 24px;
+          box-shadow: 0 30px 90px rgba(0,0,0,0.14);
+          transform: translateY(18px) scale(0.98);
+          transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu-panel-open .mobile-menu-card {
+          transform: translateY(0) scale(1);
+        }
+        .mobile-menu-link {
+          width: 100%;
+          border-radius: 1.5rem;
+          background: rgba(0,0,0,0.04);
+          padding: 16px 18px;
+          text-align: left;
+          font-size: 1.5rem;
+          font-weight: 1000;
+          letter-spacing: -0.05em;
+          color: #1d1d1f;
+          transition: transform 180ms ease, background 180ms ease, color 180ms ease;
+        }
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover {
+          background: #071107;
+          color: #B6FF00;
+          transform: translateY(-2px);
+        }
+        .faq-accordion-item {
+          overflow: hidden;
+          border-radius: 2rem;
+          background: rgba(255,255,255,0.78);
+          box-shadow: 0 18px 55px rgba(0,0,0,0.055);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          transition: box-shadow 220ms ease, transform 220ms ease;
+        }
+        .faq-accordion-open {
+          box-shadow: 0 28px 85px rgba(0,0,0,0.09);
+        }
+        .faq-accordion-button {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          padding: 24px 28px;
+          text-align: left;
+          font-size: clamp(1.2rem, 2.2vw, 2rem);
+          font-weight: 1000;
+          line-height: 1.05;
+          letter-spacing: -0.05em;
+          color: #1d1d1f;
+        }
+        .faq-accordion-icon {
+          display: flex;
+          height: 42px;
+          width: 42px;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: #071107;
+          color: #B6FF00;
+          font-size: 1.35rem;
+          transition: transform 220ms ease;
+        }
+        .faq-accordion-open .faq-accordion-icon {
+          transform: rotate(180deg);
+        }
+        .faq-accordion-answer {
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .faq-accordion-answer p {
+          overflow: hidden;
+          padding: 0 28px;
+          font-size: 0.98rem;
+          font-weight: 750 !important;
+          line-height: 1.65 !important;
+          color: rgba(0,0,0,0.66);
+        }
+        .faq-accordion-open .faq-accordion-answer {
+          grid-template-rows: 1fr;
+        }
+        .faq-accordion-open .faq-accordion-answer p {
+          padding-bottom: 26px;
+        }
+        @media (max-width: 768px) {
+          .running-cockroach { display: none !important; }
+          .mobile-menu-hint {
+            display: inline-flex;
+            position: fixed;
+            right: 14px;
+            bottom: 14px;
+            z-index: 94;
+            border-radius: 9999px;
+            background: #071107;
+            color: #B6FF00;
+            padding: 13px 18px;
+            font-size: 13px;
+            font-weight: 1000;
+            box-shadow: 0 16px 44px rgba(0,0,0,0.18);
+          }
+        }
       `}</style>
+      {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
       <div className="premium-soft-background" aria-hidden="true" />
-      <CockroachCursor />
 
       <AnnouncementBar />
+      <MobileMenuOverlay
+        open={mobileMenuOpen}
+        mode={mode}
+        activePage={activePage}
+        onOpen={() => setMobileMenuOpen(true)}
+        onClose={() => setMobileMenuOpen(false)}
+        onNavigate={navigateToPage}
+      />
 
       <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-5">
@@ -4421,7 +4696,7 @@ export default function CockroachIndiaParty() {
             <select
               value={mode}
               onChange={(event) => setMode(event.target.value as LangMode)}
-              className="magnetic-btn rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-black outline-none"
+              className="magnetic-btn rounded-full bg-white px-4 py-3 text-sm font-black outline-none"
               aria-label="Language mode"
             >
               <option value="both">English + हिंदी</option>
@@ -4430,7 +4705,7 @@ export default function CockroachIndiaParty() {
             </select>
             <button
               onClick={scrollToJoin}
-              className="magnetic-btn rounded-full bg-black px-6 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
+              className="premium-toggle premium-toggle-dark rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ease-out"
             >
               Join
             </button>
@@ -4442,18 +4717,13 @@ export default function CockroachIndiaParty() {
             <button
               key={item.id}
               onClick={() => navigateToPage(item.id)}
-              className={`shrink-0 rounded-full border px-4 py-2 text-xs font-black ${activePage === item.id ? "border-black bg-black text-white" : "border-black/10 bg-white text-black/65"}`}
+              className={`sticker-chip shrink-0 rounded-full px-4 py-2 text-xs font-black ${activePage === item.id ? "bg-black text-white" : "bg-white text-black/65"}`}
             >
               {mode === "hi" ? item.label.hi : item.label.en}
             </button>
           ))}
         </div>
       </nav>
-
-      <div className="border-b border-black/10 bg-[#fafafa] px-6 py-4 text-center text-sm font-black text-black/45">
-        Current page: {pageTitle.en}
-        {mode !== "en" && <HindiShadow text={pageTitle.hi} className="text-[10px]" />}
-      </div>
 
       <div key={activePage} className="page-transition">
         {activePage === "home" && <HomePage mode={mode} setPage={navigateToPage} scrollToJoin={scrollToJoin} />}
@@ -4465,7 +4735,10 @@ export default function CockroachIndiaParty() {
         {activePage === "privacy" && <PrivacyPage mode={mode} />}
       </div>
 
-      <footer className="border-t border-black/10 px-6 py-14 text-center text-sm font-bold text-black/45">
+
+      <FinalCinematicCTA mode={mode} />
+
+      <footer className="border-t border-black/10 px-6 py-14 pb-28 text-center text-sm font-bold text-black/45 md:pb-14">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex flex-col items-center gap-4">
             <div className="flex h-14 w-14 items-center justify-center rounded-[1.5rem] bg-black text-white shadow-2xl">
@@ -4498,18 +4771,18 @@ export default function CockroachIndiaParty() {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="magnetic-btn inline-flex rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
+            className="premium-toggle premium-toggle-dark inline-flex rounded-full px-8 py-4 text-base font-black"
           >
-            Follow / Report Issue →
+            Follow on Instagram
           </a>
 
           <div className="mt-8">
             <span>
-              © 2026 Cockroach India Party. Public movement website draft. Add official registration details only after legal registration.
+              © 2026 Cockroach India Party. Official registration and election symbol details will be updated after legal completion.
             </span>
             {mode !== "en" ? (
               <HindiShadow
-                text="© 2026 कॉकरोच इंडिया पार्टी। सार्वजनिक आंदोलन वेबसाइट ड्राफ्ट। कानूनी पंजीकरण के बाद ही आधिकारिक विवरण जोड़ें।"
+                text="© 2026 कॉकरोच इंडिया पार्टी। आधिकारिक पंजीकरण और चुनाव चिन्ह विवरण कानूनी प्रक्रिया पूरी होने के बाद अपडेट होंगे।"
                 className="text-[10px]"
               />
             ) : null}
