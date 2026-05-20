@@ -411,36 +411,36 @@ const publicAccountabilityIssues: { title: I18n; explanation: I18n }[] = [
   {
     title: { en: "Ethanol Blending & Fuel Price Transparency", hi: "एथेनॉल ब्लेंडिंग और ईंधन मूल्य पारदर्शिता" },
     explanation: {
-      en: "Citizens deserve a transparent audit of ethanol blending, petrol pricing, tax collection, mileage impact, farmer benefit, oil company benefit, and whether consumers actually received fair savings.",
-      hi: "नागरिकों को एथेनॉल ब्लेंडिंग, पेट्रोल कीमत, टैक्स, माइलेज प्रभाव, किसान लाभ, तेल कंपनी लाभ और उपभोक्ता बचत की पारदर्शी जांच मिलनी चाहिए।",
+      en: "Citizens deserve a transparent audit of ethanol blending, petrol pricing, mileage impact, tax collection, farmer benefit, oil company benefit, and whether consumers actually received fair savings.",
+      hi: "नागरिकों को एथेनॉल ब्लेंडिंग, पेट्रोल कीमत, माइलेज प्रभाव, टैक्स, किसान लाभ, तेल कंपनी लाभ और उपभोक्ता बचत की पारदर्शी जांच मिलनी चाहिए।",
     },
   },
   {
-    title: { en: "Demonetization Impact Audit", hi: "नोटबंदी प्रभाव जांच" },
+    title: { en: "Paper Leak, Exam Delay & Recruitment Scam Audit", hi: "पेपर लीक, परीक्षा देरी और भर्ती घोटाला जांच" },
     explanation: {
-      en: "A full public audit must show the real impact of demonetization on jobs, small businesses, cash economy, banking stress, black money recovery, and the hardship faced by ordinary families.",
-      hi: "नोटबंदी का रोजगार, छोटे व्यवसाय, नकद अर्थव्यवस्था, बैंकिंग दबाव, काले धन की रिकवरी और आम परिवारों की कठिनाई पर पूरा सार्वजनिक ऑडिट होना चाहिए।",
+      en: "Every paper leak, delayed exam, cancelled recruitment, and repeated re-exam must be audited publicly. Students lose years of life, money, confidence, and career opportunities because of system failure.",
+      hi: "हर पेपर लीक, परीक्षा देरी, रद्द भर्ती और बार-बार री-एग्जाम का सार्वजनिक ऑडिट हो। सिस्टम की विफलता से छात्रों का समय, पैसा, भरोसा और करियर अवसर बर्बाद होते हैं।",
     },
   },
   {
-    title: { en: "Electoral Funding & Political Donation Transparency", hi: "चुनावी फंडिंग और राजनीतिक दान पारदर्शिता" },
+    title: { en: "Berozgari & Fake Job Creation Data Audit", hi: "बेरोजगारी और फर्जी रोजगार डेटा जांच" },
     explanation: {
-      en: "Every political donation must be traceable to the public. Citizens must know who funded which party, whether donors received contracts, and whether policy decisions benefited donors.",
-      hi: "हर राजनीतिक दान जनता के लिए ट्रेस करने योग्य हो। नागरिक जानें किसने किस पार्टी को पैसा दिया, क्या दाताओं को ठेके मिले और क्या नीति से उन्हें लाभ हुआ।",
+      en: "Government job claims, private job creation claims, skill program outcomes, placement numbers, and unemployment data must be audited publicly so youth get real jobs, not fake promises.",
+      hi: "सरकारी नौकरी दावे, निजी रोजगार दावे, स्किल प्रोग्राम परिणाम, प्लेसमेंट नंबर और बेरोजगारी डेटा का सार्वजनिक ऑडिट हो ताकि युवाओं को असली रोजगार मिले, सिर्फ वादे नहीं।",
     },
   },
   {
-    title: { en: "Public Infrastructure Cost & Quality Audit", hi: "सार्वजनिक इंफ्रास्ट्रक्चर लागत और गुणवत्ता जांच" },
+    title: { en: "Private Job Exploitation & Unpaid Overtime Audit", hi: "निजी नौकरी शोषण और बिना भुगतान ओवरटाइम जांच" },
     explanation: {
-      en: "Roads, bridges, airports, smart city works, public buildings, and large contracts must be audited for inflated cost, poor quality, repeated repairs, delays, and contractor-politician links.",
-      hi: "सड़क, पुल, एयरपोर्ट, स्मार्ट सिटी, सरकारी भवन और बड़े ठेकों की बढ़ी लागत, खराब गुणवत्ता, बार-बार मरम्मत, देरी और ठेकेदार-नेता संबंधों पर जांच हो।",
+      en: "Private employees deserve an audit of unpaid overtime, forced weekend work, toxic work culture, fake internship work, delayed salaries, sudden layoffs, and labour law violations.",
+      hi: "निजी कर्मचारियों के बिना भुगतान ओवरटाइम, जबरन वीकेंड काम, टॉक्सिक वर्क कल्चर, फर्जी इंटर्नशिप, सैलरी देरी, अचानक छंटनी और श्रम कानून उल्लंघन की जांच हो।",
     },
   },
   {
-    title: { en: "Loan Write-Offs, NPAs & Crony Benefit Audit", hi: "लोन राइट-ऑफ, NPA और करीबी लाभ जांच" },
+    title: { en: "Education Fees, Coaching & Student Loan Audit", hi: "शिक्षा फीस, कोचिंग और स्टूडेंट लोन जांच" },
     explanation: {
-      en: "Large loan write-offs, NPAs, bank losses, corporate relief, and recovery failures must be publicly audited so common taxpayers do not pay the price for powerful defaulters.",
-      hi: "बड़े लोन राइट-ऑफ, NPA, बैंक घाटे, कॉरपोरेट राहत और रिकवरी विफलता का सार्वजनिक ऑडिट हो ताकि आम टैक्सपेयर ताकतवर डिफॉल्टरों की कीमत न चुकाए।",
+      en: "College fees, coaching fees, exam fees, application fees, student loans, hostel charges, and placement promises must be audited so education does not become a debt trap for middle-class families.",
+      hi: "कॉलेज फीस, कोचिंग फीस, परीक्षा फीस, आवेदन फीस, स्टूडेंट लोन, हॉस्टल चार्ज और प्लेसमेंट वादों का ऑडिट हो ताकि शिक्षा मिडिल क्लास परिवारों के लिए कर्ज का जाल न बने।",
     },
   },
 ];
@@ -1049,37 +1049,153 @@ function PageTitle({ value, mode }: { value: I18n; mode: LangMode }) {
 
 function ManifestoCard({ section, index, mode }: { section: ManifestoSection; index: number; mode: LangMode }) {
   return (
-    <div className="reveal-card group rounded-[2.25rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-      <div className="flex items-start gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-3xl bg-black text-2xl text-white transition group-hover:scale-105">
+    <div className="reveal-card micro-lift shine-card apple-clean-card group rounded-[3rem] bg-white/76 p-7 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+      <div className="flex items-start gap-5">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.55rem] bg-black text-3xl text-white shadow-2xl transition group-hover:scale-105">
           {section.icon}
         </div>
         <div>
-          <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
-          <h3 className="mt-1 text-2xl font-black tracking-[-0.04em]">
-            <BilingualText value={section.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal" />
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Promise {String(index + 1).padStart(2, "0")}</p>
+          <h3 className="mt-2 text-3xl font-black leading-[0.98] tracking-[-0.055em] text-black md:text-4xl">
+            <BilingualText value={section.title} mode={mode} hiClassName="text-base leading-5 tracking-normal text-black/55" />
           </h3>
-          <p className="mt-3 text-sm font-black leading-6 text-black/70">
-            <BilingualText
-              value={{ en: `Goal: ${section.goal.en}`, hi: `लक्ष्य: ${section.goal.hi}` }}
-              mode={mode}
-              hiClassName="text-[11px] leading-4"
-            />
-          </p>
         </div>
       </div>
 
-      <ul className="mt-6 space-y-3 border-t border-black/10 pt-5">
+      <div className="mt-7 rounded-[2.25rem] bg-black p-6 text-white shadow-xl">
+        <p className="text-xs font-black uppercase tracking-[0.22em] text-white/40">Goal</p>
+        <p className="mt-3 text-lg font-black leading-7 tracking-[-0.035em] text-white md:text-xl">
+          <BilingualText value={section.goal} mode={mode} hiClassName="text-xs leading-4 text-white/35" />
+        </p>
+      </div>
+
+      <ul className="mt-7 grid gap-3">
         {section.points.map((point) => (
-          <li key={point.en} className="flex gap-3 text-sm font-bold leading-6 text-black/75">
-            <span className="manifesto-bullet mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-black" />
+          <li key={point.en} className="flex gap-3 rounded-[1.65rem] bg-white/72 p-4 text-sm font-bold leading-6 text-black/75 shadow-[0_10px_30px_rgba(0,0,0,0.035)] backdrop-blur-xl">
+            <span className="manifesto-bullet mt-2 h-2 w-2 shrink-0 rounded-full bg-black" />
             <span>
-              <BilingualText value={point} mode={mode} hiClassName="text-[11px] leading-4" />
+              <BilingualText value={point} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
             </span>
           </li>
         ))}
       </ul>
     </div>
+  );
+}
+
+function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scrollToJoin: () => void }) {
+  const eligibilityCards: I18n[] = [
+    {
+      en: "Your degree is ready but your job is still loading.",
+      hi: "डिग्री तैयार है लेकिन नौकरी अभी भी loading में है।",
+    },
+    {
+      en: "You are tired of paper leaks, delayed exams, fake job data, and unpaid overtime.",
+      hi: "आप पेपर लीक, परीक्षा देरी, फर्जी रोजगार डेटा और बिना भुगतान ओवरटाइम से थक चुके हैं।",
+    },
+    {
+      en: "You believe बेरोजगारी is not youth failure — it is governance failure.",
+      hi: "आप मानते हैं कि बेरोजगारी युवाओं की विफलता नहीं — शासन की विफलता है।",
+    },
+    {
+      en: "You want clean politics without hate, caste drama, fake news, or paid propaganda.",
+      hi: "आप नफरत, जाति ड्रामा, फेक न्यूज़ और पेड प्रोपेगैंडा के बिना साफ राजनीति चाहते हैं।",
+    },
+  ];
+
+  const movingWords = [
+    "No VIP Connection Needed",
+    "No Political Family Needed",
+    "No Fake Promise Needed",
+    "Only One Qualification",
+    "Care About India",
+    "Question Power",
+    "I Survived The System",
+    "Yes, I Am Eligible",
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="eligibility-section apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Join Now Eligibility", hi: "जुड़ने की योग्यता" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.88] tracking-[-0.075em] text-black md:text-8xl">
+              <BilingualText
+                value={{
+                  en: "If your degree is ready but your job is still loading, you are eligible.",
+                  hi: "अगर डिग्री तैयार है लेकिन नौकरी अभी भी loading में है, तो आप eligible हैं।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
+
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-2xl font-black leading-9 tracking-[-0.04em] text-black md:text-4xl md:leading-[3rem]">
+              <BilingualText
+                value={{
+                  en: "No caste certificate. No VIP connection. No political background.",
+                  hi: "कोई जाति प्रमाणपत्र नहीं। कोई VIP connection नहीं। कोई राजनीतिक background नहीं।",
+                }}
+                mode={mode}
+                hiClassName="text-base leading-5 text-black/55 md:text-xl"
+              />
+            </p>
+            <p className="mt-5 text-base font-black leading-7 text-black/68">
+              <BilingualText
+                value={{
+                  en: "Only one qualification: you care about India and you are ready to question power.",
+                  hi: "सिर्फ एक योग्यता: आपको भारत की चिंता है और आप सत्ता से सवाल करने के लिए तैयार हैं।",
+                }}
+                mode={mode}
+                hiClassName="text-xs leading-4 text-black/55"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="eligibility-marquee apple-clean-pill mt-10 rounded-full bg-white/70 py-4 backdrop-blur-xl" aria-hidden="true">
+          <div className="eligibility-marquee-track">
+            {[...movingWords, ...movingWords, ...movingWords].map((word, index) => (
+              <span key={`${word}-${index}`} className="eligibility-pill">
+                {word}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-4">
+          {eligibilityCards.map((card) => (
+            <div
+              key={card.en}
+              className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/75 p-6 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <p className="text-xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={card} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="apple-borderless mt-10 flex flex-col items-center justify-between gap-5 rounded-[2.75rem] bg-black p-6 text-white md:flex-row">
+          <p className="text-2xl font-black leading-8 tracking-[-0.04em] md:text-4xl">
+            <BilingualText
+              value={{ en: "I survived the system.", hi: "मैंने सिस्टम survive किया है।" }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+            />
+          </p>
+          <button
+            onClick={scrollToJoin}
+            className="magnetic-btn rounded-full bg-white px-8 py-4 text-base font-black text-black transition-all duration-300 hover:apple-gradient-bg hover:text-black"
+          >
+            Yes, I Am Eligible →
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1094,163 +1210,164 @@ function HomePage({
 }) {
   return (
     <>
-      <section className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:pb-24 md:pt-28">
-        <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div className="text-center lg:text-left">
-            <div className="mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 apple-gradient-bg px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:items-start">
-              <span>✓ Vision 2047 Manifesto</span>
-              {mode !== "en" && <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />}
-            </div>
-
-            <h1 className="text-5xl font-black leading-[0.92] tracking-[-0.065em] md:text-7xl lg:text-8xl">
-              <BilingualText
-                value={{ en: "India's future-first political movement.", hi: "भारत का भविष्य-प्रथम राजनीतिक आंदोलन।" }}
-                mode={mode}
-                hiClassName="mt-4 text-lg leading-6 tracking-normal md:text-2xl"
-              />
-            </h1>
-
-            <p className="mt-8 max-w-3xl text-lg font-bold leading-8 text-black/65 lg:mx-0">
-              <BilingualText
-                value={{
-                  en: "A movement for students, workers, taxpayers, farmers, small business owners, and ordinary families who want accountability - not caste politics, hate, or empty slogans.",
-                  hi: "छात्रों, कर्मचारियों, टैक्सपेयर्स, किसानों, छोटे व्यापारियों और आम परिवारों के लिए आंदोलन जो जवाबदेही चाहते हैं - जाति राजनीति, नफरत या खाली नारों पर नहीं।",
-                }}
-                mode={mode}
-                hiClassName="text-sm leading-5"
-              />
-            </p>
-
-            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
-              <button
-                onClick={scrollToJoin}
-                className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
-              >
-                Join the Movement →
-              </button>
-              <button
-                onClick={() => setPage("manifesto")}
-                className="magnetic-btn rounded-full border border-black/15 bg-white px-8 py-4 text-base font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl"
-              >
-                Read Full Manifesto
-              </button>
-            </div>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl text-center">
+          <div className="mb-8 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full apple-clean-pill apple-gradient-bg px-6 py-3 text-sm font-black transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <span>India 2047 Movement</span>
+            {mode !== "en" && <HindiShadow text="भारत 2047 आंदोलन" className="text-[10px] leading-3" />}
           </div>
 
-          <div className="reveal-card micro-lift shine-card glass-card hero-emblem-card rounded-[3.25rem] border border-black/10 p-6 shadow-2xl">
-            <div className="relative overflow-hidden rounded-[2.75rem] bg-white/80 p-6">
-              <div className="absolute inset-0 apple-gradient-soft opacity-80" aria-hidden="true" />
-              <PartyEmblem className="relative z-10 mx-auto aspect-square w-full max-w-[430px] rounded-[2.25rem] object-contain" />
-            </div>
-            <div className="mt-5 text-center">
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-black/40">Movement Emblem</p>
-              <p className="mt-2 text-xl font-black tracking-[-0.04em] text-black">Survive. Rebuild. Rise.</p>
-            </div>
-          </div>
-        </div>
+          <h1 className="text-6xl font-black leading-[0.86] tracking-[-0.08em] md:text-8xl lg:text-9xl">
+            <BilingualText
+              value={{
+                en: "Ordinary Indians deserve extraordinary accountability.",
+                hi: "आम भारतीयों को असाधारण जवाबदेही चाहिए।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/45 md:text-4xl"
+            />
+          </h1>
 
-        <div className="mt-16 grid gap-4 md:grid-cols-4">
-          {[
-            { en: "Jobs", hi: "रोजगार" },
-            { en: "Education", hi: "शिक्षा" },
-            { en: "Technology", hi: "तकनीक" },
-            { en: "Justice", hi: "न्याय" },
-          ].map((item) => (
-            <div
-              key={item.en}
-              className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "Students. Workers. Farmers. Taxpayers. Families. One movement against corruption, berozgari, paper leaks, and political luxury.",
+                hi: "छात्र। कर्मचारी। किसान। टैक्सपेयर। परिवार। भ्रष्टाचार, बेरोजगारी, पेपर लीक और राजनीतिक विलासिता के खिलाफ एक आंदोलन।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45 md:text-base"
+            />
+          </p>
+
+          <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+            <button
+              onClick={scrollToJoin}
+              className="magnetic-btn rounded-full bg-black px-9 py-5 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
             >
-              <p className="text-2xl font-black tracking-[-0.04em]">
-                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
-              </p>
-              <p className="mt-2 text-xs font-bold text-black/50">National priority</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-y border-black/10 bg-[#fafafa]">
-        <div className="mx-auto max-w-7xl px-6 py-20">
-          <div className="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-            <div>
-              <PageEyebrow value={{ en: "India 2047", hi: "भारत 2047" }} mode={mode} />
-              <PageTitle
-                value={{ en: "The world's most trusted, educated and powerful nation.", hi: "दुनिया का सबसे विश्वसनीय, शिक्षित और शक्तिशाली राष्ट्र।" }}
-                mode={mode}
-              />
-            </div>
-            <p className="text-lg font-bold leading-8 text-black/65">
-              <BilingualText
-                value={{
-                  en: "The goal is not just to win elections. The goal is to build an India that leads the world in trust, talent, technology, safety, economic strength, and citizen dignity.",
-                  hi: "लक्ष्य केवल चुनाव जीतना नहीं है। लक्ष्य ऐसा भारत बनाना है जो भरोसे, प्रतिभा, तकनीक, सुरक्षा, आर्थिक शक्ति और नागरिक सम्मान में दुनिया का नेतृत्व करे।",
-                }}
-                mode={mode}
-                hiClassName="text-sm leading-5"
-              />
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {targets.map((target) => (
-              <div
-                key={target.en}
-                className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
-              >
-                <p className="text-base font-black tracking-[-0.02em]">
-                  <BilingualText value={target} mode={mode} hiClassName="text-xs leading-4" />
-                </p>
-              </div>
-            ))}
+              Join the Movement →
+            </button>
+            <button
+              onClick={() => setPage("manifesto")}
+              className="magnetic-btn rounded-full bg-white/80 px-9 py-5 text-base font-black text-black shadow-[0_18px_55px_rgba(0,0,0,0.07)] backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
+            >
+              Read Manifesto
+            </button>
           </div>
         </div>
       </section>
 
-      <BigStatementSection mode={mode} />
+      <JoinEligibilitySection mode={mode} scrollToJoin={scrollToJoin} />
+      <BerozgariEmergencySection mode={mode} />
+      <PublicAccountabilitySection mode={mode} />
       <WhyCockroachStorySection mode={mode} />
       <ManifestoQuickViewSection mode={mode} setPage={setPage} />
       <BeforeAfterSection mode={mode} />
-      <MovementCounterSection mode={mode} />
-      <WhyMovementExistsSection mode={mode} />
-      <JanataPainPointsSection mode={mode} />
-      <BerozgariEmergencySection mode={mode} />
-      <StudentFirstHomeSection mode={mode} />
-      <WorkerRightsHomeSection mode={mode} />
-      <MovementRulesSection mode={mode} />
-      <HundredDayPlanSection mode={mode} />
-      <PublicAccountabilitySection mode={mode} />
-      <ReportLocalIssueSection mode={mode} />
       <ContactPage mode={mode} />
     </>
   );
 }
 
 function ManifestoPage({ mode }: { mode: LangMode }) {
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-20">
-      <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div className="max-w-4xl">
-          <PageEyebrow value={{ en: "Detailed Manifesto", hi: "विस्तृत घोषणापत्र" }} mode={mode} />
-          <PageTitle value={{ en: "India First, Citizens First.", hi: "भारत प्रथम, नागरिक प्रथम।" }} mode={mode} />
-        </div>
-        <p className="max-w-md text-base font-bold leading-7 text-black/65">
-          <BilingualText
-            value={{
-              en: "A simple, measurable, voter-friendly manifesto covering governance, jobs, education, technology, justice, healthcare, national security, and equal opportunity.",
-              hi: "शासन, रोजगार, शिक्षा, तकनीक, न्याय, स्वास्थ्य, राष्ट्रीय सुरक्षा और समान अवसर पर सरल घोषणापत्र।",
-            }}
-            mode={mode}
-            hiClassName="text-xs leading-4"
-          />
-        </p>
-      </div>
+  const manifestoWords = [
+    "India First",
+    "Citizens First",
+    "Jobs",
+    "Education",
+    "Zero Corruption",
+    "Student First",
+    "Worker Rights",
+    "AI Superpower",
+    "Fast Justice",
+    "Digital Government",
+  ];
 
-      <div className="grid gap-5 lg:grid-cols-2">
-        {manifesto.map((section, index) => (
-          <ManifestoCard key={section.id} section={section} index={index} mode={mode} />
-        ))}
-      </div>
-    </section>
+  return (
+    <>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
+          <div className="mx-auto max-w-6xl">
+            <PageEyebrow value={{ en: "Detailed Manifesto", hi: "विस्तृत घोषणापत्र" }} mode={mode} />
+            <h1 className="mt-6 text-6xl font-black uppercase leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+              <BilingualText
+                value={{ en: "India First. Citizens First.", hi: "भारत प्रथम। नागरिक प्रथम।" }}
+                mode={mode}
+                hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h1>
+            <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "A simple, measurable, voter-friendly manifesto for jobs, education, technology, justice, healthcare, anti-corruption, students, workers, and India 2047.",
+                  hi: "रोजगार, शिक्षा, तकनीक, न्याय, स्वास्थ्य, भ्रष्टाचार विरोध, छात्रों, कर्मचारियों और भारत 2047 के लिए सरल और मापने योग्य घोषणापत्र।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/45 md:text-base"
+              />
+            </p>
+          </div>
+
+          <div className="eligibility-marquee apple-clean-pill mt-12 rounded-full bg-white/70 py-4 backdrop-blur-xl" aria-hidden="true">
+            <div className="eligibility-marquee-track">
+              {[...manifestoWords, ...manifestoWords, ...manifestoWords].map((word, index) => (
+                <span key={`${word}-${index}`} className="eligibility-pill">
+                  {word}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-10">
+        <div className="grid gap-5 md:grid-cols-4">
+          {[
+            { en: "10+ Core Sectors", hi: "10+ मुख्य सेक्टर" },
+            { en: "Student First", hi: "छात्र प्रथम" },
+            { en: "Worker Rights", hi: "कर्मचारी अधिकार" },
+            { en: "India 2047", hi: "भारत 2047" },
+          ].map((item) => (
+            <div key={item.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
+              <p className="text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "All Manifesto Promises", hi: "सभी घोषणापत्र वादे" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "Big promises. Clear actions.", hi: "बड़े वादे। साफ कार्रवाई।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "Every promise is written as a governance direction, not a slogan.",
+                  hi: "हर वादा नारे की तरह नहीं, शासन दिशा की तरह लिखा गया है।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {manifesto.map((section, index) => (
+            <ManifestoCard key={section.id} section={section} index={index} mode={mode} />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -1486,7 +1603,7 @@ function WhyCockroachStorySection({ mode }: { mode: LangMode }) {
         </div>
         <div>
           <PageEyebrow value={{ en: "Why Cockroach?", hi: "कॉकरोच क्यों?" }} mode={mode} />
-          <PageTitle value={{ en: "It is not weakness. It is survival.", hi: "यह कमजोरी नहीं। यह संघर्ष है।" }} mode={mode} />
+          <PageTitle value={{ en: "We survive. We rebuild. We rise.", hi: "हम survive करते हैं। हम rebuild करते हैं। हम rise करते हैं।" }} mode={mode} />
           <p className="mt-6 text-base font-bold leading-7 text-black/65">
             <BilingualText
               value={{
@@ -1682,7 +1799,7 @@ function JanataPainPointsSection({ mode }: { mode: LangMode }) {
 function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-gradient-bg rounded-[3.25rem] border border-black/10 p-8 shadow-2xl md:p-12">
+      <div className="apple-borderless apple-gradient-bg rounded-[3.25rem] p-8 md:p-12">
         <div className="max-w-5xl">
           <PageEyebrow value={{ en: "Berozgari Emergency", hi: "बेरोजगारी आपातकाल" }} mode={mode} />
           <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
@@ -1920,7 +2037,7 @@ function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-gradient-bg overflow-hidden rounded-[3.75rem] border border-black/10 p-8 shadow-2xl md:p-12">
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <div>
             <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
@@ -1936,7 +2053,7 @@ function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
             </h2>
           </div>
 
-          <div className="rounded-[2.75rem] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/70 p-6 backdrop-blur-xl">
             <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
               <BilingualText
                 value={{
@@ -1964,7 +2081,7 @@ function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
           {publicAccountabilityIssues.map((issue, index) => (
             <div
               key={issue.title.en}
-              className="reveal-card micro-lift shine-card rounded-[2.75rem] border border-black/10 bg-white/75 p-6 shadow-sm backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.75rem] bg-white/75 p-6 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
             >
               <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-xl font-black text-white shadow-xl">
                 {String(index + 1).padStart(2, "0")}
@@ -2181,6 +2298,18 @@ export default function CockroachIndiaParty() {
         .apple-rounded {
           border-radius: 28px;
         }
+        .apple-borderless {
+          border-color: transparent !important;
+          box-shadow: 0 28px 90px rgba(0,0,0,0.08);
+        }
+        .apple-clean-card {
+          border-color: transparent !important;
+          box-shadow: 0 18px 55px rgba(0,0,0,0.055);
+        }
+        .apple-clean-pill {
+          border-color: transparent !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.055);
+        }
         .shine-card { position: relative; overflow: hidden; }
         .shine-card::before {
           content: "";
@@ -2259,6 +2388,54 @@ export default function CockroachIndiaParty() {
           border-radius: 3rem;
           background: radial-gradient(circle, rgba(182,255,0,0.24), transparent 62%);
           filter: blur(18px);
+        }
+        @keyframes eligibilityMarquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.333%); }
+        }
+        .eligibility-section {
+          position: relative;
+          isolation: isolate;
+        }
+        .eligibility-section::before {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          inset: 18px;
+          z-index: -1;
+          border-radius: 3.25rem;
+          background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.72), transparent 35%), radial-gradient(circle at 80% 80%, rgba(182,255,0,0.22), transparent 42%);
+          filter: blur(12px);
+        }
+        .eligibility-marquee {
+          overflow: hidden;
+          white-space: nowrap;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+        }
+        .eligibility-marquee-track {
+          display: inline-flex;
+          width: max-content;
+          gap: 14px;
+          animation: eligibilityMarquee 42s linear infinite;
+          will-change: transform;
+        }
+        .eligibility-marquee:hover .eligibility-marquee-track {
+          animation-play-state: paused;
+        }
+        .eligibility-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          border: 1px solid rgba(0,0,0,0.1);
+          background: rgba(255,255,255,0.78);
+          padding: 12px 20px;
+          font-size: 15px;
+          font-weight: 1000;
+          letter-spacing: -0.03em;
+          color: #071107;
+          box-shadow: 0 12px 32px rgba(0,0,0,0.06);
         }
         @keyframes svgDashMove {
           from { stroke-dashoffset: 0; }
@@ -2531,6 +2708,17 @@ export default function CockroachIndiaParty() {
           .cockroach-pointer,
           .cockroach-trail-dot { display: none; }
         }
+        .premium-soft-background {
+          pointer-events: none;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          background:
+            radial-gradient(circle at 20% 8%, rgba(182,255,0,0.22), transparent 26%),
+            radial-gradient(circle at 80% 24%, rgba(124,255,107,0.18), transparent 30%),
+            radial-gradient(circle at 50% 92%, rgba(233,255,232,0.72), transparent 32%),
+            linear-gradient(180deg, #ffffff 0%, #fbfff7 46%, #ffffff 100%);
+        }
         .webgl-background {
           pointer-events: none;
           position: fixed;
@@ -2618,17 +2806,8 @@ export default function CockroachIndiaParty() {
         button:hover, select:hover, input:focus, textarea:focus, a:hover { transform: translateY(-1px); }
       `}</style>
       <ScrollProgressBar progress={scrollProgress} />
-      <WebGLBackground />
-      <CockroachArtworkBackground />
-      <SvgAnimatedBackground />
+      <div className="premium-soft-background" aria-hidden="true" />
       <CockroachCursor />
-
-      <div className="parallax-background" aria-hidden="true">
-        <div className="parallax-grid" />
-        <div className="parallax-orb-one" />
-        <div className="parallax-orb-two" />
-        <div className="parallax-orb-three" />
-      </div>
 
       <AnnouncementBar />
 
