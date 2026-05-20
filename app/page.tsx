@@ -31,13 +31,13 @@ const INSTAGRAM_URL =
   "https://www.instagram.com/cockroachindiaparty_?igsh=ZTA2ejhxbDFrdXR2&utm_source=qr";
 
 
-const navItems: { id: PageId; icon: string; label: I18n }[] = [
-  { id: "home", icon: "🏠", label: { en: "Home", hi: "होम" } },
-  { id: "manifesto", icon: "📜", label: { en: "Manifesto", hi: "घोषणापत्र" } },
-  { id: "about", icon: "👥", label: { en: "About", hi: "परिचय" } },
-  { id: "constitution", icon: "🚀", label: { en: "Vision", hi: "दृष्टि" } },
-  { id: "student", icon: "🎓", label: { en: "Student First", hi: "छात्र प्रथम" } },
-  { id: "antiCorruption", icon: "🛡️", label: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" } },
+const navItems: { id: PageId; label: I18n }[] = [
+  { id: "home", label: { en: "Home", hi: "होम" } },
+  { id: "manifesto", label: { en: "Manifesto", hi: "घोषणापत्र" } },
+  { id: "about", label: { en: "About", hi: "परिचय" } },
+  { id: "constitution", label: { en: "Vision", hi: "दृष्टि" } },
+  { id: "student", label: { en: "Student First", hi: "छात्र प्रथम" } },
+  { id: "antiCorruption", label: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" } },
 ];
 
 const manifesto: ManifestoSection[] = [
@@ -701,7 +701,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
 }
 
 function RunningCockroachEffect() {
-  const runners = Array.from({ length: 80 });
+  const runners = Array.from({ length: 110 });
 
   return (
     <div className="running-cockroach-layer" aria-hidden="true">
@@ -733,78 +733,6 @@ function RunningCockroachEffect() {
         </span>
       ))}
     </div>
-  );
-}
-
-function TrustBadgesSection({ mode }: { mode: LangMode }) {
-  const badges: I18n[] = [
-    { en: "No Hate Politics", hi: "नफरत की राजनीति नहीं" },
-    { en: "No Fake News", hi: "फेक न्यूज़ नहीं" },
-    { en: "No Violence", hi: "हिंसा नहीं" },
-    { en: "Evidence First", hi: "पहले प्रमाण" },
-    { en: "Public Accountability", hi: "सार्वजनिक जवाबदेही" },
-  ];
-
-  return (
-    <section className="mx-auto max-w-7xl px-6 py-8">
-      <div className="apple-clean-pill flex flex-wrap items-center justify-center gap-3 rounded-full bg-white/78 p-3 backdrop-blur-xl">
-        {badges.map((badge) => (
-          <span key={badge.en} className="rounded-full bg-black px-5 py-3 text-sm font-black text-[#B6FF00] shadow-sm">
-            <BilingualText value={badge} mode={mode} hiClassName="text-[10px] leading-3 text-white/50" />
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function AnimatedCounter({ value }: { value: string }) {
-  const target = Number.parseInt(value, 10) || 0;
-  const [count, setCount] = useState(0);
-  const counterRef = useRef<HTMLParagraphElement | null>(null);
-  const startedRef = useRef(false);
-
-  useEffect(() => {
-    const node = counterRef.current;
-    if (!node) return;
-
-    const startAnimation = () => {
-      if (startedRef.current) return;
-      startedRef.current = true;
-
-      if (target === 0) {
-        setCount(0);
-        return;
-      }
-
-      const duration = 900;
-      const startedAt = performance.now();
-
-      const tick = (now: number) => {
-        const progress = Math.min((now - startedAt) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setCount(Math.round(target * eased));
-        if (progress < 1) requestAnimationFrame(tick);
-      };
-
-      requestAnimationFrame(tick);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) startAnimation();
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [target]);
-
-  return (
-    <p ref={counterRef} className="animated-counter text-6xl font-black leading-none tracking-[-0.08em] text-[#B6FF00] md:text-8xl">
-      {String(count).padStart(value.length, "0")}
-    </p>
   );
 }
 
@@ -850,7 +778,7 @@ function CommandCenterSection({ mode }: { mode: LangMode }) {
         <div className="mt-12 grid gap-5 md:grid-cols-4">
           {metrics.map((metric) => (
             <div key={metric.label.en} className="command-metric rounded-[2.5rem] bg-white/10 p-7 text-center backdrop-blur-xl">
-              <AnimatedCounter value={metric.value} />
+              <p className="text-6xl font-black leading-none tracking-[-0.08em] text-[#B6FF00] md:text-8xl">{metric.value}</p>
               <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/55">
                 <BilingualText value={metric.label} mode={mode} hiClassName="text-[10px] leading-3 text-white/35" />
               </p>
@@ -900,7 +828,7 @@ function HomePage({
   return (
     <>
       <RunningCockroachEffect />
-      <section className="hero-cinematic mx-auto max-w-7xl px-6 pb-20 pt-0 md:pb-28 md:pt-1">
+      <section className="hero-cinematic mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="mx-auto max-w-6xl text-center">
           <div className="mb-8 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full apple-clean-pill apple-gradient-bg px-6 py-3 text-sm font-black transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <span>India 2047 Movement</span>
@@ -908,16 +836,14 @@ function HomePage({
           </div>
 
           <h1 className="text-6xl font-black leading-[0.86] tracking-[-0.08em] md:text-8xl lg:text-9xl">
-            <span className="hero-accountability-underline">
-              <WordRevealText
-                value={{
-                  en: "Ordinary Indians deserve extraordinary accountability.",
-                  hi: "आम भारतीयों को असाधारण जवाबदेही चाहिए।",
-                }}
-                mode={mode}
-                hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/45 md:text-4xl"
-              />
-            </span>
+            <WordRevealText
+              value={{
+                en: "Ordinary Indians deserve extraordinary accountability.",
+                hi: "आम भारतीयों को असाधारण जवाबदेही चाहिए।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/45 md:text-4xl"
+            />
           </h1>
 
           <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
@@ -948,7 +874,6 @@ function HomePage({
         </div>
       </section>
 
-      <TrustBadgesSection mode={mode} />
       <SlidingTextBanner
         variant="dark"
         speed="slow"
@@ -977,8 +902,12 @@ function HomePage({
       <JoinEligibilitySection mode={mode} scrollToJoin={scrollToJoin} />
       <BerozgariEmergencySection mode={mode} />
       <PublicAccountabilitySection mode={mode} />
+      <OfficialStatusSection mode={mode} />
+      <FoundingPrinciplesSection mode={mode} />
       <VolunteerRolesSection mode={mode} />
       <ReportFormatSection mode={mode} />
+      <DistrictProblemDashboardSection mode={mode} />
+      <SocialProofSection mode={mode} />
       <FAQAccordionSection mode={mode} />
       <ContactPage mode={mode} />
     </>
@@ -2293,24 +2222,14 @@ function ContactPage({ mode }: { mode: LangMode }) {
               </h3>
               <p className="mt-3 text-sm font-bold text-black/50">@cockroachindiaparty_</p>
 
-              <div className="mt-8 grid gap-3">
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="premium-toggle premium-toggle-dark inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
-                >
-                  Follow on Instagram
-                </a>
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="premium-toggle premium-toggle-light inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
-                >
-                  Send Issue / Corruption Video
-                </a>
-              </div>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="premium-toggle premium-toggle-dark mt-8 inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
+              >
+                Follow on Instagram
+              </a>
 
               <p className="mt-5 text-xs font-bold text-black/45">
                 <BilingualText
@@ -2367,6 +2286,119 @@ function ScrollProgressBar({ progress }: { progress: number }) {
   );
 }
 
+function WhyCockroachStorySection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+        <div className="clay-card rounded-[3.25rem] border border-black/10 p-8">
+          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[2rem] bg-black text-white shadow-2xl">
+            <CockroachIcon className="h-14 w-14" />
+          </div>
+          <p className="mt-6 text-center text-sm font-black uppercase tracking-[0.22em] text-black/45">
+            Movement Symbol
+          </p>
+        </div>
+        <div>
+          <PageEyebrow value={{ en: "Why Cockroach?", hi: "कॉकरोच क्यों?" }} mode={mode} />
+          <PageTitle value={{ en: "We survive. We rebuild. We rise.", hi: "हम survive करते हैं। हम rebuild करते हैं। हम rise करते हैं।" }} mode={mode} />
+          <p className="mt-6 text-base font-bold leading-7 text-black/65">
+            <BilingualText
+              value={{
+                en: "Ordinary people survive everything: inflation, corruption, exams, job pressure, bad roads, toxic offices, and failed promises. The cockroach is survival, adaptability, discipline, and refusal to disappear.",
+                hi: "आम लोग सब कुछ झेलते हैं: महंगाई, भ्रष्टाचार, परीक्षा, नौकरी दबाव, खराब सड़क, विषाक्त ऑफिस और टूटे वादे। कॉकरोच संघर्ष, अनुकूलन, अनुशासन और मिटने से इनकार का प्रतीक है।",
+              }}
+              mode={mode}
+              hiClassName="text-xs leading-4"
+            />
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ManifestoQuickViewSection({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) => void }) {
+  const quickCards: { title: I18n; body: I18n }[] = [
+    { title: { en: "Student First", hi: "छात्र प्रथम" }, body: { en: "Fair exams, no paper leaks, fast results, job-linked education.", hi: "निष्पक्ष परीक्षा, पेपर लीक बंद, तेज परिणाम, नौकरी से जुड़ी शिक्षा।" } },
+    { title: { en: "Worker Rights", hi: "कर्मचारी अधिकार" }, body: { en: "5-day work week, paid overtime, labour law audits.", hi: "5 दिन कार्य सप्ताह, भुगतान ओवरटाइम, श्रम कानून ऑडिट।" } },
+    { title: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" }, body: { en: "Asset checks, fast courts, seizure of illegal wealth.", hi: "संपत्ति जांच, तेज कोर्ट, अवैध संपत्ति जब्ती।" } },
+    { title: { en: "Public Audit", hi: "सार्वजनिक ऑडिट" }, body: { en: "Every major policy must answer with data, not slogans.", hi: "हर बड़ी नीति डेटा से जवाब दे, नारों से नहीं।" } },
+    { title: { en: "Jobs", hi: "रोजगार" }, body: { en: "Manufacturing, apprenticeships, startups, local enterprise.", hi: "मैन्युफैक्चरिंग, अप्रेंटिसशिप, स्टार्टअप, लोकल उद्यम।" } },
+    { title: { en: "Digital Government", hi: "डिजिटल सरकार" }, body: { en: "One citizen app, 7-day complaint resolution, paperless offices.", hi: "एक नागरिक ऐप, 7 दिन शिकायत समाधान, पेपरलेस ऑफिस।" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <PageEyebrow value={{ en: "Manifesto Quick View", hi: "घोषणापत्र संक्षेप" }} mode={mode} />
+          <PageTitle value={{ en: "Six promises. One direction.", hi: "छह वादे। एक दिशा।" }} mode={mode} />
+        </div>
+        <button
+          onClick={() => setPage("manifesto")}
+          className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
+        >
+          Read Full Manifesto
+        </button>
+      </div>
+      <div className="grid gap-5 md:grid-cols-3">
+        {quickCards.map((card) => (
+          <div key={card.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6">
+            <h3 className="text-2xl font-black tracking-[-0.04em]">
+              <BilingualText value={card.title} mode={mode} hiClassName="text-xs leading-4" />
+            </h3>
+            <p className="mt-4 text-sm font-bold leading-6 text-black/65">
+              <BilingualText value={card.body} mode={mode} hiClassName="text-[11px] leading-4" />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BeforeAfterSection({ mode }: { mode: LangMode }) {
+  const today: I18n[] = [
+    { en: "Paper leaks", hi: "पेपर लीक" },
+    { en: "Corruption", hi: "भ्रष्टाचार" },
+    { en: "Unpaid overtime", hi: "बिना भुगतान ओवरटाइम" },
+    { en: "Political luxury", hi: "नेताओं की विलासिता" },
+  ];
+  const tomorrow: I18n[] = [
+    { en: "Fair exams", hi: "निष्पक्ष परीक्षा" },
+    { en: "Public audits", hi: "सार्वजनिक ऑडिट" },
+    { en: "Paid overtime", hi: "भुगतान वाला ओवरटाइम" },
+    { en: "Accountable leaders", hi: "जवाबदेह नेता" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="rounded-[3.25rem] border border-black/10 bg-white/80 p-8 shadow-sm">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-black/40">Today</p>
+          <div className="mt-6 grid gap-4">
+            {today.map((item) => (
+              <p key={item.en} className="text-3xl font-black tracking-[-0.04em] text-black/70">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="apple-gradient-bg rounded-[3.25rem] border border-black/10 p-8 shadow-2xl">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-black/45">Our India</p>
+          <div className="mt-6 grid gap-4">
+            {tomorrow.map((item) => (
+              <p key={item.en} className="text-3xl font-black tracking-[-0.04em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PremiumPageLoader() {
   return (
     <div className="premium-loader" aria-hidden="true">
@@ -2398,8 +2430,8 @@ function MobileMenuOverlay({
 }) {
   return (
     <>
-      <button type="button" onClick={onOpen} className="mobile-menu-hint" aria-label="Open movement menu">
-        Movement
+      <button type="button" onClick={onOpen} className="mobile-menu-hint" aria-label="Open menu">
+        Menu
       </button>
 
       <div className={`mobile-menu-panel ${open ? "mobile-menu-panel-open" : ""}`} aria-hidden={!open}>
@@ -2425,37 +2457,26 @@ function MobileMenuOverlay({
                 }}
                 className={`mobile-menu-link ${activePage === item.id ? "mobile-menu-link-active" : ""}`}
               >
-                <span aria-hidden="true">{item.icon}</span>
-                <span>{mode === "hi" ? item.label.hi : item.label.en}</span>
+                {mode === "hi" ? item.label.hi : item.label.en}
               </button>
             ))}
           </div>
 
-          <div className="mt-8 grid gap-3">
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-dark flex w-full rounded-full px-8 py-4 text-base font-black"
-            >
-              Follow on Instagram
-            </a>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-light flex w-full rounded-full px-8 py-4 text-base font-black"
-            >
-              Send Issue / Corruption Video
-            </a>
-          </div>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="premium-toggle premium-toggle-dark mt-8 flex w-full rounded-full px-8 py-4 text-base font-black"
+          >
+            Follow on Instagram
+          </a>
         </div>
       </div>
     </>
   );
 }
 
-function FinalCinematicCTA({ mode, onShare }: { mode: LangMode; onShare?: () => void }) {
+function FinalCinematicCTA({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-14">
@@ -2470,33 +2491,14 @@ function FinalCinematicCTA({ mode, onShare }: { mode: LangMode; onShare?: () => 
             hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
           />
         </h2>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="premium-toggle premium-toggle-dark inline-flex rounded-full px-9 py-5 text-base font-black"
-          >
-            Follow on Instagram
-          </a>
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="premium-toggle premium-toggle-light inline-flex rounded-full px-9 py-5 text-base font-black"
-          >
-            Send Issue / Corruption Video
-          </a>
-          {onShare ? (
-            <button
-              type="button"
-              onClick={onShare}
-              className="premium-toggle premium-toggle-light inline-flex rounded-full px-9 py-5 text-base font-black"
-            >
-              Share Movement
-            </button>
-          ) : null}
-        </div>
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="premium-toggle premium-toggle-dark mt-10 inline-flex rounded-full px-9 py-5 text-base font-black"
+        >
+          Follow on Instagram
+        </a>
       </div>
     </section>
   );
@@ -2572,6 +2574,14 @@ function FAQAccordionSection({ mode }: { mode: LangMode }) {
         })}
       </div>
     </section>
+  );
+}
+
+function AnnouncementBar() {
+  return (
+    <div className="border-b border-black/10 apple-gradient-bg px-6 py-3 text-center text-sm font-black text-black">
+      Janata First. Power Accountable. Follow the movement on Instagram.
+    </div>
   );
 }
 
@@ -2680,6 +2690,90 @@ function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
             />
           </p>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function OfficialStatusSection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <PageEyebrow value={{ en: "Official Status", hi: "आधिकारिक स्थिति" }} mode={mode} />
+        <h2 className="mt-5 max-w-5xl text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+          <BilingualText
+            value={{
+              en: "Movement first. Legal details after registration.",
+              hi: "पहले आंदोलन। पंजीकरण के बाद कानूनी विवरण।",
+            }}
+            mode={mode}
+            hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+          />
+        </h2>
+        <p className="mt-8 max-w-4xl text-base font-bold leading-7 text-white/62">
+          <BilingualText
+            value={{
+              en: "This is a citizen-first political movement website. Official party registration details, election symbol, office address, and legal documents will be updated after completion of legal registration. No symbol, slogan, or mark shown here should be treated as an officially allotted election symbol unless approved under applicable election rules.",
+              hi: "यह citizen-first राजनीतिक आंदोलन वेबसाइट है। आधिकारिक पार्टी पंजीकरण विवरण, चुनाव चिन्ह, कार्यालय पता और कानूनी दस्तावेज पंजीकरण पूरा होने के बाद अपडेट होंगे। यहां दिखाया गया कोई चिन्ह, slogan या mark आधिकारिक चुनाव चिन्ह नहीं माना जाए जब तक लागू चुनाव नियमों के तहत स्वीकृत न हो।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4 text-white/35"
+          />
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function FoundingPrinciplesSection({ mode }: { mode: LangMode }) {
+  const principles: I18n[] = [
+    { en: "India First.", hi: "भारत प्रथम।" },
+    { en: "Citizens First.", hi: "नागरिक प्रथम।" },
+    { en: "Students First.", hi: "छात्र प्रथम।" },
+    { en: "No hate politics.", hi: "नफरत की राजनीति नहीं।" },
+    { en: "No corruption.", hi: "भ्रष्टाचार नहीं।" },
+    { en: "No fake news.", hi: "फेक न्यूज़ नहीं।" },
+    { en: "No violence.", hi: "हिंसा नहीं।" },
+    { en: "No caste or religion targeting.", hi: "जाति या धर्म को निशाना नहीं।" },
+    { en: "Public money must be publicly visible.", hi: "जनता का पैसा जनता को दिखना चाहिए।" },
+    { en: "Politics is service, not luxury.", hi: "राजनीति सेवा है, विलासिता नहीं।" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+        <div>
+          <PageEyebrow value={{ en: "Founding Principles", hi: "स्थापना सिद्धांत" }} mode={mode} />
+          <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText
+              value={{ en: "Clear rules before power.", hi: "सत्ता से पहले साफ नियम।" }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl"
+            />
+          </h2>
+        </div>
+        <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+          <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "A movement becomes serious only when discipline is stronger than emotion.",
+                hi: "आंदोलन तभी गंभीर बनता है जब अनुशासन भावना से मजबूत हो।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+            />
+          </p>
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {principles.map((principle) => (
+          <div key={principle.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
+            <p className="text-xl font-black leading-7 tracking-[-0.045em] text-black">
+              <BilingualText value={principle} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -2868,6 +2962,144 @@ function ReportFormatSection({ mode }: { mode: LangMode }) {
   );
 }
 
+function DistrictProblemDashboardSection({ mode }: { mode: LangMode }) {
+  const items: I18n[] = [
+    { en: "Roads", hi: "सड़क" },
+    { en: "Drainage", hi: "ड्रेनेज" },
+    { en: "Garbage", hi: "कचरा" },
+    { en: "Paper leaks", hi: "पेपर लीक" },
+    { en: "Hospital issues", hi: "अस्पताल समस्या" },
+    { en: "Local corruption", hi: "स्थानीय भ्रष्टाचार" },
+    { en: "Exam delays", hi: "परीक्षा देरी" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <PageEyebrow value={{ en: "Coming Soon", hi: "जल्द आ रहा है" }} mode={mode} />
+        <h2 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+          <BilingualText
+            value={{ en: "Janata Problem Dashboard.", hi: "जनता समस्या डैशबोर्ड।" }}
+            mode={mode}
+            hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+          />
+        </h2>
+        <p className="mt-8 max-w-4xl text-base font-bold leading-7 text-white/62">
+          <BilingualText
+            value={{
+              en: "Every district. Publicly tracked. Local problems should not disappear after complaints; they should become visible, measurable, and accountable.",
+              hi: "हर जिला। सार्वजनिक tracking। स्थानीय समस्याएं complaint के बाद गायब नहीं होनी चाहिए; वे visible, measurable और accountable बननी चाहिए।",
+            }}
+            mode={mode}
+            hiClassName="text-xs leading-4 text-white/35"
+          />
+        </p>
+        <div className="mt-10 flex flex-wrap gap-3">
+          {items.map((item) => (
+            <span key={item.en} className="rounded-full bg-white/10 px-5 py-3 text-sm font-black text-white/82">
+              <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4 text-white/35" />
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SocialProofSection({ mode }: { mode: LangMode }) {
+  const lines: I18n[] = [
+    { en: "Movement Started By Citizens.", hi: "आंदोलन नागरिकों द्वारा शुरू।" },
+    { en: "Built For Citizens.", hi: "नागरिकों के लिए बना।" },
+    { en: "Open For Students, Workers, Farmers, Taxpayers, and Families.", hi: "छात्रों, कर्मचारियों, किसानों, टैक्सपेयर्स और परिवारों के लिए खुला।" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-12">
+        <PageEyebrow value={{ en: "Citizen Movement", hi: "नागरिक आंदोलन" }} mode={mode} />
+        <div className="mx-auto mt-6 grid max-w-5xl gap-4">
+          {lines.map((line) => (
+            <h2 key={line.en} className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-7xl">
+              <BilingualText value={line} mode={mode} hiClassName="text-lg leading-6 tracking-normal text-black/55 md:text-2xl" />
+            </h2>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection({ mode }: { mode: LangMode }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const faqs: { question: I18n; answer: I18n }[] = [
+    {
+      question: { en: "Is Cockroach India Party officially registered?", hi: "क्या Cockroach India Party officially registered है?" },
+      answer: { en: "Official registration details will be updated after legal registration is completed. Until then, this website represents a citizen-first political movement.", hi: "कानूनी पंजीकरण पूरा होने के बाद official registration details अपडेट होंगे। तब तक यह वेबसाइट citizen-first political movement को represent करती है।" },
+    },
+    {
+      question: { en: "Why the name Cockroach?", hi: "नाम Cockroach क्यों?" },
+      answer: { en: "It symbolizes survival, adaptability, discipline, and refusal to disappear — the story of ordinary Indians who survive broken systems every day.", hi: "यह survival, adaptability, discipline और मिटने से इनकार का प्रतीक है — उन आम भारतीयों की कहानी जो हर दिन टूटे सिस्टम को survive करते हैं।" },
+    },
+    {
+      question: { en: "What does the movement stand for?", hi: "यह movement किसके लिए है?" },
+      answer: { en: "Student-first governance, jobs, anti-corruption, worker rights, public accountability, clean politics, and the Indian Dream for every citizen.", hi: "Student-first governance, jobs, anti-corruption, worker rights, public accountability, clean politics और हर citizen के Indian Dream के लिए।" },
+    },
+    {
+      question: { en: "How can students join?", hi: "Students कैसे join कर सकते हैं?" },
+      answer: { en: "Students can follow the Instagram page, join as campus volunteers, report education problems, and help build student-first issue campaigns.", hi: "Students Instagram page follow करके, campus volunteer बनकर, education problems report करके और student-first issue campaigns बनाकर join कर सकते हैं।" },
+    },
+    {
+      question: { en: "How can I report corruption or local problems?", hi: "मैं corruption या local problem कैसे report करूं?" },
+      answer: { en: "Send location, date, short description, and video/photo proof on Instagram. Do not risk your safety or record illegally.", hi: "Location, date, short description और video/photo proof Instagram पर भेजें। अपनी safety risk में न डालें और illegal recording न करें।" },
+    },
+    {
+      question: { en: "Do you support hate politics?", hi: "क्या आप hate politics support करते हैं?" },
+      answer: { en: "No. The movement rejects hate politics, caste or religion targeting, fake news, paid propaganda, and violence.", hi: "नहीं। यह movement hate politics, caste/religion targeting, fake news, paid propaganda और violence को reject करता है।" },
+    },
+    {
+      question: { en: "Can private employees join?", hi: "क्या private employees join कर सकते हैं?" },
+      answer: { en: "Yes. Private employees are nation builders. The movement supports 5-day work week, paid overtime, labour law audits, and protection from toxic work culture.", hi: "हाँ। Private employees nation builders हैं। Movement 5-day work week, paid overtime, labour law audits और toxic work culture से protection support करता है।" },
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-10 max-w-4xl">
+        <PageEyebrow value={{ en: "FAQ", hi: "सवाल-जवाब" }} mode={mode} />
+        <PageTitle value={{ en: "Clear answers. No confusion.", hi: "साफ जवाब। कोई confusion नहीं।" }} mode={mode} />
+      </div>
+
+      <div className="grid gap-3">
+        {faqs.map((faq, index) => {
+          const isOpen = openIndex === index;
+          return (
+            <div key={faq.question.en} className="apple-clean-card overflow-hidden rounded-[2rem] bg-white/78 backdrop-blur-xl">
+              <button
+                onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                className="flex w-full items-center justify-between gap-5 px-6 py-5 text-left"
+                aria-expanded={isOpen}
+              >
+                <span className="text-lg font-extrabold leading-6 text-black md:text-xl">
+                  <BilingualText value={faq.question} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+                </span>
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-black text-lg font-extrabold text-white">
+                  {isOpen ? "−" : "+"}
+                </span>
+              </button>
+              {isOpen ? (
+                <p className="px-6 pb-6 text-sm font-bold leading-7 text-black/68">
+                  <BilingualText value={faq.answer} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                </p>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
   const auditIcons = ["⛽", "📝", "💼", "🧑‍💻", "🎓"];
 
@@ -3023,16 +3255,11 @@ function PrivacyPage({ mode }: { mode: LangMode }) {
 
 export default function CockroachIndiaParty() {
   const [activePage, setActivePage] = useState<PageId>("home");
-  const [mode, setMode] = useState<LangMode>("en");
+  const [mode, setMode] = useState<LangMode>("both");
   const [scrollY, setScrollY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [showLoader, setShowLoader] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return window.sessionStorage.getItem("cip-loader-seen") !== "true";
-  });
+  const [showLoader, setShowLoader] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navRef = useRef<HTMLDivElement | null>(null);
-  const [navIndicator, setNavIndicator] = useState({ left: 0, width: 0, opacity: 0 });
 
   useEffect(() => {
     document.title = "Cockroach India Party | Student First, Anti-Corruption & India 2047 Movement";
@@ -3123,31 +3350,9 @@ export default function CockroachIndiaParty() {
   }, [activePage]);
 
   useEffect(() => {
-    if (!showLoader) return;
-    window.sessionStorage.setItem("cip-loader-seen", "true");
     const timer = window.setTimeout(() => setShowLoader(false), 950);
     return () => window.clearTimeout(timer);
-  }, [showLoader]);
-
-  useEffect(() => {
-    const updateIndicator = () => {
-      const nav = navRef.current;
-      if (!nav) return;
-      const activeButton = nav.querySelector<HTMLButtonElement>(`[data-page="${activePage}"]`);
-      if (!activeButton) return;
-      const navRect = nav.getBoundingClientRect();
-      const buttonRect = activeButton.getBoundingClientRect();
-      setNavIndicator({
-        left: buttonRect.left - navRect.left,
-        width: buttonRect.width,
-        opacity: 1,
-      });
-    };
-
-    updateIndicator();
-    window.addEventListener("resize", updateIndicator);
-    return () => window.removeEventListener("resize", updateIndicator);
-  }, [activePage, mode]);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -3165,25 +3370,6 @@ export default function CockroachIndiaParty() {
     }, 80);
   };
 
-  const shareMovement = async () => {
-    const shareData = {
-      title: "Cockroach India Party",
-      text: "Student First. Public Accountability. India 2047 Movement.",
-      url: INSTAGRAM_URL,
-    };
-
-    try {
-      if (typeof navigator !== "undefined" && "share" in navigator) {
-        await navigator.share(shareData);
-      } else if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText(INSTAGRAM_URL);
-        alert("Movement link copied.");
-      }
-    } catch {
-      // User cancelled sharing or browser blocked it.
-    }
-  };
-
     return (
     <main
       className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] tracking-[-0.018em]"
@@ -3195,8 +3381,6 @@ export default function CockroachIndiaParty() {
       <style>{`
         html { scroll-behavior: smooth; }
         html, body {
-          margin: 0;
-          padding: 0;
           font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
@@ -3232,28 +3416,6 @@ export default function CockroachIndiaParty() {
           transform-origin: bottom center;
           animation: wordRevealUp 0.78s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           will-change: transform, opacity, filter;
-        }
-        .hero-accountability-underline {
-          position: relative;
-          display: inline;
-          isolation: isolate;
-        }
-        .hero-accountability-underline::after {
-          content: "";
-          position: absolute;
-          left: 2%;
-          right: 2%;
-          bottom: 0.05em;
-          z-index: -1;
-          height: 0.12em;
-          border-radius: 9999px;
-          background: linear-gradient(90deg, rgba(7,17,7,0.06), rgba(7,17,7,0.25), rgba(182,255,0,0.68), rgba(7,17,7,0.10));
-          background-size: 220% 100%;
-          transform-origin: left center;
-          animation: underlineSweep 4.8s ease-in-out infinite;
-        }
-        .animated-counter {
-          animation: counterPop 520ms cubic-bezier(0.16, 1, 0.3, 1) both, counterGlow 2.6s ease-in-out infinite;
         }
         .counter-number {
           display: block;
@@ -3429,19 +3591,6 @@ export default function CockroachIndiaParty() {
           0% { box-shadow: 0 0 0 0 rgba(182,255,0,0.34); }
           100% { box-shadow: 0 0 0 10px rgba(182,255,0,0); }
         }
-        @keyframes buttonRipple {
-          from { transform: translate(-50%, -50%) scale(0); opacity: 0.24; }
-          to { transform: translate(-50%, -50%) scale(9); opacity: 0; }
-        }
-        @keyframes underlineSweep {
-          0% { background-position: 0% 50%; transform: scaleX(0.58); opacity: 0.55; }
-          50% { background-position: 100% 50%; transform: scaleX(1); opacity: 0.95; }
-          100% { background-position: 200% 50%; transform: scaleX(0.82); opacity: 0.65; }
-        }
-        @keyframes counterPop {
-          from { transform: translateY(10px) scale(0.96); opacity: 0; filter: blur(6px); }
-          to { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
-        }
         .magnetic-btn {
           position: relative;
           overflow: hidden;
@@ -3533,20 +3682,6 @@ export default function CockroachIndiaParty() {
           transform: translateY(1px) scale(0.98);
           box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 10px 28px rgba(0,0,0,0.12) !important;
         }
-        .premium-toggle:active::after,
-        .magnetic-btn:active::after {
-          content: "";
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          inset: auto;
-          z-index: -1;
-          height: 28px;
-          width: 28px;
-          border-radius: 9999px;
-          background: rgba(255,255,255,0.72);
-          animation: buttonRipple 520ms ease-out;
-        }
         .premium-toggle-dark {
           background: #071107 !important;
           color: #ffffff !important;
@@ -3572,52 +3707,25 @@ export default function CockroachIndiaParty() {
           background: linear-gradient(135deg, #ffffff 0%, #E9FFE8 48%, #B6FF00 100%) !important;
           color: #071107 !important;
         }
-        .top-nav-segment {
+        .nav-link {
           position: relative;
-          isolation: isolate;
-          border-radius: 9999px;
-          background: rgba(255,255,255,0.56);
-          padding: 0.22rem;
-          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.055), 0 10px 30px rgba(0,0,0,0.04);
+          padding-bottom: 6px;
         }
-        .top-nav-slider {
+        .nav-link::after {
+          content: "";
           position: absolute;
           left: 0;
-          top: 0.22rem;
-          bottom: 0.22rem;
-          z-index: -1;
+          right: 0;
+          bottom: 0;
+          height: 2px;
           border-radius: 9999px;
-          background: #071107;
-          transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), width 320ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+          background: linear-gradient(90deg, #0B8F36, #B6FF00, #64E986);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 240ms ease;
         }
-        .top-nav-toggle {
-          position: relative;
-          z-index: 1;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 9999px;
-          padding: 0.62rem 1rem;
-          background: transparent;
-          color: rgba(29,29,31,0.62);
-          border: 1px solid transparent;
-          font-weight: 900;
-          letter-spacing: -0.02em;
-          transition: color 200ms ease, transform 200ms ease, border-color 200ms ease;
-        }
-        .top-nav-toggle:hover {
-          color: #071107;
-          transform: translateY(-1px);
-        }
-        .top-nav-toggle-active {
-          background: transparent;
-          color: #ffffff !important;
-          border-color: transparent;
-          box-shadow: none;
-        }
-        .top-nav-toggle:active {
-          transform: translateY(0) scale(0.97);
-        }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .nav-link:active { animation: smoothTogglePress 260ms cubic-bezier(0.16, 1, 0.3, 1) both; }
         .icon-bump { transition: transform 260ms ease, box-shadow 260ms ease; }
         .icon-bump:hover { animation: iconWiggle 520ms ease; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
         .manifesto-bullet { animation: softPulse 2.6s ease-in-out infinite; }
@@ -3920,7 +4028,107 @@ export default function CockroachIndiaParty() {
           from { background-position: 0 0; transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.018), 0); }
           to { background-position: 64px 64px; transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.018), 0); }
         }
-        
+        .cockroach-pointer {
+          pointer-events: none;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 80;
+          height: 24px;
+          width: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.82;
+          filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.24));
+          transition: transform 45ms linear, opacity 160ms ease, filter 180ms ease;
+          transform-origin: 7px 7px;
+        }
+        .cockroach-pointer-hidden {
+          opacity: 0;
+        }
+
+        .cockroach-pointer svg {
+          overflow: visible;
+        }
+        .cursor-antenna {
+          stroke: #050505;
+          stroke-width: 2.2;
+          stroke-linecap: round;
+          fill: none;
+          filter: drop-shadow(0 0 7px rgba(182,255,0,0.72));
+        }
+        .cursor-leg {
+          stroke: #050505;
+          stroke-width: 2.4;
+          stroke-linecap: round;
+          fill: none;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+        .cursor-wing-left,
+        .cursor-wing-right {
+          transform-box: fill-box;
+          transform-origin: center;
+          opacity: 0.94;
+        }
+        @keyframes cockroachWalkBob {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-1.4px) rotate(1.2deg); }
+        }
+        @keyframes legWalkA {
+          0%, 100% { transform: rotate(-24deg) translateY(0) translateX(0); }
+          50% { transform: rotate(34deg) translateY(-7px) translateX(4px); }
+        }
+        @keyframes legWalkB {
+          0%, 100% { transform: rotate(28deg) translateY(-3px) translateX(0); }
+          50% { transform: rotate(-32deg) translateY(5px) translateX(-4px); }
+        }
+        @keyframes wingFlutterLeft {
+          0%, 100% { transform: rotate(0deg) translateY(0); }
+          50% { transform: rotate(-8deg) translateY(-0.8px); }
+        }
+        @keyframes wingFlutterRight {
+          0%, 100% { transform: rotate(0deg) translateY(0); }
+          50% { transform: rotate(8deg) translateY(-0.8px); }
+        }
+        @keyframes cursorFeelers {
+          0%, 100% { transform: rotate(-10deg) translateX(0); }
+          25% { transform: rotate(18deg) translateX(7px); }
+          50% { transform: rotate(-22deg) translateX(-5px); }
+          75% { transform: rotate(14deg) translateX(5px); }
+        }
+        .cockroach-pointer-moving svg {
+          animation: cockroachWalkBob 0.38s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-wing-left {
+          animation: wingFlutterLeft 0.48s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-wing-right {
+          animation: wingFlutterRight 0.48s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-antenna {
+          transform-origin: 94px 42px;
+          animation: cursorFeelers 0.34s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-antenna-b { animation-delay: 0.08s; }
+        .cockroach-pointer-moving .cursor-antenna-c { animation-delay: 0.14s; }
+        .cockroach-pointer-moving .cursor-leg-a,
+        .cockroach-pointer-moving .cursor-leg-c,
+        .cockroach-pointer-moving .cursor-leg-e {
+          animation: legWalkA 0.18s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-leg-b,
+        .cockroach-pointer-moving .cursor-leg-d,
+        .cockroach-pointer-moving .cursor-leg-f {
+          animation: legWalkB 0.18s ease-in-out infinite;
+        }
+
+
+
+        @media (max-width: 768px) {
+          .cockroach-pointer { display: none; }
+        }
         .premium-soft-background {
           pointer-events: none;
           position: fixed;
@@ -4349,9 +4557,6 @@ export default function CockroachIndiaParty() {
           transform: translateY(0) scale(1);
         }
         .mobile-menu-link {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
           width: 100%;
           border-radius: 1.5rem;
           background: rgba(0,0,0,0.04);
@@ -4447,60 +4652,12 @@ export default function CockroachIndiaParty() {
             box-shadow: 0 16px 44px rgba(0,0,0,0.18);
           }
         }
-        .quick-section-dots {
-          position: fixed;
-          right: 18px;
-          top: 50%;
-          z-index: 70;
-          display: flex;
-          transform: translateY(-50%);
-          flex-direction: column;
-          gap: 10px;
-        }
-        .quick-section-dot {
-          position: relative;
-          height: 11px;
-          width: 11px;
-          border-radius: 9999px;
-          background: rgba(7,17,7,0.22);
-          border: 1px solid rgba(255,255,255,0.75);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-          transition: transform 180ms ease, background 180ms ease;
-        }
-        .quick-section-dot:hover,
-        .quick-section-dot-active {
-          background: #B6FF00;
-          transform: scale(1.35);
-        }
-        .quick-section-dot::after {
-          content: attr(data-label);
-          position: absolute;
-          right: 18px;
-          top: 50%;
-          transform: translateY(-50%) translateX(8px);
-          opacity: 0;
-          pointer-events: none;
-          white-space: nowrap;
-          border-radius: 9999px;
-          background: rgba(7,17,7,0.92);
-          color: #B6FF00;
-          padding: 7px 12px;
-          font-size: 11px;
-          font-weight: 1000;
-          letter-spacing: -0.02em;
-          transition: opacity 180ms ease, transform 180ms ease;
-        }
-        .quick-section-dot:hover::after {
-          opacity: 1;
-          transform: translateY(-50%) translateX(0);
-        }
-        @media (max-width: 1024px) {
-          .quick-section-dots { display: none; }
-        }
       `}</style>
       {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
       <div className="premium-soft-background" aria-hidden="true" />
+
+      <AnnouncementBar />
       <MobileMenuOverlay
         open={mobileMenuOpen}
         mode={mode}
@@ -4510,29 +4667,8 @@ export default function CockroachIndiaParty() {
         onNavigate={navigateToPage}
       />
 
-      <div className="quick-section-dots" aria-label="Quick page navigation">
-        {[
-          { id: "home" as PageId, label: "Home" },
-          { id: "manifesto" as PageId, label: "Manifesto" },
-          { id: "student" as PageId, label: "Student First" },
-          { id: "antiCorruption" as PageId, label: "Anti-Corruption" },
-          { id: "about" as PageId, label: "About" },
-          { id: "constitution" as PageId, label: "Vision" },
-        ].map((item) => (
-          <button
-            key={item.id}
-            type="button"
-            onClick={() => navigateToPage(item.id)}
-            className={`quick-section-dot ${activePage === item.id ? "quick-section-dot-active" : ""}`}
-            title={item.label}
-            aria-label={item.label}
-            data-label={item.label}
-          />
-        ))}
-      </div>
-
-      <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-1.5">
+      <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-5">
           <button onClick={() => navigateToPage("home")} className="flex items-center gap-3 text-left">
             <div className="icon-bump flex h-11 w-11 items-center justify-center rounded-3xl bg-black text-white shadow-sm">
               <CockroachIcon className="h-7 w-7" />
@@ -4544,18 +4680,12 @@ export default function CockroachIndiaParty() {
             </div>
           </button>
 
-          <div ref={navRef} className="top-nav-segment hidden items-center gap-2 text-sm font-bold text-black/60 xl:flex">
-            <span
-              className="top-nav-slider"
-              style={{ transform: `translateX(${navIndicator.left}px)`, width: `${navIndicator.width}px`, opacity: navIndicator.opacity }}
-              aria-hidden="true"
-            />
+          <div className="hidden items-center gap-5 text-sm font-bold text-black/60 xl:flex">
             {navItems.map((item) => (
               <button
                 key={item.id}
-                data-page={item.id}
                 onClick={() => navigateToPage(item.id)}
-                className={`top-nav-toggle ${activePage === item.id ? "top-nav-toggle-active" : ""}`}
+                className={`nav-link hover:text-black ${activePage === item.id ? "text-black" : ""}`}
               >
                 <BilingualText value={item.label} mode={mode} hiClassName="text-[10px] leading-3" />
               </button>
@@ -4569,9 +4699,9 @@ export default function CockroachIndiaParty() {
               className="magnetic-btn rounded-full bg-white px-4 py-3 text-sm font-black outline-none"
               aria-label="Language mode"
             >
+              <option value="both">English + हिंदी</option>
               <option value="en">English</option>
               <option value="hi">हिंदी</option>
-              <option value="both">English + हिंदी</option>
             </select>
             <button
               onClick={scrollToJoin}
@@ -4582,6 +4712,17 @@ export default function CockroachIndiaParty() {
           </div>
         </div>
 
+        <div className="mx-auto flex max-w-7xl gap-3 overflow-x-auto px-6 pb-4 xl:hidden">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => navigateToPage(item.id)}
+              className={`sticker-chip shrink-0 rounded-full px-4 py-2 text-xs font-black ${activePage === item.id ? "bg-black text-white" : "bg-white text-black/65"}`}
+            >
+              {mode === "hi" ? item.label.hi : item.label.en}
+            </button>
+          ))}
+        </div>
       </nav>
 
       <div key={activePage} className="page-transition">
@@ -4595,7 +4736,7 @@ export default function CockroachIndiaParty() {
       </div>
 
 
-      <FinalCinematicCTA mode={mode} onShare={shareMovement} />
+      <FinalCinematicCTA mode={mode} />
 
       <footer className="border-t border-black/10 px-6 py-14 pb-28 text-center text-sm font-bold text-black/45 md:pb-14">
         <div className="mx-auto max-w-7xl">
@@ -4614,16 +4755,6 @@ export default function CockroachIndiaParty() {
             </p>
           </div>
 
-          <div className="mx-auto mb-8 max-w-4xl rounded-[2rem] bg-black px-6 py-5 text-center text-sm font-black leading-6 text-white/68">
-            Citizen-first political movement website. Official party registration, election symbol, office address, and legal documents will be updated after legal completion.
-            {mode !== "en" ? (
-              <HindiShadow
-                text="यह citizen-first राजनीतिक आंदोलन वेबसाइट है। आधिकारिक पंजीकरण, चुनाव चिन्ह, कार्यालय पता और कानूनी दस्तावेज कानूनी प्रक्रिया पूरी होने के बाद अपडेट होंगे।"
-                className="text-[10px] text-white/35"
-              />
-            ) : null}
-          </div>
-
           <div className="mx-auto mb-8 flex max-w-7xl flex-wrap justify-center gap-3">
             {[...navItems, { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } }].map((item) => (
               <button
@@ -4636,24 +4767,14 @@ export default function CockroachIndiaParty() {
             ))}
           </div>
 
-          <div className="flex flex-col justify-center gap-3 sm:flex-row">
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-dark inline-flex rounded-full px-8 py-4 text-base font-black"
-            >
-              Follow on Instagram
-            </a>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-light inline-flex rounded-full px-8 py-4 text-base font-black"
-            >
-              Send Issue / Corruption Video
-            </a>
-          </div>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="premium-toggle premium-toggle-dark inline-flex rounded-full px-8 py-4 text-base font-black"
+          >
+            Follow on Instagram
+          </a>
 
           <div className="mt-8">
             <span>
