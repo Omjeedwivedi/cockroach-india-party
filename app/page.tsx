@@ -507,6 +507,93 @@ function CockroachIcon({ className = "" }: { className?: string }) {
   );
 }
 
+function PartyEmblem({ className = "" }: { className?: string }) {
+  const spokes = Array.from({ length: 24 });
+  const petals = Array.from({ length: 16 });
+  const roaches = Array.from({ length: 6 });
+
+  return (
+    <svg
+      viewBox="0 0 600 600"
+      className={className}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-label="Cockroach India Party emblem"
+    >
+      <defs>
+        <radialGradient id="emblemWood" cx="50%" cy="42%" r="62%">
+          <stop offset="0%" stopColor="#E9B07A" />
+          <stop offset="45%" stopColor="#8B4D2E" />
+          <stop offset="100%" stopColor="#2A1710" />
+        </radialGradient>
+        <linearGradient id="emblemCopper" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FFE0B4" />
+          <stop offset="45%" stopColor="#B4683E" />
+          <stop offset="100%" stopColor="#4A2416" />
+        </linearGradient>
+        <filter id="emblemShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="12" stdDeviation="14" floodColor="#000000" floodOpacity="0.22" />
+        </filter>
+      </defs>
+
+      <circle cx="300" cy="300" r="270" fill="url(#emblemWood)" opacity="0.18" filter="url(#emblemShadow)" />
+
+      {petals.map((_, index) => (
+        <g key={`petal-${index}`} transform={`rotate(${index * 22.5} 300 300)`}>
+          <path
+            d="M300 40 C335 102 335 175 300 238 C265 175 265 102 300 40Z"
+            fill="url(#emblemCopper)"
+            stroke="#102436"
+            strokeWidth="7"
+            strokeLinejoin="round"
+            opacity={index % 2 === 0 ? 0.95 : 0.55}
+          />
+          <path d="M300 72 C318 124 318 165 300 214 C282 165 282 124 300 72Z" stroke="#F4C18D" strokeWidth="4" opacity="0.65" />
+        </g>
+      ))}
+
+      <circle cx="300" cy="300" r="178" fill="#1E1714" opacity="0.9" stroke="#102436" strokeWidth="10" />
+      <circle cx="300" cy="300" r="143" fill="#F8FAFC" stroke="#0E3C70" strokeWidth="14" />
+      <circle cx="300" cy="300" r="103" fill="#ffffff" stroke="#0E3C70" strokeWidth="5" />
+      <circle cx="300" cy="300" r="20" fill="#0E3C70" />
+
+      {spokes.map((_, index) => (
+        <line
+          key={`spoke-${index}`}
+          x1="300"
+          y1="300"
+          x2="300"
+          y2="205"
+          stroke="#0E3C70"
+          strokeWidth="4"
+          strokeLinecap="round"
+          transform={`rotate(${index * 15} 300 300)`}
+        />
+      ))}
+
+      {roaches.map((_, index) => (
+        <g key={`roach-${index}`} transform={`rotate(${index * 60} 300 300) translate(300 96)`}>
+          <path d="M-42 -12 C-78 -70 -120 -86 -160 -92" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <path d="M42 -12 C78 -70 120 -86 160 -92" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <ellipse cx="0" cy="30" rx="34" ry="72" fill="url(#emblemCopper)" stroke="#102436" strokeWidth="8" />
+          <ellipse cx="0" cy="-38" rx="26" ry="23" fill="#D5905E" stroke="#102436" strokeWidth="8" />
+          <path d="M0 -24 V92" stroke="#5C2E1E" strokeWidth="5" strokeLinecap="round" />
+          <path d="M-30 8 L-78 -12" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <path d="M30 8 L78 -12" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <path d="M-27 45 L-75 62" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <path d="M27 45 L75 62" stroke="#102436" strokeWidth="8" strokeLinecap="round" />
+          <circle cx="-10" cy="-42" r="5" fill="#102436" />
+          <circle cx="10" cy="-42" r="5" fill="#102436" />
+        </g>
+      ))}
+
+      <circle cx="300" cy="300" r="151" fill="none" stroke="#ffffff" strokeWidth="8" opacity="0.9" />
+      <circle cx="300" cy="300" r="190" fill="none" stroke="#C88654" strokeWidth="7" opacity="0.7" />
+    </svg>
+  );
+}
+
 function CockroachArtworkBackground() {
   return (
     <svg
@@ -1008,44 +1095,57 @@ function HomePage({
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:pb-24 md:pt-28">
-        <div className="mx-auto max-w-5xl text-center">
-          <div className="mx-auto mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 apple-gradient-bg px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-            <span>✓ Vision 2047 Manifesto</span>
-            {mode !== "en" && <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />}
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="text-center lg:text-left">
+            <div className="mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 apple-gradient-bg px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:items-start">
+              <span>✓ Vision 2047 Manifesto</span>
+              {mode !== "en" && <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />}
+            </div>
+
+            <h1 className="text-5xl font-black leading-[0.92] tracking-[-0.065em] md:text-7xl lg:text-8xl">
+              <BilingualText
+                value={{ en: "India's future-first political movement.", hi: "भारत का भविष्य-प्रथम राजनीतिक आंदोलन।" }}
+                mode={mode}
+                hiClassName="mt-4 text-lg leading-6 tracking-normal md:text-2xl"
+              />
+            </h1>
+
+            <p className="mt-8 max-w-3xl text-lg font-bold leading-8 text-black/65 lg:mx-0">
+              <BilingualText
+                value={{
+                  en: "A movement for students, workers, taxpayers, farmers, small business owners, and ordinary families who want accountability - not caste politics, hate, or empty slogans.",
+                  hi: "छात्रों, कर्मचारियों, टैक्सपेयर्स, किसानों, छोटे व्यापारियों और आम परिवारों के लिए आंदोलन जो जवाबदेही चाहते हैं - जाति राजनीति, नफरत या खाली नारों पर नहीं।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5"
+              />
+            </p>
+
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row lg:justify-start">
+              <button
+                onClick={scrollToJoin}
+                className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
+              >
+                Join the Movement →
+              </button>
+              <button
+                onClick={() => setPage("manifesto")}
+                className="magnetic-btn rounded-full border border-black/15 bg-white px-8 py-4 text-base font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl"
+              >
+                Read Full Manifesto
+              </button>
+            </div>
           </div>
 
-          <h1 className="text-5xl font-black leading-[0.92] tracking-[-0.065em] md:text-7xl lg:text-8xl">
-            <BilingualText
-              value={{ en: "India's future-first political movement.", hi: "भारत का भविष्य-प्रथम राजनीतिक आंदोलन।" }}
-              mode={mode}
-              hiClassName="mt-4 text-lg leading-6 tracking-normal md:text-2xl"
-            />
-          </h1>
-
-          <p className="mx-auto mt-8 max-w-3xl text-lg font-bold leading-8 text-black/65">
-            <BilingualText
-              value={{
-                en: "A movement for students, workers, taxpayers, farmers, small business owners, and ordinary families who want accountability - not caste politics, hate, or empty slogans.",
-                hi: "छात्रों, कर्मचारियों, टैक्सपेयर्स, किसानों, छोटे व्यापारियों और आम परिवारों के लिए आंदोलन जो जवाबदेही चाहते हैं - जाति राजनीति, नफरत या खाली नारों पर नहीं।",
-              }}
-              mode={mode}
-              hiClassName="text-sm leading-5"
-            />
-          </p>
-
-          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-            <button
-              onClick={scrollToJoin}
-              className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
-            >
-              Join the Movement →
-            </button>
-            <button
-              onClick={() => setPage("manifesto")}
-              className="magnetic-btn rounded-full border border-black/15 bg-white px-8 py-4 text-base font-black transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-black/5 hover:shadow-xl"
-            >
-              Read Full Manifesto
-            </button>
+          <div className="reveal-card micro-lift shine-card glass-card hero-emblem-card rounded-[3.25rem] border border-black/10 p-6 shadow-2xl">
+            <div className="relative overflow-hidden rounded-[2.75rem] bg-white/80 p-6">
+              <div className="absolute inset-0 apple-gradient-soft opacity-80" aria-hidden="true" />
+              <PartyEmblem className="relative z-10 mx-auto aspect-square w-full max-w-[430px] rounded-[2.25rem] object-contain" />
+            </div>
+            <div className="mt-5 text-center">
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-black/40">Movement Emblem</p>
+              <p className="mt-2 text-xl font-black tracking-[-0.04em] text-black">Survive. Rebuild. Rise.</p>
+            </div>
           </div>
         </div>
 
@@ -1113,6 +1213,7 @@ function HomePage({
       <MovementCounterSection mode={mode} />
       <WhyMovementExistsSection mode={mode} />
       <JanataPainPointsSection mode={mode} />
+      <BerozgariEmergencySection mode={mode} />
       <StudentFirstHomeSection mode={mode} />
       <WorkerRightsHomeSection mode={mode} />
       <MovementRulesSection mode={mode} />
@@ -1578,6 +1679,67 @@ function JanataPainPointsSection({ mode }: { mode: LangMode }) {
   );
 }
 
+function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-gradient-bg rounded-[3.25rem] border border-black/10 p-8 shadow-2xl md:p-12">
+        <div className="max-w-5xl">
+          <PageEyebrow value={{ en: "Berozgari Emergency", hi: "बेरोजगारी आपातकाल" }} mode={mode} />
+          <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText
+              value={{
+                en: "Berozgari is a national emergency.",
+                hi: "बेरोजगारी राष्ट्रीय आपातकाल है।",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+            />
+          </h2>
+        </div>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-5">
+          {[
+            { en: "Paper leaks", hi: "पेपर लीक" },
+            { en: "Delayed exams", hi: "परीक्षा में देरी" },
+            { en: "Unpaid internships", hi: "बिना वेतन इंटर्नशिप" },
+            { en: "Low salaries", hi: "कम सैलरी" },
+            { en: "No job security", hi: "नौकरी की असुरक्षा" },
+          ].map((item) => (
+            <div key={item.en} className="shine-card rounded-[2.25rem] border border-black/10 bg-white/70 p-5 shadow-sm backdrop-blur-xl">
+              <p className="text-xl font-black leading-7 tracking-[-0.04em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+          <p className="text-2xl font-black leading-9 tracking-[-0.035em] text-black md:text-4xl md:leading-[3rem]">
+            <BilingualText
+              value={{
+                en: "This is not the failure of Indian youth. This is the failure of governance.",
+                hi: "यह भारतीय युवाओं की विफलता नहीं है। यह शासन व्यवस्था की विफलता है।",
+              }}
+              mode={mode}
+              hiClassName="text-base leading-5 text-black/55 md:text-xl"
+            />
+          </p>
+          <p className="text-base font-bold leading-7 text-black/70">
+            <BilingualText
+              value={{
+                en: "Our mission is simple: fair exams, skill-based education, apprenticeships, local manufacturing, startup support, private job protection, and real employment.",
+                hi: "हमारा मिशन साफ है: निष्पक्ष परीक्षा, कौशल आधारित शिक्षा, अप्रेंटिसशिप, स्थानीय मैन्युफैक्चरिंग, स्टार्टअप समर्थन, निजी नौकरी सुरक्षा और वास्तविक रोजगार।",
+              }}
+              mode={mode}
+              hiClassName="text-xs leading-4 text-black/55"
+            />
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StudentFirstHomeSection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -1757,36 +1919,65 @@ function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
 
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
   return (
-    <section className="mt-20 rounded-[3.25rem] border border-black/10 bg-[#fafafa] p-6 md:p-10">
-      <div className="mb-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-        <div>
-          <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
-          <PageTitle value={{ en: "Where citizens suffered, power must answer.", hi: "जहां जनता ने कष्ट झेला, सत्ता जवाब दे।" }} mode={mode} />
-        </div>
-        <p className="text-base font-bold leading-7 text-black/65">
-          <BilingualText
-            value={{
-              en: "These are public-interest audit demands. Every major policy that affected common citizens must be reviewed with data, documents, hearings, and legal due process.",
-              hi: "ये सार्वजनिक हित की ऑडिट मांगें हैं। आम नागरिकों को प्रभावित करने वाली हर बड़ी नीति की डेटा, दस्तावेज, सुनवाई और कानूनी प्रक्रिया से समीक्षा हो।",
-            }}
-            mode={mode}
-            hiClassName="text-xs leading-4"
-          />
-        </p>
-      </div>
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-gradient-bg overflow-hidden rounded-[3.75rem] border border-black/10 p-8 shadow-2xl md:p-12">
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{
+                  en: "Power must answer when people suffer.",
+                  hi: "जनता कष्ट झेले तो सत्ता जवाब दे।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
-        {publicAccountabilityIssues.map((issue, index) => (
-          <div key={issue.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
-            <p className="text-sm font-black text-black/35">Audit {String(index + 1).padStart(2, "0")}</p>
-            <h3 className="mt-2 text-2xl font-black tracking-[-0.04em]">
-              <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal" />
-            </h3>
-            <p className="mt-4 text-sm font-bold leading-6 text-black/70">
-              <BilingualText value={issue.explanation} mode={mode} hiClassName="text-[11px] leading-4" />
+          <div className="rounded-[2.75rem] border border-black/10 bg-white/70 p-6 shadow-sm backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "Not slogans. Not excuses. Public data, legal process, and citizen-first audits.",
+                  hi: "नारे नहीं। बहाने नहीं। सार्वजनिक डेटा, कानूनी प्रक्रिया और नागरिक-प्रथम ऑडिट।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+            <p className="mt-5 text-sm font-bold leading-6 text-black/65">
+              <BilingualText
+                value={{
+                  en: "Every major policy that affected common citizens must be reviewed with data, documents, public hearings, and due process.",
+                  hi: "आम नागरिकों को प्रभावित करने वाली हर बड़ी नीति की डेटा, दस्तावेज, सार्वजनिक सुनवाई और कानूनी प्रक्रिया से समीक्षा हो।",
+                }}
+                mode={mode}
+                hiClassName="text-[11px] leading-4 text-black/55"
+              />
             </p>
           </div>
-        ))}
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-5">
+          {publicAccountabilityIssues.map((issue, index) => (
+            <div
+              key={issue.title.en}
+              className="reveal-card micro-lift shine-card rounded-[2.75rem] border border-black/10 bg-white/75 p-6 shadow-sm backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-xl font-black text-white shadow-xl">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+              <h3 className="text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black">
+                <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+              </h3>
+              <p className="mt-5 text-sm font-bold leading-6 text-black/68">
+                <BilingualText value={issue.explanation} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -2057,6 +2248,18 @@ export default function CockroachIndiaParty() {
         .icon-bump { transition: transform 260ms ease, box-shadow 260ms ease; }
         .icon-bump:hover { animation: iconWiggle 520ms ease; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
         .manifesto-bullet { animation: softPulse 2.6s ease-in-out infinite; }
+        .hero-emblem-card {
+          isolation: isolate;
+        }
+        .hero-emblem-card::after {
+          content: "";
+          position: absolute;
+          inset: 16px;
+          z-index: -1;
+          border-radius: 3rem;
+          background: radial-gradient(circle, rgba(182,255,0,0.24), transparent 62%);
+          filter: blur(18px);
+        }
         @keyframes svgDashMove {
           from { stroke-dashoffset: 0; }
           to { stroke-dashoffset: -260; }
