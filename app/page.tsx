@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 type LangMode = "both" | "en" | "hi";
 
@@ -507,6 +507,412 @@ function CockroachIcon({ className = "" }: { className?: string }) {
   );
 }
 
+function CockroachArtworkBackground() {
+  return (
+    <svg
+      className="cockroach-artwork-background"
+      viewBox="0 0 1600 900"
+      preserveAspectRatio="xMidYMid slice"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="cockroachMotionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#E9FFE8" />
+          <stop offset="45%" stopColor="#B6FF00" />
+          <stop offset="100%" stopColor="#67E66E" />
+        </linearGradient>
+        <filter id="cockroachArtworkGlow">
+          <feGaussianBlur stdDeviation="7" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g className="artwork-soft-waves">
+        <path d="M-120 560 C 180 430, 340 760, 620 570 S 1050 310, 1360 480 S 1600 710, 1760 520" />
+        <path d="M-80 760 C 160 610, 410 760, 640 640 S 1010 490, 1280 620 S 1540 820, 1710 690" />
+      </g>
+
+      <g className="artwork-hand" transform="translate(840 480)">
+        <path d="M-10 105 C 80 38, 200 25, 360 46 C 468 60, 560 118, 653 199" />
+        <path d="M-96 330 C -32 222, 18 154, 84 112" />
+        <path d="M92 116 C 65 160, 46 196, 48 235 C 50 282, 86 310, 130 315" />
+        <path d="M128 173 C 100 217, 104 266, 145 286 C 174 300, 212 296, 244 276" />
+        <path d="M-2 238 C 25 290, 62 336, 120 354 C 174 372, 224 360, 260 330" />
+        <path d="M208 256 C 270 220, 342 202, 420 214" />
+      </g>
+
+      <g className="artwork-cockroach" transform="translate(990 270) rotate(-14)">
+        <ellipse cx="0" cy="0" rx="52" ry="25" fill="#111111" />
+        <ellipse cx="-8" cy="0" rx="38" ry="18" fill="#252525" stroke="#050505" strokeWidth="5" />
+        <circle cx="45" cy="-4" r="24" fill="#1f1f1f" stroke="#050505" strokeWidth="5" />
+        <path d="M55 -24 C 82 -70, 120 -87, 160 -90" className="artwork-dark-line" />
+        <path d="M48 -27 C 58 -82, 82 -116, 122 -140" className="artwork-dark-line" />
+        <path d="M-10 22 L-32 54" className="artwork-dark-line" />
+        <path d="M8 24 L-2 65" className="artwork-dark-line" />
+        <path d="M25 18 L34 57" className="artwork-dark-line" />
+        <path d="M52 -10 Q60 -2 56 7" stroke="white" strokeWidth="5" strokeLinecap="round" fill="none" />
+      </g>
+
+      <g className="artwork-motion-trails">
+        <path d="M760 350 C 820 290, 890 260, 960 260" />
+        <path d="M720 410 C 790 330, 880 300, 965 300" />
+        <path d="M690 460 C 770 365, 860 330, 950 340" />
+      </g>
+
+      <g className="artwork-sparkles">
+        <path d="M1300 220 L1314 250 L1344 264 L1314 278 L1300 308 L1286 278 L1256 264 L1286 250 Z" />
+        <circle cx="410" cy="680" r="9" />
+        <circle cx="520" cy="355" r="5" />
+        <circle cx="1315" cy="590" r="6" />
+        <path d="M760 600 L766 612 L778 618 L766 624 L760 636 L754 624 L742 618 L754 612 Z" />
+      </g>
+    </svg>
+  );
+}
+
+function SvgAnimatedBackground() {
+  return (
+    <svg
+      className="svg-animated-background"
+      viewBox="0 0 1440 1100"
+      preserveAspectRatio="xMidYMid slice"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="svgFlowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#E9FFE8" />
+          <stop offset="32%" stopColor="#B6FF00" />
+          <stop offset="68%" stopColor="#7CFF6B" />
+          <stop offset="100%" stopColor="#F6FFE8" />
+        </linearGradient>
+        <filter id="svgSoftGlow">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <path
+        d="M-80 220 C 160 80, 280 420, 520 260 S 920 20, 1140 250 S 1350 520, 1520 320"
+        className="svg-flow-line svg-flow-line-one"
+      />
+      <path
+        d="M-120 620 C 180 450, 330 780, 610 580 S 990 360, 1190 570 S 1370 820, 1540 640"
+        className="svg-flow-line svg-flow-line-two"
+      />
+      <path
+        d="M120 1060 C 300 820, 540 1000, 720 780 S 1060 520, 1280 760 S 1470 1030, 1580 860"
+        className="svg-flow-line svg-flow-line-three"
+      />
+
+      <circle cx="210" cy="250" r="7" className="svg-floating-node svg-delay-1" />
+      <circle cx="520" cy="260" r="10" className="svg-floating-node svg-delay-2" />
+      <circle cx="930" cy="165" r="8" className="svg-floating-node svg-delay-3" />
+      <circle cx="1180" cy="570" r="9" className="svg-floating-node svg-delay-4" />
+      <circle cx="720" cy="780" r="8" className="svg-floating-node svg-delay-2" />
+    </svg>
+  );
+}
+
+function WebGLBackground() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const gl = canvas.getContext("webgl", {
+      alpha: true,
+      antialias: true,
+      preserveDrawingBuffer: false,
+    });
+
+    if (!gl) return;
+
+    const vertexShaderSource = `
+      attribute vec2 position;
+      void main() {
+        gl_Position = vec4(position, 0.0, 1.0);
+      }
+    `;
+
+    const fragmentShaderSource = `
+      precision mediump float;
+      uniform vec2 resolution;
+      uniform float time;
+      uniform vec2 pointer;
+
+      float circle(vec2 uv, vec2 pos, float radius, float blur) {
+        return smoothstep(radius, radius - blur, length(uv - pos));
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec2 p = pointer;
+        float wave = sin((uv.x + time * 0.06) * 8.0) * 0.015 + cos((uv.y - time * 0.05) * 9.0) * 0.015;
+
+        float blue = circle(uv + wave, vec2(0.18, 0.82), 0.42, 0.34);
+        float violet = circle(uv - wave, vec2(0.82, 0.22), 0.38, 0.30);
+        float pink = circle(uv, vec2(0.72, 0.76), 0.34, 0.28);
+        float cursor = circle(uv, p, 0.24, 0.20);
+
+        vec3 color = vec3(1.0);
+        color = mix(color, vec3(0.78, 1.0, 0.78), blue * 0.44);
+        color = mix(color, vec3(0.58, 1.0, 0.38), violet * 0.38);
+        color = mix(color, vec3(0.90, 1.0, 0.58), pink * 0.32);
+        color = mix(color, vec3(0.70, 1.0, 0.10), cursor * 0.30);
+
+        float alpha = max(max(blue, violet), max(pink, cursor)) * 0.55;
+        gl_FragColor = vec4(color, alpha);
+      }
+    `;
+
+    const createShader = (type: number, source: string) => {
+      const shader = gl.createShader(type);
+      if (!shader) return null;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    };
+
+    const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+    if (!vertexShader || !fragmentShader) return;
+
+    const program = gl.createProgram();
+    if (!program) return;
+
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW,
+    );
+
+    const positionLocation = gl.getAttribLocation(program, "position");
+    const resolutionLocation = gl.getUniformLocation(program, "resolution");
+    const timeLocation = gl.getUniformLocation(program, "time");
+    const pointerLocation = gl.getUniformLocation(program, "pointer");
+
+    let animationFrame = 0;
+    let startTime = performance.now();
+    let pointerX = 0.5;
+    let pointerY = 0.5;
+
+    const resize = () => {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(window.innerWidth * pixelRatio);
+      canvas.height = Math.floor(window.innerHeight * pixelRatio);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      pointerX = event.clientX / Math.max(window.innerWidth, 1);
+      pointerY = 1 - event.clientY / Math.max(window.innerHeight, 1);
+    };
+
+    const render = () => {
+      const now = performance.now();
+      gl.useProgram(program);
+      gl.enableVertexAttribArray(positionLocation);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+      gl.uniform1f(timeLocation, (now - startTime) * 0.001);
+      gl.uniform2f(pointerLocation, pointerX, pointerY);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      animationFrame = requestAnimationFrame(render);
+    };
+
+    resize();
+    render();
+    window.addEventListener("resize", resize);
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("pointermove", onPointerMove);
+      gl.deleteProgram(program);
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+      gl.deleteBuffer(buffer);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="webgl-background" aria-hidden="true" />;
+}
+
+function CockroachCursor() {
+  const [cursor, setCursor] = useState({ x: -100, y: -100, label: "", visible: true, active: false, moving: false });
+  const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
+  const moveTimerRef = useRef<number | null>(null);
+  const trailIdRef = useRef(0);
+
+  useEffect(() => {
+    const getActionLabel = (element: Element | null) => {
+      const interactive = element?.closest("button, a, select");
+      if (!interactive) return "";
+
+      const text = (interactive.textContent || "").toLowerCase();
+      if (text.includes("join")) return "Join";
+      if (text.includes("manifesto")) return "Read";
+      if (text.includes("follow")) return "Open";
+      if (text.includes("report") || text.includes("issue")) return "Send";
+      if (text.includes("privacy")) return "View";
+      return "Go";
+    };
+
+    const shouldHideOnText = (element: Element | null) => {
+      if (!element) return false;
+      const isInteractive = element.closest("button, a, select");
+      const isCard = element.closest(".micro-lift, .reveal-card, .glass-card, .clay-card");
+      const isText = element.closest("p, h1, h2, h3, h4, li, span");
+      return Boolean(isText && !isInteractive && !isCard);
+    };
+
+    const onPointerMove = (event: PointerEvent) => {
+      const target = document.elementFromPoint(event.clientX, event.clientY);
+      const label = getActionLabel(target);
+      const isCard = Boolean(target?.closest(".micro-lift, .reveal-card, .glass-card, .clay-card"));
+      const hideOnText = shouldHideOnText(target);
+      const active = Boolean(label || isCard);
+
+      setCursor({
+        x: event.clientX,
+        y: event.clientY,
+        label,
+        visible: !hideOnText,
+        active,
+        moving: true,
+      });
+
+      trailIdRef.current += 1;
+      const nextDot = { x: event.clientX, y: event.clientY, id: trailIdRef.current };
+      setTrail((previous) => [nextDot, ...previous].slice(0, 4));
+
+      if (moveTimerRef.current) window.clearTimeout(moveTimerRef.current);
+      moveTimerRef.current = window.setTimeout(() => {
+        setCursor((previous) => ({ ...previous, moving: false }));
+      }, 140);
+    };
+
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      if (moveTimerRef.current) window.clearTimeout(moveTimerRef.current);
+    };
+  }, []);
+
+  return (
+    <>
+      {trail.map((dot, index) => (
+        <span
+          key={dot.id}
+          className="cockroach-trail-dot"
+          style={{
+            transform: `translate3d(${dot.x - 3}px, ${dot.y - 3}px, 0)`,
+            opacity: cursor.visible ? Math.max(0, 0.26 - index * 0.055) : 0,
+          }}
+          aria-hidden="true"
+        />
+      ))}
+
+      <div
+        className={`cockroach-pointer ${cursor.active ? "cockroach-pointer-active" : ""} ${cursor.moving ? "cockroach-pointer-moving" : ""} ${cursor.visible ? "" : "cockroach-pointer-hidden"}`}
+        style={{
+          transform: `translate3d(${cursor.x - 7}px, ${cursor.y - 7}px, 0) rotate(-18deg)`,
+        }}
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 120 120"
+          className="h-8 w-8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="cursorBodyShine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#2a1710" />
+              <stop offset="48%" stopColor="#111111" />
+              <stop offset="100%" stopColor="#050505" />
+            </linearGradient>
+          </defs>
+
+          <path
+            d="M39 34 C28 21, 18 22, 16 36 C14 53, 27 66, 49 66 C47 52, 44 42, 39 34Z"
+            fill="#101010"
+            stroke="#050505"
+            strokeWidth="3"
+            className="cursor-wing-left"
+          />
+          <path
+            d="M71 33 C84 19, 96 22, 99 37 C102 54, 87 67, 63 66 C64 51, 67 41, 71 33Z"
+            fill="#101010"
+            stroke="#050505"
+            strokeWidth="3"
+            className="cursor-wing-right"
+          />
+
+          <ellipse cx="57" cy="58" rx="31" ry="21" fill="url(#cursorBodyShine)" stroke="#050505" strokeWidth="4" />
+          <path d="M31 58 C42 50, 72 50, 84 58" stroke="#3a2115" strokeWidth="2.2" strokeLinecap="round" />
+          <path d="M34 68 C47 60, 68 60, 80 68" stroke="#3a2115" strokeWidth="2.2" strokeLinecap="round" />
+          <path d="M57 38 V78" stroke="#4a2a1c" strokeWidth="2.2" strokeLinecap="round" opacity="0.8" />
+
+          <ellipse cx="83" cy="52" rx="15" ry="13" fill="#151515" stroke="#050505" strokeWidth="3" />
+          <ellipse cx="94" cy="49" rx="10" ry="9" fill="#111111" stroke="#050505" strokeWidth="3" />
+          <circle cx="98" cy="46" r="1.6" fill="#B6FF00" />
+          <circle cx="92" cy="51" r="1.2" fill="#B6FF00" />
+
+          <path d="M99 43 C150 5, 210 -24, 285 -34" className="cursor-antenna cursor-antenna-a" />
+          <path d="M94 39 C132 -30, 205 -72, 270 -112" className="cursor-antenna cursor-antenna-b" />
+          <path d="M96 46 C158 33, 230 18, 310 28" className="cursor-antenna cursor-antenna-c" />
+
+          <path d="M39 48 C27 43, 18 36, 10 27" className="cursor-leg cursor-leg-a" />
+          <path d="M35 58 C20 60, 9 65, -1 75" className="cursor-leg cursor-leg-b" />
+          <path d="M42 73 C30 85, 20 95, 8 107" className="cursor-leg cursor-leg-c" />
+          <path d="M72 47 C82 40, 91 34, 103 27" className="cursor-leg cursor-leg-d" />
+          <path d="M76 61 C91 62, 103 68, 115 77" className="cursor-leg cursor-leg-e" />
+          <path d="M68 75 C78 89, 88 100, 101 112" className="cursor-leg cursor-leg-f" />
+
+          <g transform="translate(16 70) rotate(-12)">
+            <rect x="0" y="0" width="19" height="14" rx="2.5" fill="#B6FF00" stroke="#071107" strokeWidth="2.2" />
+            <line x1="9.5" y1="2" x2="9.5" y2="12" stroke="#071107" strokeWidth="1.5" />
+            <line x1="3" y1="5" x2="7" y2="5" stroke="#071107" strokeWidth="1.2" />
+            <line x1="12" y1="5" x2="16" y2="5" stroke="#071107" strokeWidth="1.2" />
+            <line x1="3" y1="8" x2="7" y2="8" stroke="#071107" strokeWidth="1.2" />
+            <line x1="12" y1="8" x2="16" y2="8" stroke="#071107" strokeWidth="1.2" />
+          </g>
+        </svg>
+
+        {cursor.label ? <span className="cursor-action-label">{cursor.label}</span> : null}
+      </div>
+    </>
+  );
+}
+
 function HindiShadow({ text, className = "" }: { text: string; className?: string }) {
   return (
     <span
@@ -556,9 +962,9 @@ function PageTitle({ value, mode }: { value: I18n; mode: LangMode }) {
 
 function ManifestoCard({ section, index, mode }: { section: ManifestoSection; index: number; mode: LangMode }) {
   return (
-    <div className="reveal-card group rounded-[2rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+    <div className="reveal-card group rounded-[2.25rem] border border-black/10 bg-white p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
       <div className="flex items-start gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-black text-2xl text-white transition group-hover:scale-105">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-3xl bg-black text-2xl text-white transition group-hover:scale-105">
           {section.icon}
         </div>
         <div>
@@ -579,7 +985,7 @@ function ManifestoCard({ section, index, mode }: { section: ManifestoSection; in
       <ul className="mt-6 space-y-3 border-t border-black/10 pt-5">
         {section.points.map((point) => (
           <li key={point.en} className="flex gap-3 text-sm font-bold leading-6 text-black/75">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 magnetic-btn rounded-full bg-black" />
+            <span className="manifesto-bullet mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-black" />
             <span>
               <BilingualText value={point} mode={mode} hiClassName="text-[11px] leading-4" />
             </span>
@@ -603,7 +1009,7 @@ function HomePage({
     <>
       <section className="mx-auto max-w-7xl px-6 pb-16 pt-20 md:pb-24 md:pt-28">
         <div className="mx-auto max-w-5xl text-center">
-          <div className="mx-auto mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 bg-[#B6FF00] px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          <div className="mx-auto mb-7 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full border border-black/10 apple-gradient-bg px-5 py-3 text-sm font-black shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <span>✓ Vision 2047 Manifesto</span>
             {mode !== "en" && <HindiShadow text="विजन 2047 घोषणापत्र" className="text-[10px] leading-3" />}
           </div>
@@ -630,7 +1036,7 @@ function HomePage({
           <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
             <button
               onClick={scrollToJoin}
-              className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
+              className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
             >
               Join the Movement →
             </button>
@@ -652,7 +1058,7 @@ function HomePage({
           ].map((item) => (
             <div
               key={item.en}
-              className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
             >
               <p className="text-2xl font-black tracking-[-0.04em]">
                 <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
@@ -689,7 +1095,7 @@ function HomePage({
             {targets.map((target) => (
               <div
                 key={target.en}
-                className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+                className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
               >
                 <p className="text-base font-black tracking-[-0.02em]">
                   <BilingualText value={target} mode={mode} hiClassName="text-xs leading-4" />
@@ -700,6 +1106,10 @@ function HomePage({
         </div>
       </section>
 
+      <BigStatementSection mode={mode} />
+      <WhyCockroachStorySection mode={mode} />
+      <ManifestoQuickViewSection mode={mode} setPage={setPage} />
+      <BeforeAfterSection mode={mode} />
       <MovementCounterSection mode={mode} />
       <WhyMovementExistsSection mode={mode} />
       <JanataPainPointsSection mode={mode} />
@@ -747,7 +1157,7 @@ function AboutPage({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-20">
       <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-start">
-        <div className="rounded-[2rem] border border-black/10 bg-[#fafafa] p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl">
+        <div className="rounded-[2.25rem] border border-black/10 bg-[#fafafa] p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-xl">
           <p className="text-base font-black text-black/45">
             <BilingualText
               value={{ en: "Cockroach icon is used as a movement mark in the header.", hi: "कॉकरोच आइकन हेडर में आंदोलन चिन्ह के रूप में उपयोग है।" }}
@@ -769,7 +1179,7 @@ function AboutPage({ mode }: { mode: LangMode }) {
               hiClassName="text-sm leading-5"
             />
           </p>
-          <div className="mt-8 rounded-[2rem] border border-black/10 bg-[#fafafa] p-7">
+          <div className="mt-8 rounded-[2.25rem] border border-black/10 bg-[#fafafa] p-7">
             <p className="text-sm font-black leading-6 text-black/70">
               <BilingualText
                 value={{
@@ -820,7 +1230,7 @@ function ConstitutionPage({ mode }: { mode: LangMode }) {
         {constitutionItems.map((item, index) => (
           <div
             key={item.en}
-            className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
           >
             <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
             <p className="mt-4 text-xl font-black leading-7 tracking-[-0.03em]">
@@ -849,7 +1259,7 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
       <PageEyebrow value={eyebrow} mode={mode} />
       <PageTitle value={section.title} mode={mode} />
       <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-[2rem] border border-black/10 bg-black p-8 text-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+        <div className="rounded-[2.25rem] border border-black/10 bg-black p-8 text-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
           <div className="text-5xl">{section.icon}</div>
           <p className="mt-8 text-xl font-black leading-7 tracking-[-0.03em]">
             <BilingualText value={section.goal} mode={mode} hiClassName="text-xs leading-4 text-white/35" />
@@ -859,7 +1269,7 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
           {section.points.map((point, index) => (
             <div
               key={point.en}
-              className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+              className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
             >
               <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
               <p className="mt-3 text-base font-bold leading-7 text-black/75">
@@ -876,7 +1286,7 @@ function FocusPage({ mode, sectionId, eyebrow }: { mode: LangMode; sectionId: st
 function ContactPage({ mode }: { mode: LangMode }) {
   return (
     <section id="join" className="mx-auto max-w-7xl px-6 py-20">
-      <div className="overflow-hidden glass-card rounded-[3rem] border border-black/10 shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
+      <div className="overflow-hidden glass-card rounded-[3.25rem] border border-black/10 shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
         <div className="grid md:grid-cols-2">
           <div className="p-8 md:p-12">
             <PageEyebrow value={{ en: "Join Now", hi: "अभी जुड़ें" }} mode={mode} />
@@ -894,7 +1304,7 @@ function ContactPage({ mode }: { mode: LangMode }) {
           </div>
 
           <div className="flex flex-col justify-center bg-[#fafafa] p-8 md:p-12">
-            <div className="rounded-[2rem] border border-black/10 bg-white p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <div className="rounded-[2.25rem] border border-black/10 bg-white p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-5xl">📸</p>
               <h3 className="mt-5 text-2xl font-black tracking-[-0.04em]">
                 <BilingualText
@@ -909,7 +1319,7 @@ function ContactPage({ mode }: { mode: LangMode }) {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex w-full items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
+                className="mt-8 inline-flex w-full items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
               >
                 Follow on Instagram →
               </a>
@@ -929,9 +1339,154 @@ function ContactPage({ mode }: { mode: LangMode }) {
   );
 }
 
+function ScrollProgressBar({ progress }: { progress: number }) {
+  return (
+    <div className="fixed left-0 top-0 z-[90] h-1 w-full bg-black/5" aria-hidden="true">
+      <div
+        className="h-full bg-gradient-to-r from-[#0B8F36] via-[#B6FF00] to-[#64E986] transition-[width] duration-150 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
+}
+
+function BigStatementSection({ mode }: { mode: LangMode }) {
+  const lines: I18n[] = [
+    { en: "No hate politics.", hi: "नफरत की राजनीति नहीं।" },
+    { en: "No hidden wealth.", hi: "छिपी संपत्ति नहीं।" },
+    { en: "No luxury politics.", hi: "विलासिता वाली राजनीति नहीं।" },
+    { en: "Only public accountability.", hi: "केवल सार्वजनिक जवाबदेही।" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="glass-card rounded-[3.25rem] border border-black/10 p-8 text-center md:p-12">
+        {lines.map((line) => (
+          <h2 key={line.en} className="apple-gradient-text text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-7xl">
+            <BilingualText value={line} mode={mode} hiClassName="text-lg leading-6 tracking-normal md:text-2xl" />
+          </h2>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function WhyCockroachStorySection({ mode }: { mode: LangMode }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+        <div className="clay-card rounded-[3.25rem] border border-black/10 p-8">
+          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-[2rem] bg-black text-white shadow-2xl">
+            <CockroachIcon className="h-14 w-14" />
+          </div>
+          <p className="mt-6 text-center text-sm font-black uppercase tracking-[0.22em] text-black/45">
+            Movement Symbol
+          </p>
+        </div>
+        <div>
+          <PageEyebrow value={{ en: "Why Cockroach?", hi: "कॉकरोच क्यों?" }} mode={mode} />
+          <PageTitle value={{ en: "It is not weakness. It is survival.", hi: "यह कमजोरी नहीं। यह संघर्ष है।" }} mode={mode} />
+          <p className="mt-6 text-base font-bold leading-7 text-black/65">
+            <BilingualText
+              value={{
+                en: "Ordinary people survive everything: inflation, corruption, exams, job pressure, bad roads, toxic offices, and failed promises. The cockroach is survival, adaptability, discipline, and refusal to disappear.",
+                hi: "आम लोग सब कुछ झेलते हैं: महंगाई, भ्रष्टाचार, परीक्षा, नौकरी दबाव, खराब सड़क, विषाक्त ऑफिस और टूटे वादे। कॉकरोच संघर्ष, अनुकूलन, अनुशासन और मिटने से इनकार का प्रतीक है।",
+              }}
+              mode={mode}
+              hiClassName="text-xs leading-4"
+            />
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ManifestoQuickViewSection({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) => void }) {
+  const quickCards: { title: I18n; body: I18n }[] = [
+    { title: { en: "Student First", hi: "छात्र प्रथम" }, body: { en: "Fair exams, no paper leaks, fast results, job-linked education.", hi: "निष्पक्ष परीक्षा, पेपर लीक बंद, तेज परिणाम, नौकरी से जुड़ी शिक्षा।" } },
+    { title: { en: "Worker Rights", hi: "कर्मचारी अधिकार" }, body: { en: "5-day work week, paid overtime, labour law audits.", hi: "5 दिन कार्य सप्ताह, भुगतान ओवरटाइम, श्रम कानून ऑडिट।" } },
+    { title: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" }, body: { en: "Asset checks, fast courts, seizure of illegal wealth.", hi: "संपत्ति जांच, तेज कोर्ट, अवैध संपत्ति जब्ती।" } },
+    { title: { en: "Public Audit", hi: "सार्वजनिक ऑडिट" }, body: { en: "Every major policy must answer with data, not slogans.", hi: "हर बड़ी नीति डेटा से जवाब दे, नारों से नहीं।" } },
+    { title: { en: "Jobs", hi: "रोजगार" }, body: { en: "Manufacturing, apprenticeships, startups, local enterprise.", hi: "मैन्युफैक्चरिंग, अप्रेंटिसशिप, स्टार्टअप, लोकल उद्यम।" } },
+    { title: { en: "Digital Government", hi: "डिजिटल सरकार" }, body: { en: "One citizen app, 7-day complaint resolution, paperless offices.", hi: "एक नागरिक ऐप, 7 दिन शिकायत समाधान, पेपरलेस ऑफिस।" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <PageEyebrow value={{ en: "Manifesto Quick View", hi: "घोषणापत्र संक्षेप" }} mode={mode} />
+          <PageTitle value={{ en: "Six promises. One direction.", hi: "छह वादे। एक दिशा।" }} mode={mode} />
+        </div>
+        <button
+          onClick={() => setPage("manifesto")}
+          className="magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
+        >
+          Read Full Manifesto →
+        </button>
+      </div>
+      <div className="grid gap-5 md:grid-cols-3">
+        {quickCards.map((card) => (
+          <div key={card.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6">
+            <h3 className="text-2xl font-black tracking-[-0.04em]">
+              <BilingualText value={card.title} mode={mode} hiClassName="text-xs leading-4" />
+            </h3>
+            <p className="mt-4 text-sm font-bold leading-6 text-black/65">
+              <BilingualText value={card.body} mode={mode} hiClassName="text-[11px] leading-4" />
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BeforeAfterSection({ mode }: { mode: LangMode }) {
+  const today: I18n[] = [
+    { en: "Paper leaks", hi: "पेपर लीक" },
+    { en: "Corruption", hi: "भ्रष्टाचार" },
+    { en: "Unpaid overtime", hi: "बिना भुगतान ओवरटाइम" },
+    { en: "Political luxury", hi: "नेताओं की विलासिता" },
+  ];
+  const tomorrow: I18n[] = [
+    { en: "Fair exams", hi: "निष्पक्ष परीक्षा" },
+    { en: "Public audits", hi: "सार्वजनिक ऑडिट" },
+    { en: "Paid overtime", hi: "भुगतान वाला ओवरटाइम" },
+    { en: "Accountable leaders", hi: "जवाबदेह नेता" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="rounded-[3.25rem] border border-black/10 bg-white/80 p-8 shadow-sm">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-black/40">Today</p>
+          <div className="mt-6 grid gap-4">
+            {today.map((item) => (
+              <p key={item.en} className="text-3xl font-black tracking-[-0.04em] text-black/70">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="apple-gradient-bg rounded-[3.25rem] border border-black/10 p-8 shadow-2xl">
+          <p className="text-sm font-black uppercase tracking-[0.22em] text-black/45">Our India</p>
+          <div className="mt-6 grid gap-4">
+            {tomorrow.map((item) => (
+              <p key={item.en} className="text-3xl font-black tracking-[-0.04em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AnnouncementBar() {
   return (
-    <div className="border-b border-black/10 bg-[#B6FF00] px-6 py-3 text-center text-sm font-black text-black">
+    <div className="border-b border-black/10 apple-gradient-bg px-6 py-3 text-center text-sm font-black text-black">
       Janata First. Power Accountable. Follow the movement on Instagram.
     </div>
   );
@@ -951,7 +1506,7 @@ function MovementCounterSection({ mode }: { mode: LangMode }) {
         {counters.map((item) => (
           <div
             key={item.en}
-            className="reveal-card micro-lift shine-card soft-green-glow rounded-[2rem] border border-black/10 bg-[#B6FF00] p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            className="reveal-card micro-lift shine-card soft-gradient-glow rounded-[2.25rem] border border-black/10 apple-gradient-bg p-6 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
           >
             <p className="text-xl font-black leading-7 tracking-[-0.04em] text-black">
               <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
@@ -963,19 +1518,6 @@ function MovementCounterSection({ mode }: { mode: LangMode }) {
   );
 }
 
-function StickyInstagramButton() {
-  return (
-    <a
-      href={INSTAGRAM_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-50 magnetic-btn rounded-full border border-black/10 bg-[#B6FF00] px-5 py-3 text-sm font-black text-black shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
-    >
-      Follow / Report Issue
-    </a>
-  );
-}
-
 function WhyMovementExistsSection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -984,7 +1526,7 @@ function WhyMovementExistsSection({ mode }: { mode: LangMode }) {
           <PageEyebrow value={{ en: "Why This Movement Exists", hi: "यह आंदोलन क्यों है" }} mode={mode} />
           <PageTitle value={{ en: "For ordinary Indians who survive pressure every day.", hi: "उन आम भारतीयों के लिए जो हर दिन दबाव झेलते हैं।" }} mode={mode} />
         </div>
-        <div className="reveal-card rounded-[2rem] border border-black/10 bg-[#fafafa] p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+        <div className="reveal-card rounded-[2.25rem] border border-black/10 bg-[#fafafa] p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
           <p className="text-base font-bold leading-7 text-black/70">
             <BilingualText
               value={{
@@ -1024,7 +1566,7 @@ function JanataPainPointsSection({ mode }: { mode: LangMode }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {painPoints.map((item) => (
-            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-sm font-black leading-6 text-black/75">
                 <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
               </p>
@@ -1039,7 +1581,7 @@ function JanataPainPointsSection({ mode }: { mode: LangMode }) {
 function StudentFirstHomeSection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="rounded-[3rem] border border-black/10 bg-black p-8 text-white shadow-2xl md:p-10">
+      <div className="rounded-[3.25rem] border border-black/10 bg-black p-8 text-white shadow-2xl md:p-10">
         <PageEyebrow value={{ en: "Student First Movement", hi: "छात्र प्रथम आंदोलन" }} mode={mode} />
         <h2 className="mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
           <BilingualText
@@ -1082,7 +1624,7 @@ function WorkerRightsHomeSection({ mode }: { mode: LangMode }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           {demands.map((item) => (
-            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <div key={item.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-sm font-black leading-6 text-black/75">
                 <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
               </p>
@@ -1113,7 +1655,7 @@ function MovementRulesSection({ mode }: { mode: LangMode }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rules.map((rule) => (
-            <div key={rule.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+            <div key={rule.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
               <p className="text-sm font-black leading-6 text-black/75">
                 ✓ <BilingualText value={rule} mode={mode} hiClassName="text-[11px] leading-4" />
               </p>
@@ -1157,7 +1699,7 @@ function HundredDayPlanSection({ mode }: { mode: LangMode }) {
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {actions.map((action, index) => (
-          <div key={action.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+          <div key={action.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
             <p className="text-sm font-black text-black/35">Day Plan {String(index + 1).padStart(2, "0")}</p>
             <p className="mt-3 text-sm font-black leading-6 text-black/75">
               <BilingualText value={action} mode={mode} hiClassName="text-[11px] leading-4" />
@@ -1172,7 +1714,7 @@ function HundredDayPlanSection({ mode }: { mode: LangMode }) {
 function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="glass-card rounded-[3rem] border border-black/10 p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl md:p-10">
+      <div className="glass-card rounded-[3.25rem] border border-black/10 p-8 text-center shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl md:p-10">
         <PageEyebrow value={{ en: "Report Public Problems", hi: "जन समस्याएं भेजें" }} mode={mode} />
         <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-[0.95] tracking-[-0.055em] md:text-6xl">
           <BilingualText
@@ -1194,7 +1736,7 @@ function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
             hiClassName="text-xs leading-4"
           />
         </p>
-        <div className="mx-auto mt-6 max-w-3xl rounded-2xl border border-black/10 bg-[#B6FF00] p-4 text-left text-xs font-black leading-5 text-black">
+        <div className="mx-auto mt-6 max-w-3xl rounded-3xl border border-black/10 apple-gradient-bg p-4 text-left text-xs font-black leading-5 text-black">
           Safety note: Do not put yourself in danger while recording. Share only truthful, lawful, and evidence-based information.
         </div>
 
@@ -1203,7 +1745,7 @@ function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
+            className="inline-flex items-center justify-center magnetic-btn rounded-full bg-black px-8 py-4 text-base font-black text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
           >
             Send Issue or Corruption Video ↓
           </a>
@@ -1215,7 +1757,7 @@ function ReportLocalIssueSection({ mode }: { mode: LangMode }) {
 
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
   return (
-    <section className="mt-20 rounded-[3rem] border border-black/10 bg-[#fafafa] p-6 md:p-10">
+    <section className="mt-20 rounded-[3.25rem] border border-black/10 bg-[#fafafa] p-6 md:p-10">
       <div className="mb-10 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
         <div>
           <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
@@ -1235,7 +1777,7 @@ function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
 
       <div className="grid gap-5 lg:grid-cols-2">
         {publicAccountabilityIssues.map((issue, index) => (
-          <div key={issue.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+          <div key={issue.title.en} className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
             <p className="text-sm font-black text-black/35">Audit {String(index + 1).padStart(2, "0")}</p>
             <h3 className="mt-2 text-2xl font-black tracking-[-0.04em]">
               <BilingualText value={issue.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal" />
@@ -1261,7 +1803,7 @@ function PoliticianLifestyleSection({ mode }: { mode: LangMode }) {
           </div>
           <div className="grid gap-4">
             {politicianLifestylePromises.map((item, index) => (
-              <div key={item.en} className="rounded-[2rem] border border-black/10 bg-white p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div key={item.en} className="rounded-[2.25rem] border border-black/10 bg-white p-5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
                 <p className="text-sm font-black text-black/35">{String(index + 1).padStart(2, "0")}</p>
                 <p className="mt-3 text-sm font-bold leading-6 text-black/75">
                   <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4" />
@@ -1291,7 +1833,7 @@ function PrivacyPage({ mode }: { mode: LangMode }) {
         {items.map((item) => (
           <div
             key={item.en}
-            className="reveal-card micro-lift shine-card glass-card rounded-[2rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
+            className="reveal-card micro-lift shine-card glass-card rounded-[2.25rem] border border-black/10 p-6 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl"
           >
             <p className="text-base font-bold leading-7 text-black/75">
               <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4" />
@@ -1331,7 +1873,7 @@ function LaunchChecklist({ mode }: { mode: LangMode }) {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {launchItems.map((item) => (
-              <div key={item.en} className="rounded-[2rem] border border-white/10 bg-white/5 p-5 transition-all duration-500 hover:-translate-y-2 hover:bg-white/10">
+              <div key={item.en} className="rounded-[2.25rem] border border-white/10 bg-white/5 p-5 transition-all duration-500 hover:-translate-y-2 hover:bg-white/10">
                 <p className="text-sm font-black leading-6">
                   ✓ <BilingualText value={item} mode={mode} hiClassName="text-[10px] leading-3 text-white/30" />
                 </p>
@@ -1346,7 +1888,33 @@ function LaunchChecklist({ mode }: { mode: LangMode }) {
 
 export default function CockroachIndiaParty() {
   const [activePage, setActivePage] = useState<PageId>("home");
-  const [mode, setMode] = useState<LangMode>("en");
+  const [mode, setMode] = useState<LangMode>("both");
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    let frameId = 0;
+
+    const updateScroll = () => {
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const currentScroll = window.scrollY || 0;
+        const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        setScrollY(currentScroll);
+        setScrollProgress(Math.min(100, Math.max(0, (currentScroll / maxScroll) * 100)));
+      });
+    };
+
+    updateScroll();
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("resize", updateScroll);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", updateScroll);
+      window.removeEventListener("resize", updateScroll);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1373,7 +1941,10 @@ export default function CockroachIndiaParty() {
   return (
     <main
       className="min-h-screen bg-white text-[#0f0f0f] tracking-[-0.01em]"
-      style={{ fontFamily: 'Inter, "SF Pro Display", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif' }}
+      style={{
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Arial, "Noto Sans Devanagari", sans-serif',
+        "--scroll-y": `${scrollY}px`,
+      } as React.CSSProperties}
     >
       <style>{`
         html { scroll-behavior: smooth; }
@@ -1395,8 +1966,29 @@ export default function CockroachIndiaParty() {
           background: #ffffff;
           box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.08), 0 18px 50px rgba(0, 0, 0, 0.08);
         }
-        .soft-green-glow {
-          box-shadow: 0 0 0 1px rgba(182, 255, 0, 0.45), 0 20px 70px rgba(182, 255, 0, 0.16);
+        .soft-gradient-glow {
+          box-shadow: 0 0 0 1px rgba(88, 255, 120, 0.24), 0 24px 80px rgba(182, 255, 0, 0.28), 0 16px 60px rgba(0, 210, 120, 0.18);
+        }
+        .apple-gradient-bg {
+          background:
+            radial-gradient(circle at 18% 18%, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.48) 18%, transparent 38%),
+            linear-gradient(135deg, #E9FFE8 0%, #B6FF00 30%, #7CFF6B 58%, #D8FF7A 78%, #F6FFE8 100%);
+          background-size: 180% 180%;
+          color: #071107;
+        }
+        .apple-gradient-soft {
+          background:
+            radial-gradient(circle at 20% 10%, rgba(255,255,255,0.88), transparent 30%),
+            linear-gradient(135deg, rgba(233,255,232,0.92), rgba(182,255,0,0.28), rgba(124,255,107,0.24), rgba(216,255,122,0.28), rgba(246,255,232,0.88));
+        }
+        .apple-gradient-text {
+          background: linear-gradient(135deg, #0B8F36 0%, #35D94A 32%, #B6FF00 66%, #64E986 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        .apple-rounded {
+          border-radius: 28px;
         }
         .shine-card { position: relative; overflow: hidden; }
         .shine-card::before {
@@ -1409,23 +2001,343 @@ export default function CockroachIndiaParty() {
           pointer-events: none;
         }
         .shine-card:hover::before { transform: translateX(120%); }
-        .micro-lift { transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background-color 260ms ease; }
-        .micro-lift:hover { transform: translateY(-8px) scale(1.01); }
-        .magnetic-btn { transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease; }
+        @keyframes iconWiggle {
+          0%, 100% { transform: rotate(0deg) scale(1); }
+          25% { transform: rotate(-4deg) scale(1.05); }
+          75% { transform: rotate(4deg) scale(1.05); }
+        }
+        @keyframes softPulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(88, 255, 120, 0.0); }
+          50% { box-shadow: 0 0 0 8px rgba(88, 255, 120, 0.16); }
+        }
+        .micro-lift {
+          transform-style: preserve-3d;
+          transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease, background-color 260ms ease;
+        }
+        .micro-lift:hover {
+          transform: translateY(-8px) scale(1.012) rotateX(1deg);
+          border-color: rgba(0, 0, 0, 0.18);
+        }
+        .micro-lift:active { transform: translateY(-2px) scale(0.995); }
+        .magnetic-btn {
+          position: relative;
+          overflow: hidden;
+          transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+        }
+        .magnetic-btn::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.42) 48%, transparent 70%);
+          transform: translateX(-120%);
+          transition: transform 520ms ease;
+          pointer-events: none;
+        }
         .magnetic-btn:hover { transform: translateY(-3px) scale(1.03); }
+        .magnetic-btn:hover::after { transform: translateX(120%); }
+        .magnetic-btn:active { transform: translateY(0) scale(0.97); }
+        .nav-link {
+          position: relative;
+          padding-bottom: 6px;
+        }
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 2px;
+          border-radius: 9999px;
+          background: linear-gradient(90deg, #0B8F36, #B6FF00, #64E986);
+          transform: scaleX(0);
+          transform-origin: center;
+          transition: transform 240ms ease;
+        }
+        .nav-link:hover::after { transform: scaleX(1); }
+        .icon-bump { transition: transform 260ms ease, box-shadow 260ms ease; }
+        .icon-bump:hover { animation: iconWiggle 520ms ease; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
+        .manifesto-bullet { animation: softPulse 2.6s ease-in-out infinite; }
+        @keyframes svgDashMove {
+          from { stroke-dashoffset: 0; }
+          to { stroke-dashoffset: -260; }
+        }
+        @keyframes svgFloatNode {
+          0%, 100% { transform: translateY(0) scale(1); opacity: 0.55; }
+          50% { transform: translateY(-18px) scale(1.22); opacity: 0.9; }
+        }
+        @keyframes svgSlowRotate {
+          from { transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.012), 0) rotate(0deg); }
+          to { transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.012), 0) rotate(1deg); }
+        }
+        .svg-animated-background {
+          pointer-events: none;
+          position: fixed;
+          inset: -8vh -8vw;
+          z-index: 0;
+          width: 116vw;
+          height: 116vh;
+          opacity: 0.38;
+          filter: blur(0.2px);
+          animation: svgSlowRotate 16s ease-in-out infinite alternate;
+        }
+        .svg-flow-line {
+          fill: none;
+          stroke: url(#svgFlowGradient);
+          stroke-width: 3.5;
+          stroke-linecap: round;
+          stroke-dasharray: 18 24;
+          filter: url(#svgSoftGlow);
+          animation: svgDashMove 11s linear infinite;
+        }
+        .svg-flow-line-two {
+          stroke-width: 2.5;
+          opacity: 0.72;
+          animation-duration: 14s;
+          animation-direction: reverse;
+        }
+        .svg-flow-line-three {
+          stroke-width: 2;
+          opacity: 0.6;
+          animation-duration: 18s;
+        }
+        .svg-floating-node {
+          fill: #B6FF00;
+          stroke: rgba(255,255,255,0.9);
+          stroke-width: 4;
+          filter: url(#svgSoftGlow);
+          transform-origin: center;
+          animation: svgFloatNode 4s ease-in-out infinite;
+        }
+        .svg-delay-1 { animation-delay: 0.2s; }
+        .svg-delay-2 { animation-delay: 0.8s; }
+        .svg-delay-3 { animation-delay: 1.3s; }
+        .svg-delay-4 { animation-delay: 1.9s; }
+        @keyframes artworkFloat {
+          0%, 100% { transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.018), 0) scale(1); }
+          50% { transform: translate3d(0, calc(-18px + var(--scroll-y, 0px) * -0.018), 0) scale(1.012); }
+        }
+        @keyframes cockroachHover {
+          0%, 100% { transform: translate(990px, 270px) rotate(-14deg) translateY(0); }
+          50% { transform: translate(990px, 270px) rotate(-10deg) translateY(-22px); }
+        }
+        @keyframes handBreath {
+          0%, 100% { transform: translate(840px, 480px) scale(1); }
+          50% { transform: translate(840px, 482px) scale(1.006); }
+        }
+        @keyframes trailFlow {
+          from { stroke-dashoffset: 0; }
+          to { stroke-dashoffset: -180; }
+        }
+        @keyframes sparklePulse {
+          0%, 100% { opacity: 0.32; transform: scale(1); }
+          50% { opacity: 0.78; transform: scale(1.14); }
+        }
+        .cockroach-artwork-background {
+          pointer-events: none;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          width: 100vw;
+          height: 100vh;
+          opacity: 0.24;
+          animation: artworkFloat 9s ease-in-out infinite;
+        }
+        .artwork-hand path {
+          fill: none;
+          stroke: rgba(0,0,0,0.66);
+          stroke-width: 7;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .artwork-hand { animation: handBreath 5.5s ease-in-out infinite; }
+        .artwork-cockroach { animation: cockroachHover 3.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+        .artwork-dark-line { stroke: #050505; stroke-width: 6; stroke-linecap: round; fill: none; }
+        .artwork-motion-trails path {
+          fill: none;
+          stroke: url(#cockroachMotionGradient);
+          stroke-width: 4;
+          stroke-linecap: round;
+          stroke-dasharray: 22 18;
+          filter: url(#cockroachArtworkGlow);
+          animation: trailFlow 7s linear infinite;
+        }
+        .artwork-soft-waves path {
+          fill: none;
+          stroke: rgba(80, 190, 90, 0.28);
+          stroke-width: 2;
+          stroke-linecap: round;
+        }
+        .artwork-sparkles path,
+        .artwork-sparkles circle {
+          fill: rgba(70, 190, 85, 0.72);
+          stroke: rgba(255,255,255,0.8);
+          stroke-width: 2;
+          filter: url(#cockroachArtworkGlow);
+          animation: sparklePulse 3.6s ease-in-out infinite;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+        @media (max-width: 768px) {
+          .cockroach-artwork-background {
+            opacity: 0.16;
+            width: 160vw;
+            height: 120vh;
+            left: -46vw;
+          }
+        }
         @keyframes parallaxDriftOne {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(38px, -32px, 0) scale(1.08); }
-          100% { transform: translate3d(0, 0, 0) scale(1); }
+          0% { transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.035), 0) scale(1); }
+          50% { transform: translate3d(38px, calc(-32px + var(--scroll-y, 0px) * -0.035), 0) scale(1.08); }
+          100% { transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.035), 0) scale(1); }
         }
         @keyframes parallaxDriftTwo {
-          0% { transform: translate3d(0, 0, 0) scale(1); }
-          50% { transform: translate3d(-44px, 36px, 0) scale(1.06); }
-          100% { transform: translate3d(0, 0, 0) scale(1); }
+          0% { transform: translate3d(0, calc(var(--scroll-y, 0px) * 0.028), 0) scale(1); }
+          50% { transform: translate3d(-44px, calc(36px + var(--scroll-y, 0px) * 0.028), 0) scale(1.06); }
+          100% { transform: translate3d(0, calc(var(--scroll-y, 0px) * 0.028), 0) scale(1); }
         }
         @keyframes gridMove {
-          from { background-position: 0 0; }
-          to { background-position: 64px 64px; }
+          from { background-position: 0 0; transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.018), 0); }
+          to { background-position: 64px 64px; transform: translate3d(0, calc(var(--scroll-y, 0px) * -0.018), 0); }
+        }
+        .cockroach-pointer {
+          pointer-events: none;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 80;
+          height: 32px;
+          width: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.82;
+          filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.24));
+          transition: transform 45ms linear, opacity 160ms ease, filter 180ms ease;
+          transform-origin: 7px 7px;
+        }
+        .cockroach-pointer-hidden {
+          opacity: 0;
+        }
+        .cockroach-pointer-active {
+          opacity: 1;
+          filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 12px rgba(182,255,0,0.38));
+        }
+        .cockroach-pointer svg {
+          overflow: visible;
+        }
+        .cursor-antenna {
+          stroke: #050505;
+          stroke-width: 4;
+          stroke-linecap: round;
+          fill: none;
+          filter: drop-shadow(0 0 7px rgba(182,255,0,0.72));
+        }
+        .cursor-leg {
+          stroke: #050505;
+          stroke-width: 9;
+          stroke-linecap: round;
+          fill: none;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+        .cursor-wing-left,
+        .cursor-wing-right {
+          transform-box: fill-box;
+          transform-origin: center;
+          opacity: 0.94;
+        }
+        @keyframes cockroachWalkBob {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-1.4px) rotate(1.2deg); }
+        }
+        @keyframes legWalkA {
+          0%, 100% { transform: rotate(-24deg) translateY(0) translateX(0); }
+          50% { transform: rotate(34deg) translateY(-7px) translateX(4px); }
+        }
+        @keyframes legWalkB {
+          0%, 100% { transform: rotate(28deg) translateY(-3px) translateX(0); }
+          50% { transform: rotate(-32deg) translateY(5px) translateX(-4px); }
+        }
+        @keyframes wingFlutterLeft {
+          0%, 100% { transform: rotate(0deg) translateY(0); }
+          50% { transform: rotate(-8deg) translateY(-0.8px); }
+        }
+        @keyframes wingFlutterRight {
+          0%, 100% { transform: rotate(0deg) translateY(0); }
+          50% { transform: rotate(8deg) translateY(-0.8px); }
+        }
+        @keyframes cursorFeelers {
+          0%, 100% { transform: rotate(-10deg) translateX(0); }
+          25% { transform: rotate(18deg) translateX(7px); }
+          50% { transform: rotate(-22deg) translateX(-5px); }
+          75% { transform: rotate(14deg) translateX(5px); }
+        }
+        .cockroach-pointer-moving svg {
+          animation: cockroachWalkBob 0.38s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-wing-left {
+          animation: wingFlutterLeft 0.48s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-wing-right {
+          animation: wingFlutterRight 0.48s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-antenna {
+          transform-origin: 94px 42px;
+          animation: cursorFeelers 0.34s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-antenna-b { animation-delay: 0.08s; }
+        .cockroach-pointer-moving .cursor-antenna-c { animation-delay: 0.14s; }
+        .cockroach-pointer-moving .cursor-leg-a,
+        .cockroach-pointer-moving .cursor-leg-c,
+        .cockroach-pointer-moving .cursor-leg-e {
+          animation: legWalkA 0.18s ease-in-out infinite;
+        }
+        .cockroach-pointer-moving .cursor-leg-b,
+        .cockroach-pointer-moving .cursor-leg-d,
+        .cockroach-pointer-moving .cursor-leg-f {
+          animation: legWalkB 0.18s ease-in-out infinite;
+        }
+        .cockroach-trail-dot {
+          pointer-events: none;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 78;
+          height: 6px;
+          width: 6px;
+          border-radius: 9999px;
+          background: #B6FF00;
+          box-shadow: 0 0 16px rgba(182,255,0,0.75);
+          transition: transform 80ms linear, opacity 220ms ease;
+        }
+        .cursor-action-label {
+          position: absolute;
+          left: 28px;
+          top: -12px;
+          border-radius: 9999px;
+          background: #071107;
+          color: #B6FF00;
+          padding: 6px 10px;
+          font-size: 11px;
+          font-weight: 1000;
+          letter-spacing: -0.02em;
+          box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+          white-space: nowrap;
+        }
+        @media (max-width: 768px) {
+          .cockroach-pointer,
+          .cockroach-trail-dot { display: none; }
+        }
+        .webgl-background {
+          pointer-events: none;
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.85;
+          mix-blend-mode: multiply;
+        }
+        @media (max-width: 768px) {
+          .webgl-background { opacity: 0.65; }
         }
         .parallax-background {
           pointer-events: none;
@@ -1433,13 +2345,17 @@ export default function CockroachIndiaParty() {
           inset: 0;
           z-index: 0;
           overflow: hidden;
-          background: radial-gradient(circle at 20% 10%, rgba(182, 255, 0, 0.18), transparent 26%), radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.06), transparent 24%), #ffffff;
+          background:
+            radial-gradient(circle at 18% 10%, rgba(210, 255, 210, 0.58), transparent 28%),
+            radial-gradient(circle at 82% 18%, rgba(182, 255, 0, 0.28), transparent 26%),
+            radial-gradient(circle at 50% 86%, rgba(124, 255, 107, 0.34), transparent 30%),
+            #ffffff;
         }
         .parallax-grid {
           position: absolute;
           inset: -80px;
-          opacity: 0.22;
-          background-image: linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+          opacity: 0.16;
+          background-image: linear-gradient(rgba(42,140,62,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(42,140,62,0.08) 1px, transparent 1px);
           background-size: 64px 64px;
           animation: gridMove 18s linear infinite;
         }
@@ -1456,7 +2372,7 @@ export default function CockroachIndiaParty() {
           top: 18%;
           height: 260px;
           width: 260px;
-          background: rgba(182, 255, 0, 0.45);
+          background: rgba(182, 255, 0, 0.48);
           animation: parallaxDriftOne 10s ease-in-out infinite;
         }
         .parallax-orb-two {
@@ -1464,7 +2380,7 @@ export default function CockroachIndiaParty() {
           top: 42%;
           height: 320px;
           width: 320px;
-          background: rgba(0, 0, 0, 0.08);
+          background: rgba(124, 255, 107, 0.42);
           animation: parallaxDriftTwo 13s ease-in-out infinite;
         }
         .parallax-orb-three {
@@ -1472,14 +2388,23 @@ export default function CockroachIndiaParty() {
           bottom: 8%;
           height: 220px;
           width: 220px;
-          background: rgba(182, 255, 0, 0.28);
+          background: rgba(210, 255, 210, 0.52);
           animation: parallaxDriftTwo 16s ease-in-out infinite reverse;
         }
         @media (prefers-reduced-motion: reduce) {
           .parallax-grid,
           .parallax-orb-one,
           .parallax-orb-two,
-          .parallax-orb-three { animation: none; }
+          .parallax-orb-three,
+          .svg-animated-background,
+          .svg-flow-line,
+          .svg-floating-node,
+          .cockroach-artwork-background,
+          .artwork-hand,
+          .artwork-cockroach,
+          .artwork-motion-trails path,
+          .artwork-sparkles path,
+          .artwork-sparkles circle { animation: none; }
         }
         section, nav, footer, .page-layer { position: relative; z-index: 1; }
         section { animation: softScale 0.55s ease-out both; }
@@ -1489,6 +2414,12 @@ export default function CockroachIndiaParty() {
         }
         button:hover, select:hover, input:focus, textarea:focus, a:hover { transform: translateY(-1px); }
       `}</style>
+      <ScrollProgressBar progress={scrollProgress} />
+      <WebGLBackground />
+      <CockroachArtworkBackground />
+      <SvgAnimatedBackground />
+      <CockroachCursor />
+
       <div className="parallax-background" aria-hidden="true">
         <div className="parallax-grid" />
         <div className="parallax-orb-one" />
@@ -1501,7 +2432,7 @@ export default function CockroachIndiaParty() {
       <nav className="sticky top-0 z-50 border-b border-black/10 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-5">
           <button onClick={() => navigateToPage("home")} className="flex items-center gap-3 text-left">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black text-white shadow-sm">
+            <div className="icon-bump flex h-11 w-11 items-center justify-center rounded-3xl bg-black text-white shadow-sm">
               <CockroachIcon className="h-7 w-7" />
             </div>
             <div>
@@ -1516,7 +2447,7 @@ export default function CockroachIndiaParty() {
               <button
                 key={item.id}
                 onClick={() => navigateToPage(item.id)}
-                className={`hover:text-black ${activePage === item.id ? "text-black" : ""}`}
+                className={`nav-link hover:text-black ${activePage === item.id ? "text-black" : ""}`}
               >
                 <BilingualText value={item.label} mode={mode} hiClassName="text-[10px] leading-3" />
               </button>
@@ -1530,13 +2461,13 @@ export default function CockroachIndiaParty() {
               className="magnetic-btn rounded-full border border-black/10 bg-white px-4 py-3 text-sm font-black outline-none"
               aria-label="Language mode"
             >
+              <option value="both">English + हिंदी</option>
               <option value="en">English</option>
               <option value="hi">हिंदी</option>
-              <option value="both">English + हिंदी</option>
             </select>
             <button
               onClick={scrollToJoin}
-              className="magnetic-btn rounded-full bg-black px-6 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#B6FF00] hover:text-black hover:shadow-xl"
+              className="magnetic-btn rounded-full bg-black px-6 py-3 text-sm font-bold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:apple-gradient-bg hover:text-black hover:shadow-xl"
             >
               Join
             </button>
@@ -1569,34 +2500,56 @@ export default function CockroachIndiaParty() {
       {activePage === "antiCorruption" && <FocusPage mode={mode} sectionId="asset-verification" eyebrow={{ en: "Anti-Corruption Guarantee", hi: "भ्रष्टाचार विरोध गारंटी" }} />}
       {activePage === "privacy" && <PrivacyPage mode={mode} />}
       <PoliticianLifestyleSection mode={mode} />
-      <StickyInstagramButton />
 
-      <footer className="border-t border-black/10 px-6 py-10 text-center text-sm font-bold text-black/45">
-        <div className="mx-auto mb-6 flex max-w-7xl flex-wrap justify-center gap-3">
-          {[...navItems, { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } }].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => navigateToPage(item.id)}
-              className="magnetic-btn rounded-full border border-black/10 px-4 py-2 hover:bg-black hover:text-white"
-            >
-              {mode === "hi" ? item.label.hi : item.label.en}
-            </button>
-          ))}
-        </div>
+      <footer className="border-t border-black/10 px-6 py-14 text-center text-sm font-bold text-black/45">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col items-center gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-[1.5rem] bg-black text-white shadow-2xl">
+              <CockroachIcon className="h-9 w-9" />
+            </div>
+            <h2 className="apple-gradient-text text-4xl font-black tracking-[-0.05em] md:text-6xl">
+              Cockroach India Party
+            </h2>
+            <p className="max-w-2xl text-xl font-black leading-8 text-black">
+              We survive. We rebuild. We rise.
+            </p>
+            <p className="max-w-2xl text-base font-black text-black/65">
+              Public office is service, not luxury.
+            </p>
+          </div>
 
-        <div>
-          <p className="mb-3 text-base font-black text-black">
-            Public office is service, not luxury.
-          </p>
-          <span>
-            © 2026 Cockroach India Party. Public movement website draft. Add official registration details only after legal registration.
-          </span>
-          {mode !== "en" ? (
-            <HindiShadow
-              text="© 2026 कॉकरोच इंडिया पार्टी। सार्वजनिक आंदोलन वेबसाइट ड्राफ्ट। कानूनी पंजीकरण के बाद ही आधिकारिक विवरण जोड़ें।"
-              className="text-[10px]"
-            />
-          ) : null}
+          <div className="mx-auto mb-8 flex max-w-7xl flex-wrap justify-center gap-3">
+            {[...navItems, { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } }].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => navigateToPage(item.id)}
+                className="magnetic-btn rounded-full border border-black/10 bg-white/70 px-4 py-2 hover:bg-black hover:text-white"
+              >
+                {mode === "hi" ? item.label.hi : item.label.en}
+              </button>
+            ))}
+          </div>
+
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="magnetic-btn inline-flex rounded-full bg-black px-8 py-4 text-base font-black text-white hover:apple-gradient-bg hover:text-black"
+          >
+            Follow / Report Issue →
+          </a>
+
+          <div className="mt-8">
+            <span>
+              © 2026 Cockroach India Party. Public movement website draft. Add official registration details only after legal registration.
+            </span>
+            {mode !== "en" ? (
+              <HindiShadow
+                text="© 2026 कॉकरोच इंडिया पार्टी। सार्वजनिक आंदोलन वेबसाइट ड्राफ्ट। कानूनी पंजीकरण के बाद ही आधिकारिक विवरण जोड़ें।"
+                className="text-[10px]"
+              />
+            ) : null}
+          </div>
         </div>
       </footer>
     </main>
