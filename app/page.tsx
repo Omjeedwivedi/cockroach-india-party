@@ -3801,76 +3801,76 @@ function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
 function VolunteerRolesSection({ mode }: { mode: LangMode }) {
   const roles: { icon: string; title: I18n; body: I18n; tag: string }[] = [
     {
-      icon: "🎓",
-      title: { en: "Campus Volunteer", hi: "Campus Volunteer" },
+      icon: "🎤",
+      title: { en: "Excuse Translator", hi: "Excuse Translator" },
       body: {
-        en: "Build student-first discussion circles and collect real education issues.",
-        hi: "Student-first चर्चा समूह बनाएं और वास्तविक शिक्षा मुद्दे collect करें।",
+        en: "Translates official lines like ‘process is ongoing’ into simple janta language: kaam abhi hua nahi.",
+        hi: "‘Process चल रहा है’ को simple janta language में translate करता है: काम अभी हुआ नहीं।",
       },
-      tag: "Campus",
+      tag: "Excuse Dept",
     },
     {
-      icon: "📍",
-      title: { en: "District Issue Reporter", hi: "District Issue Reporter" },
+      icon: "🧾",
+      title: { en: "Receipt Hunter", hi: "Receipt Hunter" },
       body: {
-        en: "Report local problems with evidence, location, and short facts.",
-        hi: "स्थानीय समस्याएं evidence, location और short facts के साथ report करें।",
+        en: "Asks the most dangerous democratic question: paisa gaya kahan, tender kisko mila, result kya nikla?",
+        hi: "सबसे dangerous democratic question पूछता है: पैसा गया कहां, tender किसको मिला, result क्या निकला?",
       },
-      tag: "Ground",
+      tag: "Audit Squad",
     },
     {
-      icon: "📣",
-      title: { en: "Social Media Volunteer", hi: "Social Media Volunteer" },
+      icon: "📝",
+      title: { en: "Paper Leak Detective", hi: "Paper Leak Detective" },
       body: {
-        en: "Turn citizen issues into clean, non-hateful public awareness content.",
-        hi: "Citizen issues को साफ, non-hateful public awareness content में बदलें।",
+        en: "Tracks exam delay, paper leak, cancelled recruitment, and the mysterious disappearance of student future.",
+        hi: "Exam delay, paper leak, cancelled recruitment और student future के mysterious disappearance को track करता है।",
       },
-      tag: "Media",
+      tag: "Student Wing",
     },
     {
-      icon: "🔎",
-      title: { en: "Research Volunteer", hi: "Research Volunteer" },
+      icon: "🚨",
+      title: { en: "VIP Siren Blocker", hi: "VIP Siren Blocker" },
       body: {
-        en: "Study policies, data, budgets, tenders, exams, and job claims.",
-        hi: "Policies, data, budgets, tenders, exams और job claims का अध्ययन करें।",
+        en: "Reminds leaders that public roads are not private red carpets and citizens are not traffic decoration.",
+        hi: "Leaders को याद दिलाता है कि public roads private red carpet नहीं और citizens traffic decoration नहीं।",
       },
-      tag: "Research",
+      tag: "No VIP",
     },
     {
-      icon: "⚖️",
-      title: { en: "Legal Awareness Volunteer", hi: "Legal Awareness Volunteer" },
+      icon: "🕳️",
+      title: { en: "Gaddha Reporter", hi: "Gaddha Reporter" },
       body: {
-        en: "Help citizens understand basic rights, complaint formats, and due process.",
-        hi: "Citizens को basic rights, complaint formats और due process समझने में मदद करें।",
+        en: "Reports roads that have become adventure sports zones before politicians arrive for ribbon-cutting photos.",
+        hi: "उन roads को report करता है जो ribbon-cutting photos से पहले adventure sports zone बन चुकी हैं।",
       },
-      tag: "Rights",
+      tag: "Road Watch",
     },
     {
-      icon: "💻",
-      title: { en: "Tech Volunteer", hi: "Tech Volunteer" },
+      icon: "🦟",
+      title: { en: "Nali Drama Spotter", hi: "Nali Drama Spotter" },
       body: {
-        en: "Help build dashboards, forms, data systems, websites, and automation.",
-        hi: "Dashboards, forms, data systems, websites और automation बनाने में मदद करें।",
+        en: "Finds blocked drains, garbage mountains, mosquito kingdoms, and development that exists only in posters.",
+        hi: "Blocked drains, garbage mountains, mosquito kingdoms और सिर्फ posters में मौजूद development को पकड़ता है।",
       },
-      tag: "Tech",
+      tag: "Local Issue",
     },
     {
-      icon: "🎬",
-      title: { en: "Video Editor", hi: "Video Editor" },
+      icon: "📸",
+      title: { en: "Screenshot Sainik", hi: "Screenshot Sainik" },
       body: {
-        en: "Make short, fact-based videos on student, worker, and corruption issues.",
-        hi: "Student, worker और corruption issues पर short fact-based videos बनाएं।",
+        en: "Saves promises, deadlines, claims, speeches, and deletes-proof-before-election moments with discipline.",
+        hi: "Promises, deadlines, claims, speeches और election से पहले delete होने वाले proof को discipline से save करता है।",
       },
-      tag: "Creative",
+      tag: "Proof Team",
     },
     {
-      icon: "🛣️",
-      title: { en: "Local Problem Reporter", hi: "Local Problem Reporter" },
+      icon: "🪳",
+      title: { en: "Booth Cockroach", hi: "Booth Cockroach" },
       body: {
-        en: "Send roads, drainage, garbage, hospital, exam, and office problems.",
-        hi: "Roads, drainage, garbage, hospital, exam और office problems भेजें।",
+        en: "Keeps the movement alive in mohalla, campus, office, market, and ward without hate, violence, or fake news.",
+        hi: "Mohalla, campus, office, market और ward में movement alive रखता है — बिना hate, violence या fake news।",
       },
-      tag: "Local",
+      tag: "Ground Unit",
     },
   ];
 
@@ -3880,10 +3880,10 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
         <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
           <div className="classic-side-card flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
             <div>
-              <PageEyebrow value={{ en: "Volunteer Roles", hi: "Volunteer Roles" }} mode={mode} />
+              <PageEyebrow value={{ en: "Sarcastic Volunteer Roles", hi: "Sarcastic Volunteer Roles" }} mode={mode} />
               <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
                 <BilingualText
-                  value={{ en: "Choose your role. Build the movement.", hi: "अपनी भूमिका चुनें। आंदोलन बनाएं।" }}
+                  value={{ en: "Not jobs. Janta roles for system repair.", hi: "Jobs नहीं। System repair के लिए janta roles।" }}
                   mode={mode}
                   hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
                 />
@@ -3893,14 +3893,14 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
               <div className="rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
                 <p className="text-[7rem] font-black leading-none tracking-[-0.1em] md:text-[9rem]">08</p>
-                <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Ways to serve</p>
+                <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Janta roles</p>
               </div>
               <div className="rounded-[2.5rem] bg-white/10 p-6 backdrop-blur-xl">
                 <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
                   <BilingualText
                     value={{
-                      en: "Not just followers. Builders, reporters, researchers, creators, and problem solvers.",
-                      hi: "सिर्फ followers नहीं। Builders, reporters, researchers, creators और problem solvers।",
+                      en: "Pick a role. Bring proof. Ask questions. Make excuses uncomfortable.",
+                      hi: "Role चुनो। Proof लाओ। सवाल पूछो। Excuses को uncomfortable बनाओ।",
                     }}
                     mode={mode}
                     hiClassName="text-sm leading-5 text-white/35 md:text-lg"
@@ -3939,7 +3939,7 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
         <div className="mt-10 flex flex-col items-center justify-between gap-5 rounded-[2.75rem] bg-white/10 p-6 backdrop-blur-xl md:flex-row">
           <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl">
             <BilingualText
-              value={{ en: "Start small. Report honestly. Build publicly.", hi: "छोटा शुरू करें। ईमानदारी से report करें। Publicly build करें।" }}
+              value={{ en: "No hate. No violence. Only receipts, screenshots, and public pressure.", hi: "Hate नहीं। Violence नहीं। सिर्फ receipts, screenshots और public pressure।" }}
               mode={mode}
               hiClassName="text-sm leading-5 text-white/35 md:text-lg"
             />
@@ -3950,7 +3950,7 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
             rel="noopener noreferrer"
             className="premium-toggle premium-toggle-light inline-flex rounded-full px-8 py-4 text-base font-black"
           >
-            Choose Your Role on Instagram
+            Choose Your Janta Role
           </a>
         </div>
       </div>
