@@ -11,7 +11,10 @@ type PageId =
   | "constitution"
   | "student"
   | "antiCorruption"
+  | "noVip"
+  | "greatIndia"
   | "contact"
+  | "oath"
   | "privacy";
 
 type I18n = {
@@ -34,10 +37,10 @@ const INSTAGRAM_URL =
 const navItems: { id: PageId; icon: string; label: I18n }[] = [
   { id: "home", icon: "🏠", label: { en: "Home", hi: "होम" } },
   { id: "manifesto", icon: "📜", label: { en: "Manifesto", hi: "घोषणापत्र" } },
-  { id: "about", icon: "👥", label: { en: "About", hi: "परिचय" } },
   { id: "constitution", icon: "🚀", label: { en: "Vision", hi: "दृष्टि" } },
-  { id: "student", icon: "🎓", label: { en: "Student First", hi: "छात्र प्रथम" } },
   { id: "antiCorruption", icon: "🛡️", label: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" } },
+  { id: "noVip", icon: "🚫", label: { en: "No VIP Culture", hi: "VIP संस्कृति बंद" } },
+  { id: "greatIndia", icon: "🇮🇳", label: { en: "India Mission", hi: "भारत मिशन" } },
 ];
 
 const manifesto: ManifestoSection[] = [
@@ -588,7 +591,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
   const eligibilityCards: I18n[] = [
     {
       en: "Your degree is ready but your job is still loading.",
-      hi: "डिग्री तैयार है लेकिन नौकरी अभी भी loading में है।",
+      hi: "डिग्री तैयार है लेकिन नौकरी अभी भी loading है।",
     },
     {
       en: "You are tired of paper leaks, delayed exams, fake job data, and unpaid overtime.",
@@ -625,7 +628,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
               <BilingualText
                 value={{
                   en: "If your degree is ready but your job is still loading, you are eligible.",
-                  hi: "अगर डिग्री तैयार है लेकिन नौकरी अभी भी loading में है, तो आप eligible हैं।",
+                  hi: "अगर डिग्री तैयार है लेकिन नौकरी अभी भी loading है, तो आप eligible हैं।",
                 }}
                 mode={mode}
                 hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
@@ -638,7 +641,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
               <BilingualText
                 value={{
                   en: "No caste certificate. No VIP connection. No political background.",
-                  hi: "कोई जाति प्रमाणपत्र नहीं। कोई VIP connection नहीं। कोई राजनीतिक background नहीं।",
+                  hi: "कोई जाति प्रमाणपत्र नहीं। कोई VIP connection नहीं। कोई political background नहीं।"
                 }}
                 mode={mode}
                 hiClassName="text-base leading-5 text-black/55 md:text-xl"
@@ -648,7 +651,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
               <BilingualText
                 value={{
                   en: "Only one qualification: you care about India and you are ready to question power.",
-                  hi: "सिर्फ एक योग्यता: आपको भारत की चिंता है और आप सत्ता से सवाल करने के लिए तैयार हैं।",
+                  hi: "सिर्फ एक योग्यता: आपको भारत की चिंता है और आप सत्ता से सवाल करने के लिए तैयार हैं।"
                 }}
                 mode={mode}
                 hiClassName="text-xs leading-4 text-black/55"
@@ -701,7 +704,7 @@ function JoinEligibilitySection({ mode, scrollToJoin }: { mode: LangMode; scroll
 }
 
 function RunningCockroachEffect() {
-  const runners = Array.from({ length: 80 });
+  const runners = Array.from({ length: 24 });
 
   return (
     <div className="running-cockroach-layer" aria-hidden="true">
@@ -766,6 +769,11 @@ function CommandCenterSection({ mode }: { mode: LangMode }) {
     { value: "005", label: { en: "Public Audits", hi: "जन ऑडिट" } },
   ];
 
+  const description: I18n = {
+    en: "The movement will track reports, districts, volunteers, and public audits like a civic product — not like a poster campaign.",
+    hi: "Movement reports, districts, volunteers और public audits को civic product की तरह track करेगा — poster campaign की तरह नहीं।",
+  };
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
       <div className="command-center apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
@@ -774,25 +782,16 @@ function CommandCenterSection({ mode }: { mode: LangMode }) {
             <PageEyebrow value={{ en: "Janata Command Center", hi: "जनता कमांड सेंटर" }} mode={mode} />
             <h2 className="mt-5 text-5xl font-black uppercase leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
               <BilingualText
-                value={{
-                  en: "Every issue should become visible.",
-                  hi: "हर समस्या visible होनी चाहिए।",
-                }}
+                value={{ en: "Every issue should become visible.", hi: "हर समस्या visible होनी चाहिए।" }}
                 mode={mode}
-                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                hiClassName="mt-4 text-2xl leading-8 tracking-normal text-white/72 md:text-4xl"
               />
             </h2>
           </div>
+
           <div className="rounded-[2.75rem] bg-white/10 p-6 backdrop-blur-xl">
             <p className="text-xl font-black leading-8 tracking-[-0.035em] text-white md:text-3xl md:leading-10">
-              <BilingualText
-                value={{
-                  en: "The movement will track reports, districts, volunteers, and public audits like a civic product — not like a poster campaign.",
-                  hi: "Movement reports, districts, volunteers और public audits को civic product की तरह track करेगा — poster campaign की तरह नहीं।",
-                }}
-                mode={mode}
-                hiClassName="text-sm leading-5 text-white/35 md:text-lg"
-              />
+              <BilingualText value={description} mode={mode} hiClassName="text-sm leading-5 text-white/35 md:text-lg" />
             </p>
           </div>
         </div>
@@ -800,9 +799,11 @@ function CommandCenterSection({ mode }: { mode: LangMode }) {
         <div className="mt-12 grid gap-5 md:grid-cols-4">
           {metrics.map((metric) => (
             <div key={metric.label.en} className="command-metric rounded-[2.5rem] bg-white/10 p-7 text-center backdrop-blur-xl">
-              <p className="text-6xl font-black leading-none tracking-[-0.08em] text-[#B6FF00] md:text-8xl">{metric.value}</p>
+              <p className="text-6xl font-black leading-none tracking-[-0.08em] text-[#B6FF00] md:text-8xl">
+                {metric.value}
+              </p>
               <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-white/55">
-                <BilingualText value={metric.label} mode={mode} hiClassName="text-[10px] leading-3 text-white/35" />
+                <BilingualText value={metric.label} mode={mode} hiClassName="text-xs leading-5 text-white/45" />
               </p>
             </div>
           ))}
@@ -883,10 +884,10 @@ function HomePage({
 
           <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
             <button
-              onClick={scrollToJoin}
+              onClick={() => setPage("contact")}
               className="premium-toggle premium-toggle-dark rounded-full px-9 py-5 text-base font-black transition-all duration-300 ease-out"
             >
-              Join the Movement
+              Join / Report
             </button>
             <button
               onClick={() => setPage("manifesto")}
@@ -899,6 +900,9 @@ function HomePage({
       </section>
 
       <TrustBadgesSection mode={mode} />
+      <PremiumSlidingStatement mode={mode} />
+      <NotMemeMovementSection mode={mode} />
+      <HowItWorksSection mode={mode} />
       <SlidingTextBanner
         variant="dark"
         speed="slow"
@@ -911,9 +915,10 @@ function HomePage({
           "POWER ACCOUNTABLE",
         ]}
       />
-      <PremiumSlidingStatement mode={mode} />
       <CommandCenterSection mode={mode} />
-      <CinematicStickyStorySection mode={mode} />
+      <PublicIssueMapSection mode={mode} />
+      <CitizenReportCategoriesSection mode={mode} />
+      <CandidateStandardSection mode={mode} />
       <SlidingTextBanner
         variant="green"
         speed="normal"
@@ -926,11 +931,7 @@ function HomePage({
       />
       <JoinEligibilitySection mode={mode} scrollToJoin={scrollToJoin} />
       <BerozgariEmergencySection mode={mode} />
-      <PublicAccountabilitySection mode={mode} />
-      <VolunteerRolesSection mode={mode} />
-      <ReportFormatSection mode={mode} />
       <FAQAccordionSection mode={mode} />
-      <ContactPage mode={mode} />
     </>
   );
 }
@@ -2211,6 +2212,790 @@ function AntiCorruptionDetailedPage({ mode }: { mode: LangMode }) {
   );
 }
 
+function NoVIPCulturePage({ mode }: { mode: LangMode }) {
+  const noVipWords = [
+    "NO VIP ROADS",
+    "NO ROYAL CONVOYS",
+    "NO LUXURY POLITICS",
+    "PUBLIC TRANSPORT FIRST",
+    "LEADERS USE PUBLIC SYSTEMS",
+    "2 YEAR FIX DEADLINE",
+  ];
+
+  const noVipLines: I18n[] = [
+    { en: "No VIP roads.", hi: "VIP roads नहीं।" },
+    { en: "No royal convoys.", hi: "शाही convoy नहीं।" },
+    { en: "No luxury politics.", hi: "Luxury politics नहीं।" },
+    { en: "No public money for personal comfort.", hi: "Personal comfort के लिए public money नहीं।" },
+  ];
+
+  const publicSystems: I18n[] = [
+    { en: "Government hospitals", hi: "सरकारी अस्पताल" },
+    { en: "Government schools", hi: "सरकारी स्कूल" },
+    { en: "Public transport", hi: "सार्वजनिक परिवहन" },
+    { en: "Public offices", hi: "सरकारी दफ्तर" },
+    { en: "Public roads", hi: "सार्वजनिक सड़कें" },
+    { en: "Complaint systems", hi: "शिकायत प्रणाली" },
+  ];
+
+  const publicTransportItems: I18n[] = [
+    { en: "Metro", hi: "Metro" },
+    { en: "Bus", hi: "Bus" },
+    { en: "Train", hi: "Train" },
+    { en: "Government transport", hi: "Government transport" },
+    { en: "Walking inspection", hi: "Walking inspection" },
+    { en: "Cycling inspection", hi: "Cycling inspection" },
+  ];
+
+  const rules: { title: I18n; body: I18n }[] = [
+    {
+      title: { en: "Same System Rule", hi: "Same System Rule" },
+      body: {
+        en: "After election, every party MLA, MP, minister, and senior office holder must use and inspect the same public systems citizens use: government hospitals, government schools, public transport, public offices, public roads, and complaint systems. Security-sensitive cases can have limited written exceptions.",
+        hi: "चुनाव के बाद हर MLA, MP, minister और senior office holder वही public systems use और inspect करेगा जो citizens use करते हैं: government hospitals, government schools, public transport, public offices, public roads और complaint systems। Security-sensitive cases में limited written exceptions हो सकते हैं।",
+      },
+    },
+    {
+      title: { en: "Two-Year Fix Deadline", hi: "Two-Year Fix Deadline" },
+      body: {
+        en: "Elected members get 2 years to make basic public services in their area usable for common citizens and party members. If a leader cannot use the public hospital, public school, public road, public transport, or public office after 2 years, they have failed the people.",
+        hi: "Elected members को 2 साल मिलेंगे ताकि उनके area की basic public services common citizens और party members के use लायक बनें। अगर 2 साल बाद leader public hospital, public school, public road, public transport या public office use नहीं कर सकता, तो वह जनता के लिए fail हुआ।",
+      },
+    },
+    {
+      title: { en: "Public Transport Rule", hi: "Public Transport Rule" },
+      body: {
+        en: "Party members must regularly use metro, bus, train, government transport, walking inspection, and cycling inspection so they experience heat, crowding, delays, unsafe routes, bad last-mile connectivity, dirty stations, and broken roads directly.",
+        hi: "Party members को regularly metro, bus, train, government transport, walking inspection और cycling inspection use करना होगा ताकि वे heat, crowding, delays, unsafe routes, bad last-mile connectivity, dirty stations और broken roads खुद experience करें।",
+      },
+    },
+    {
+      title: { en: "No Luxury Politics Rule", hi: "No Luxury Politics Rule" },
+      body: {
+        en: "No unnecessary convoy, no luxury cars from public money, no expensive office renovation, no VIP road blocking, no misuse of security, and no public money for personal comfort.",
+        hi: "Unnecessary convoy नहीं, public money से luxury cars नहीं, expensive office renovation नहीं, VIP road blocking नहीं, security misuse नहीं और personal comfort के लिए public money नहीं।",
+      },
+    },
+    {
+      title: { en: "Public Service Audit", hi: "Public Service Audit" },
+      body: {
+        en: "Every elected member must publish a yearly report showing how many times they used public transport, how many government hospitals and schools they inspected, how many public complaints they solved, and how much public money was spent on office, travel, security, car, and bungalow.",
+        hi: "हर elected member yearly report publish करेगा जिसमें public transport usage, government hospital और school inspections, solved complaints और office, travel, security, car, bungalow पर खर्च public money दिखेगा।",
+      },
+    },
+  ];
+
+  return (
+    <>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
+          <PageEyebrow value={{ en: "No VIP Culture Rule", hi: "VIP संस्कृति बंद नियम" }} mode={mode} />
+          <h1 className="mx-auto mt-6 max-w-6xl text-6xl font-black uppercase leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+            <WordRevealText
+              value={{
+                en: "End VIP Culture. Make leaders use the system they control.",
+                hi: "VIP संस्कृति बंद। नेता वही सिस्टम use करें जिसे वे control करते हैं।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+            />
+          </h1>
+          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "If public services are not good enough for leaders, they are not good enough for citizens.",
+                hi: "अगर public services leaders के लिए अच्छी नहीं हैं, तो वे citizens के लिए भी अच्छी नहीं हैं।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45 md:text-base"
+            />
+          </p>
+
+          <div className="eligibility-marquee apple-clean-pill mt-12 rounded-full bg-white/70 py-4 backdrop-blur-xl" aria-hidden="true">
+            <div className="eligibility-marquee-track">
+              {[...noVipWords, ...noVipWords, ...noVipWords].map((word, index) => (
+                <span key={`${word}-${index}`} className="eligibility-pill">
+                  {word}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <PageEyebrow value={{ en: "Core Rule", hi: "मुख्य नियम" }} mode={mode} />
+          <div className="mt-6 grid gap-4 text-5xl font-black leading-[0.9] tracking-[-0.07em] md:text-7xl lg:text-8xl">
+            {noVipLines.map((line, index) => (
+              <p key={line.en} className={index % 2 === 0 ? "text-white" : "text-white/45"}>
+                <BilingualText value={line} mode={mode} hiClassName="text-lg leading-6 tracking-normal text-white/35 md:text-2xl" />
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Same System Rule", hi: "Same System Rule" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{
+                  en: "Leaders should not escape broken systems. They should fix them.",
+                  hi: "Leaders को broken systems से भागना नहीं चाहिए। उन्हें उन्हें fix करना चाहिए।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "If public transport, hospitals, schools, roads, offices, buses, trains, and complaint systems are broken, leaders must fix them — not escape them through VIP privilege.",
+                  hi: "अगर public transport, hospitals, schools, roads, offices, buses, trains और complaint systems broken हैं, तो leaders को उन्हें fix करना होगा — VIP privilege से escape नहीं करना होगा।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {publicSystems.map((system) => (
+            <div key={system.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
+              <p className="text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={system} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
+            <div className="rounded-[3rem] bg-black p-8 text-white md:p-10">
+              <PageEyebrow value={{ en: "2-Year Fix Deadline", hi: "2 साल की deadline" }} mode={mode} />
+              <p className="mt-8 text-[7rem] font-black leading-none tracking-[-0.1em] text-[#B6FF00] md:text-[10rem]">02</p>
+              <p className="mt-4 text-3xl font-black leading-9 tracking-[-0.05em] text-white md:text-5xl md:leading-[3.4rem]">
+                <BilingualText
+                  value={{ en: "Years to fix basic public services.", hi: "Basic public services fix करने के लिए साल।" }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+                />
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {rules.map((rule, index) => (
+                <article key={rule.title.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 backdrop-blur-xl">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Rule {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-3xl">
+                    <BilingualText value={rule.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                  </h3>
+                  <p className="mt-4 text-sm font-bold leading-6 text-black/66">
+                    <BilingualText value={rule.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <PageEyebrow value={{ en: "Public Transport Rule", hi: "Public Transport Rule" }} mode={mode} />
+              <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+                <BilingualText
+                  value={{
+                    en: "Use the same route. Feel the same pain. Fix the same system.",
+                    hi: "Same route use करो। Same pain feel करो। Same system fix करो।",
+                  }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                />
+              </h2>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {publicTransportItems.map((item) => (
+                <div key={item.en} className="rounded-[1.75rem] bg-white/10 p-4 text-lg font-black text-white/82">
+                  <BilingualText value={item} mode={mode} hiClassName="text-[11px] leading-4 text-white/35" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-12">
+          <PageEyebrow value={{ en: "Final Line", hi: "अंतिम बात" }} mode={mode} />
+          <h2 className="mx-auto mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText
+              value={{
+                en: "Leaders should not rise above the people. Leaders should raise the system for the people.",
+                hi: "Leaders को जनता से ऊपर नहीं उठना चाहिए। Leaders को जनता के लिए system उठाना चाहिए।",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+            />
+          </h2>
+          <p className="mx-auto mt-8 max-w-4xl text-xl font-black leading-8 text-black/62">
+            <BilingualText
+              value={{
+                en: "Public office is not a shortcut to luxury. Public office is duty.",
+                hi: "Public office luxury का shortcut नहीं है। Public office duty है।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45"
+            />
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function GreatIndiaMissionPage({ mode }: { mode: LangMode }) {
+  const missionWords = [
+    "Middle Class First",
+    "Farmer to Founder",
+    "Women Safety",
+    "Small Business Freedom",
+    "Indian Family Protection",
+    "Clean City Clean Village",
+    "Climate Heat Pollution",
+    "Tree Survival Audit",
+    "Police Reform",
+    "Taxpayer Dashboard",
+    "Indian Product Mission",
+    "National Character",
+  ];
+
+  const missionTopics: { icon: string; title: I18n; line: I18n; points: I18n[] }[] = [
+    {
+      icon: "🏠",
+      title: { en: "Middle Class First", hi: "मिडिल क्लास प्रथम" },
+      line: { en: "Middle class pays the bill. Middle class deserves respect.", hi: "मिडिल क्लास बिल भरता है। मिडिल क्लास सम्मान deserve करता है।" },
+      points: [
+        { en: "Lower tax burden on honest earners.", hi: "ईमानदार earners पर कम tax burden." },
+        { en: "Transparent use of taxpayer money.", hi: "Taxpayer money का transparent use." },
+        { en: "Affordable education, healthcare, housing, and rent protection.", hi: "Affordable education, healthcare, housing और rent protection." },
+        { en: "No harassment for small compliance mistakes.", hi: "छोटी compliance mistakes पर harassment नहीं." },
+      ],
+    },
+    {
+      icon: "🌾",
+      title: { en: "Farmer to Founder Mission", hi: "Farmer to Founder Mission" },
+      line: { en: "Farmers should not just survive harvests. Farmers should build wealth.", hi: "किसान सिर्फ harvest survive न करें। किसान wealth build करें।" },
+      points: [
+        { en: "Agri processing units and cold storage in every district.", hi: "हर जिले में agri processing units और cold storage." },
+        { en: "Direct farmer-to-consumer platforms.", hi: "Direct farmer-to-consumer platforms." },
+        { en: "Farm tourism, medicinal crops, and solar income for farmers.", hi: "Farm tourism, medicinal crops और farmers के लिए solar income." },
+        { en: "AI-based crop advisory and market intelligence.", hi: "AI-based crop advisory और market intelligence." },
+      ],
+    },
+    {
+      icon: "🛡️",
+      title: { en: "Women Safety and Economic Freedom", hi: "महिला सुरक्षा और आर्थिक स्वतंत्रता" },
+      line: { en: "A country is not developed until women feel free after sunset.", hi: "देश तब तक developed नहीं जब तक महिलाएं sunset के बाद free feel न करें।" },
+      points: [
+        { en: "Safe transport and fast crime response.", hi: "Safe transport और fast crime response." },
+        { en: "Women police units and workplace safety systems.", hi: "Women police units और workplace safety systems." },
+        { en: "Skill and business grants for women.", hi: "महिलाओं के लिए skill और business grants." },
+        { en: "Hostel and rental safety standards.", hi: "Hostel और rental safety standards." },
+      ],
+    },
+    {
+      icon: "🏪",
+      title: { en: "Small Business Freedom", hi: "छोटे व्यवसाय की स्वतंत्रता" },
+      line: { en: "Small businesses create jobs. Government should not create fear.", hi: "Small businesses jobs बनाते हैं। Government fear नहीं बनाए।" },
+      points: [
+        { en: "24-hour business registration and simple GST support.", hi: "24-hour business registration और simple GST support." },
+        { en: "No inspector harassment.", hi: "Inspector harassment नहीं." },
+        { en: "Digital loan access and local manufacturing clusters.", hi: "Digital loan access और local manufacturing clusters." },
+        { en: "Street vendor dignity and small shop digital upgrade.", hi: "Street vendor dignity और small shop digital upgrade." },
+      ],
+    },
+    {
+      icon: "👨‍👩‍👧‍👦",
+      title: { en: "Indian Family Protection", hi: "भारतीय परिवार सुरक्षा" },
+      line: { en: "Every policy must protect the Indian family.", hi: "हर policy भारतीय परिवार को protect करे।" },
+      points: [
+        { en: "Affordable school fees and medical treatment.", hi: "Affordable school fees और medical treatment." },
+        { en: "Old age care and housing access.", hi: "Old age care और housing access." },
+        { en: "Food quality and mental health support.", hi: "Food quality और mental health support." },
+        { en: "Family income stability.", hi: "Family income stability." },
+      ],
+    },
+    {
+      icon: "🏙️",
+      title: { en: "Clean City, Clean Village Mission", hi: "स्वच्छ शहर, स्वच्छ गांव मिशन" },
+      line: { en: "No Indian should live between garbage, dust, bad roads, and broken drains.", hi: "कोई भारतीय garbage, dust, bad roads और broken drains के बीच न रहे।" },
+      points: [
+        { en: "Garbage tracking dashboard and drainage audit.", hi: "Garbage tracking dashboard और drainage audit." },
+        { en: "Road quality audit and public toilet maintenance.", hi: "Road quality audit और public toilet maintenance." },
+        { en: "Clean water guarantee.", hi: "Clean water guarantee." },
+        { en: "Ward-level public scorecard and contractor accountability.", hi: "Ward-level public scorecard और contractor accountability." },
+      ],
+    },
+    {
+      icon: "🌳",
+      title: { en: "Climate, Heat & Pollution Mission", hi: "जलवायु, गर्मी और प्रदूषण मिशन" },
+      line: { en: "No Indian should lose health, income, or life because of heat, pollution, and broken urban planning.", hi: "गर्मी, प्रदूषण और खराब urban planning के कारण कोई भारतीय health, income या life न खोए।" },
+      points: [
+        { en: "Heat Action Plan for every district with heat shelters, drinking water points, shaded bus stops, emergency medical response, school timing rules, and worker safety rules during heat waves.", hi: "हर जिले में heat shelters, drinking water points, shaded bus stops, emergency medical response, school timing rules और heat wave में worker safety rules." },
+        { en: "Tree Canopy Mission with yearly targets for every city and village: planted, survived, dead, and replaced trees must be tracked publicly.", hi: "हर city और village के लिए yearly tree canopy targets: planted, survived, dead और replaced trees publicly tracked हों." },
+        { en: "Native Tree Plantation focused on shade, biodiversity, water retention, and long-term survival instead of decorative plants.", hi: "Decorative plants की जगह shade, biodiversity, water retention और long-term survival वाले native trees." },
+        { en: "Urban Shade Rule for footpaths, bus stops, school routes, hospital routes, market areas, and metro or railway access roads.", hi: "Footpaths, bus stops, school routes, hospital routes, market areas और metro/railway access roads के लिए Urban Shade Rule." },
+        { en: "Pollution Accountability Dashboard for ward-wise air quality, dust, garbage burning, industrial pollution, construction dust, and traffic pollution.", hi: "Ward-wise air quality, dust, garbage burning, industrial pollution, construction dust और traffic pollution के लिए dashboard." },
+        { en: "Construction Dust Control using green nets, water spraying, covered material transport, and penalties for violations.", hi: "Green nets, water spraying, covered material transport और violations पर penalty के साथ construction dust control." },
+        { en: "Clean Public Transport Mission with electric buses, better bus frequency, shaded bus stops, last-mile e-rickshaw integration, and safe cycling lanes.", hi: "Electric buses, better frequency, shaded bus stops, last-mile e-rickshaw integration और safe cycling lanes." },
+        { en: "Cool Roof Mission for low-income homes, schools, anganwadis, hospitals, and public buildings with heat-reflective coating.", hi: "Low-income homes, schools, anganwadis, hospitals और public buildings के लिए cool roofs या heat-reflective coating." },
+        { en: "Water Body Revival for lakes, ponds, drains, and wetlands to reduce heat, flooding, and water shortage.", hi: "Heat, flooding और water shortage कम करने के लिए lakes, ponds, drains और wetlands revival." },
+        { en: "Worker Heat Safety Law for delivery workers, construction workers, traffic police, street vendors, sanitation workers, and outdoor labourers with water, shade, rest breaks, and heat-risk protection.", hi: "Delivery workers, construction workers, traffic police, street vendors, sanitation workers और outdoor labourers के लिए water, shade, rest breaks और heat-risk protection." },
+      ],
+    },
+    {
+      icon: "⚖️",
+      title: { en: "Police and Court Reform", hi: "पुलिस और कोर्ट सुधार" },
+      line: { en: "Justice delayed is democracy denied.", hi: "Justice delayed is democracy denied." },
+      points: [
+        { en: "Time-bound case tracking and digital FIR.", hi: "Time-bound case tracking और digital FIR." },
+        { en: "Police body cameras and modern forensic labs.", hi: "Police body cameras और modern forensic labs." },
+        { en: "Fast courts and witness protection.", hi: "Fast courts और witness protection." },
+        { en: "Legal aid for poor citizens.", hi: "Poor citizens के लिए legal aid." },
+      ],
+    },
+    {
+      icon: "🛰️",
+      title: { en: "Indian Product Mission", hi: "भारतीय प्रोडक्ट मिशन" },
+      line: { en: "India should not only buy the future. India should build the future.", hi: "भारत सिर्फ future खरीदे नहीं। भारत future बनाए।" },
+      points: [
+        { en: "Indian apps, AI tools, and cloud platforms.", hi: "Indian apps, AI tools और cloud platforms." },
+        { en: "Indian chips, EVs, drones, and defense tech.", hi: "Indian chips, EVs, drones और defense tech." },
+        { en: "Indian operating systems for government.", hi: "Government के लिए Indian operating systems." },
+        { en: "Public procurement preference for high-quality Indian products.", hi: "High-quality Indian products के लिए public procurement preference." },
+      ],
+    },
+    {
+      icon: "📊",
+      title: { en: "Taxpayer Dashboard", hi: "Taxpayer Dashboard" },
+      line: { en: "Every rupee taken from citizens must be visible to citizens.", hi: "Citizens से लिया हर रुपया citizens को visible होना चाहिए।" },
+      points: [
+        { en: "Where tax money went and project cost.", hi: "Tax money कहां गया और project cost." },
+        { en: "Contractor name and delay reason.", hi: "Contractor name और delay reason." },
+        { en: "Completion status and officer responsible.", hi: "Completion status और responsible officer." },
+        { en: "Citizen rating for public projects.", hi: "Public projects के लिए citizen rating." },
+      ],
+    },
+    {
+      icon: "🧭",
+      title: { en: "National Character Mission", hi: "राष्ट्रीय चरित्र मिशन" },
+      line: { en: "A great country needs great systems and great character.", hi: "महान देश को महान systems और महान character चाहिए।" },
+      points: [
+        { en: "Discipline and clean public behaviour.", hi: "Discipline और clean public behaviour." },
+        { en: "No bribery culture and truth before propaganda.", hi: "No bribery culture और truth before propaganda." },
+        { en: "Respect for women, workers, and public property.", hi: "Women, workers और public property का respect." },
+        { en: "Civic duty as a national habit.", hi: "Civic duty as national habit." },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
+          <PageEyebrow value={{ en: "India Mission", hi: "भारत मिशन" }} mode={mode} />
+          <h1 className="mx-auto mt-6 max-w-6xl text-6xl font-black leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+            <WordRevealText
+              value={{
+                en: "Make India the opportunity nation for every family.",
+                hi: "हर परिवार के लिए भारत को opportunity nation बनाओ।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+            />
+          </h1>
+          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "A practical national mission for middle class families, farmers, women, small businesses, taxpayers, clean cities, clean air, heat protection, tree survival, justice, Indian products, and national character.",
+                hi: "Middle class families, farmers, women, small businesses, taxpayers, clean cities, clean air, heat protection, tree survival, justice, Indian products और national character के लिए practical national mission.",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45 md:text-base"
+            />
+          </p>
+
+          <div className="eligibility-marquee apple-clean-pill mt-12 rounded-full bg-white/70 py-4 backdrop-blur-xl" aria-hidden="true">
+            <div className="eligibility-marquee-track">
+              {[...missionWords, ...missionWords, ...missionWords].map((word, index) => (
+                <span key={`${word}-${index}`} className="eligibility-pill">
+                  {word}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <SlidingTextBanner
+        variant="green"
+        speed="slow"
+        items={[
+          "MIDDLE CLASS FIRST",
+          "FARMER TO FOUNDER",
+          "WOMEN SAFETY",
+          "SMALL BUSINESS FREEDOM",
+          "TAXPAYER DASHBOARD",
+          "CLIMATE HEAT POLLUTION",
+          "TREE SURVIVAL AUDIT",
+          "NATIONAL CHARACTER",
+        ]}
+      />
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <PageEyebrow value={{ en: "Big National Frame", hi: "बड़ा राष्ट्रीय विचार" }} mode={mode} />
+          <div className="mt-6 grid gap-4 text-5xl font-black leading-[0.9] tracking-[-0.07em] md:text-7xl lg:text-8xl">
+            <p>Every family must rise.</p>
+            <p className="text-white/45">Every rupee must be visible.</p>
+            <p>Every city must work.</p>
+            <p className="text-white/45">Every citizen must breathe clean air.</p>
+            <p>Every tree planted must survive.</p>
+            <p className="text-white/45">Every citizen must feel safe.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "11 Missions", hi: "11 मिशन" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "Daily-life problems need system-level solutions.", hi: "Daily-life problems को system-level solutions चाहिए।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "This page expands the movement beyond politics into household security, income, dignity, safety, clean air, heat protection, tree survival, justice, and national discipline.",
+                  hi: "यह page movement को politics से आगे household security, income, dignity, safety, clean air, heat protection, tree survival, justice और national discipline तक ले जाता है।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {missionTopics.map((topic, index) => (
+            <article key={topic.title.en} className="reveal-card micro-lift shine-card apple-clean-card rounded-[3rem] bg-white/76 p-7 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div className="flex items-start gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.55rem] bg-black text-3xl text-white shadow-2xl">
+                  {topic.icon}
+                </div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Mission {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black md:text-3xl">
+                    <BilingualText value={topic.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                  </h3>
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-[2.25rem] bg-black p-6 text-white shadow-xl">
+                <p className="text-lg font-black leading-7 tracking-[-0.035em] text-white md:text-xl">
+                  <BilingualText value={topic.line} mode={mode} hiClassName="text-xs leading-4 text-white/35" />
+                </p>
+              </div>
+
+              <ul className="mt-6 grid gap-3">
+                {topic.points.map((point) => (
+                  <li key={point.en} className="flex gap-3 rounded-[1.65rem] bg-white/72 p-4 text-sm font-bold leading-6 text-black/75 shadow-[0_10px_30px_rgba(0,0,0,0.035)] backdrop-blur-xl">
+                    <span className="manifesto-bullet mt-2 h-2 w-2 shrink-0 rounded-full bg-black" />
+                    <span>
+                      <BilingualText value={point} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <PageEyebrow value={{ en: "Climate Reality Lines", hi: "जलवायु सच्चाई" }} mode={mode} />
+              <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+                <BilingualText
+                  value={{ en: "Clean air should not be a luxury product.", hi: "Clean air luxury product नहीं होना चाहिए।" }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                />
+              </h2>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {[
+                { en: "AC is not climate policy.", hi: "AC climate policy नहीं है।" },
+                { en: "A city without trees is a heat trap.", hi: "पेड़ों के बिना शहर heat trap है।" },
+                { en: "Pollution is silent violence.", hi: "Pollution silent violence है।" },
+                { en: "Tree plantation without survival tracking is just a photo shoot.", hi: "Survival tracking के बिना tree plantation सिर्फ photo shoot है।" },
+                { en: "Heat wave deaths are policy failures.", hi: "Heat wave deaths policy failures हैं।" },
+                { en: "Concrete cities are cooking citizens.", hi: "Concrete cities citizens को पका रही हैं।" },
+              ].map((line) => (
+                <div key={line.en} className="rounded-[1.75rem] bg-white/10 p-4 text-lg font-black text-white/82">
+                  <BilingualText value={line} mode={mode} hiClassName="text-[11px] leading-4 text-white/35" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
+            <div className="rounded-[3rem] bg-black p-8 text-white md:p-10">
+              <PageEyebrow value={{ en: "Tree Plantation Survival Audit", hi: "वृक्षारोपण survival audit" }} mode={mode} />
+              <p className="mt-8 text-[6rem] font-black leading-none tracking-[-0.1em] text-[#B6FF00] md:text-[9rem]">12</p>
+              <p className="mt-4 text-3xl font-black leading-9 tracking-[-0.05em] text-white md:text-5xl md:leading-[3.4rem]">
+                <BilingualText
+                  value={{ en: "Months of survival tracking after every plantation drive.", hi: "हर plantation drive के बाद survival tracking के महीने।" }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+                />
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {[
+                { en: "Trees planted", hi: "कितने trees planted" },
+                { en: "Tree species", hi: "Tree species" },
+                { en: "Location", hi: "Location" },
+                { en: "Contractor or department", hi: "Contractor या department" },
+                { en: "Cost", hi: "Cost" },
+                { en: "Survival after 6 months", hi: "6 months survival" },
+                { en: "Survival after 1 year", hi: "1 year survival" },
+                { en: "Replacement status", hi: "Replacement status" },
+              ].map((audit, index) => (
+                <article key={audit.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 backdrop-blur-xl">
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Audit Field {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-3xl">
+                    <BilingualText value={audit} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                  </h3>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-12">
+          <PageEyebrow value={{ en: "Final Mission", hi: "अंतिम मिशन" }} mode={mode} />
+          <h2 className="mx-auto mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText
+              value={{
+                en: "Make India work for the honest, the hardworking, and the ordinary.",
+                hi: "भारत को honest, hardworking और ordinary लोगों के लिए काम करने वाला बनाओ।",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+            />
+          </h2>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ActionHubPage({ mode }: { mode: LangMode }) {
+  return (
+    <>
+      <ContactPage mode={mode} />
+      <JantaOathJoinSection mode={mode} />
+      <CitizenReportCategoriesSection mode={mode} />
+      <VolunteerRolesSection mode={mode} />
+    </>
+  );
+}
+
+function JantaOathJoinSection({ mode }: { mode: LangMode }) {
+  const oathLines: I18n[] = [
+    {
+      en: "I will not sell my vote for biryani, bottle, caste drama, fear, fake promises, or last-minute cash.",
+      hi: "मैं अपना vote biryani, bottle, caste drama, डर, fake promises या last-minute cash के लिए नहीं बेचूंगा।",
+    },
+    {
+      en: "I will ask: paisa gaya kahan, job aayi kahan, road bani kahan, tree bacha kahan, leader ka report card kahan?",
+      hi: "मैं पूछूंगा: पैसा गया कहां, job आई कहां, road बनी कहां, tree बचा कहां, leader का report card कहां?",
+    },
+    {
+      en: "I will not spread hate, fake news, personal abuse, or violence. I will spread proof, questions, reports, and accountability.",
+      hi: "मैं hate, fake news, personal abuse या violence नहीं फैलाऊंगा। मैं proof, questions, reports और accountability फैलाऊंगा।",
+    },
+    {
+      en: "I am not an insect. I am a citizen who survived the system. Now I will organize to fix it.",
+      hi: "मैं insect नहीं। मैं citizen हूं जिसने system survive किया। अब मैं इसे fix करने के लिए organize करूंगा।",
+    },
+  ];
+
+  const membershipLevels: { level: string; title: I18n; body: I18n }[] = [
+    { level: "01", title: { en: "Silent Survivor", hi: "Silent Survivor" }, body: { en: "Suffered the system quietly. Now converts pain into public pressure.", hi: "System quietly सहा। अब pain को public pressure बनाता है।" } },
+    { level: "02", title: { en: "Question Poochne Wala", hi: "Question Poochne Wala" }, body: { en: "Asks source kya hai, deadline kya hai, budget kahan hai, zimmedar kaun hai?", hi: "पूछता है source क्या है, deadline क्या है, budget कहां है, जिम्मेदार कौन है?" } },
+    { level: "03", title: { en: "Receipt Collector", hi: "Receipt Collector" }, body: { en: "Wants proof of every rupee, tender, road, plantation, and public promise.", hi: "हर रुपया, tender, road, plantation और public promise का proof चाहता है।" } },
+    { level: "04", title: { en: "Booth Cockroach", hi: "Booth Cockroach" }, body: { en: "Keeps the movement alive in mohalla, campus, office, and ward.", hi: "Mohalla, campus, office और ward में movement alive रखता है।" } },
+    { level: "05", title: { en: "System Ka Auditor", hi: "System Ka Auditor" }, body: { en: "Tracks promises, delays, excuses, corruption, asset growth, and failures.", hi: "Promises, delays, excuses, corruption, asset growth और failures track करता है।" } },
+  ];
+
+  const rules: I18n[] = [
+    { en: "No hate. Only audit.", hi: "Hate नहीं। सिर्फ audit।" },
+    { en: "No fake news. Only proof.", hi: "Fake news नहीं। सिर्फ proof।" },
+    { en: "No VIP worship. Public service only.", hi: "VIP worship नहीं। सिर्फ public service।" },
+    { en: "No excuse accepted without deadline.", hi: "Deadline के बिना कोई excuse accepted नहीं।" },
+    { en: "If leader gets luxury, citizen gets report card.", hi: "Leader को luxury मिले तो citizen को report card मिले।" },
+  ];
+
+  const translations: { official: I18n; janta: I18n }[] = [
+    { official: { en: "Process is ongoing.", hi: "Process चल रहा है।" }, janta: { en: "Nothing happened yet.", hi: "अभी कुछ हुआ नहीं।" } },
+    { official: { en: "Investigation is underway.", hi: "Investigation चल रही है।" }, janta: { en: "Wait till people forget.", hi: "लोग भूलें तब तक wait करो।" } },
+    { official: { en: "Technical issue.", hi: "Technical issue।" }, janta: { en: "System failed again.", hi: "System फिर fail हुआ।" } },
+    { official: { en: "Youth are our future.", hi: "Youth हमारा future हैं।" }, janta: { en: "Exam date still missing.", hi: "Exam date अभी भी missing है।" } },
+  ];
+
+  return (
+    <section id="janta-oath" className="mx-auto max-w-7xl px-6 py-16">
+      <div className="overflow-hidden glass-card rounded-[3.25rem] border border-black/10 shadow-sm transition-all duration-500 ease-out hover:shadow-2xl">
+        <div className="grid md:grid-cols-2">
+          <div className="p-8 md:p-12">
+            <PageEyebrow value={{ en: "Cockroach Janta Oath", hi: "कॉकरोच जंता शपथ" }} mode={mode} />
+            <PageTitle value={{ en: "Take the oath. Then join or report.", hi: "शपथ लें। फिर जुड़ें या रिपोर्ट करें।" }} mode={mode} />
+            <p className="mt-6 text-base font-bold leading-7 text-black/65">
+              <BilingualText
+                value={{
+                  en: "The Join / Report page now includes the oath, membership levels, rules, and excuse translation. One action hub. No separate oath page needed.",
+                  hi: "Join / Report page में अब oath, membership levels, rules और excuse translation सब हैं। एक action hub। अलग oath page की जरूरत नहीं।",
+                }}
+                mode={mode}
+                hiClassName="text-xs leading-4"
+              />
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="premium-toggle premium-toggle-dark inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out">
+                I Took the Oath — Join Now
+              </a>
+              <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="premium-toggle premium-toggle-light inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out">
+                Send Issue After Oath
+              </a>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-center bg-[#fafafa] p-8 md:p-12">
+            <div className="join-oath-card rounded-[2.25rem] border border-black/10 bg-white p-7 shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div className="mb-5 flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-[#B6FF00] shadow-xl">
+                  <CockroachIcon className="h-9 w-9" />
+                </div>
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-black/35">Oath Card</p>
+                  <h3 className="mt-1 text-2xl font-black tracking-[-0.04em] text-black">Janta First. Evidence First.</h3>
+                </div>
+              </div>
+              <div className="grid gap-3">
+                {oathLines.map((line, index) => (
+                  <div key={line.en} className="join-oath-line rounded-[1.65rem] bg-black/[0.035] p-4">
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p><BilingualText value={line} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-black/10 bg-white/55 p-8 md:p-12">
+          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
+            <div className="rounded-[2.5rem] bg-black p-7 text-white shadow-xl">
+              <PageEyebrow value={{ en: "Janta Membership Levels", hi: "Janta Membership Levels" }} mode={mode} />
+              <p className="mt-5 text-4xl font-black leading-[1.02] tracking-[-0.055em] text-white md:text-6xl">From survivor to system auditor.</p>
+              <p className="mt-5 text-sm font-bold leading-6 text-white/58">
+                <BilingualText value={{ en: "Start small. Stay disciplined. Grow the movement.", hi: "छोटा शुरू करें। Disciplined रहें। Movement grow करें।" }} mode={mode} hiClassName="text-xs leading-5 text-white/45" />
+              </p>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {membershipLevels.map((item) => (
+                <article key={item.title.en} className="join-oath-mini-card rounded-[1.65rem] bg-white p-5 shadow-sm">
+                  <p className="text-xs font-black uppercase tracking-[0.16em] text-black/35">Level {item.level}</p>
+                  <h3 className="mt-2 text-xl font-black tracking-[-0.04em] text-black"><BilingualText value={item.title} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h3>
+                  <p className="mt-3 text-sm font-bold leading-6 text-black/62"><BilingualText value={item.body} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="grid border-t border-black/10 md:grid-cols-2">
+          <div className="join-rules-black-box bg-black p-8 text-white md:p-12">
+            <PageEyebrow value={{ en: "Cockroach Janta Rules", hi: "कॉकरोच जंता नियम" }} mode={mode} />
+            <h2 className="join-rules-heading mt-5 font-black tracking-[-0.06em] text-white">
+              <BilingualText
+                value={{ en: "Rules should be simple enough to remember.", hi: "Rules इतने simple हों कि याद रह जाएं।" }}
+                mode={mode}
+                hiClassName="text-xl leading-7 tracking-normal text-white/55 md:text-3xl md:leading-10"
+              />
+            </h2>
+            <div className="join-rules-grid mt-8">
+              {rules.map((rule, index) => (
+                <div key={rule.en} className="join-rules-big-pill">
+                  <span className="join-rules-number">{String(index + 1).padStart(2, "0")}</span>
+                  <p>
+                    <BilingualText value={rule} mode={mode} hiClassName="text-base leading-7 text-white/60 md:text-lg md:leading-8" />
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="p-8 md:p-12">
+            <PageEyebrow value={{ en: "Excuse Translation", hi: "Excuse Translation" }} mode={mode} />
+            <div className="oath-translation-list mt-8">
+              {translations.map((row) => (
+                <article key={row.official.en} className="oath-translation-card">
+                  <div>
+                    <p className="oath-label">Official says</p>
+                    <h4><BilingualText value={row.official} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h4>
+                  </div>
+                  <div>
+                    <p className="oath-label">Janta translation</p>
+                    <h4><BilingualText value={row.janta} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h4>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ContactPage({ mode }: { mode: LangMode }) {
   return (
     <section id="join" className="mx-auto max-w-7xl px-6 py-20">
@@ -2314,6 +3099,234 @@ function ScrollProgressBar({ progress }: { progress: number }) {
         style={{ width: `${progress}%` }}
       />
     </div>
+  );
+}
+
+function FloatingJoinNowButton({ mode, onClick }: { mode: LangMode; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="floating-join-toggle" aria-label="Join the movement">
+      <span className="floating-join-icon">
+        <CockroachIcon className="h-5 w-5" />
+      </span>
+      <span className="floating-join-text">
+        {mode === "hi" ? "जुड़ें / रिपोर्ट" : "Join / Report"}
+      </span>
+    </button>
+  );
+}
+
+function CockroachJantaOathPage({ mode }: { mode: LangMode }) {
+  const oathLines: I18n[] = [
+    {
+      en: "I will not sell my vote for biryani, bottle, caste drama, fear, fake promises, or last-minute cash.",
+      hi: "मैं अपना vote biryani, bottle, caste drama, डर, fake promises या last-minute cash के लिए नहीं बेचूंगा।",
+    },
+    {
+      en: "I will ask: paisa gaya kahan, job aayi kahan, road bani kahan, tree bacha kahan, leader ka report card kahan?",
+      hi: "मैं पूछूंगा: पैसा गया कहां, job आई कहां, road बनी कहां, tree बचा कहां, leader का report card कहां?",
+    },
+    {
+      en: "I will not spread hate, fake news, personal abuse, or violence. I will spread proof, questions, reports, and accountability.",
+      hi: "मैं hate, fake news, personal abuse या violence नहीं फैलाऊंगा। मैं proof, questions, reports और accountability फैलाऊंगा।",
+    },
+    {
+      en: "I will laugh at excuses, save screenshots, collect receipts, and help ordinary citizens become visible.",
+      hi: "मैं excuses पर हंसूंगा, screenshots बचाऊंगा, receipts collect करूंगा और ordinary citizens को visible बनाने में मदद करूंगा।",
+    },
+    {
+      en: "I am not an insect. I am a citizen who survived the system. Now I will organize to fix it.",
+      hi: "मैं insect नहीं। मैं citizen हूं जिसने system survive किया। अब मैं इसे fix करने के लिए organize करूंगा।",
+    },
+  ];
+
+  const membershipLevels: { level: string; title: I18n; body: I18n }[] = [
+    { level: "01", title: { en: "Silent Survivor", hi: "Silent Survivor" }, body: { en: "For people who suffered the system quietly but now want their pain converted into public pressure.", hi: "उन लोगों के लिए जिन्होंने system quietly सहा, लेकिन अब pain को public pressure बनाना चाहते हैं।" } },
+    { level: "02", title: { en: "Question Poochne Wala", hi: "Question Poochne Wala" }, body: { en: "For citizens who ask source kya hai, deadline kya hai, budget kahan hai, aur zimmedar kaun hai?", hi: "उन citizens के लिए जो पूछते हैं source क्या है, deadline क्या है, budget कहां है और जिम्मेदार कौन है?" } },
+    { level: "03", title: { en: "Receipt Collector", hi: "Receipt Collector" }, body: { en: "For taxpayers who want proof of every rupee, every tender, every road, every plantation, and every public promise.", hi: "Taxpayers के लिए जिन्हें हर रुपया, tender, road, plantation और public promise का proof चाहिए।" } },
+    { level: "04", title: { en: "Booth Cockroach", hi: "Booth Cockroach" }, body: { en: "For local citizens who refuse to disappear and keep the movement alive in mohalla, campus, office, and ward.", hi: "Local citizens के लिए जो disappear होने से मना करते हैं और mohalla, campus, office और ward में movement alive रखते हैं।" } },
+    { level: "05", title: { en: "System Ka Auditor", hi: "System Ka Auditor" }, body: { en: "For people who track promises, delays, corruption, excuses, asset growth, and public service failure with discipline.", hi: "उन लोगों के लिए जो promises, delays, corruption, excuses, asset growth और public service failure को discipline से track करते हैं।" } },
+  ];
+
+  const rules: I18n[] = [
+    { en: "No hate. Only audit.", hi: "Hate नहीं। सिर्फ audit।" },
+    { en: "No fake news. Only proof.", hi: "Fake news नहीं। सिर्फ proof।" },
+    { en: "No VIP worship. Public service only.", hi: "VIP worship नहीं। सिर्फ public service।" },
+    { en: "No paper leak sympathy. Student future first.", hi: "Paper leak sympathy नहीं। Student future first।" },
+    { en: "No excuse accepted without deadline.", hi: "Deadline के बिना कोई excuse accepted नहीं।" },
+    { en: "If leader gets luxury, citizen gets report card.", hi: "Leader को luxury मिले तो citizen को report card मिले।" },
+  ];
+
+  const translations: { official: I18n; janta: I18n }[] = [
+    { official: { en: "Process is ongoing.", hi: "Process चल रहा है।" }, janta: { en: "Nothing happened yet.", hi: "अभी कुछ हुआ नहीं।" } },
+    { official: { en: "Investigation is underway.", hi: "Investigation चल रही है।" }, janta: { en: "Wait till people forget.", hi: "लोग भूलें तब तक wait करो।" } },
+    { official: { en: "Technical issue.", hi: "Technical issue।" }, janta: { en: "System failed again.", hi: "System फिर fail हुआ।" } },
+    { official: { en: "Development is coming.", hi: "Development आ रहा है।" }, janta: { en: "Road still broken.", hi: "Road अभी भी broken है।" } },
+    { official: { en: "Youth are our future.", hi: "Youth हमारा future हैं।" }, janta: { en: "Exam date still missing.", hi: "Exam date अभी भी missing है।" } },
+  ];
+
+  const complaints: I18n[] = [
+    { en: "My road has become adventure sports.", hi: "मेरी road adventure sports बन चुकी है।" },
+    { en: "My exam calendar is more mysterious than a thriller series.", hi: "मेरा exam calendar thriller series से ज्यादा mysterious है।" },
+    { en: "My salary is full-time. My workload is unlimited-time.", hi: "Salary full-time है। Workload unlimited-time है।" },
+    { en: "My tax is deducted instantly. My service is pending forever.", hi: "Tax instantly deduct होता है। Service forever pending रहती है।" },
+    { en: "My city has more dust than oxygen.", hi: "मेरे city में oxygen से ज्यादा dust है।" },
+    { en: "My leader’s car changed. My road did not.", hi: "Leader की car बदल गई। मेरी road नहीं।" },
+  ];
+
+  const reportCard: I18n[] = [
+    { en: "Leader attendance", hi: "Leader attendance" },
+    { en: "Public money usage", hi: "Public money usage" },
+    { en: "Promise completion", hi: "Promise completion" },
+    { en: "Local problem solving", hi: "Local problem solving" },
+    { en: "Public transport usage", hi: "Public transport usage" },
+    { en: "Asset growth", hi: "Asset growth" },
+    { en: "Debate participation", hi: "Debate participation" },
+    { en: "Complaint response time", hi: "Complaint response time" },
+  ];
+
+  const wantedExcuses = ["File is moving", "Approval is pending", "Budget is coming", "Committee is formed", "Portal is down", "Data is being collected", "Matter is under review", "Development is in progress"];
+
+  const departments: { icon: string; title: I18n; body: I18n }[] = [
+    { icon: "🎤", title: { en: "Excuse Translation Department", hi: "Excuse Translation Department" }, body: { en: "Turns official excuses into plain citizen language so nobody gets confused by polished delay.", hi: "Official excuses को plain citizen language में बदलता है ताकि polished delay से कोई confuse न हो।" } },
+    { icon: "🧾", title: { en: "Receipt Hunter Squad", hi: "Receipt Hunter Squad" }, body: { en: "Tracks where public money went, who got the contract, why it was delayed, and what citizens actually received.", hi: "Public money कहां गया, contract किसे मिला, delay क्यों हुआ और citizens को क्या मिला — यह track करता है।" } },
+    { icon: "📄", title: { en: "Paper Leak Detective Unit", hi: "Paper Leak Detective Unit" }, body: { en: "Follows exam delays, leaked papers, cancelled recruitments, and youth career damage with evidence.", hi: "Exam delays, leaked papers, cancelled recruitments और youth career damage को evidence के साथ follow करता है।" } },
+    { icon: "🚨", title: { en: "VIP Siren Blocker Team", hi: "VIP Siren Blocker Team" }, body: { en: "Reminds leaders that public roads, public systems, and public money belong to citizens first.", hi: "Leaders को याद दिलाता है कि public roads, public systems और public money पहले citizens की है।" } },
+  ];
+
+  return (
+    <>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
+          <PageEyebrow value={{ en: "Cockroach Janta Oath", hi: "कॉकरोच जंता शपथ" }} mode={mode} />
+          <h1 className="mx-auto mt-6 max-w-6xl text-6xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl lg:text-9xl">
+            <WordRevealText
+              value={{
+                en: "System ignored us. Janta saved the screenshot.",
+                hi: "System ने ignore किया। Janta ने screenshot बचा लिया।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+            />
+          </h1>
+          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "We are not insects. We are citizens who survived the system. Now humour becomes organization and accountability.",
+                hi: "हम insects नहीं। हम citizens हैं जिन्होंने system survive किया। अब humour organization और accountability बनेगा।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45 md:text-base"
+            />
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 md:p-12">
+          <PageEyebrow value={{ en: "The Oath", hi: "शपथ" }} mode={mode} />
+          <div className="mt-8 grid gap-4">
+            {oathLines.map((line, index) => (
+              <div key={line.en} className="oath-line-card">
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p><BilingualText value={line} mode={mode} hiClassName="text-xs leading-4 text-black/45" /></p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-6 lg:grid-cols-5">
+          {membershipLevels.map((item) => (
+            <article key={item.title.en} className="oath-mini-card apple-clean-card">
+              <p className="oath-card-index">Level {item.level}</p>
+              <h3><BilingualText value={item.title} mode={mode} hiClassName="text-xs leading-4 text-black/45" /></h3>
+              <p><BilingualText value={item.body} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <PageEyebrow value={{ en: "Cockroach Janta Rules", hi: "कॉकरोच जंता नियम" }} mode={mode} />
+          <div className="oath-rule-grid mt-8">
+            {rules.map((rule) => (
+              <div key={rule.en} className="oath-rule-pill">
+                <BilingualText value={rule} mode={mode} hiClassName="text-xs leading-5 text-white/55" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 md:p-12">
+          <PageEyebrow value={{ en: "Excuse Translation Department", hi: "Excuse Translation Department" }} mode={mode} />
+          <div className="oath-translation-list mt-8">
+            {translations.map((row) => (
+              <article key={row.official.en} className="oath-translation-card">
+                <div>
+                  <p className="oath-label">Official says</p>
+                  <h4><BilingualText value={row.official} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h4>
+                </div>
+                <div>
+                  <p className="oath-label">Janta translation</p>
+                  <h4><BilingualText value={row.janta} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h4>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 md:p-12">
+            <PageEyebrow value={{ en: "Cockroach Janta Complaints", hi: "Cockroach Janta Complaints" }} mode={mode} />
+            <div className="oath-grid mt-8">
+              {complaints.map((complaint) => (
+                <div key={complaint.en} className="oath-complaint-card">
+                  <BilingualText value={complaint} mode={mode} hiClassName="text-xs leading-5 text-black/55" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+            <PageEyebrow value={{ en: "Most Wanted Excuses", hi: "Most Wanted Excuses" }} mode={mode} />
+            <div className="oath-chip-grid mt-8">
+              {wantedExcuses.map((item) => (
+                <span key={item} className="oath-dark-chip">{item}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 md:p-12">
+          <PageEyebrow value={{ en: "Janta Report Card", hi: "Janta Report Card" }} mode={mode} />
+          <div className="oath-chip-grid mt-8">
+            {reportCard.map((item) => (
+              <span key={item.en} className="oath-chip"><BilingualText value={item} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-6 lg:grid-cols-4">
+          {departments.map((dept) => (
+            <article key={dept.title.en} className="oath-mini-card oath-dept-card apple-clean-card">
+              <div className="oath-dept-icon">{dept.icon}</div>
+              <h3><BilingualText value={dept.title} mode={mode} hiClassName="text-xs leading-4 text-black/45" /></h3>
+              <p><BilingualText value={dept.body} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
@@ -2574,6 +3587,156 @@ function PremiumSlidingStatement({ mode }: { mode: LangMode }) {
   );
 }
 
+function NotMemeMovementSection({ mode }: { mode: LangMode }) {
+  const lines: I18n[] = [
+    { en: "Funny name.", hi: "नाम funny है।" },
+    { en: "Serious mission.", hi: "Mission serious है।" },
+    { en: "Sarcastic voice.", hi: "Voice sarcastic है।" },
+    { en: "Clean politics.", hi: "Politics clean है।" },
+    { en: "Evidence-first movement.", hi: "Movement evidence-first है।" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Not a Meme. A Movement.", hi: "Meme नहीं। Movement." }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "Humour catches attention. Accountability builds the nation.", hi: "Humour attention पकड़ता है। Accountability राष्ट्र बनाती है।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="rounded-[2.75rem] bg-black p-6 text-white shadow-2xl">
+            <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
+              <BilingualText
+                value={{
+                  en: "The cockroach identity is a satire on survival. The mission is serious: public accountability, student-first politics, clean governance, and ordinary citizens becoming visible.",
+                  hi: "Cockroach identity survival पर satire है। Mission serious है: public accountability, student-first politics, clean governance और ordinary citizens को visible बनाना।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {lines.map((line) => (
+            <article key={line.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <p className="text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={line} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HowItWorksSection({ mode }: { mode: LangMode }) {
+  const steps: { title: I18n; body: I18n }[] = [
+    { title: { en: "Citizen reports issue", hi: "Citizen issue report करता है" }, body: { en: "Road, drain, paper leak, corruption, pollution, heat risk, public office problem, or local failure is reported safely.", hi: "Road, drain, paper leak, corruption, pollution, heat risk, public office problem या local failure safely report होता है।" } },
+    { title: { en: "Evidence is checked", hi: "Evidence check होता है" }, body: { en: "Only factual, lawful, safe, and evidence-based reports should move forward. No rumours. No personal abuse.", hi: "सिर्फ factual, lawful, safe और evidence-based reports आगे बढ़ें। Rumours नहीं। Personal abuse नहीं।" } },
+    { title: { en: "Issue becomes public", hi: "Issue public बनता है" }, body: { en: "Verified issues can be added to a public accountability dashboard or civic issue map when the system is ready.", hi: "Verified issues public accountability dashboard या civic issue map में add हो सकते हैं जब system ready होगा।" } },
+    { title: { en: "Authority is tagged", hi: "Authority tag होती है" }, body: { en: "The responsible department, officer, contractor, or representative should be identified and tagged for public response.", hi: "Responsible department, officer, contractor या representative identify और public response के लिए tag किया जाए।" } },
+    { title: { en: "Public pressure is created", hi: "Public pressure बनता है" }, body: { en: "Citizens amplify the issue peacefully with screenshots, documents, location, timelines, and clean language.", hi: "Citizens screenshots, documents, location, timelines और clean language से issue peacefully amplify करते हैं।" } },
+    { title: { en: "Status is tracked", hi: "Status track होता है" }, body: { en: "Reported, verified, forwarded, public audit, and resolved status makes complaints visible instead of forgotten.", hi: "Reported, verified, forwarded, public audit और resolved status complaints को forgotten होने से बचाता है।" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "How It Works", hi: "कैसे काम करेगा" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+              <BilingualText
+                value={{ en: "From complaint to public pressure.", hi: "Complaint से public pressure तक।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="rounded-[2.75rem] bg-white/10 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-white md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "Proposed public accountability model: clean reports, verified evidence, visible status, and peaceful citizen pressure.",
+                  hi: "Proposed public accountability model: clean reports, verified evidence, visible status और peaceful citizen pressure।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 lg:grid-cols-3">
+          {steps.map((step, index) => (
+            <article key={step.title.en} className="how-step-card reveal-card micro-lift rounded-[2.5rem] bg-white p-6 text-black shadow-[0_22px_70px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_95px_rgba(182,255,0,0.16)]">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-[#B6FF00] text-xl font-black text-black shadow-xl">
+                {String(index + 1).padStart(2, "0")}
+              </div>
+              <h3 className="text-2xl font-black leading-[1.05] tracking-[-0.045em] text-black md:text-3xl">
+                <BilingualText value={step.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+              </h3>
+              <p className="mt-4 text-sm font-bold leading-6 text-black/66">
+                <BilingualText value={step.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LegalSafetyBarSection({ mode }: { mode: LangMode }) {
+  const items: I18n[] = [
+    { en: "No hate", hi: "Hate नहीं" },
+    { en: "No violence", hi: "Violence नहीं" },
+    { en: "No fake news", hi: "Fake news नहीं" },
+    { en: "No illegal recording", hi: "Illegal recording नहीं" },
+    { en: "No personal targeting", hi: "Personal targeting नहीं" },
+    { en: "Evidence first", hi: "Evidence first" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-10">
+      <div className="legal-safety-bar apple-borderless rounded-[3.25rem] bg-black p-7 text-white md:p-9">
+        <div className="grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div className="min-w-0">
+            <p className="text-sm font-black uppercase leading-5 tracking-[0.2em] text-[#B6FF00]">Legal & Safety Code</p>
+            <p className="mt-3 max-w-3xl text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[2.9rem]">
+              <BilingualText
+                value={{
+                  en: "Clean movement. Safe reporting. Evidence-first accountability.",
+                  hi: "Clean movement. Safe reporting. Evidence-first accountability।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-6 text-white/55 md:text-base md:leading-7"
+              />
+            </p>
+          </div>
+
+          <div className="legal-safety-chip-grid">
+            {items.map((item) => (
+              <div key={item.en} className="legal-safety-chip">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-5 text-white/55" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -2637,21 +3800,85 @@ function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
 
 function VolunteerRolesSection({ mode }: { mode: LangMode }) {
   const roles: { icon: string; title: I18n; body: I18n; tag: string }[] = [
-    { icon: "🎓", title: { en: "Campus Volunteer", hi: "Campus Volunteer" }, body: { en: "Build student-first discussion circles and collect real education issues.", hi: "Student-first चर्चा समूह बनाएं और वास्तविक शिक्षा मुद्दे collect करें।" }, tag: "Campus" },
-    { icon: "📍", title: { en: "District Issue Reporter", hi: "District Issue Reporter" }, body: { en: "Report local problems with evidence, location, and short facts.", hi: "स्थानीय समस्याएं evidence, location और short facts के साथ report करें।" }, tag: "Ground" },
-    { icon: "📣", title: { en: "Social Media Volunteer", hi: "Social Media Volunteer" }, body: { en: "Turn citizen issues into clean, non-hateful public awareness content.", hi: "Citizen issues को साफ, non-hateful public awareness content में बदलें।" }, tag: "Media" },
-    { icon: "🔎", title: { en: "Research Volunteer", hi: "Research Volunteer" }, body: { en: "Study policies, data, budgets, tenders, exams, and job claims.", hi: "Policies, data, budgets, tenders, exams और job claims का अध्ययन करें।" }, tag: "Research" },
-    { icon: "⚖️", title: { en: "Legal Awareness Volunteer", hi: "Legal Awareness Volunteer" }, body: { en: "Help citizens understand basic rights, complaint formats, and due process.", hi: "Citizens को basic rights, complaint formats और due process समझने में मदद करें।" }, tag: "Rights" },
-    { icon: "💻", title: { en: "Tech Volunteer", hi: "Tech Volunteer" }, body: { en: "Help build dashboards, forms, data systems, websites, and automation.", hi: "Dashboards, forms, data systems, websites और automation बनाने में मदद करें।" }, tag: "Tech" },
-    { icon: "🎬", title: { en: "Video Editor", hi: "Video Editor" }, body: { en: "Make short, fact-based videos on student, worker, and corruption issues.", hi: "Student, worker और corruption issues पर short fact-based videos बनाएं।" }, tag: "Creative" },
-    { icon: "🏙️", title: { en: "Local Problem Reporter", hi: "Local Problem Reporter" }, body: { en: "Send roads, drainage, garbage, hospital, exam, and office problems.", hi: "Roads, drainage, garbage, hospital, exam और office problems भेजें।" }, tag: "Local" },
+    {
+      icon: "🎓",
+      title: { en: "Campus Volunteer", hi: "Campus Volunteer" },
+      body: {
+        en: "Build student-first discussion circles and collect real education issues.",
+        hi: "Student-first चर्चा समूह बनाएं और वास्तविक शिक्षा मुद्दे collect करें।",
+      },
+      tag: "Campus",
+    },
+    {
+      icon: "📍",
+      title: { en: "District Issue Reporter", hi: "District Issue Reporter" },
+      body: {
+        en: "Report local problems with evidence, location, and short facts.",
+        hi: "स्थानीय समस्याएं evidence, location और short facts के साथ report करें।",
+      },
+      tag: "Ground",
+    },
+    {
+      icon: "📣",
+      title: { en: "Social Media Volunteer", hi: "Social Media Volunteer" },
+      body: {
+        en: "Turn citizen issues into clean, non-hateful public awareness content.",
+        hi: "Citizen issues को साफ, non-hateful public awareness content में बदलें।",
+      },
+      tag: "Media",
+    },
+    {
+      icon: "🔎",
+      title: { en: "Research Volunteer", hi: "Research Volunteer" },
+      body: {
+        en: "Study policies, data, budgets, tenders, exams, and job claims.",
+        hi: "Policies, data, budgets, tenders, exams और job claims का अध्ययन करें।",
+      },
+      tag: "Research",
+    },
+    {
+      icon: "⚖️",
+      title: { en: "Legal Awareness Volunteer", hi: "Legal Awareness Volunteer" },
+      body: {
+        en: "Help citizens understand basic rights, complaint formats, and due process.",
+        hi: "Citizens को basic rights, complaint formats और due process समझने में मदद करें।",
+      },
+      tag: "Rights",
+    },
+    {
+      icon: "💻",
+      title: { en: "Tech Volunteer", hi: "Tech Volunteer" },
+      body: {
+        en: "Help build dashboards, forms, data systems, websites, and automation.",
+        hi: "Dashboards, forms, data systems, websites और automation बनाने में मदद करें।",
+      },
+      tag: "Tech",
+    },
+    {
+      icon: "🎬",
+      title: { en: "Video Editor", hi: "Video Editor" },
+      body: {
+        en: "Make short, fact-based videos on student, worker, and corruption issues.",
+        hi: "Student, worker और corruption issues पर short fact-based videos बनाएं।",
+      },
+      tag: "Creative",
+    },
+    {
+      icon: "🛣️",
+      title: { en: "Local Problem Reporter", hi: "Local Problem Reporter" },
+      body: {
+        en: "Send roads, drainage, garbage, hospital, exam, and office problems.",
+        hi: "Roads, drainage, garbage, hospital, exam और office problems भेजें।",
+      },
+      tag: "Local",
+    },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
-          <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
+      <div className="classic-section-card apple-borderless rounded-[3.25rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+          <div className="classic-side-card flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
             <div>
               <PageEyebrow value={{ en: "Volunteer Roles", hi: "Volunteer Roles" }} mode={mode} />
               <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
@@ -2663,19 +3890,23 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
               </h2>
             </div>
 
-            <div className="mt-10 rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
-              <p className="text-[6rem] font-black leading-none tracking-[-0.1em] md:text-[8rem]">08</p>
-              <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Ways to serve</p>
-              <p className="mt-5 text-2xl font-black leading-8 tracking-[-0.04em] text-black md:text-3xl">
-                <BilingualText
-                  value={{
-                    en: "Not just followers. Builders, reporters, researchers, creators, and problem solvers.",
-                    hi: "सिर्फ followers नहीं। Builders, reporters, researchers, creators और problem solvers।",
-                  }}
-                  mode={mode}
-                  hiClassName="text-sm leading-5 text-black/55"
-                />
-              </p>
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+              <div className="rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
+                <p className="text-[7rem] font-black leading-none tracking-[-0.1em] md:text-[9rem]">08</p>
+                <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Ways to serve</p>
+              </div>
+              <div className="rounded-[2.5rem] bg-white/10 p-6 backdrop-blur-xl">
+                <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
+                  <BilingualText
+                    value={{
+                      en: "Not just followers. Builders, reporters, researchers, creators, and problem solvers.",
+                      hi: "सिर्फ followers नहीं। Builders, reporters, researchers, creators और problem solvers।",
+                    }}
+                    mode={mode}
+                    hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+                  />
+                </p>
+              </div>
             </div>
           </div>
 
@@ -2818,16 +4049,241 @@ function ReportFormatSection({ mode }: { mode: LangMode }) {
   );
 }
 
+function CitizenReportCategoriesSection({ mode }: { mode: LangMode }) {
+  const categories: { icon: string; title: I18n }[] = [
+    { icon: "🛡️", title: { en: "Corruption", hi: "भ्रष्टाचार" } },
+    { icon: "📝", title: { en: "Paper Leak", hi: "पेपर लीक" } },
+    { icon: "⏱️", title: { en: "Unpaid Overtime", hi: "बिना भुगतान ओवरटाइम" } },
+    { icon: "🛣️", title: { en: "Bad Road", hi: "खराब सड़क" } },
+    { icon: "🗑️", title: { en: "Garbage", hi: "कचरा" } },
+    { icon: "💧", title: { en: "Water Problem", hi: "पानी की समस्या" } },
+    { icon: "🌫️", title: { en: "Pollution", hi: "प्रदूषण" } },
+    { icon: "🌳", title: { en: "Tree Cutting", hi: "पेड़ कटाई" } },
+    { icon: "🏢", title: { en: "Office Harassment", hi: "ऑफिस उत्पीड़न" } },
+    { icon: "🏥", title: { en: "Hospital Problem", hi: "अस्पताल समस्या" } },
+    { icon: "🎓", title: { en: "School / College Issue", hi: "स्कूल / कॉलेज समस्या" } },
+    { icon: "🔥", title: { en: "Heat Risk", hi: "गर्मी जोखिम" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Citizen Report Categories", hi: "नागरिक रिपोर्ट श्रेणियां" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.88] tracking-[-0.075em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "If it hurts citizens, it can be reported.", hi: "अगर यह नागरिकों को नुकसान पहुंचाता है, तो इसे report किया जा सकता है।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "Reports should be factual, lawful, safe, and evidence-based. No fake claims. No personal abuse. No hate.",
+                  hi: "Reports factual, lawful, safe और evidence-based होनी चाहिए। Fake claims नहीं। Personal abuse नहीं। Hate नहीं।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {categories.map((category, index) => (
+            <article key={category.title.en} className="category-report-card reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-5 text-center backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div className="category-report-icon mx-auto flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-2xl text-white shadow-xl">
+                {category.icon}
+              </div>
+              <p className="category-report-meta mt-4 font-black uppercase text-black/35">Report {String(index + 1).padStart(2, "0")}</p>
+              <p className="category-report-title mt-2 font-black text-black">
+                <BilingualText value={category.title} mode={mode} hiClassName="text-xs leading-4 tracking-normal text-black/55" />
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PublicIssueMapSection({ mode }: { mode: LangMode }) {
+  const issues: { icon: string; title: I18n }[] = [
+    { icon: "🛣️", title: { en: "Road broken", hi: "सड़क टूटी" } },
+    { icon: "🚧", title: { en: "Drain blocked", hi: "नाली बंद" } },
+    { icon: "📝", title: { en: "Paper leaked", hi: "पेपर लीक" } },
+    { icon: "🏥", title: { en: "Hospital failed", hi: "अस्पताल विफल" } },
+    { icon: "🧾", title: { en: "Corruption reported", hi: "भ्रष्टाचार रिपोर्ट" } },
+    { icon: "🌳", title: { en: "Tree plantation failed", hi: "पेड़ survival failed" } },
+  ];
+
+  const statuses: { value: I18n; label: I18n }[] = [
+    { value: { en: "Reported", hi: "Reported" }, label: { en: "Citizen sends issue", hi: "Citizen issue भेजता है" } },
+    { value: { en: "Verified", hi: "Verified" }, label: { en: "Evidence checked", hi: "Evidence check" } },
+    { value: { en: "Forwarded", hi: "Forwarded" }, label: { en: "Sent to authority", hi: "Authority को भेजा" } },
+    { value: { en: "Public Audit", hi: "Public Audit" }, label: { en: "Tracked publicly", hi: "Publicly track" } },
+    { value: { en: "Resolved", hi: "Resolved" }, label: { en: "Closure proof", hi: "Closure proof" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch">
+          <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
+            <div>
+              <div className="mb-4 flex flex-wrap items-center gap-3">
+                <p className="text-base font-black uppercase tracking-[0.22em] text-[#B6FF00]">
+                  <BilingualText value={{ en: "India Public Issue Map", hi: "भारत Public Issue Map" }} mode={mode} hiClassName="text-xs leading-4 tracking-normal text-white/70" />
+                </p>
+                <span className="rounded-full bg-[#B6FF00] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black">Coming Soon</span>
+                <span className="rounded-full bg-white/14 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white/82">Public Beta</span>
+              </div>
+              <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
+                <BilingualText
+                  value={{ en: "Every local problem should become visible.", hi: "हर local problem visible होनी चाहिए।" }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+                />
+              </h2>
+            </div>
+            <div className="mt-10 rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
+              <p className="text-[5rem] font-black leading-none tracking-[-0.1em] md:text-[8rem]">MAP</p>
+              <p className="mt-4 text-2xl font-black leading-8 tracking-[-0.04em] text-black md:text-3xl">
+                <BilingualText
+                  value={{ en: "A proposed civic dashboard for public pressure, not a complaint black hole.", hi: "Public pressure के लिए proposed civic dashboard, complaint black hole नहीं।" }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-black/55"
+                />
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            <div className="grid gap-3 md:grid-cols-2">
+              {issues.map((issue) => (
+                <div key={issue.title.en} className="public-map-issue-card rounded-[2rem] bg-white/12 p-5 text-xl font-black tracking-[-0.04em] text-white backdrop-blur-xl">
+                  <span className="public-map-issue-icon" aria-hidden="true">{issue.icon}</span>
+                  <span className="public-map-issue-title">
+                    <BilingualText value={issue.title} mode={mode} hiClassName="text-xs leading-5 text-white/72" />
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            <div className="status-system-panel rounded-[2.75rem] bg-white p-5 text-black shadow-[0_22px_70px_rgba(0,0,0,0.18)] md:p-6">
+              <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.2em] text-black/35">Report Status System</p>
+                  <p className="mt-2 text-xl font-black leading-6 tracking-[-0.035em] text-black md:text-2xl">
+                    From report to closure proof.
+                  </p>
+                </div>
+                <span className="rounded-full bg-black px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#B6FF00]">5 Steps</span>
+              </div>
+
+              <div className="status-system-flow">
+                {statuses.map((status, index) => (
+                  <div key={status.value.en} className="status-step-card rounded-[1.65rem] bg-black p-4 text-white">
+                    <div className="status-step-number">{String(index + 1).padStart(2, "0")}</div>
+                    <div className="status-step-copy">
+                      <p className="status-step-title font-black tracking-[-0.025em] text-white">
+                        <BilingualText value={status.value} mode={mode} hiClassName="text-xs leading-5 text-white/55" />
+                      </p>
+                      <p className="status-step-label mt-1 font-bold text-white/70">
+                        <BilingualText value={status.label} mode={mode} hiClassName="text-xs leading-5 text-white/55" />
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CandidateStandardSection({ mode }: { mode: LangMode }) {
+  const standards: { icon: string; title: I18n; body: I18n }[] = [
+    { icon: "🧾", title: { en: "Public Asset Disclosure", hi: "Public asset disclosure" }, body: { en: "Candidates must publish assets, liabilities, income sources, and conflict-of-interest details.", hi: "Candidates assets, liabilities, income sources और conflict-of-interest details publish करें।" } },
+    { icon: "⚖️", title: { en: "Clean Background Screening", hi: "Clean background screening" }, body: { en: "No serious criminal background and no hate politics history.", hi: "Serious criminal background और hate politics history नहीं।" } },
+    { icon: "📍", title: { en: "Local Problem Knowledge", hi: "Local problem knowledge" }, body: { en: "Every candidate must know ward, district, student, worker, farmer, and local business problems.", hi: "हर candidate ward, district, student, worker, farmer और local business problems जाने।" } },
+    { icon: "📊", title: { en: "Performance Report", hi: "Performance report" }, body: { en: "Elected representatives must publish yearly performance and public money usage reports.", hi: "Elected representatives yearly performance और public money usage reports publish करें।" } },
+    { icon: "🎤", title: { en: "Public Debate Mandatory", hi: "Public debate mandatory" }, body: { en: "Candidates must face public questions before asking for public votes.", hi: "Public votes मांगने से पहले candidates public questions face करें।" } },
+    { icon: "🚫", title: { en: "No Dynasty Shortcut", hi: "No dynasty shortcut" }, body: { en: "Ticket should be based on competence, public trust, and service record, not family power.", hi: "Ticket competence, public trust और service record पर हो, family power पर नहीं।" } },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Candidate Standard", hi: "उम्मीदवार मानक" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.88] tracking-[-0.075em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "Public power needs public standards.", hi: "Public power को public standards चाहिए।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="rounded-[2.75rem] bg-black p-6 text-white shadow-2xl">
+            <p className="text-2xl font-black leading-8 tracking-[-0.04em] text-white md:text-4xl md:leading-[3rem]">
+              <BilingualText
+                value={{ en: "A ticket should not be inherited. It should be earned through service, honesty, competence, and local accountability.", hi: "Ticket विरासत में नहीं मिलना चाहिए। Ticket service, honesty, competence और local accountability से earn होना चाहिए।" }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-white/35 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {standards.map((standard, index) => (
+            <article key={standard.title.en} className="reveal-card micro-lift apple-clean-card rounded-[2.75rem] bg-white/76 p-6 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div className="flex items-start gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.55rem] bg-black text-3xl text-white shadow-2xl">
+                  {standard.icon}
+                </div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Standard {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-0.055em] text-black md:text-3xl">
+                    <BilingualText value={standard.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                  </h3>
+                </div>
+              </div>
+              <p className="mt-5 text-sm font-bold leading-6 text-black/66">
+                <BilingualText value={standard.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PublicAccountabilitySection({ mode }: { mode: LangMode }) {
   const auditIcons = ["⛽", "📝", "💼", "🧑‍💻", "🎓"];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+      <div className="public-audits-section apple-borderless overflow-hidden rounded-[3.75rem] bg-black p-8 text-white md:p-12">
         <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-          <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
+          <div className="public-audits-left flex flex-col justify-between rounded-[3rem] bg-white/12 p-7 backdrop-blur-xl md:p-9">
             <div>
-              <PageEyebrow value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }} mode={mode} />
+              <p className="public-audit-eyebrow text-base font-black uppercase tracking-[0.22em] text-[#B6FF00]">
+                <BilingualText
+                  value={{ en: "Top 5 Public Accountability Audits", hi: "शीर्ष 5 सार्वजनिक जवाबदेही जांच" }}
+                  mode={mode}
+                  hiClassName="text-xs leading-4 tracking-normal text-white/78"
+                />
+              </p>
               <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
                 <BilingualText
                   value={{
@@ -3038,6 +4494,7 @@ export default function CockroachIndiaParty() {
   }, []);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) return;
     const cards = Array.from(document.querySelectorAll<HTMLElement>(".micro-lift"));
 
     const handleMove = (event: MouseEvent) => {
@@ -3088,9 +4545,9 @@ export default function CockroachIndiaParty() {
   };
 
   const scrollToJoin = () => {
-    setActivePage("home");
+    setActivePage("contact");
     setTimeout(() => {
-      document.getElementById("join")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("join")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
   };
 
@@ -3949,7 +5406,7 @@ export default function CockroachIndiaParty() {
           .artwork-sparkles circle { animation: none; }
         }
         section, nav, footer, .page-layer { position: relative; z-index: 1; }
-        section { animation: softScale 0.55s ease-out both; }
+        section { animation: softScale 0.45s ease-out both; content-visibility: auto; contain-intrinsic-size: 900px; }
         .reveal-card { animation: fadeUp 0.7s ease-out both; }
         button, select, input, textarea, a {
           transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background-color 220ms ease;
@@ -3958,262 +5415,8 @@ export default function CockroachIndiaParty() {
         .magnetic-btn:hover { transform: translateY(-3px) scale(1.025); }
         .sticker-chip:hover { transform: translateY(-2px) scale(1.015); }
 
-        /* FINAL RESPONSIVE READABILITY FIX */
-        *, *::before, *::after {
-          box-sizing: border-box;
-        }
 
-        html,
-        body {
-          width: 100%;
-          max-width: 100%;
-          overflow-x: hidden;
-        }
-
-        main {
-          overflow-x: hidden;
-        }
-
-        section,
-        nav,
-        footer {
-          width: 100%;
-        }
-
-        section.mx-auto,
-        nav .mx-auto,
-        footer .mx-auto,
-        .mx-auto.max-w-7xl {
-          max-width: min(1840px, calc(100vw - 32px)) !important;
-        }
-
-        .max-w-6xl {
-          max-width: min(100%, 1420px) !important;
-        }
-        .max-w-5xl {
-          max-width: min(100%, 1280px) !important;
-        }
-        .max-w-4xl {
-          max-width: min(100%, 1120px) !important;
-        }
-        .max-w-3xl,
-        .max-w-2xl {
-          max-width: min(100%, 920px) !important;
-        }
-
-        h1,
-        h2,
-        h3,
-        p,
-        span,
-        button,
-        a,
-        li {
-          overflow-wrap: anywhere;
-          word-break: normal;
-        }
-
-        h1,
-        h2,
-        h3 {
-          text-transform: none !important;
-        }
-
-        h1 {
-          font-size: clamp(4rem, 8.2vw, 10.4rem) !important;
-          line-height: 0.88 !important;
-          letter-spacing: -0.078em !important;
-          font-weight: 800 !important;
-        }
-
-        h2 {
-          font-size: clamp(3rem, 6.4vw, 8.1rem) !important;
-          line-height: 0.9 !important;
-          letter-spacing: -0.07em !important;
-          font-weight: 800 !important;
-        }
-
-        h3 {
-          font-size: clamp(1.55rem, 2.7vw, 3rem) !important;
-          line-height: 1.02 !important;
-          letter-spacing: -0.052em !important;
-          font-weight: 800 !important;
-        }
-
-        p,
-        li {
-          font-weight: 650 !important;
-          line-height: 1.45 !important;
-        }
-
-        .text-xl,
-        .text-2xl,
-        .text-3xl,
-        .text-4xl,
-        .text-5xl,
-        .text-6xl,
-        .text-7xl,
-        .text-8xl,
-        .text-9xl {
-          line-height: 1.12 !important;
-        }
-
-        .apple-borderless,
-        .apple-gradient-bg,
-        .glass-card,
-        .apple-clean-card,
-        .clay-card {
-          border-radius: clamp(1.6rem, 3vw, 2.75rem) !important;
-        }
-
-        section[class*="py-24"],
-        section[class*="py-20"],
-        section[class*="py-16"] {
-          padding-top: clamp(3rem, 5.2vw, 6.5rem) !important;
-          padding-bottom: clamp(3rem, 5.2vw, 6.5rem) !important;
-        }
-
-        .apple-gradient-bg,
-        .glass-card,
-        .apple-borderless,
-        .apple-clean-card {
-          box-shadow: 0 24px 80px rgba(0,0,0,0.075) !important;
-        }
-
-        @media (min-width: 1025px) {
-          .apple-gradient-bg,
-          .apple-borderless,
-          .glass-card,
-          .apple-clean-card,
-          .clay-card {
-            padding: clamp(2.75rem, 4.2vw, 5.75rem) !important;
-          }
-        }
-
-        .word-reveal-word {
-          white-space: normal;
-        }
-
-        .eligibility-pill {
-          font-size: 13px !important;
-          padding: 9px 15px !important;
-          font-weight: 800 !important;
-        }
-
-        @media (min-width: 1200px) {
-          section.mx-auto,
-          nav .mx-auto,
-          footer .mx-auto,
-          .mx-auto.max-w-7xl {
-            max-width: min(1880px, calc(100vw - 48px)) !important;
-          }
-
-          .grid.lg\:grid-cols-5 {
-            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          h1 {
-            font-size: clamp(3rem, 10vw, 6.1rem) !important;
-          }
-
-          h2 {
-            font-size: clamp(2.35rem, 8.2vw, 4.8rem) !important;
-          }
-
-          .grid,
-          [class*="grid-cols-"] {
-            min-width: 0;
-          }
-        }
-
-        @media (max-width: 768px) {
-          section.mx-auto,
-          nav .mx-auto,
-          footer .mx-auto,
-          .mx-auto.max-w-7xl {
-            max-width: calc(100vw - 20px) !important;
-            padding-left: 10px !important;
-            padding-right: 10px !important;
-          }
-
-          section[class*="py-24"],
-          section[class*="py-20"],
-          section[class*="py-16"],
-          section[class*="py-12"],
-          section[class*="py-10"] {
-            padding-top: 2.2rem !important;
-            padding-bottom: 2.2rem !important;
-          }
-
-          h1 {
-            font-size: clamp(2.45rem, 12vw, 4rem) !important;
-            line-height: 0.94 !important;
-            letter-spacing: -0.06em !important;
-          }
-
-          h2 {
-            font-size: clamp(2rem, 9.6vw, 3.3rem) !important;
-            line-height: 0.98 !important;
-            letter-spacing: -0.052em !important;
-          }
-
-          h3 {
-            font-size: clamp(1.28rem, 6vw, 1.9rem) !important;
-            line-height: 1.06 !important;
-          }
-
-          p,
-          li {
-            font-size: 0.94rem !important;
-            line-height: 1.62 !important;
-          }
-
-          .apple-gradient-bg,
-          .glass-card,
-          .apple-borderless,
-          .apple-clean-card,
-          .clay-card {
-            border-radius: 1.6rem !important;
-            padding: 1.25rem !important;
-          }
-
-          .rounded-\[3\.75rem\],
-          .rounded-\[3\.25rem\],
-          .rounded-\[3rem\],
-          .rounded-\[2\.75rem\],
-          .rounded-\[2\.5rem\],
-          .rounded-\[2\.25rem\] {
-            border-radius: 1.6rem !important;
-          }
-
-          .eligibility-marquee {
-            margin-top: 1.5rem !important;
-            padding-top: 0.55rem !important;
-            padding-bottom: 0.55rem !important;
-          }
-
-          .eligibility-marquee-track {
-            animation-duration: 58s !important;
-          }
-
-          .eligibility-pill {
-            font-size: 11px !important;
-            padding: 8px 12px !important;
-          }
-
-          .page-transition {
-            animation-duration: 0.28s !important;
-          }
-
-          @supports (animation-timeline: view()) {
-            section {
-              animation: none !important;
-            }
-          }
-        }
-      .premium-loader {
+        .premium-loader {
           position: fixed;
           inset: 0;
           z-index: 999;
@@ -4254,6 +5457,416 @@ export default function CockroachIndiaParty() {
           font-size: 1rem;
           font-weight: 900 !important;
           color: rgba(0,0,0,0.55);
+        }
+        .floating-join-toggle {
+          position: fixed;
+          right: 18px;
+          bottom: 22px;
+          z-index: 92;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.6rem;
+          border-radius: 9999px;
+          border: 1px solid rgba(182,255,0,0.35);
+          background: #071107;
+          color: #B6FF00;
+          padding: 0.7rem 1rem 0.7rem 0.75rem;
+          font-size: 0.82rem;
+          font-weight: 1000;
+          letter-spacing: -0.02em;
+          box-shadow: 0 18px 52px rgba(0,0,0,0.22), 0 0 34px rgba(182,255,0,0.18);
+          transform: translateZ(0);
+          transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease, color 220ms ease;
+        }
+        .floating-join-toggle:hover {
+          transform: translateY(-3px) scale(1.035);
+          background: linear-gradient(135deg, #071107 0%, #12320f 55%, #B6FF00 160%);
+          box-shadow: 0 24px 70px rgba(0,0,0,0.26), 0 0 44px rgba(182,255,0,0.32);
+        }
+        .floating-join-toggle:active {
+          transform: translateY(0) scale(0.98);
+        }
+        .floating-join-icon {
+          display: inline-flex;
+          height: 2rem;
+          width: 2rem;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: #B6FF00;
+          color: #071107;
+          box-shadow: 0 0 0 6px rgba(182,255,0,0.14);
+        }
+        .floating-join-text {
+          white-space: nowrap;
+        }
+        .oath-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 120;
+          pointer-events: none;
+          opacity: 0;
+          background: rgba(245,245,247,0.72);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          transition: opacity 260ms ease;
+        }
+        .oath-overlay-open {
+          pointer-events: auto;
+          opacity: 1;
+        }
+        .oath-panel {
+          position: absolute;
+          inset: 18px;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          border-radius: 2.75rem;
+          background: #f5f5f7;
+          box-shadow: 0 40px 120px rgba(0,0,0,0.22);
+          transform: translateY(18px) scale(0.985);
+          transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .oath-overlay-open .oath-panel { transform: translateY(0) scale(1); }
+        .oath-panel-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+          background: rgba(255,255,255,0.86);
+          padding: 1.1rem 1.35rem;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
+        .oath-kicker {
+          font-size: 0.72rem !important;
+          font-weight: 1000 !important;
+          line-height: 1.1 !important;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: rgba(7,17,7,0.46);
+        }
+        .oath-title {
+          margin-top: 0.2rem;
+          font-size: clamp(1.7rem, 4vw, 3.6rem) !important;
+          line-height: 0.95 !important;
+          letter-spacing: -0.06em !important;
+          color: #071107;
+        }
+        .oath-close {
+          border-radius: 9999px;
+          background: #071107;
+          color: #B6FF00;
+          padding: 0.8rem 1.05rem;
+          font-size: 0.8rem;
+          font-weight: 1000;
+        }
+        .oath-scroll {
+          overflow-y: auto;
+          padding: 1.2rem;
+        }
+        .oath-hero-card,
+        .oath-block {
+          margin: 0 auto 1.1rem;
+          max-width: 1280px;
+          border-radius: 2rem;
+          background: rgba(255,255,255,0.78);
+          padding: 1.25rem;
+          box-shadow: 0 18px 54px rgba(0,0,0,0.07);
+        }
+        .oath-hero-card {
+          background: linear-gradient(135deg, #071107 0%, #12320f 52%, #B6FF00 145%);
+          color: white;
+        }
+        .oath-big-line {
+          max-width: 980px;
+          font-size: clamp(2rem, 5vw, 5.8rem) !important;
+          font-weight: 1000 !important;
+          line-height: 0.95 !important;
+          letter-spacing: -0.07em !important;
+          color: #ffffff;
+        }
+        .oath-sub-line {
+          margin-top: 1rem;
+          max-width: 720px;
+          font-size: clamp(1rem, 2vw, 1.4rem) !important;
+          font-weight: 900 !important;
+          color: rgba(255,255,255,0.68);
+        }
+        .oath-block h3 {
+          margin-bottom: 1rem;
+          font-size: clamp(1.55rem, 3.2vw, 3.2rem) !important;
+          line-height: 1.02 !important;
+          letter-spacing: -0.055em !important;
+        }
+        .oath-paper {
+          background: linear-gradient(135deg, #ffffff 0%, #efffe7 54%, #ffffff 100%);
+        }
+        .oath-black-block {
+          background: #071107;
+          color: white;
+        }
+        .oath-black-block h3 { color: white; }
+        .oath-lines,
+        .oath-translation-list {
+          display: grid;
+          gap: 0.75rem;
+        }
+        .oath-line-card,
+        .oath-translation-card {
+          display: grid;
+          gap: 0.85rem;
+          border-radius: 1.45rem;
+          background: rgba(255,255,255,0.72);
+          padding: 1rem;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045);
+        }
+        .oath-line-card { grid-template-columns: 3rem 1fr; align-items: start; }
+        .oath-line-card span {
+          display: inline-flex;
+          height: 2.35rem;
+          width: 2.35rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: #071107;
+          color: #B6FF00;
+          font-size: 0.8rem;
+          font-weight: 1000;
+        }
+        .oath-line-card p,
+        .oath-mini-card p,
+        .oath-complaint-card,
+        .oath-translation-card p {
+          font-size: 0.92rem !important;
+          font-weight: 750 !important;
+          line-height: 1.45 !important;
+          color: rgba(7,17,7,0.68);
+        }
+        .oath-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0.85rem;
+        }
+        .oath-grid-five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+        .oath-grid-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .oath-mini-card,
+        .oath-complaint-card {
+          border-radius: 1.55rem;
+          background: rgba(255,255,255,0.76);
+          padding: 1rem;
+          box-shadow: 0 12px 34px rgba(0,0,0,0.055);
+        }
+        .oath-card-index,
+        .oath-label {
+          margin-bottom: 0.45rem;
+          font-size: 0.65rem !important;
+          font-weight: 1000 !important;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(7,17,7,0.38) !important;
+        }
+        .oath-mini-card h4,
+        .oath-translation-card h4 {
+          margin: 0.2rem 0 0.45rem;
+          font-size: 1.1rem !important;
+          font-weight: 1000 !important;
+          line-height: 1.1 !important;
+          letter-spacing: -0.035em;
+          color: #071107;
+        }
+        .oath-rule-grid,
+        .oath-chip-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.65rem;
+        }
+        .oath-rule-pill,
+        .oath-chip,
+        .oath-dark-chip {
+          border-radius: 9999px;
+          padding: 0.78rem 1rem;
+          font-size: 0.82rem !important;
+          font-weight: 1000 !important;
+          line-height: 1.1 !important;
+        }
+        .oath-rule-pill,
+        .oath-dark-chip {
+          background: rgba(255,255,255,0.10);
+          color: #B6FF00;
+          border: 1px solid rgba(182,255,0,0.18);
+        }
+        .oath-chip {
+          background: #071107;
+          color: #B6FF00;
+        }
+        .oath-translation-card {
+          grid-template-columns: 1fr 1fr;
+          background: rgba(255,255,255,0.82);
+        }
+        .oath-dept-icon {
+          display: flex;
+          height: 3rem;
+          width: 3rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 1rem;
+          background: #071107;
+          color: #B6FF00;
+          font-size: 1.4rem;
+          margin-bottom: 0.8rem;
+        }
+        .join-oath-card {
+          overflow: visible !important;
+        }
+        .join-oath-line {
+          display: grid;
+          grid-template-columns: 2.6rem minmax(0, 1fr);
+          align-items: flex-start;
+          gap: 0.95rem;
+          min-height: auto;
+          overflow: visible !important;
+        }
+        .join-oath-line > span:first-child {
+          display: inline-flex;
+          height: 2.15rem;
+          width: 2.15rem;
+          min-width: 2.15rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: #071107;
+          color: #B6FF00;
+          font-size: 0.72rem;
+          font-weight: 1000;
+          line-height: 1 !important;
+        }
+        .join-oath-line p {
+          min-width: 0;
+          margin: 0;
+          font-size: clamp(0.88rem, 1vw, 1rem) !important;
+          font-weight: 780 !important;
+          line-height: 1.58 !important;
+          letter-spacing: -0.012em !important;
+          color: rgba(7,17,7,0.70);
+          overflow-wrap: anywhere !important;
+          word-break: normal !important;
+        }
+        .join-oath-line .bilingual-stack {
+          gap: 0.42rem;
+        }
+        .join-oath-line .bilingual-hi {
+          font-size: clamp(0.8rem, 0.95vw, 0.94rem) !important;
+          line-height: 1.65 !important;
+          color: rgba(7,17,7,0.58) !important;
+        }
+        .join-oath-mini-card {
+          min-height: 150px;
+          overflow: visible !important;
+        }
+        .join-rules-black-box {
+          overflow: hidden;
+          border-radius: 3.25rem !important;
+          background:
+            radial-gradient(circle at 15% 8%, rgba(182,255,0,0.16), transparent 34%),
+            radial-gradient(circle at 88% 92%, rgba(182,255,0,0.10), transparent 38%),
+            #071107 !important;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 28px 90px rgba(0,0,0,0.20);
+        }
+        .join-rules-heading {
+          font-size: clamp(2.35rem, 4.8vw, 5.7rem) !important;
+          line-height: 1.02 !important;
+          letter-spacing: -0.06em !important;
+          max-width: 720px;
+        }
+        .join-rules-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        .join-rules-big-pill {
+          display: grid;
+          grid-template-columns: 3.8rem minmax(0, 1fr);
+          align-items: center;
+          gap: 1rem;
+          min-height: 104px;
+          border-radius: 2.25rem;
+          border: 1px solid rgba(182,255,0,0.18);
+          background: rgba(255,255,255,0.10);
+          padding: 1.1rem 1.25rem;
+          color: #ffffff;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 16px 46px rgba(0,0,0,0.18);
+          transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), background 240ms ease, box-shadow 240ms ease;
+        }
+        .join-rules-big-pill:hover {
+          transform: translateY(-3px);
+          background: rgba(182,255,0,0.13);
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 22px 60px rgba(182,255,0,0.12);
+        }
+        .join-rules-number {
+          display: inline-flex;
+          height: 3.35rem;
+          width: 3.35rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 1.25rem;
+          background: #B6FF00;
+          color: #071107;
+          font-size: 1rem;
+          font-weight: 1000;
+          line-height: 1;
+          box-shadow: 0 12px 34px rgba(182,255,0,0.22);
+        }
+        .join-rules-big-pill p {
+          margin: 0;
+          font-size: clamp(1.35rem, 2.15vw, 2.25rem) !important;
+          font-weight: 1000 !important;
+          line-height: 1.12 !important;
+          letter-spacing: -0.045em !important;
+          color: #ffffff !important;
+        }
+        .join-rules-big-pill .bilingual-stack {
+          gap: 0.35rem;
+        }
+        .join-rules-big-pill .bilingual-hi {
+          font-size: clamp(1rem, 1.35vw, 1.35rem) !important;
+          line-height: 1.45 !important;
+          color: rgba(255,255,255,0.62) !important;
+          letter-spacing: 0 !important;
+        }
+        @media (max-width: 768px) {
+          .join-rules-black-box {
+            border-radius: 1.8rem !important;
+            padding: 1.25rem !important;
+          }
+          .join-rules-heading {
+            font-size: clamp(1.85rem, 8.2vw, 2.65rem) !important;
+            line-height: 1.08 !important;
+          }
+          .join-rules-big-pill {
+            grid-template-columns: 2.8rem minmax(0, 1fr);
+            min-height: 86px;
+            gap: 0.75rem;
+            border-radius: 1.55rem;
+            padding: 0.95rem;
+          }
+          .join-rules-number {
+            height: 2.5rem;
+            width: 2.5rem;
+            border-radius: 0.9rem;
+            font-size: 0.82rem;
+          }
+          .join-rules-big-pill p {
+            font-size: 1.12rem !important;
+            line-height: 1.22 !important;
+            letter-spacing: -0.03em !important;
+          }
+          .join-rules-big-pill .bilingual-hi {
+            font-size: 0.86rem !important;
+            line-height: 1.55 !important;
+          }
         }
         .mobile-menu-hint {
           display: none;
@@ -4370,11 +5983,59 @@ export default function CockroachIndiaParty() {
         }
         @media (max-width: 768px) {
           .running-cockroach { display: none !important; }
+          .floating-join-toggle {
+            right: 12px;
+            bottom: 14px;
+            padding: 0.62rem 0.86rem 0.62rem 0.64rem;
+            font-size: 0.76rem;
+          }
+          .floating-join-icon {
+            height: 1.8rem;
+            width: 1.8rem;
+          }
+          .floating-oath-toggle {
+            left: 12px;
+            bottom: 14px;
+            padding: 0.62rem 0.78rem 0.62rem 0.64rem;
+            font-size: 0.72rem;
+          }
+          .floating-oath-icon {
+            height: 1.8rem;
+            width: 1.8rem;
+          }
+          .oath-panel {
+            inset: 10px;
+            border-radius: 1.5rem;
+          }
+          .oath-panel-head {
+            padding: 0.9rem;
+          }
+          .oath-scroll {
+            padding: 0.75rem;
+          }
+          .oath-hero-card,
+          .oath-block {
+            border-radius: 1.4rem;
+            padding: 1rem;
+          }
+          .oath-big-line {
+            font-size: clamp(1.8rem, 10vw, 3.2rem) !important;
+            line-height: 1.02 !important;
+          }
+          .oath-line-card,
+          .oath-translation-card {
+            grid-template-columns: 1fr;
+          }
+          .oath-grid,
+          .oath-grid-five,
+          .oath-grid-four {
+            grid-template-columns: 1fr;
+          }
           .mobile-menu-hint {
             display: inline-flex;
             position: fixed;
             right: 14px;
-            bottom: 14px;
+            bottom: 72px;
             z-index: 94;
             border-radius: 9999px;
             background: #071107;
@@ -4383,6 +6044,311 @@ export default function CockroachIndiaParty() {
             font-size: 13px;
             font-weight: 1000;
             box-shadow: 0 16px 44px rgba(0,0,0,0.18);
+          }
+        }
+        .category-report-card {
+          min-height: 170px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          overflow: visible;
+        }
+        .category-report-icon {
+          flex: 0 0 auto;
+        }
+        .category-report-meta {
+          font-size: 0.68rem !important;
+          line-height: 1.25 !important;
+          letter-spacing: 0.14em !important;
+          overflow-wrap: normal !important;
+          word-break: normal !important;
+        }
+        .category-report-title {
+          font-size: clamp(1.15rem, 1.45vw, 1.55rem) !important;
+          line-height: 1.16 !important;
+          letter-spacing: -0.025em !important;
+          overflow-wrap: normal !important;
+          word-break: normal !important;
+          text-wrap: balance;
+          max-width: 100%;
+        }
+        @media (max-width: 768px) {
+          .category-report-card {
+            min-height: 145px;
+            padding: 1.05rem !important;
+          }
+          .category-report-title {
+            font-size: 1.1rem !important;
+            line-height: 1.2 !important;
+          }
+          .category-report-meta {
+            font-size: 0.62rem !important;
+            letter-spacing: 0.12em !important;
+          }
+        }
+        .how-step-card {
+          min-height: 260px;
+        }
+        .legal-safety-bar {
+          overflow: hidden;
+          border-radius: 3.25rem !important;
+        }
+        .legal-safety-bar .bilingual-stack {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.35rem;
+        }
+        .legal-safety-bar .bilingual-en,
+        .legal-safety-bar .bilingual-hi,
+        .legal-safety-bar .bilingual-en-only,
+        .legal-safety-bar .bilingual-hi-only {
+          white-space: normal !important;
+          overflow-wrap: anywhere !important;
+          word-break: normal !important;
+        }
+        .legal-safety-chip-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 0.75rem;
+        }
+        .legal-safety-chip {
+          min-width: 0;
+          min-height: 76px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          border: 1px solid rgba(255,255,255,0.10);
+          background: rgba(255,255,255,0.10);
+          padding: 0.9rem 1rem;
+          text-align: center;
+          font-size: 0.78rem !important;
+          font-weight: 1000 !important;
+          line-height: 1.2 !important;
+          text-transform: uppercase;
+          letter-spacing: 0.10em;
+          color: rgba(255,255,255,0.84);
+          overflow: visible;
+        }
+        .legal-safety-chip .bilingual-stack {
+          align-items: center;
+          gap: 0.25rem;
+        }
+        @media (max-width: 768px) {
+          .how-step-card {
+            min-height: auto;
+          }
+          .legal-safety-bar {
+            border-radius: 1.65rem !important;
+            padding: 1.25rem !important;
+          }
+          .legal-safety-chip-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.55rem;
+          }
+          .legal-safety-chip {
+            min-height: 66px;
+            border-radius: 1.35rem;
+            padding: 0.75rem 0.7rem;
+            font-size: 0.68rem !important;
+            line-height: 1.25 !important;
+            letter-spacing: 0.07em;
+          }
+        }
+        .public-map-issue-card {
+          min-height: 106px;
+          display: grid;
+          grid-template-columns: 3.25rem minmax(0, 1fr);
+          align-items: center;
+          gap: 1rem;
+          border: 1px solid rgba(255,255,255,0.12);
+          color: #ffffff !important;
+        }
+        .public-map-issue-icon {
+          display: inline-flex;
+          height: 3.1rem;
+          width: 3.1rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0;
+          background: transparent;
+          color: inherit;
+          font-size: 2rem;
+          box-shadow: none;
+          line-height: 1;
+        }
+        .public-map-issue-title {
+          min-width: 0;
+          font-size: clamp(1.2rem, 1.65vw, 1.7rem) !important;
+          line-height: 1.08 !important;
+          color: #ffffff !important;
+        }
+        @media (max-width: 768px) {
+          .public-map-issue-card {
+            min-height: 86px;
+            grid-template-columns: 2.65rem minmax(0, 1fr);
+            border-radius: 1.45rem !important;
+            padding: 1rem !important;
+          }
+          .public-map-issue-icon {
+            height: 2.45rem;
+            width: 2.45rem;
+            border-radius: 0;
+            font-size: 1.55rem;
+          }
+          .public-map-issue-title {
+            font-size: 1.08rem !important;
+          }
+        }
+        .status-system-panel {
+          overflow: visible;
+        }
+        .status-system-flow {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
+        }
+        .status-step-card {
+          min-width: 0;
+          min-height: 82px;
+          display: grid;
+          grid-template-columns: 3.05rem minmax(0, 1fr);
+          align-items: center;
+          gap: 0.9rem;
+          overflow: visible;
+          padding: 0.95rem !important;
+        }
+        .status-step-number {
+          display: inline-flex;
+          height: 2.8rem;
+          width: 2.8rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          background: #B6FF00;
+          color: #071107;
+          font-size: 0.88rem;
+          font-weight: 1000;
+          line-height: 1;
+          box-shadow: none;
+        }
+        .status-step-copy {
+          min-width: 0;
+        }
+        .status-step-title {
+          margin: 0;
+          font-size: clamp(1.12rem, 1.55vw, 1.55rem) !important;
+          line-height: 1.12 !important;
+          overflow-wrap: normal !important;
+          word-break: normal !important;
+          color: #ffffff !important;
+        }
+        .status-step-label {
+          margin: 0;
+          font-size: 0.9rem !important;
+          line-height: 1.35 !important;
+          overflow-wrap: normal !important;
+          word-break: normal !important;
+          color: rgba(255,255,255,0.70) !important;
+        }
+        @media (min-width: 1180px) {
+          .status-system-flow {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+          }
+          .status-step-card {
+            min-height: 178px;
+            grid-template-columns: 1fr;
+            align-items: start;
+            align-content: start;
+            gap: 0.75rem;
+            padding: 1rem !important;
+          }
+          .status-step-title {
+            font-size: clamp(1rem, 1.05vw, 1.18rem) !important;
+            line-height: 1.18 !important;
+          }
+          .status-step-label {
+            font-size: 0.76rem !important;
+            line-height: 1.4 !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .status-system-panel {
+            border-radius: 1.65rem !important;
+            padding: 1rem !important;
+          }
+          .status-step-card {
+            min-height: 76px;
+            grid-template-columns: 2.55rem minmax(0, 1fr);
+            gap: 0.75rem;
+            border-radius: 1.25rem !important;
+            padding: 0.85rem !important;
+          }
+          .status-step-number {
+            height: 2.25rem;
+            width: 2.25rem;
+            font-size: 0.74rem;
+          }
+          .status-step-title {
+            font-size: 1rem !important;
+            line-height: 1.2 !important;
+          }
+          .status-step-label {
+            font-size: 0.75rem !important;
+            line-height: 1.35 !important;
+          }
+        }
+        .public-audits-section {
+          overflow: visible !important;
+        }
+        .public-audits-left {
+          overflow: visible !important;
+          min-width: 0;
+        }
+        .public-audit-eyebrow {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          color: #B6FF00 !important;
+          line-height: 1.35 !important;
+          text-shadow: none !important;
+        }
+        .public-audit-eyebrow span {
+          display: block;
+          color: rgba(255,255,255,0.78) !important;
+          font-size: 0.86rem !important;
+          line-height: 1.55 !important;
+          letter-spacing: 0 !important;
+          text-transform: none !important;
+          font-weight: 900 !important;
+        }
+        .public-audits-section h2 {
+          overflow: visible !important;
+          padding-bottom: 0.12em;
+          color: #ffffff !important;
+          text-shadow: none !important;
+        }
+        .public-audits-section h2 span,
+        .public-audits-section h2 [lang="hi"] {
+          color: rgba(255,255,255,0.78) !important;
+        }
+        .public-audits-section [class*="text-white/"] {
+          color: rgba(255,255,255,0.76) !important;
+        }
+        @media (max-width: 768px) {
+          .public-audits-section {
+            border-radius: 1.65rem !important;
+            padding: 1.1rem !important;
+          }
+          .public-audits-left {
+            border-radius: 1.45rem !important;
+            padding: 1.1rem !important;
+          }
+          .public-audit-eyebrow {
+            font-size: 0.82rem !important;
+            letter-spacing: 0.14em !important;
           }
         }
         .quick-section-dots {
@@ -4435,6 +6401,7 @@ export default function CockroachIndiaParty() {
         @media (max-width: 1024px) {
           .quick-section-dots { display: none; }
         }
+
       `}</style>
       {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
@@ -4447,15 +6414,16 @@ export default function CockroachIndiaParty() {
         onClose={() => setMobileMenuOpen(false)}
         onNavigate={navigateToPage}
       />
+      <FloatingJoinNowButton mode={mode} onClick={() => navigateToPage("contact")} />
 
       <div className="quick-section-dots" aria-label="Quick page navigation">
         {[
           { id: "home" as PageId, label: "Home" },
           { id: "manifesto" as PageId, label: "Manifesto" },
-          { id: "student" as PageId, label: "Student First" },
           { id: "antiCorruption" as PageId, label: "Anti-Corruption" },
-          { id: "about" as PageId, label: "About" },
+          { id: "noVip" as PageId, label: "No VIP" },
           { id: "constitution" as PageId, label: "Vision" },
+          { id: "greatIndia" as PageId, label: "India Mission" },
         ].map((item) => (
           <button
             key={item.id}
@@ -4506,10 +6474,10 @@ export default function CockroachIndiaParty() {
               <option value="both">English + हिंदी</option>
             </select>
             <button
-              onClick={scrollToJoin}
+              onClick={() => navigateToPage("contact")}
               className="premium-toggle premium-toggle-dark rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ease-out"
             >
-              Join
+              Join / Report
             </button>
           </div>
         </div>
@@ -4518,15 +6486,30 @@ export default function CockroachIndiaParty() {
 
       <div key={activePage} className="page-transition">
         {activePage === "home" && <HomePage mode={mode} setPage={navigateToPage} scrollToJoin={scrollToJoin} />}
-        {activePage === "manifesto" && <ManifestoPage mode={mode} />}
+        {activePage === "manifesto" && (
+          <>
+            <ManifestoPage mode={mode} />
+            <StudentFirstDetailedPage mode={mode} />
+          </>
+        )}
         {activePage === "about" && <AboutPage mode={mode} />}
         {activePage === "constitution" && <ConstitutionPage mode={mode} />}
-        {activePage === "student" && <StudentFirstDetailedPage mode={mode} />}
+        {activePage === "student" && (
+          <>
+            <ManifestoPage mode={mode} />
+            <StudentFirstDetailedPage mode={mode} />
+          </>
+        )}
         {activePage === "antiCorruption" && <AntiCorruptionDetailedPage mode={mode} />}
+        {activePage === "noVip" && <NoVIPCulturePage mode={mode} />}
+        {activePage === "greatIndia" && <GreatIndiaMissionPage mode={mode} />}
+        {activePage === "contact" && <ActionHubPage mode={mode} />}
+        {activePage === "oath" && <ActionHubPage mode={mode} />}
         {activePage === "privacy" && <PrivacyPage mode={mode} />}
       </div>
 
 
+      <LegalSafetyBarSection mode={mode} />
       <FinalCinematicCTA mode={mode} onShare={shareMovement} />
 
       <footer className="border-t border-black/10 px-6 py-14 pb-28 text-center text-sm font-bold text-black/45 md:pb-14">
@@ -4557,7 +6540,12 @@ export default function CockroachIndiaParty() {
           </div>
 
           <div className="mx-auto mb-8 flex max-w-7xl flex-wrap justify-center gap-3">
-            {[...navItems, { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } }].map((item) => (
+            {[
+              ...navItems,
+              { id: "contact" as PageId, label: { en: "Join / Report", hi: "जुड़ें / रिपोर्ट करें" } },
+              { id: "about" as PageId, label: { en: "About", hi: "परिचय" } },
+              { id: "privacy" as PageId, label: { en: "Privacy", hi: "गोपनीयता" } },
+            ].map((item) => (
               <button
                 key={item.id}
                 onClick={() => navigateToPage(item.id)}
