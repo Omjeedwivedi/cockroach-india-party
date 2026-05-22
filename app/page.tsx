@@ -6627,6 +6627,38 @@ export default function CockroachIndiaParty() {
             line-height: 1.42 !important;
           }
         }
+
+        /* HOME HERO CENTER ALIGN FIX */
+        .hero-cinematic > div {
+          text-align: center !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+        }
+
+        .hero-cinematic h1,
+        .hero-cinematic .word-reveal,
+        .hero-cinematic .hero-accountability-underline {
+          margin-left: auto !important;
+          margin-right: auto !important;
+          text-align: center !important;
+        }
+
+        .hero-cinematic h1 {
+          max-width: min(1320px, 100%) !important;
+        }
+
+        .hero-cinematic p {
+          margin-left: auto !important;
+          margin-right: auto !important;
+          text-align: center !important;
+        }
+
+        .hero-cinematic .mt-12.flex,
+        .hero-cinematic .flex.sm\:flex-row {
+          justify-content: center !important;
+          align-items: center !important;
+        }
       `}</style>
       {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
