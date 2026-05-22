@@ -6402,6 +6402,231 @@ export default function CockroachIndiaParty() {
           .quick-section-dots { display: none; }
         }
 
+        /* FULL-WIDTH STRIPE LAYOUT PATCH - ACTIVE */
+        .max-w-7xl,
+        .max-w-6xl,
+        .max-w-5xl,
+        .max-w-4xl,
+        .max-w-3xl,
+        .max-w-2xl {
+          max-width: min(1760px, calc(100vw - 48px)) !important;
+        }
+
+        section.mx-auto,
+        nav .mx-auto,
+        footer .mx-auto,
+        .page-transition > section,
+        .page-transition > div {
+          width: min(1760px, calc(100vw - 48px)) !important;
+          max-width: min(1760px, calc(100vw - 48px)) !important;
+        }
+
+        section.mx-auto {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+
+        nav .mx-auto {
+          padding-left: 24px !important;
+          padding-right: 24px !important;
+        }
+
+        .hero-cinematic > div,
+        .hero-cinematic h1,
+        .hero-cinematic p,
+        section h1,
+        section h2,
+        section p.max-w-4xl,
+        section p.max-w-5xl,
+        section p.max-w-6xl {
+          max-width: none !important;
+        }
+
+        .hero-cinematic > div {
+          width: 100% !important;
+        }
+
+        .hero-cinematic h1 {
+          max-width: 1280px !important;
+        }
+
+        .hero-cinematic p {
+          max-width: 980px !important;
+        }
+
+        .apple-borderless,
+        .apple-gradient-bg,
+        .glass-card,
+        .classic-section-card,
+        .command-center,
+        .public-audits-section {
+          width: 100% !important;
+        }
+
+        .grid.lg\:grid-cols-\[0\.95fr_1\.05fr\],
+        .grid.lg\:grid-cols-\[0\.9fr_1\.1fr\],
+        .grid.lg\:grid-cols-\[0\.92fr_1\.08fr\],
+        .grid.lg\:grid-cols-\[0\.88fr_1\.12fr\] {
+          grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) !important;
+        }
+
+        .grid.lg\:grid-cols-2 {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+
+        .grid.lg\:grid-cols-3 {
+          grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        }
+
+        .grid.lg\:grid-cols-4 {
+          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        }
+
+        .grid.lg\:grid-cols-5 {
+          grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        }
+
+        @media (min-width: 1536px) {
+          .grid.lg\:grid-cols-2 {
+            grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+          }
+
+          .grid.lg\:grid-cols-3 {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          }
+
+          .grid.lg\:grid-cols-4 {
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+          }
+
+          .grid.md\:grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          }
+
+          .grid.md\:grid-cols-5 {
+            grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+          }
+        }
+
+        @media (min-width: 1800px) {
+          .max-w-7xl,
+          section.mx-auto,
+          nav .mx-auto,
+          footer .mx-auto {
+            max-width: min(1880px, calc(100vw - 64px)) !important;
+            width: min(1880px, calc(100vw - 64px)) !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .max-w-7xl,
+          .max-w-6xl,
+          .max-w-5xl,
+          .max-w-4xl,
+          .max-w-3xl,
+          .max-w-2xl,
+          section.mx-auto,
+          nav .mx-auto,
+          footer .mx-auto {
+            width: calc(100vw - 24px) !important;
+            max-width: calc(100vw - 24px) !important;
+          }
+
+          nav .mx-auto {
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+          }
+        }
+
+        /* COCKROACH JANTA RULES LABEL ONLY PATCH */
+        .join-rules-black-box > p:first-child {
+          color: #ffffff !important;
+          font-size: clamp(1.05rem, 1.25vw, 1.4rem) !important;
+          line-height: 1.35 !important;
+          font-weight: 1000 !important;
+          letter-spacing: 0.14em !important;
+          text-shadow: none !important;
+        }
+
+        .join-rules-black-box > p:first-child span,
+        .join-rules-black-box > p:first-child [lang="hi"] {
+          color: #ffffff !important;
+          font-weight: 1000 !important;
+          line-height: 1.4 !important;
+        }
+
+        @media (max-width: 768px) {
+          .join-rules-black-box > p:first-child {
+            font-size: 0.95rem !important;
+            letter-spacing: 0.1em !important;
+          }
+        }
+
+        /* COCKROACH JANTA RULE TILES COMPACT PATCH */
+        .join-rules-grid {
+          gap: 0.6rem !important;
+        }
+
+        .join-rules-big-pill {
+          grid-template-columns: 2.7rem minmax(0, 1fr) !important;
+          min-height: 66px !important;
+          border-radius: 1.45rem !important;
+          padding: 0.7rem 0.85rem !important;
+          gap: 0.7rem !important;
+        }
+
+        .join-rules-number {
+          height: 2.25rem !important;
+          width: 2.25rem !important;
+          border-radius: 0.85rem !important;
+          font-size: 0.72rem !important;
+        }
+
+        .join-rules-big-pill p {
+          font-size: clamp(0.92rem, 1.15vw, 1.18rem) !important;
+          line-height: 1.22 !important;
+          letter-spacing: -0.025em !important;
+          font-weight: 900 !important;
+        }
+
+        .join-rules-big-pill .bilingual-hi,
+        .join-rules-big-pill [lang="hi"] {
+          font-size: clamp(0.72rem, 0.9vw, 0.9rem) !important;
+          line-height: 1.45 !important;
+          font-weight: 850 !important;
+        }
+
+        @media (max-width: 768px) {
+          .join-rules-grid {
+            gap: 0.5rem !important;
+          }
+
+          .join-rules-big-pill {
+            grid-template-columns: 2.2rem minmax(0, 1fr) !important;
+            min-height: 58px !important;
+            border-radius: 1.1rem !important;
+            padding: 0.65rem !important;
+            gap: 0.55rem !important;
+          }
+
+          .join-rules-number {
+            height: 1.9rem !important;
+            width: 1.9rem !important;
+            border-radius: 0.65rem !important;
+            font-size: 0.62rem !important;
+          }
+
+          .join-rules-big-pill p {
+            font-size: 0.86rem !important;
+            line-height: 1.25 !important;
+          }
+
+          .join-rules-big-pill .bilingual-hi,
+          .join-rules-big-pill [lang="hi"] {
+            font-size: 0.68rem !important;
+            line-height: 1.42 !important;
+          }
+        }
       `}</style>
       {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
