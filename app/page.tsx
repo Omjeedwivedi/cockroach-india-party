@@ -12,6 +12,7 @@ type PageId =
   | "student"
   | "antiCorruption"
   | "noVip"
+  | "reformOS"
   | "greatIndia"
   | "contact"
   | "oath"
@@ -40,6 +41,7 @@ const navItems: { id: PageId; icon: string; label: I18n }[] = [
   { id: "constitution", icon: "🚀", label: { en: "Vision", hi: "दृष्टि" } },
   { id: "antiCorruption", icon: "🛡️", label: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" } },
   { id: "noVip", icon: "🚫", label: { en: "No VIP Culture", hi: "VIP संस्कृति बंद" } },
+  { id: "reformOS", icon: "🧭", label: { en: "Reforms 2047", hi: "सुधार 2047" } },
   { id: "greatIndia", icon: "🇮🇳", label: { en: "India Mission", hi: "भारत मिशन" } },
 ];
 
@@ -750,12 +752,122 @@ function TrustBadgesSection({ mode }: { mode: LangMode }) {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-8">
-      <div className="apple-clean-pill flex flex-wrap items-center justify-center gap-3 rounded-full bg-white/78 p-3 backdrop-blur-xl">
-        {badges.map((badge) => (
-          <span key={badge.en} className="rounded-full bg-black px-5 py-3 text-sm font-black text-[#B6FF00] shadow-sm">
-            <BilingualText value={badge} mode={mode} hiClassName="text-[10px] leading-3 text-white/50" />
-          </span>
-        ))}
+      <div className="trust-marquee-shell">
+        <div className="trust-marquee-track">
+          {[...badges, ...badges, ...badges].map((badge, index) => (
+            <span key={`${badge.en}-${index}`} className="trust-marquee-pill">
+              <BilingualText
+                value={badge}
+                mode={mode}
+                hiClassName="text-[11px] leading-4 text-black/55"
+              />
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedIssueOfWeekSection({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) => void }) {
+  const featured: { title: I18n; body: I18n; tags: I18n[] } = {
+    title: {
+      en: "This Week's Public Issue: make every complaint visible.",
+      hi: "इस सप्ताह का सार्वजनिक मुद्दा: हर complaint visible बनाओ।",
+    },
+    body: {
+      en: "Road broken, drain blocked, paper leak, unpaid overtime, hospital failure, corruption report, tree survival failure — if it hurts citizens, it deserves evidence, tracking, and public accountability.",
+      hi: "Road broken, drain blocked, paper leak, unpaid overtime, hospital failure, corruption report, tree survival failure — अगर यह citizens को hurt करता है, तो उसे evidence, tracking और public accountability मिलनी चाहिए।",
+    },
+    tags: [
+      { en: "Report", hi: "Report" },
+      { en: "Verify", hi: "Verify" },
+      { en: "Track", hi: "Track" },
+      { en: "Audit", hi: "Audit" },
+    ],
+  };
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="featured-issue-card apple-borderless rounded-[3.75rem] bg-white p-8 md:p-12">
+        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Featured Issue of the Week", hi: "इस सप्ताह का मुद्दा" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText value={featured.title} mode={mode} hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl" />
+            </h2>
+          </div>
+          <div className="featured-issue-copy rounded-[2.75rem] bg-white p-6">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText value={featured.body} mode={mode} hiClassName="text-sm leading-5 text-black/55 md:text-lg" />
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {featured.tags.map((tag, index) => (
+                <span key={tag.en} className="featured-issue-tag">
+                  {String(index + 1).padStart(2, "0")} · <BilingualText value={tag} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+                </span>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setPage("contact")}
+              className="premium-toggle premium-toggle-dark mt-7 rounded-full px-8 py-4 text-base font-black"
+            >
+              Report an Issue
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MovementIndexSection({ mode, setPage }: { mode: LangMode; setPage: (page: PageId) => void }) {
+  const sections: { id: PageId; number: string; title: I18n; line: I18n }[] = [
+    {
+      id: "manifesto",
+      number: "01",
+      title: { en: "Manifesto", hi: "घोषणापत्र" },
+      line: { en: "Promises with clear actions.", hi: "वादे clear actions के साथ।" },
+    },
+    {
+      id: "antiCorruption",
+      number: "02",
+      title: { en: "Anti-Corruption", hi: "भ्रष्टाचार विरोध" },
+      line: { en: "Power audited. Wealth explained.", hi: "Power audited. Wealth explained." },
+    },
+    {
+      id: "noVip",
+      number: "03",
+      title: { en: "No VIP Culture", hi: "VIP संस्कृति बंद" },
+      line: { en: "Leaders use the system they control.", hi: "Leaders वही system use करें।" },
+    },
+    {
+      id: "reformOS",
+      number: "04",
+      title: { en: "Reforms 2047", hi: "सुधार 2047" },
+      line: { en: "Sector-wise operating system upgrade.", hi: "हर sector का operating system upgrade।" },
+    },
+    {
+      id: "greatIndia",
+      number: "05",
+      title: { en: "India Mission", hi: "भारत मिशन" },
+      line: { en: "Daily-life problems, national-scale solutions.", hi: "Daily-life problems, national-scale solutions." },
+    },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="movement-index-shell apple-borderless rounded-[3.75rem] bg-white p-6 md:p-8">
+        <div className="movement-index-grid">
+          {sections.map((section) => (
+            <button key={section.id} type="button" onClick={() => setPage(section.id)} className="movement-index-card">
+              <span className="movement-index-number">{section.number}</span>
+              <strong><BilingualText value={section.title} mode={mode} hiClassName="text-xs leading-4 text-black/55" /></strong>
+              <small><BilingualText value={section.line} mode={mode} hiClassName="text-xs leading-4 text-black/55" /></small>
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -851,86 +963,94 @@ function HomePage({
   return (
     <>
       <RunningCockroachEffect />
-      <section className="hero-cinematic mx-auto max-w-7xl px-6 pb-20 pt-0 md:pb-28 md:pt-1">
-        <div className="mx-auto max-w-6xl text-center">
-          <div className="mb-8 inline-flex flex-col items-center gap-1 magnetic-btn rounded-full apple-clean-pill apple-gradient-bg px-6 py-3 text-sm font-black transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-            <span>India 2047 Movement</span>
-            {mode !== "en" && <HindiShadow text="भारत 2047 आंदोलन" className="text-[10px] leading-3" />}
-          </div>
+      <section className="hero-cinematic mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg hero-premium-shell overflow-hidden rounded-[3.75rem] p-8 md:p-14">
+          <div className="hero-premium-grid">
+            <div className="hero-premium-copy">
+              <PageEyebrow value={{ en: "India 2047 Movement", hi: "भारत 2047 आंदोलन" }} mode={mode} />
 
-          <h1 className="text-6xl font-black leading-[0.86] tracking-[-0.08em] md:text-8xl lg:text-9xl">
-            <span className="hero-accountability-underline">
-              <WordRevealText
-                value={{
-                  en: "Ordinary Indians deserve extraordinary accountability.",
-                  hi: "आम भारतीयों को असाधारण जवाबदेही चाहिए।",
-                }}
-                mode={mode}
-                hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/45 md:text-4xl"
-              />
-            </span>
-          </h1>
+              <h1 className="mt-6 max-w-5xl text-6xl font-black leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+                <span className="hero-accountability-underline">
+                  <WordRevealText
+                    value={{
+                      en: "Ordinary Indians deserve extraordinary accountability.",
+                      hi: "आम भारतीयों को असाधारण जवाबदेही चाहिए।",
+                    }}
+                    mode={mode}
+                    hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+                  />
+                </span>
+              </h1>
 
-          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
-            <BilingualText
-              value={{
-                en: "Students. Workers. Farmers. Taxpayers. Families. One movement against corruption, berozgari, paper leaks, and political luxury.",
-                hi: "छात्र। कर्मचारी। किसान। टैक्सपेयर। परिवार। भ्रष्टाचार, बेरोजगारी, पेपर लीक और राजनीतिक विलासिता के खिलाफ एक आंदोलन।",
-              }}
-              mode={mode}
-              hiClassName="text-sm leading-5 text-black/45 md:text-base"
-            />
-          </p>
+              <p className="mt-10 max-w-3xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+                <BilingualText
+                  value={{
+                    en: "Students. Workers. Farmers. Taxpayers. Families. One movement against corruption, berozgari, paper leaks, and political luxury.",
+                    hi: "छात्र। कर्मचारी। किसान। टैक्सपेयर। परिवार। भ्रष्टाचार, बेरोजगारी, पेपर लीक और राजनीतिक विलासिता के खिलाफ एक आंदोलन।",
+                  }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-black/45 md:text-base"
+                />
+              </p>
 
-          <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-            <button
-              onClick={() => setPage("contact")}
-              className="premium-toggle premium-toggle-dark rounded-full px-9 py-5 text-base font-black transition-all duration-300 ease-out"
-            >
-              Join / Report
-            </button>
-            <button
-              onClick={() => setPage("manifesto")}
-              className="magnetic-btn rounded-full bg-white/80 px-9 py-5 text-base font-black text-black shadow-[0_18px_55px_rgba(0,0,0,0.07)] backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
-            >
-              Read Manifesto
-            </button>
+              <div className="mt-12 flex flex-col items-start gap-4 sm:flex-row">
+                <button
+                  onClick={() => setPage("contact")}
+                  className="premium-toggle premium-toggle-dark rounded-full px-9 py-5 text-base font-black transition-all duration-300 ease-out"
+                >
+                  Join / Report Issue
+                </button>
+                <button
+                  onClick={() => setPage("manifesto")}
+                  className="magnetic-btn rounded-full bg-white/80 px-9 py-5 text-base font-black text-black shadow-[0_18px_55px_rgba(0,0,0,0.07)] backdrop-blur-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl"
+                >
+                  Read Manifesto
+                </button>
+              </div>
+
+              <p className="hero-trust-microcopy mt-5 text-sm font-black tracking-[-0.01em] text-black/45">
+                No hate. No violence. Evidence first.
+              </p>
+            </div>
+
+            <div className="hero-dashboard-card" aria-label="Public accountability dashboard preview">
+              <div className="hero-dashboard-topbar">
+                <span className="hero-dashboard-dot" />
+                <span className="hero-dashboard-title">Public Accountability Dashboard</span>
+              </div>
+              <div className="hero-dashboard-main-number">005</div>
+              <p className="hero-dashboard-label">active public audits</p>
+              <div className="hero-dashboard-status-grid">
+                {[
+                  { label: "Reported", value: "124" },
+                  { label: "Verified", value: "038" },
+                  { label: "Forwarded", value: "019" },
+                  { label: "Resolved", value: "007" },
+                ].map((item) => (
+                  <div key={item.label} className="hero-dashboard-status">
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="hero-dashboard-feed">
+                <div><span>🛣️</span> Road broken <b>Verified</b></div>
+                <div><span>📝</span> Paper leak <b>Audit</b></div>
+                <div><span>🌳</span> Tree survival <b>Tracking</b></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <TrustBadgesSection mode={mode} />
-      <PremiumSlidingStatement mode={mode} />
+      <FeaturedIssueOfWeekSection mode={mode} setPage={setPage} />
       <NotMemeMovementSection mode={mode} />
+      <MovementIndexSection mode={mode} setPage={setPage} />
+      <YouthPowerTransferSection mode={mode} />
       <HowItWorksSection mode={mode} />
-      <SlidingTextBanner
-        variant="dark"
-        speed="slow"
-        items={[
-          "NO PAPER LEAKS",
-          "NO HIDDEN WEALTH",
-          "NO UNPAID OVERTIME",
-          "NO LUXURY POLITICS",
-          "STUDENT FIRST",
-          "POWER ACCOUNTABLE",
-        ]}
-      />
-      <CommandCenterSection mode={mode} />
       <PublicIssueMapSection mode={mode} />
-      <CitizenReportCategoriesSection mode={mode} />
-      <CandidateStandardSection mode={mode} />
-      <SlidingTextBanner
-        variant="green"
-        speed="normal"
-        items={[
-          "DEGREE READY. JOB LOADING.",
-          "EXAM DELAYED. FUTURE DELAYED.",
-          "PAPER LEAK IS CAREER MURDER.",
-          "UNPAID OVERTIME IS THEFT.",
-        ]}
-      />
-      <JoinEligibilitySection mode={mode} scrollToJoin={scrollToJoin} />
-      <BerozgariEmergencySection mode={mode} />
+      <ContactPage mode={mode} />
       <FAQAccordionSection mode={mode} />
     </>
   );
@@ -1003,6 +1123,8 @@ function ManifestoPage({ mode }: { mode: LangMode }) {
           ))}
         </div>
       </section>
+
+      <YouthPowerTransferSection mode={mode} />
 
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
@@ -1536,19 +1658,6 @@ function ConstitutionPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
-      <SlidingTextBanner
-        variant="green"
-        speed="slow"
-        items={[
-          "THE INDIAN DREAM",
-          "OPPORTUNITY NATION",
-          "WORLD-CLASS UNIVERSITIES",
-          "INNOVATION ECONOMY",
-          "RULE OF LAW",
-          "GLOBAL LEADERSHIP",
-        ]}
-      />
-
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
           <div>
@@ -1891,19 +2000,6 @@ function StudentFirstDetailedPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
-      <SlidingTextBanner
-        variant="green"
-        speed="slow"
-        items={[
-          "NO PAPER LEAKS",
-          "NO EXAM DELAYS",
-          "PAID INTERNSHIPS",
-          "SKILL + DEGREE",
-          "STUDENT COUNCILS",
-          "NO FUTURE LEFT BEHIND",
-        ]}
-      />
-
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-5 md:grid-cols-5">
           {promises.map((promise) => (
@@ -2099,19 +2195,6 @@ function AntiCorruptionDetailedPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
-      <SlidingTextBanner
-        variant="dark"
-        speed="slow"
-        items={[
-          "ASSET CHECK",
-          "CID VERIFICATION",
-          "PUBLIC DASHBOARD",
-          "10 YEARS JAIL",
-          "ASSET SEIZURE",
-          "LIFETIME BAN",
-        ]}
-      />
-
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid gap-5 md:grid-cols-4">
           {[
@@ -2204,6 +2287,102 @@ function AntiCorruptionDetailedPage({ mode }: { mode: LangMode }) {
               }}
               mode={mode}
               hiClassName="text-xs leading-4 text-white/35"
+            />
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <PageEyebrow value={{ en: "Accused Politicians and Pending Cases", hi: "आरोपी नेताओं और लंबित मामलों पर नीति" }} mode={mode} />
+          <h2 className="mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+            <BilingualText
+              value={{
+                en: "No political protection. Every serious case must face a proper trial.",
+                hi: "कोई political protection नहीं। हर serious case का proper trial होना चाहिए।",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+            />
+          </h2>
+          <p className="mt-8 max-w-5xl text-xl font-black leading-9 tracking-[-0.03em] text-white/62 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "Any politician, minister, MP, MLA, mayor, councillor, party office bearer, or politically connected public official with declared criminal cases, corruption allegations, asset-disproportion cases, scam links, land-grab allegations, tender manipulation charges, money-laundering allegations, or abuse-of-power complaints must be reviewed under a transparent legal process — party does not matter.",
+                hi: "किसी भी politician, minister, MP, MLA, mayor, councillor, party office bearer या politically connected public official पर declared criminal cases, corruption allegations, disproportionate asset cases, scam links, land-grab allegations, tender manipulation charges, money-laundering allegations या abuse-of-power complaints हों तो transparent legal process में review होना चाहिए — party matter नहीं करती।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-white/38 md:text-base"
+            />
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-3">
+          {[
+            {
+              title: { en: "1. National Case Audit", hi: "1. National Case Audit" },
+              text: {
+                en: "Create an independent national audit of all pending and closed political cases from the last 25 years. Cases closed due to pressure, weak investigation, missing files, procedural delay, or suspicious withdrawal should be reviewed again through court-monitored scrutiny.",
+                hi: "पिछले 25 साल के सभी pending और closed political cases का independent national audit हो। Pressure, weak investigation, missing files, procedural delay या suspicious withdrawal के कारण बंद cases को court-monitored scrutiny में फिर review किया जाए।",
+              },
+            },
+            {
+              title: { en: "2. Reopen Where Law Allows", hi: "2. कानून के अनुसार Reopen" },
+              text: {
+                en: "All cases that legally qualify for reopening must be reopened. No leader should escape because the government changed, witnesses were threatened, records disappeared, or agencies were politically controlled.",
+                hi: "जो cases legally reopen हो सकते हैं उन्हें reopen किया जाए। कोई leader इसलिए न बचे क्योंकि government बदल गई, witnesses threaten हुए, records गायब हुए या agencies politically controlled थीं।",
+              },
+            },
+            {
+              title: { en: "3. Time-Bound Trial", hi: "3. Time-Bound Trial" },
+              text: {
+                en: "Special fast-track courts should complete serious political corruption, violence, land mafia, scam, and money-laundering trials within strict timelines, with monthly public status updates.",
+                hi: "Serious political corruption, violence, land mafia, scam और money-laundering trials के लिए special fast-track courts हों, strict timeline के साथ monthly public status updates मिलें।",
+              },
+            },
+            {
+              title: { en: "4. Equal Rule for Every Party", hi: "4. हर Party पर Same Rule" },
+              text: {
+                en: "Ruling party, opposition party, regional party, national party, independent leader, or alliance partner — the same law, same investigation standard, and same punishment must apply.",
+                hi: "Ruling party, opposition party, regional party, national party, independent leader या alliance partner — सब पर same law, same investigation standard और same punishment लागू हो।",
+              },
+            },
+            {
+              title: { en: "5. Public Case Dashboard", hi: "5. Public Case Dashboard" },
+              text: {
+                en: "Every serious case must show case number, court, charges, current stage, next hearing, delay reason, investigating agency, and disposal status in a public dashboard without declaring anyone guilty before conviction.",
+                hi: "हर serious case में case number, court, charges, current stage, next hearing, delay reason, investigating agency और disposal status public dashboard पर दिखे, लेकिन conviction से पहले किसी को guilty declare न किया जाए।",
+              },
+            },
+            {
+              title: { en: "6. No Ticket for Serious Charges", hi: "6. Serious Charges पर Ticket नहीं" },
+              text: {
+                en: "Political parties should be barred from giving tickets to candidates facing court-framed charges for serious crimes such as corruption, rape, murder, organized violence, extortion, money laundering, and large public fraud.",
+                hi: "Corruption, rape, murder, organized violence, extortion, money laundering और large public fraud जैसे serious crimes में court-framed charges वाले candidates को ticket देने से parties को रोका जाए।",
+              },
+            },
+          ].map((item) => (
+            <div key={item.title.en} className="reveal-card micro-lift apple-clean-card rounded-[2.75rem] bg-white/76 p-7 backdrop-blur-xl">
+              <h3 className="text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={item.title} mode={mode} hiClassName="text-sm leading-4 text-black/55" />
+              </h3>
+              <p className="mt-4 text-sm font-bold leading-6 text-black/68">
+                <BilingualText value={item.text} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="legal-trial-note mt-6 rounded-[3rem] bg-white p-7 md:p-10">
+          <PageEyebrow value={{ en: "Legal-Safe Trial Principle", hi: "Legal-Safe Trial Principle" }} mode={mode} />
+          <p className="mt-5 text-2xl font-black leading-9 tracking-[-0.045em] text-black md:text-4xl md:leading-[1.08]">
+            <BilingualText
+              value={{
+                en: "Accused does not mean guilty. But public power must not be used to delay investigation, suppress evidence, threaten witnesses, buy silence, or escape trial.",
+                hi: "Accused का मतलब guilty नहीं होता। लेकिन public power का use investigation delay करने, evidence दबाने, witnesses को डराने, silence खरीदने या trial से बचने के लिए नहीं होना चाहिए।",
+              }}
+              mode={mode}
+              hiClassName="mt-3 text-base leading-5 tracking-normal text-black/55 md:text-xl"
             />
           </p>
         </div>
@@ -2648,21 +2827,6 @@ function GreatIndiaMissionPage({ mode }: { mode: LangMode }) {
         </div>
       </section>
 
-      <SlidingTextBanner
-        variant="green"
-        speed="slow"
-        items={[
-          "MIDDLE CLASS FIRST",
-          "FARMER TO FOUNDER",
-          "WOMEN SAFETY",
-          "SMALL BUSINESS FREEDOM",
-          "TAXPAYER DASHBOARD",
-          "CLIMATE HEAT POLLUTION",
-          "TREE SURVIVAL AUDIT",
-          "NATIONAL CHARACTER",
-        ]}
-      />
-
       <section className="mx-auto max-w-7xl px-6 py-16">
         <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
           <PageEyebrow value={{ en: "Big National Frame", hi: "बड़ा राष्ट्रीय विचार" }} mode={mode} />
@@ -2826,6 +2990,416 @@ function GreatIndiaMissionPage({ mode }: { mode: LangMode }) {
   );
 }
 
+function India2047ReformOSPage({ mode }: { mode: LangMode }) {
+  const headlineWords = [
+    "American Innovation",
+    "European Public Services",
+    "Indian Scale",
+    "Zero Corruption Execution",
+    "Fast Justice",
+    "Clean Governance",
+    "World-Class Education",
+    "High Income Jobs",
+    "AI Leadership",
+    "Citizen Dignity",
+  ];
+
+  const operatingFormula: I18n[] = [
+    { en: "American innovation", hi: "American innovation" },
+    { en: "European public service quality", hi: "European public service quality" },
+    { en: "Japanese discipline", hi: "Japanese discipline" },
+    { en: "Singapore-style execution", hi: "Singapore-style execution" },
+    { en: "Indian scale and talent", hi: "Indian scale और talent" },
+  ];
+
+  const sectorReforms: { icon: string; title: I18n; goal: I18n; problem: I18n; reforms: I18n[]; outcome: I18n }[] = [
+    {
+      icon: "🏛️",
+      title: { en: "Governance Reform", hi: "शासन सुधार" },
+      goal: { en: "Government should work like a high-performance product, not like a dusty file room.", hi: "Government high-performance product की तरह काम करे, dusty file room की तरह नहीं।" },
+      problem: { en: "Slow files, unclear responsibility, weak delivery, corruption, fake promises, and citizens forced to chase offices.", hi: "Slow files, unclear responsibility, weak delivery, corruption, fake promises और citizens को offices के चक्कर।" },
+      reforms: [
+        { en: "Every government file must have digital tracking with officer name, deadline, delay reason, and escalation path.", hi: "हर government file में officer name, deadline, delay reason और escalation path के साथ digital tracking हो।" },
+        { en: "Every public project must show cost, contractor, deadline, payment status, delay reason, and completion proof.", hi: "हर public project में cost, contractor, deadline, payment status, delay reason और completion proof दिखे।" },
+        { en: "Officer and minister performance scorecards must be published yearly in simple citizen language.", hi: "Officer और minister performance scorecards हर साल simple citizen language में publish हों।" },
+        { en: "Citizen services must have a 30-day service guarantee with automatic escalation and penalty for avoidable delay.", hi: "Citizen services में 30-day guarantee, automatic escalation और avoidable delay पर penalty हो।" },
+        { en: "Every election promise must be tracked on a Promise Dashboard: not started, in progress, delayed, completed, or failed.", hi: "हर election promise Promise Dashboard पर track हो: not started, in progress, delayed, completed या failed।" },
+      ],
+      outcome: { en: "Fast, visible, accountable government where citizens do not beg for basic services.", hi: "Fast, visible, accountable government जहां citizen basic services के लिए भीख न मांगे।" },
+    },
+    {
+      icon: "📚",
+      title: { en: "Education Reform", hi: "शिक्षा सुधार" },
+      goal: { en: "India should produce builders, researchers, founders, scientists, and problem solvers — not only degree holders.", hi: "भारत सिर्फ degree holders नहीं, builders, researchers, founders, scientists और problem solvers बनाए।" },
+      problem: { en: "Rote learning, weak universities, paper leaks, low employability, poor labs, fake placement claims, and students treated as crowd.", hi: "Rote learning, weak universities, paper leaks, low employability, poor labs, fake placement claims और students को crowd की तरह treat करना।" },
+      reforms: [
+        { en: "AI, coding, finance, communication, civic sense, manufacturing basics, and problem-solving must start from Class 6.", hi: "Class 6 से AI, coding, finance, communication, civic sense, manufacturing basics और problem-solving शुरू हो।" },
+        { en: "Every district must get a world-class government university or skill campus linked with industry and research labs.", hi: "हर district में industry और research labs से linked world-class government university या skill campus हो।" },
+        { en: "National exam calendar must publish notification, exam, result, joining date, delay reason, and responsible officer.", hi: "National exam calendar में notification, exam, result, joining date, delay reason और responsible officer publish हो।" },
+        { en: "Teacher quality training, teacher assessment, modern labs, libraries, internships, and project-based learning must replace pure memorization.", hi: "Teacher training, assessment, modern labs, libraries, internships और project-based learning pure memorization को replace करें।" },
+        { en: "Public universities should target MIT, Stanford, Oxford, Cambridge-level research culture in AI, medicine, law, climate, agriculture, and manufacturing.", hi: "Public universities AI, medicine, law, climate, agriculture और manufacturing में MIT, Stanford, Oxford, Cambridge-level research culture target करें।" },
+      ],
+      outcome: { en: "Students become employable, confident, innovative, and globally competitive without leaving India for dignity.", hi: "Students employable, confident, innovative और globally competitive बनें, dignity के लिए India छोड़ना न पड़े।" },
+    },
+    {
+      icon: "🏭",
+      title: { en: "Jobs and Economy Reform", hi: "रोजगार और अर्थव्यवस्था सुधार" },
+      goal: { en: "India needs high-paying jobs, not survival salaries.", hi: "India को high-paying jobs चाहिए, survival salaries नहीं।" },
+      problem: { en: "Low salaries, weak manufacturing depth, fresher unemployment, delayed hiring, informal work, and too much dependence on service jobs.", hi: "Low salaries, weak manufacturing depth, fresher unemployment, delayed hiring, informal work और service jobs पर ज्यादा dependence।" },
+      reforms: [
+        { en: "Create export-focused manufacturing clusters for chips, electronics, EVs, batteries, drones, robotics, pharma, defense, and clean energy.", hi: "Chips, electronics, EVs, batteries, drones, robotics, pharma, defense और clean energy के export-focused manufacturing clusters बनें।" },
+        { en: "Companies creating verified quality jobs must get tax benefits, faster approvals, land support, and infrastructure priority.", hi: "Verified quality jobs बनाने वाली companies को tax benefits, faster approvals, land support और infrastructure priority मिले।" },
+        { en: "Every fresher should access apprenticeships through a national apprenticeship exchange linked with private industry and local clusters.", hi: "हर fresher को private industry और local clusters से linked national apprenticeship exchange से apprenticeships मिलें।" },
+        { en: "Business registration should finish in 24 hours with one national compliance portal and no inspector harassment for small mistakes.", hi: "Business registration 24 hours में हो, one national compliance portal और small mistakes पर inspector harassment न हो।" },
+        { en: "Private employees need salary delay penalty, paid overtime, mental health safeguards, and labour law complaint systems.", hi: "Private employees के लिए salary delay penalty, paid overtime, mental health safeguards और labour law complaint systems हों।" },
+      ],
+      outcome: { en: "A productive economy where youth build wealth through work, enterprise, exports, and innovation.", hi: "Productive economy जहां youth work, enterprise, exports और innovation से wealth build करे।" },
+    },
+    {
+      icon: "🛡️",
+      title: { en: "Anti-Corruption Reform", hi: "भ्रष्टाचार विरोध सुधार" },
+      goal: { en: "Public office is service, not a shortcut to luxury.", hi: "Public office service है, luxury का shortcut नहीं।" },
+      problem: { en: "Tender manipulation, unexplained wealth, benami assets, political protection, weak punishment, and public money leakage.", hi: "Tender manipulation, unexplained wealth, benami assets, political protection, weak punishment और public money leakage।" },
+      reforms: [
+        { en: "Every tender, payment, contractor, project milestone, delay, and cost overrun must be visible on a public dashboard.", hi: "हर tender, payment, contractor, project milestone, delay और cost overrun public dashboard पर visible हो।" },
+        { en: "Politicians and senior officials must publish annual asset, income, gift, travel, business interest, and family-linked disclosure.", hi: "Politicians और senior officials annual asset, income, gift, travel, business interest और family-linked disclosure publish करें।" },
+        { en: "Suspicious lifestyle growth must trigger independent asset verification with due legal process and public status tracking.", hi: "Suspicious lifestyle growth पर due legal process और public status tracking के साथ independent asset verification हो।" },
+        { en: "Corruption conviction must bring jail, asset seizure, lifetime election ban, government contract ban, and recovery of public loss.", hi: "Corruption conviction पर jail, asset seizure, lifetime election ban, government contract ban और public loss recovery हो।" },
+        { en: "Whistleblowers must receive safety, anonymity, legal support, and protection from retaliation.", hi: "Whistleblowers को safety, anonymity, legal support और retaliation से protection मिले।" },
+      ],
+      outcome: { en: "Corruption becomes risky, traceable, punishable, and politically costly.", hi: "Corruption risky, traceable, punishable और politically costly बने।" },
+    },
+    {
+      icon: "⚖️",
+      title: { en: "Justice and Police Reform", hi: "न्याय और पुलिस सुधार" },
+      goal: { en: "Justice delayed is democracy denied.", hi: "Justice delayed is democracy denied." },
+      problem: { en: "Slow courts, weak investigation, political pressure on police, poor forensic capacity, and victims losing faith.", hi: "Slow courts, weak investigation, police पर political pressure, poor forensic capacity और victims का trust टूटना।" },
+      reforms: [
+        { en: "Time-bound courts must handle rape, murder, corruption, land mafia, fraud, cybercrime, and serious violence.", hi: "Rape, murder, corruption, land mafia, fraud, cybercrime और serious violence के लिए time-bound courts हों।" },
+        { en: "Digital FIR, digital case tracking, online hearing status, and citizen-friendly legal updates must become standard.", hi: "Digital FIR, digital case tracking, online hearing status और citizen-friendly legal updates standard बनें।" },
+        { en: "Police modernization must include body cameras, forensic labs in every district, cybercrime units, and evidence handling training.", hi: "Police modernization में body cameras, हर district में forensic labs, cybercrime units और evidence handling training हो।" },
+        { en: "Police must be protected from illegal political pressure through independent oversight and transparent transfer rules.", hi: "Police को independent oversight और transparent transfer rules से illegal political pressure से बचाया जाए।" },
+        { en: "Witness protection, victim support, legal aid, and fast compensation systems must be mandatory.", hi: "Witness protection, victim support, legal aid और fast compensation systems mandatory हों।" },
+      ],
+      outcome: { en: "Citizens trust law because criminals fear law and victims get timely justice.", hi: "Citizens law पर trust करें क्योंकि criminals law से डरें और victims को timely justice मिले।" },
+    },
+    {
+      icon: "🏥",
+      title: { en: "Healthcare Reform", hi: "स्वास्थ्य सुधार" },
+      goal: { en: "No Indian family should become poor because someone fell sick.", hi: "किसी Indian family को बीमारी के कारण गरीब नहीं होना चाहिए।" },
+      problem: { en: "Expensive treatment, overcrowded hospitals, uneven rural care, medicine costs, poor hygiene, and mental health neglect.", hi: "Expensive treatment, overcrowded hospitals, uneven rural care, medicine costs, poor hygiene और mental health neglect।" },
+      reforms: [
+        { en: "Free emergency care must be available in every government hospital with public service ratings and cleanliness dashboards.", hi: "हर government hospital में free emergency care, public service ratings और cleanliness dashboards हों।" },
+        { en: "Every citizen should have a privacy-safe digital health record with consent-based sharing.", hi: "हर citizen के पास consent-based sharing वाला privacy-safe digital health record हो।" },
+        { en: "District-level super specialty hospitals, telemedicine centers, mobile clinics, and nurse training missions must expand care access.", hi: "District-level super specialty hospitals, telemedicine centers, mobile clinics और nurse training missions care access बढ़ाएं।" },
+        { en: "Essential medicines, diagnostic tests, emergency services, and basic procedures must have transparent price limits.", hi: "Essential medicines, diagnostic tests, emergency services और basic procedures की transparent price limits हों।" },
+        { en: "Mental health support must exist in schools, colleges, workplaces, public hospitals, and district helplines.", hi: "Mental health support schools, colleges, workplaces, public hospitals और district helplines में हो।" },
+      ],
+      outcome: { en: "Affordable, fast, dignified healthcare from village to metro city.", hi: "Village से metro city तक affordable, fast और dignified healthcare।" },
+    },
+    {
+      icon: "🏙️",
+      title: { en: "Cities and Infrastructure Reform", hi: "शहर और इंफ्रास्ट्रक्चर सुधार" },
+      goal: { en: "A developed country is visible first on roads, hospitals, schools, transport, drainage, and public toilets.", hi: "Developed country सबसे पहले roads, hospitals, schools, transport, drainage और public toilets में दिखता है।" },
+      problem: { en: "Broken roads, blocked drains, unsafe footpaths, dust, traffic, garbage, bad buses, poor rental housing, and contractor escape.", hi: "Broken roads, blocked drains, unsafe footpaths, dust, traffic, garbage, bad buses, poor rental housing और contractor escape।" },
+      reforms: [
+        { en: "Every road must have a public warranty, contractor name, cost, material quality audit, and repair deadline.", hi: "हर road की public warranty, contractor name, cost, material quality audit और repair deadline हो।" },
+        { en: "Drainage, garbage, public toilet, dust control, and pothole complaints must be tracked ward-wise.", hi: "Drainage, garbage, public toilet, dust control और pothole complaints ward-wise track हों।" },
+        { en: "Public transport should get better frequency, clean stations, safe last-mile routes, shaded stops, and integrated ticketing.", hi: "Public transport में better frequency, clean stations, safe last-mile routes, shaded stops और integrated ticketing हो।" },
+        { en: "Affordable rental housing must be built near work hubs for students, workers, nurses, teachers, police, and factory employees.", hi: "Work hubs के पास students, workers, nurses, teachers, police और factory employees के लिए affordable rental housing बने।" },
+        { en: "Cities must use traffic AI, parking reform, underground wiring, pedestrian-first design, and cycling lanes.", hi: "Cities traffic AI, parking reform, underground wiring, pedestrian-first design और cycling lanes use करें।" },
+      ],
+      outcome: { en: "Clean, safe, fast, walkable cities where daily life does not feel like punishment.", hi: "Clean, safe, fast, walkable cities जहां daily life punishment जैसी न लगे।" },
+    },
+    {
+      icon: "🌾",
+      title: { en: "Agriculture and Rural Reform", hi: "कृषि और ग्रामीण सुधार" },
+      goal: { en: "Farmers should not only survive harvests. Farmers should build wealth.", hi: "Farmers सिर्फ harvest survive न करें। Farmers wealth build करें।" },
+      problem: { en: "Middlemen dependency, poor storage, unstable prices, delayed insurance, weak processing, and rural youth migration.", hi: "Middlemen dependency, poor storage, unstable prices, delayed insurance, weak processing और rural youth migration।" },
+      reforms: [
+        { en: "Food processing, cold storage, packaging, testing labs, and logistics hubs must exist in every agricultural district.", hi: "हर agricultural district में food processing, cold storage, packaging, testing labs और logistics hubs हों।" },
+        { en: "Farmer producer companies need professional management, digital market access, direct buyer links, and export support.", hi: "Farmer producer companies को professional management, digital market access, direct buyer links और export support मिले।" },
+        { en: "Crop insurance must pay on time using satellite, weather, and local verification data.", hi: "Crop insurance satellite, weather और local verification data से time पर pay करे।" },
+        { en: "AI-based crop advisory, soil health tracking, water planning, seed quality checks, and mandi price intelligence must reach villages.", hi: "AI-based crop advisory, soil health tracking, water planning, seed quality checks और mandi price intelligence villages तक पहुंचे।" },
+        { en: "Rural skill campuses should train youth in agri-tech, solar, repair, food processing, logistics, drones, and local enterprise.", hi: "Rural skill campuses youth को agri-tech, solar, repair, food processing, logistics, drones और local enterprise में train करें।" },
+      ],
+      outcome: { en: "Villages become production, processing, tourism, energy, and enterprise centers.", hi: "Villages production, processing, tourism, energy और enterprise centers बनें।" },
+    },
+    {
+      icon: "🤖",
+      title: { en: "AI, Science and Technology Reform", hi: "AI, Science और Technology सुधार" },
+      goal: { en: "India should not only consume the future. India should build the future.", hi: "India सिर्फ future consume न करे। India future build करे।" },
+      problem: { en: "Brain drain, weak research funding, limited compute access, foreign platform dependence, slow deeptech procurement, and low patent support.", hi: "Brain drain, weak research funding, limited compute access, foreign platform dependence, slow deeptech procurement और low patent support।" },
+      reforms: [
+        { en: "National AI labs in major universities must offer GPU access, datasets, research grants, startup credits, and industry challenges.", hi: "Major universities में National AI labs GPU access, datasets, research grants, startup credits और industry challenges दें।" },
+        { en: "India must build domestic AI models, cloud platforms, cybersecurity products, chips, robotics, drones, and operating systems.", hi: "India domestic AI models, cloud platforms, cybersecurity products, chips, robotics, drones और operating systems बनाए।" },
+        { en: "Government procurement should create first customers for serious Indian deeptech startups.", hi: "Government procurement serious Indian deeptech startups के लिए first customers बनाए।" },
+        { en: "Research grants must support AI, biotech, space, quantum, defense tech, clean energy, medicine, farming, and materials science.", hi: "Research grants AI, biotech, space, quantum, defense tech, clean energy, medicine, farming और materials science को support करें।" },
+        { en: "India needs strong data privacy, cybersecurity, AI safety, and public-sector AI accountability laws.", hi: "India को strong data privacy, cybersecurity, AI safety और public-sector AI accountability laws चाहिए।" },
+      ],
+      outcome: { en: "India becomes a technology creator, not just a technology market.", hi: "India technology creator बने, सिर्फ technology market नहीं।" },
+    },
+    {
+      icon: "💼",
+      title: { en: "Tax and Business Reform", hi: "Tax और Business सुधार" },
+      goal: { en: "Taxpayers should not feel punished for being honest.", hi: "Taxpayers को honest होने की सजा जैसा feel नहीं होना चाहिए।" },
+      problem: { en: "Complex compliance, GST stress, delayed refunds, policy uncertainty, fear of notices, and unclear use of taxpayer money.", hi: "Complex compliance, GST stress, delayed refunds, policy uncertainty, notices का fear और taxpayer money का unclear use।" },
+      reforms: [
+        { en: "GST and income tax compliance must become simpler for small businesses, freelancers, creators, and service firms.", hi: "GST और income tax compliance small businesses, freelancers, creators और service firms के लिए simple बने।" },
+        { en: "Minor mistakes should trigger correction support before punishment unless fraud is proven.", hi: "Minor mistakes पर punishment से पहले correction support मिले जब तक fraud proven न हो।" },
+        { en: "Refunds should be time-bound, automatic, and tracked publicly through service-level dashboards.", hi: "Refunds time-bound, automatic और service-level dashboards से tracked हों।" },
+        { en: "Tax incentives should reward hiring, exports, R&D, manufacturing, formalization, and employee welfare.", hi: "Tax incentives hiring, exports, R&D, manufacturing, formalization और employee welfare को reward करें।" },
+        { en: "Every taxpayer should see a simple dashboard showing where public money went: roads, schools, hospitals, defense, welfare, debt, and salaries.", hi: "हर taxpayer को simple dashboard दिखे कि public money कहां गया: roads, schools, hospitals, defense, welfare, debt और salaries।" },
+      ],
+      outcome: { en: "Business confidence rises because honesty becomes easier than jugaad.", hi: "Business confidence बढ़े क्योंकि honesty jugaad से आसान बने।" },
+    },
+    {
+      icon: "🛡️",
+      title: { en: "Women Safety and Freedom Reform", hi: "महिला सुरक्षा और स्वतंत्रता सुधार" },
+      goal: { en: "A country is not developed until women feel free after sunset.", hi: "Country developed तब तक नहीं जब तक women sunset के बाद free feel न करें।" },
+      problem: { en: "Unsafe streets, weak transport safety, slow justice, hostel risks, workplace harassment, and limited economic freedom.", hi: "Unsafe streets, weak transport safety, slow justice, hostel risks, workplace harassment और limited economic freedom।" },
+      reforms: [
+        { en: "Safe transport monitoring, street lighting, CCTV in risk zones, emergency response teams, and last-mile safety audits must be mandatory.", hi: "Safe transport monitoring, street lighting, risk zones में CCTV, emergency response teams और last-mile safety audits mandatory हों।" },
+        { en: "Fast courts and victim support must handle crimes against women with dignity and strict timelines.", hi: "Women crimes के लिए fast courts और victim support dignity और strict timelines के साथ काम करें।" },
+        { en: "Hostel, PG, rental, school route, college route, and workplace safety standards must be published and audited.", hi: "Hostel, PG, rental, school route, college route और workplace safety standards publish और audit हों।" },
+        { en: "Workplace harassment complaints need fast, confidential, independent handling with penalties for retaliation.", hi: "Workplace harassment complaints में fast, confidential, independent handling और retaliation पर penalties हों।" },
+        { en: "Women entrepreneurs need skill grants, credit access, childcare support, digital safety training, and market access.", hi: "Women entrepreneurs को skill grants, credit access, childcare support, digital safety training और market access मिले।" },
+      ],
+      outcome: { en: "Women move, work, study, build, and lead without fear.", hi: "Women बिना fear move, work, study, build और lead करें।" },
+    },
+    {
+      icon: "🌳",
+      title: { en: "Climate, Heat and Pollution Reform", hi: "Climate, Heat और Pollution सुधार" },
+      goal: { en: "Clean air should not be a luxury product.", hi: "Clean air luxury product नहीं होना चाहिए।" },
+      problem: { en: "Heat waves, dust, pollution, garbage burning, tree death after plantation drives, water stress, and concrete cities cooking citizens.", hi: "Heat waves, dust, pollution, garbage burning, plantation के बाद tree death, water stress और concrete cities citizens को पका रही हैं।" },
+      reforms: [
+        { en: "Every district needs a Heat Action Plan with shaded stops, water points, heat shelters, school timing rules, and worker heat protection.", hi: "हर district में shaded stops, water points, heat shelters, school timing rules और worker heat protection वाला Heat Action Plan हो।" },
+        { en: "Tree plantation must include survival tracking for 12 months: planted, survived, dead, replaced, species, cost, and responsible department.", hi: "Tree plantation में 12 months survival tracking हो: planted, survived, dead, replaced, species, cost और responsible department।" },
+        { en: "Ward-wise air quality, dust, garbage burning, construction pollution, traffic pollution, and industrial pollution dashboards must be public.", hi: "Ward-wise air quality, dust, garbage burning, construction pollution, traffic pollution और industrial pollution dashboards public हों।" },
+        { en: "Cool roofs, water body revival, wetland protection, native tree canopy, and urban shade rules must become city standards.", hi: "Cool roofs, water body revival, wetland protection, native tree canopy और urban shade rules city standards बनें।" },
+        { en: "Electric buses, safe cycling lanes, shaded walking routes, and dust control must reduce heat and pollution together.", hi: "Electric buses, safe cycling lanes, shaded walking routes और dust control heat और pollution दोनों reduce करें।" },
+      ],
+      outcome: { en: "India becomes livable, breathable, shaded, and climate-resilient.", hi: "India livable, breathable, shaded और climate-resilient बने।" },
+    },
+    {
+      icon: "🪖",
+      title: { en: "Defense and National Security Reform", hi: "रक्षा और राष्ट्रीय सुरक्षा सुधार" },
+      goal: { en: "India must be peaceful, but never weak.", hi: "India peaceful हो, लेकिन कभी weak नहीं।" },
+      problem: { en: "Import dependence, cyber threats, drone threats, slow procurement, border risks, and underused defense startups.", hi: "Import dependence, cyber threats, drone threats, slow procurement, border risks और underused defense startups।" },
+      reforms: [
+        { en: "Indigenous defense manufacturing must scale in drones, sensors, cyber defense, missiles, electronics, robotics, and surveillance systems.", hi: "Indigenous defense manufacturing drones, sensors, cyber defense, missiles, electronics, robotics और surveillance systems में scale हो।" },
+        { en: "AI-based border surveillance, drone defense, satellite intelligence, and cyber defense command must be strengthened.", hi: "AI-based border surveillance, drone defense, satellite intelligence और cyber defense command strengthen हों।" },
+        { en: "Defense startups should get fast testing grounds, procurement pathways, export support, and university research partnerships.", hi: "Defense startups को fast testing grounds, procurement pathways, export support और university research partnerships मिलें।" },
+        { en: "Critical components must be domestically produced with trusted supply chains.", hi: "Critical components trusted supply chains के साथ domestically produced हों।" },
+        { en: "Veterans should receive skill, entrepreneurship, employment, and mental health support after service.", hi: "Veterans को service के बाद skill, entrepreneurship, employment और mental health support मिले।" },
+      ],
+      outcome: { en: "A secure India that protects peace through strength and self-reliance.", hi: "Secure India जो strength और self-reliance से peace protect करे।" },
+    },
+    {
+      icon: "📰",
+      title: { en: "Media and Information Reform", hi: "Media और Information सुधार" },
+      goal: { en: "Truth before propaganda. Evidence before outrage.", hi: "Propaganda से पहले truth। Outrage से पहले evidence।" },
+      problem: { en: "Fake news, deepfakes, paid propaganda, hidden ownership, political ad opacity, and citizens trapped in outrage cycles.", hi: "Fake news, deepfakes, paid propaganda, hidden ownership, political ad opacity और citizens outrage cycles में trapped।" },
+      reforms: [
+        { en: "Political ads must show sponsor, spend, targeting category, funding source, and campaign archive.", hi: "Political ads sponsor, spend, targeting category, funding source और campaign archive show करें।" },
+        { en: "Media ownership and government ad spending must be transparent.", hi: "Media ownership और government ad spending transparent हों।" },
+        { en: "Deepfake detection, public fact-check dashboards, and election misinformation response teams must be active.", hi: "Deepfake detection, public fact-check dashboards और election misinformation response teams active हों।" },
+        { en: "Civic education should teach students how to verify claims, read budgets, understand rights, and question propaganda.", hi: "Civic education students को claims verify करना, budgets पढ़ना, rights समझना और propaganda question करना सिखाए।" },
+        { en: "Public money should not fund personal image-building propaganda for leaders.", hi: "Public money leaders की personal image-building propaganda में use न हो।" },
+      ],
+      outcome: { en: "Citizens make decisions with facts, not fear or manipulation.", hi: "Citizens fear या manipulation नहीं, facts से decisions लें।" },
+    },
+    {
+      icon: "🗳️",
+      title: { en: "Political Reform", hi: "राजनीतिक सुधार" },
+      goal: { en: "Tickets should be earned through service, not inherited through surname.", hi: "Ticket surname से inherit नहीं, service से earn होना चाहिए।" },
+      problem: { en: "Dynasty politics, weak candidate standards, no debates, criminal cases, hidden funding, VIP culture, and youth kept outside power.", hi: "Dynasty politics, weak candidate standards, no debates, criminal cases, hidden funding, VIP culture और youth को power से बाहर रखना।" },
+      reforms: [
+        { en: "Internal party elections, transparent donation ledgers, candidate screening, and yearly leader report cards must be mandatory.", hi: "Internal party elections, transparent donation ledgers, candidate screening और yearly leader report cards mandatory हों।" },
+        { en: "Candidates must disclose assets, criminal cases, income sources, business interests, public work, and attendance.", hi: "Candidates assets, criminal cases, income sources, business interests, public work और attendance disclose करें।" },
+        { en: "Public debates before elections must become normal for serious candidates.", hi: "Elections से पहले public debates serious candidates के लिए normal बनें।" },
+        { en: "At least 50% youth representation should exist in party decision bodies and policy councils.", hi: "Party decision bodies और policy councils में कम से कम 50% youth representation हो।" },
+        { en: "No VIP culture: leaders should use and inspect public hospitals, schools, transport, roads, and offices they control.", hi: "No VIP culture: leaders वही public hospitals, schools, transport, roads और offices use और inspect करें जिन्हें वे control करते हैं।" },
+      ],
+      outcome: { en: "Politics becomes a public duty with measurable performance, not a family business.", hi: "Politics measurable performance वाली public duty बने, family business नहीं।" },
+    },
+  ];
+
+  return (
+    <>
+      <section className="mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 text-center md:p-14">
+          <PageEyebrow value={{ en: "India 2047 Reform Operating System", hi: "भारत 2047 सुधार ऑपरेटिंग सिस्टम" }} mode={mode} />
+          <h1 className="mx-auto mt-6 max-w-6xl text-6xl font-black leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+            <WordRevealText
+              value={{
+                en: "Make India better than America and Europe.",
+                hi: "भारत को America और Europe से बेहतर बनाओ।",
+              }}
+              mode={mode}
+              hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+            />
+          </h1>
+          <p className="mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+            <BilingualText
+              value={{
+                en: "India should not copy any country blindly. India should combine America's innovation, Europe's public service quality, India's scale, and zero-corruption execution.",
+                hi: "India किसी country को blindly copy न करे। India American innovation, European public service quality, Indian scale और zero-corruption execution को combine करे।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45 md:text-base"
+            />
+          </p>
+
+          <div className="eligibility-marquee apple-clean-pill mt-12 rounded-full bg-white/70 py-4 backdrop-blur-xl" aria-hidden="true">
+            <div className="eligibility-marquee-track">
+              {[...headlineWords, ...headlineWords, ...headlineWords].map((word, index) => (
+                <span key={`${word}-${index}`} className="eligibility-pill">
+                  {word}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless rounded-[3.75rem] bg-black p-8 text-white md:p-12">
+          <PageEyebrow value={{ en: "The Big National Goal", hi: "बड़ा राष्ट्रीय लक्ष्य" }} mode={mode} />
+          <h2 className="mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-white md:text-8xl">
+            <BilingualText
+              value={{
+                en: "High income. Clean governance. Fast justice. Safe cities. AI leadership. Dignity for every citizen.",
+                hi: "High income. Clean governance. Fast justice. Safe cities. AI leadership. हर citizen की dignity.",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-white/35 md:text-4xl"
+            />
+          </h2>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="grid gap-5 md:grid-cols-5">
+          {operatingFormula.map((item, index) => (
+            <div key={item.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Formula {String(index + 1).padStart(2, "0")}</p>
+              <p className="mt-3 text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Sector-by-Sector Reform Plan", hi: "हर सेक्टर का सुधार प्लान" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+              <BilingualText
+                value={{ en: "Every sector needs an operating system upgrade.", hi: "हर sector को operating system upgrade चाहिए।" }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "This page converts national anger into practical reforms: problem, action, and outcome for every major sector.",
+                  hi: "यह page national anger को practical reforms में बदलता है: हर major sector के लिए problem, action और outcome।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {sectorReforms.map((sector, index) => (
+            <article key={sector.title.en} className="reveal-card micro-lift apple-clean-card rounded-[3rem] bg-white/76 p-7 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl">
+              <div className="flex items-start gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.55rem] bg-black text-3xl text-white shadow-2xl">
+                  {sector.icon}
+                </div>
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Reform {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-2 text-3xl font-black leading-[0.98] tracking-[-0.055em] text-black md:text-4xl">
+                    <BilingualText value={sector.title} mode={mode} hiClassName="text-base leading-5 tracking-normal text-black/55" />
+                  </h3>
+                </div>
+              </div>
+
+              <div className="mt-7 grid gap-3 md:grid-cols-2">
+                <div className="rounded-[2.25rem] bg-white/72 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.035)]">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-black/35">Problem</p>
+                  <p className="mt-3 text-sm font-bold leading-6 text-black/68">
+                    <BilingualText value={sector.problem} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                  </p>
+                </div>
+                <div className="rounded-[2.25rem] bg-black p-5 text-white shadow-xl">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-white/40">Goal</p>
+                  <p className="mt-3 text-lg font-black leading-7 tracking-[-0.035em] text-white">
+                    <BilingualText value={sector.goal} mode={mode} hiClassName="text-xs leading-4 text-white/35" />
+                  </p>
+                </div>
+              </div>
+
+              <ul className="mt-7 grid gap-3">
+                {sector.reforms.map((reform, reformIndex) => (
+                  <li key={reform.en} className="flex gap-3 rounded-[1.65rem] bg-white/72 p-4 text-sm font-bold leading-6 text-black/75 shadow-[0_10px_30px_rgba(0,0,0,0.035)] backdrop-blur-xl">
+                    <span className="manifesto-bullet mt-2 h-2 w-2 shrink-0 rounded-full bg-black" />
+                    <span>
+                      <strong>Action {String(reformIndex + 1).padStart(2, "0")}: </strong>
+                      <BilingualText value={reform} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-7 rounded-[2.25rem] bg-white/72 p-5 shadow-[0_10px_30px_rgba(0,0,0,0.035)]">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-black/35">Outcome</p>
+                <p className="mt-3 text-base font-black leading-7 tracking-[-0.025em] text-black/72">
+                  <BilingualText value={sector.outcome} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-16">
+        <div className="apple-borderless apple-gradient-bg rounded-[3.75rem] p-8 text-center md:p-12">
+          <PageEyebrow value={{ en: "Final Reform Line", hi: "अंतिम सुधार लाइन" }} mode={mode} />
+          <h2 className="mx-auto mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+            <BilingualText
+              value={{
+                en: "India does not need to become America. India must become better than America.",
+                hi: "India को America बनने की जरूरत नहीं। India को America से बेहतर बनना है।",
+              }}
+              mode={mode}
+              hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+            />
+          </h2>
+          <p className="mx-auto mt-8 max-w-4xl text-xl font-black leading-8 text-black/62">
+            <BilingualText
+              value={{
+                en: "India has young population, digital public infrastructure, engineering talent, family ambition, democratic energy, and hunger to rise. With reforms, this becomes the world's strongest nation.",
+                hi: "India के पास young population, digital public infrastructure, engineering talent, family ambition, democratic energy और rise करने की hunger है। Reforms के साथ यही world की strongest nation बन सकती है।",
+              }}
+              mode={mode}
+              hiClassName="text-sm leading-5 text-black/45"
+            />
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function ActionHubPage({ mode }: { mode: LangMode }) {
   return (
     <>
@@ -2931,24 +3505,29 @@ function JantaOathJoinSection({ mode }: { mode: LangMode }) {
           </div>
         </div>
 
-        <div className="border-t border-black/10 bg-white/55 p-8 md:p-12">
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
-            <div className="rounded-[2.5rem] bg-black p-7 text-white shadow-xl">
-              <PageEyebrow value={{ en: "Janta Membership Levels", hi: "Janta Membership Levels" }} mode={mode} />
-              <p className="mt-5 text-4xl font-black leading-[1.02] tracking-[-0.055em] text-white md:text-6xl">From survivor to system auditor.</p>
-              <p className="mt-5 text-sm font-bold leading-6 text-white/58">
-                <BilingualText value={{ en: "Start small. Stay disciplined. Grow the movement.", hi: "छोटा शुरू करें। Disciplined रहें। Movement grow करें।" }} mode={mode} hiClassName="text-xs leading-5 text-white/45" />
-              </p>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              {membershipLevels.map((item) => (
-                <article key={item.title.en} className="join-oath-mini-card rounded-[1.65rem] bg-white p-5 shadow-sm">
-                  <p className="text-xs font-black uppercase tracking-[0.16em] text-black/35">Level {item.level}</p>
-                  <h3 className="mt-2 text-xl font-black tracking-[-0.04em] text-black"><BilingualText value={item.title} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h3>
-                  <p className="mt-3 text-sm font-bold leading-6 text-black/62"><BilingualText value={item.body} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
-                </article>
-              ))}
-            </div>
+        <div className="membership-levels-section border-t border-black/10 bg-white/55 p-8 md:p-12">
+          <div className="membership-levels-home-header mx-auto max-w-6xl text-center">
+            <PageEyebrow value={{ en: "Janta Membership Levels", hi: "Janta Membership Levels" }} mode={mode} />
+            <h2 className="membership-levels-home-title mx-auto mt-6 max-w-6xl text-6xl font-black leading-[0.86] tracking-[-0.08em] text-black md:text-8xl lg:text-9xl">
+              <WordRevealText
+                value={{ en: "From survivor to system auditor.", hi: "Survivor से system auditor तक।" }}
+                mode={mode}
+                hiClassName="mt-5 text-2xl leading-8 tracking-normal text-black/50 md:text-4xl"
+              />
+            </h2>
+            <p className="membership-levels-home-subtitle mx-auto mt-10 max-w-4xl text-xl font-black leading-9 tracking-[-0.03em] text-black/65 md:text-2xl md:leading-10">
+              <BilingualText value={{ en: "Start small. Stay disciplined. Grow the movement.", hi: "छोटा शुरू करें। Disciplined रहें। Movement grow करें।" }} mode={mode} hiClassName="text-sm leading-5 text-black/45 md:text-base" />
+            </p>
+          </div>
+
+          <div className="membership-levels-home-grid mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+            {membershipLevels.map((item) => (
+              <article key={item.title.en} className="join-oath-mini-card membership-level-card rounded-[1.65rem] bg-white p-5 shadow-sm">
+                <p className="text-xs font-black uppercase tracking-[0.16em] text-black/35">Level {item.level}</p>
+                <h3 className="mt-2 text-xl font-black tracking-[-0.04em] text-black"><BilingualText value={item.title} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></h3>
+                <p className="mt-3 text-sm font-bold leading-6 text-black/62"><BilingualText value={item.body} mode={mode} hiClassName="text-xs leading-5 text-black/55" /></p>
+              </article>
+            ))}
           </div>
         </div>
 
@@ -3033,7 +3612,7 @@ function ContactPage({ mode }: { mode: LangMode }) {
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="premium-toggle premium-toggle-dark inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
+                  className="premium-toggle premium-toggle-follow inline-flex w-full items-center justify-center rounded-full px-8 py-4 text-base font-black transition-all duration-300 ease-out"
                 >
                   Follow on Instagram
                 </a>
@@ -3095,7 +3674,7 @@ function ScrollProgressBar({ progress }: { progress: number }) {
   return (
     <div className="fixed left-0 top-0 z-[90] h-1 w-full bg-black/5" aria-hidden="true">
       <div
-        className="h-full bg-gradient-to-r from-[#0B8F36] via-[#B6FF00] to-[#64E986] transition-[width] duration-150 ease-out"
+        className="h-full bg-gradient-to-r from-[#0B0B0D] via-[#E11D48] to-[#0B0B0D] transition-[width] duration-150 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>
@@ -3109,7 +3688,7 @@ function FloatingJoinNowButton({ mode, onClick }: { mode: LangMode; onClick: () 
         <CockroachIcon className="h-5 w-5" />
       </span>
       <span className="floating-join-text">
-        {mode === "hi" ? "जुड़ें / रिपोर्ट" : "Join / Report"}
+        {mode === "hi" ? "जुड़ें / रिपोर्ट मुद्दा" : "Join / Report Issue"}
       </span>
     </button>
   );
@@ -3378,7 +3957,7 @@ function MobileMenuOverlay({
           </div>
 
           <div className="grid gap-3">
-            {navItems.map((item) => (
+            {navItems.filter((item) => ["home", "manifesto", "antiCorruption", "reformOS"].includes(item.id)).map((item) => (
               <button
                 key={item.id}
                 type="button"
@@ -3399,7 +3978,7 @@ function MobileMenuOverlay({
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-dark flex w-full rounded-full px-8 py-4 text-base font-black"
+              className="premium-toggle premium-toggle-follow flex w-full rounded-full px-8 py-4 text-base font-black"
             >
               Follow on Instagram
             </a>
@@ -3438,7 +4017,7 @@ function FinalCinematicCTA({ mode, onShare }: { mode: LangMode; onShare?: () => 
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="premium-toggle premium-toggle-dark inline-flex rounded-full px-9 py-5 text-base font-black"
+            className="premium-toggle premium-toggle-follow inline-flex rounded-full px-9 py-5 text-base font-black"
           >
             Follow on Instagram
           </a>
@@ -3737,6 +4316,210 @@ function LegalSafetyBarSection({ mode }: { mode: LangMode }) {
   );
 }
 
+function YouthPowerTransferSection({ mode }: { mode: LangMode }) {
+  const sharpLines: I18n[] = [
+    {
+      en: "The people who will live in 2047 should help design 2047.",
+      hi: "जो लोग 2047 में भारत को जिएंगे, उन्हें 2047 design करने का अधिकार मिलना चाहिए।",
+    },
+    {
+      en: "Youth are not just voters. Youth are the operating system of India.",
+      hi: "Youth सिर्फ voters नहीं। Youth India का operating system हैं।",
+    },
+    {
+      en: "Stop using youth as crowd, slogan, and selfie background. Give youth real power.",
+      hi: "Youth को crowd, slogan और selfie background मत बनाओ। Youth को real power दो।",
+    },
+    {
+      en: "Retirement-age politics cannot solve startup-age problems.",
+      hi: "Retirement-age politics startup-age problems solve नहीं कर सकती।",
+    },
+    {
+      en: "No more ‘beta wait karo’. Youth has waited enough.",
+      hi: "अब ‘beta wait karo’ नहीं। Youth काफी wait कर चुका है।",
+    },
+    {
+      en: "Young India does not need speeches. Young India needs seats at the decision table.",
+      hi: "Young India को speeches नहीं, decision table पर seats चाहिए।",
+    },
+  ];
+
+  const policies: { icon: string; title: I18n; body: I18n }[] = [
+    {
+      icon: "🧑‍⚖️",
+      title: { en: "50% Youth Representation", hi: "50% Youth Representation" },
+      body: {
+        en: "District, state, and national decision bodies must include serious youth members, not decorative youth faces for stage events.",
+        hi: "District, state और national decision bodies में serious youth members हों, सिर्फ stage events के decorative youth faces नहीं।",
+      },
+    },
+    {
+      icon: "🏛️",
+      title: { en: "Youth Policy Council", hi: "Youth Policy Council" },
+      body: {
+        en: "Every district should have a youth council with students, private employees, founders, farmers’ children, gig workers, and young professionals.",
+        hi: "हर district में students, private employees, founders, farmers’ children, gig workers और young professionals वाली youth council हो।",
+      },
+    },
+    {
+      icon: "🎟️",
+      title: { en: "Candidate Age Diversity Rule", hi: "Candidate Age Diversity Rule" },
+      body: {
+        en: "Tickets should not go only to old political networks. Young candidates with clean background, local work, and public trust must get real chances.",
+        hi: "Tickets सिर्फ पुराने political networks को न मिलें। Clean background, local work और public trust वाले young candidates को real chances मिलें।",
+      },
+    },
+    {
+      icon: "📊",
+      title: { en: "Youth Budget Audit", hi: "Youth Budget Audit" },
+      body: {
+        en: "Every budget must show how much money directly supports youth jobs, education, skills, internships, startups, sports, mental health, and research.",
+        hi: "हर budget दिखाए कि youth jobs, education, skills, internships, startups, sports, mental health और research पर कितना पैसा जा रहा है।",
+      },
+    },
+    {
+      icon: "🗳️",
+      title: { en: "No Future Without Youth Consent", hi: "No Future Without Youth Consent" },
+      body: {
+        en: "Any policy affecting exams, jobs, education, tech, hiring, or youth employment must include documented youth consultation.",
+        hi: "Exams, jobs, education, tech, hiring या youth employment को affect करने वाली policy में documented youth consultation हो।",
+      },
+    },
+  ];
+
+  const youthReality: I18n[] = [
+    { en: "Clear exams but wait for recruitment.", hi: "Exam clear करो, फिर recruitment का wait करो।" },
+    { en: "Study technology while outdated politics decides jobs.", hi: "Technology पढ़ो, लेकिन jobs outdated politics decide करे।" },
+    { en: "Pay rent, tax, EMIs, fees, and still be called inexperienced.", hi: "Rent, tax, EMI, fees भरो और फिर inexperienced कहलाओ।" },
+    { en: "Build startups and AI systems, but stay outside policy rooms.", hi: "Startups और AI systems बनाओ, लेकिन policy rooms से बाहर रहो।" },
+  ];
+
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-16">
+      <div className="apple-borderless apple-gradient-bg overflow-hidden rounded-[3.75rem] p-8 md:p-12">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <PageEyebrow value={{ en: "Youth Power Transfer", hi: "युवा शक्ति हस्तांतरण" }} mode={mode} />
+            <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-black md:text-8xl lg:text-9xl">
+              <BilingualText
+                value={{
+                  en: "India cannot be run like a retirement club.",
+                  hi: "भारत retirement club की तरह नहीं चल सकता।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+              />
+            </h2>
+          </div>
+          <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+            <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+              <BilingualText
+                value={{
+                  en: "The future must be led by the generation that will actually live in it. This is not disrespect for age. This is respect for the future.",
+                  hi: "Future उसी generation के हाथ में होना चाहिए जो उसे actually live करेगी। यह age का अपमान नहीं। यह future का सम्मान है।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+              />
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-4">
+          {youthReality.map((item) => (
+            <div key={item.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 text-center backdrop-blur-xl">
+              <p className="text-2xl font-black leading-7 tracking-[-0.045em] text-black">
+                <BilingualText value={item} mode={mode} hiClassName="text-xs leading-4 text-black/55" />
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-stretch">
+          <div className="rounded-[3rem] bg-black p-8 text-white md:p-10">
+            <PageEyebrow value={{ en: "Enough Now", hi: "अब बहुत हुआ" }} mode={mode} />
+            <p className="mt-8 text-5xl font-black leading-[0.88] tracking-[-0.075em] text-white md:text-7xl">
+              <BilingualText
+                value={{
+                  en: "Old politics had 75 years. Now give young India 10 years.",
+                  hi: "पुरानी राजनीति को 75 साल मिले। अब Young India को 10 साल दो।",
+                }}
+                mode={mode}
+                hiClassName="mt-4 text-xl leading-6 tracking-normal text-white/50 md:text-3xl"
+              />
+            </p>
+            <p className="mt-8 text-lg font-black leading-7 text-white/68">
+              <BilingualText
+                value={{
+                  en: "If youth can run startups, code AI systems, manage families, clear exams, survive rent, pay tax, and work 10-hour jobs, youth can also run the country with discipline and accountability.",
+                  hi: "अगर youth startups चला सकता है, AI systems code कर सकता है, family manage कर सकता है, exams clear कर सकता है, rent survive कर सकता है, tax pay कर सकता है और 10-hour jobs कर सकता है, तो youth discipline और accountability के साथ country भी चला सकता है।",
+                }}
+                mode={mode}
+                hiClassName="text-sm leading-5 text-white/45"
+              />
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {sharpLines.map((line, index) => (
+              <article key={line.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 backdrop-blur-xl">
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Youth Line {String(index + 1).padStart(2, "0")}</p>
+                <h3 className="mt-3 text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black md:text-3xl">
+                  <BilingualText value={line} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                </h3>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <div className="mb-8 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+            <div>
+              <PageEyebrow value={{ en: "Youth Power Plan", hi: "Youth Power Plan" }} mode={mode} />
+              <h3 className="mt-5 text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+                <BilingualText
+                  value={{ en: "Not timepass. Nation building.", hi: "Timepass नहीं। Nation building." }}
+                  mode={mode}
+                  hiClassName="mt-4 text-2xl leading-7 tracking-normal text-black/55 md:text-4xl"
+                />
+              </h3>
+            </div>
+            <div className="apple-clean-card rounded-[2.75rem] bg-white/72 p-6 backdrop-blur-xl">
+              <p className="text-xl font-black leading-8 tracking-[-0.035em] text-black md:text-3xl md:leading-10">
+                <BilingualText
+                  value={{
+                    en: "Power must move from expired political software to skilled, accountable, future-facing Indians.",
+                    hi: "Power expired political software से skilled, accountable और future-facing Indians के हाथ में जानी चाहिए।",
+                  }}
+                  mode={mode}
+                  hiClassName="text-sm leading-5 text-black/55 md:text-lg"
+                />
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-5">
+            {policies.map((policy, index) => (
+              <article key={policy.title.en} className="reveal-card micro-lift apple-clean-card rounded-[2.5rem] bg-white/76 p-6 backdrop-blur-xl">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-black text-2xl text-white shadow-xl">
+                  {policy.icon}
+                </div>
+                <p className="text-sm font-black uppercase tracking-[0.18em] text-black/35">Plan {String(index + 1).padStart(2, "0")}</p>
+                <h4 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-0.05em] text-black">
+                  <BilingualText value={policy.title} mode={mode} hiClassName="text-sm leading-5 tracking-normal text-black/55" />
+                </h4>
+                <p className="mt-4 text-sm font-bold leading-6 text-black/66">
+                  <BilingualText value={policy.body} mode={mode} hiClassName="text-[11px] leading-4 text-black/55" />
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function BerozgariEmergencySection({ mode }: { mode: LangMode }) {
   return (
     <section className="mx-auto max-w-7xl px-6 py-16">
@@ -3891,8 +4674,8 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
             </div>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
-                <p className="text-[7rem] font-black leading-none tracking-[-0.1em] md:text-[9rem]">08</p>
+              <div className="janta-role-count-tile rounded-[2.5rem] border border-black/10 bg-white p-6 text-black shadow-[0_24px_80px_rgba(0,0,0,0.08)]">
+                <p className="janta-role-count-number text-[7rem] font-black leading-none tracking-[-0.1em] md:text-[9rem]">08</p>
                 <p className="mt-2 text-sm font-black uppercase tracking-[0.22em] text-black/55">Janta roles</p>
               </div>
               <div className="rounded-[2.5rem] bg-white/10 p-6 backdrop-blur-xl">
@@ -3914,10 +4697,10 @@ function VolunteerRolesSection({ mode }: { mode: LangMode }) {
             {roles.map((role, index) => (
               <article
                 key={role.title.en}
-                className="reveal-card micro-lift group rounded-[2.75rem] bg-white p-5 text-black shadow-[0_22px_70px_rgba(0,0,0,0.16)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_95px_rgba(182,255,0,0.16)] md:p-6"
+                className="reveal-card micro-lift group rounded-[2.75rem] bg-white p-5 text-black shadow-[0_22px_70px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_95px_rgba(225,29,72,0.10)] md:p-6"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-[1.65rem] bg-black text-3xl text-white shadow-2xl transition duration-500 group-hover:bg-[#B6FF00] group-hover:text-black">
+                  <div className="janta-role-icon flex h-16 w-16 items-center justify-center rounded-[1.65rem] bg-black text-3xl text-white shadow-2xl transition duration-500 group-hover:bg-[#E11D48] group-hover:text-white">
                     {role.icon}
                   </div>
                   <span className="rounded-full bg-black/5 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black/45">
@@ -4136,10 +4919,10 @@ function PublicIssueMapSection({ mode }: { mode: LangMode }) {
           <div className="flex flex-col justify-between rounded-[3rem] bg-white/8 p-7 backdrop-blur-xl md:p-9">
             <div>
               <div className="mb-4 flex flex-wrap items-center gap-3">
-                <p className="text-base font-black uppercase tracking-[0.22em] text-[#B6FF00]">
+                <p className="text-base font-black uppercase tracking-[0.22em] text-white/82">
                   <BilingualText value={{ en: "India Public Issue Map", hi: "भारत Public Issue Map" }} mode={mode} hiClassName="text-xs leading-4 tracking-normal text-white/70" />
                 </p>
-                <span className="rounded-full bg-[#B6FF00] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-black">Coming Soon</span>
+                <span className="rounded-full bg-[#E11D48] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white">Coming Soon</span>
                 <span className="rounded-full bg-white/14 px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white/82">Public Beta</span>
               </div>
               <h2 className="mt-5 text-5xl font-black leading-[0.86] tracking-[-0.075em] text-white md:text-8xl">
@@ -4150,8 +4933,8 @@ function PublicIssueMapSection({ mode }: { mode: LangMode }) {
                 />
               </h2>
             </div>
-            <div className="mt-10 rounded-[2.5rem] bg-[#B6FF00] p-6 text-black shadow-[0_24px_80px_rgba(182,255,0,0.18)]">
-              <p className="text-[5rem] font-black leading-none tracking-[-0.1em] md:text-[8rem]">MAP</p>
+            <div className="public-map-count-tile mt-10 rounded-[2.5rem] border border-white/14 bg-white p-6 text-black shadow-[0_24px_80px_rgba(0,0,0,0.12)]">
+              <p className="public-map-count-word text-[5rem] font-black leading-none tracking-[-0.1em] md:text-[8rem]">MAP</p>
               <p className="mt-4 text-2xl font-black leading-8 tracking-[-0.04em] text-black md:text-3xl">
                 <BilingualText
                   value={{ en: "A proposed civic dashboard for public pressure, not a complaint black hole.", hi: "Public pressure के लिए proposed civic dashboard, complaint black hole नहीं।" }}
@@ -4182,7 +4965,7 @@ function PublicIssueMapSection({ mode }: { mode: LangMode }) {
                     From report to closure proof.
                   </p>
                 </div>
-                <span className="rounded-full bg-black px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#B6FF00]">5 Steps</span>
+                <span className="rounded-full bg-black px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-white">5 Steps</span>
               </div>
 
               <div className="status-system-flow">
@@ -6659,6 +7442,3053 @@ export default function CockroachIndiaParty() {
           justify-content: center !important;
           align-items: center !important;
         }
+
+        /* REMOVE ALL GREEN: WHITE REPLACEMENT PATCH */
+        .text-\[\#B6FF00\],
+        .text-\[\#64E986\],
+        .text-\[\#35D94A\],
+        .text-\[\#0B8F36\],
+        .apple-gradient-text,
+        .public-audit-eyebrow,
+        .auto-slide-dark,
+        .auto-slide-dark .auto-slide-word,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        .oath-chip,
+        .floating-join-toggle,
+        .mobile-menu-hint,
+        .quick-section-dot::after {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          background-image: none !important;
+        }
+
+        .bg-\[\#B6FF00\],
+        .bg-\[\#64E986\],
+        .bg-\[\#35D94A\],
+        .bg-\[\#0B8F36\],
+        .premium-toggle::before,
+        .floating-join-icon,
+        .join-rules-number,
+        .status-step-number,
+        .faq-accordion-icon,
+        .quick-section-dot:hover,
+        .quick-section-dot-active,
+        .manifesto-bullet,
+        .svg-floating-node {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          color: #071107 !important;
+          box-shadow: none !important;
+        }
+
+        .apple-gradient-bg,
+        .apple-gradient-soft,
+        .premium-soft-background,
+        .auto-slide-green,
+        .oath-paper {
+          background:
+            radial-gradient(circle at 18% 16%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.70) 22%, transparent 44%),
+            radial-gradient(circle at 82% 20%, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.42) 24%, transparent 46%),
+            linear-gradient(135deg, #ffffff 0%, #f7f7f7 48%, #ffffff 100%) !important;
+          color: #071107 !important;
+        }
+
+        .auto-slide-green .auto-slide-word,
+        .eligibility-pill,
+        .apple-clean-pill,
+        .premium-statement-banner {
+          background: rgba(255,255,255,0.86) !important;
+          color: #071107 !important;
+          border-color: rgba(0,0,0,0.08) !important;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+        }
+
+        .auto-slide-dark .auto-slide-word,
+        .oath-rule-pill,
+        .oath-dark-chip {
+          background: rgba(255,255,255,0.12) !important;
+          color: #ffffff !important;
+          border-color: rgba(255,255,255,0.22) !important;
+          text-shadow: none !important;
+        }
+
+        .premium-toggle-dark:hover,
+        .premium-toggle-dark:focus-visible,
+        .premium-toggle-light:hover,
+        .premium-toggle-light:focus-visible {
+          background: #ffffff !important;
+          color: #071107 !important;
+        }
+
+        .nav-link::after,
+        .h-full.bg-gradient-to-r {
+          background: #ffffff !important;
+        }
+
+        .running-cockroach,
+        .premium-loader-mark,
+        .oath-close,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover {
+          color: #ffffff !important;
+          box-shadow: none !important;
+        }
+
+        .join-rules-black-box,
+        .oath-hero-card {
+          background:
+            radial-gradient(circle at 15% 8%, rgba(255,255,255,0.10), transparent 34%),
+            radial-gradient(circle at 88% 92%, rgba(255,255,255,0.08), transparent 38%),
+            #071107 !important;
+        }
+
+        .soft-gradient-glow,
+        .running-cockroach,
+        .premium-toggle::before,
+        .floating-join-icon,
+        .join-rules-number,
+        .status-step-number {
+          filter: none !important;
+          box-shadow: none !important;
+        }
+
+        /* HOME TRUST BADGES SLIDING DESIGN */
+        .trust-marquee-shell {
+          overflow: hidden;
+          width: 100%;
+          border-radius: 9999px;
+          background: #ffffff !important;
+          border: 1px solid rgba(0, 0, 0, 0.08) !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+          padding: 0.7rem 0 !important;
+          -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+
+        .trust-marquee-track {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          width: max-content;
+          animation: trustMarqueeMove 26s linear infinite;
+          will-change: transform;
+        }
+
+        .trust-marquee-shell:hover .trust-marquee-track {
+          animation-play-state: paused;
+        }
+
+        .trust-marquee-pill {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          white-space: nowrap;
+          border-radius: 9999px;
+          background: #ffffff !important;
+          color: #111111 !important;
+          border: 1px solid rgba(0, 0, 0, 0.08) !important;
+          padding: 0.9rem 1.2rem !important;
+          font-size: 0.95rem !important;
+          line-height: 1.2 !important;
+          font-weight: 700 !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+          text-shadow: none !important;
+          -webkit-text-fill-color: #111111 !important;
+        }
+
+        .trust-marquee-pill span,
+        .trust-marquee-pill .bilingual-hi,
+        .trust-marquee-pill [lang="hi"] {
+          color: rgba(0, 0, 0, 0.58) !important;
+          -webkit-text-fill-color: rgba(0, 0, 0, 0.58) !important;
+          text-shadow: none !important;
+        }
+
+        @keyframes trustMarqueeMove {
+          from { transform: translateX(0); }
+          to { transform: translateX(-33.333%); }
+        }
+
+        @media (max-width: 768px) {
+          .trust-marquee-shell {
+            padding: 0.55rem 0 !important;
+          }
+
+          .trust-marquee-track {
+            gap: 0.55rem;
+            animation-duration: 20s;
+          }
+
+          .trust-marquee-pill {
+            padding: 0.75rem 0.95rem !important;
+            font-size: 0.82rem !important;
+          }
+        }
+
+        /* PREMIUM WHITE EDITORIAL FINAL SYSTEM */
+        :root {
+          --premium-white: #ffffff;
+          --premium-soft: #f7f7f8;
+          --premium-soft-2: #fbfbfc;
+          --premium-ink: #111111;
+          --premium-muted: rgba(17,17,17,0.62);
+          --premium-border: rgba(0,0,0,0.075);
+          --premium-border-strong: rgba(0,0,0,0.11);
+          --premium-shadow: 0 18px 50px rgba(0,0,0,0.055);
+          --premium-shadow-soft: 0 10px 30px rgba(0,0,0,0.04);
+          --premium-radius: 24px;
+          --premium-radius-lg: 32px;
+        }
+
+        html,
+        body,
+        main {
+          background: var(--premium-white) !important;
+          color: var(--premium-ink) !important;
+        }
+
+        .premium-soft-background,
+        .parallax-background,
+        .apple-gradient-bg,
+        .apple-gradient-soft,
+        .auto-slide-green,
+        .oath-paper,
+        .eligibility-section::before {
+          background: linear-gradient(180deg, #ffffff 0%, #fbfbfc 48%, #ffffff 100%) !important;
+          background-color: #ffffff !important;
+          background-image: linear-gradient(180deg, #ffffff 0%, #fbfbfc 48%, #ffffff 100%) !important;
+          color: var(--premium-ink) !important;
+          filter: none !important;
+          box-shadow: none !important;
+        }
+
+        .apple-borderless,
+        .glass-card,
+        .apple-clean-card,
+        .clay-card,
+        .reveal-card,
+        .faq-accordion-item,
+        .category-report-card,
+        .how-step-card,
+        .status-system-panel,
+        .join-oath-card,
+        .join-oath-mini-card,
+        .oath-mini-card,
+        .oath-translation-card,
+        .oath-complaint-card,
+        .trust-marquee-shell,
+        .premium-statement-banner,
+        .eligibility-marquee,
+        .command-center,
+        .classic-section-card,
+        .public-audits-section,
+        .legal-safety-bar,
+        .join-rules-black-box,
+        .oath-hero-card,
+        .oath-block,
+        .mobile-menu-card,
+        footer .rounded-\[2rem\] {
+          background: var(--premium-white) !important;
+          background-color: var(--premium-white) !important;
+          background-image: none !important;
+          border: 1px solid var(--premium-border) !important;
+          border-radius: var(--premium-radius-lg) !important;
+          box-shadow: var(--premium-shadow) !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          color: var(--premium-ink) !important;
+        }
+
+        .command-metric,
+        .classic-side-card,
+        .public-audits-left,
+        .join-rules-big-pill,
+        .status-step-card,
+        .legal-safety-chip,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        .public-map-issue-card,
+        .rounded-\[3rem\].bg-white\/8,
+        .rounded-\[3rem\].bg-white\/12,
+        .rounded-\[2\.75rem\].bg-white\/10,
+        .rounded-\[2\.5rem\].bg-white\/10,
+        .rounded-\[2\.25rem\].bg-black,
+        [class*="bg-white/8"],
+        [class*="bg-white/10"],
+        [class*="bg-white/12"],
+        [class*="bg-white/14"],
+        [class*="bg-black/"] {
+          background: var(--premium-soft-2) !important;
+          background-color: var(--premium-soft-2) !important;
+          background-image: none !important;
+          border: 1px solid var(--premium-border) !important;
+          color: var(--premium-ink) !important;
+          box-shadow: var(--premium-shadow-soft) !important;
+        }
+
+        .bg-black,
+        [class*="bg-black"],
+        .auto-slide-dark,
+        .oath-black-block {
+          background: var(--premium-white) !important;
+          background-color: var(--premium-white) !important;
+          background-image: none !important;
+          color: var(--premium-ink) !important;
+          border-color: var(--premium-border) !important;
+          box-shadow: var(--premium-shadow) !important;
+        }
+
+        .premium-toggle-dark,
+        .floating-join-toggle,
+        .mobile-menu-hint,
+        .oath-close,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover,
+        footer .premium-toggle-dark,
+        nav .premium-toggle-dark {
+          background: var(--premium-ink) !important;
+          background-color: var(--premium-ink) !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          border-color: var(--premium-ink) !important;
+          box-shadow: 0 14px 36px rgba(0,0,0,0.14) !important;
+        }
+
+        .premium-toggle-dark *,
+        .floating-join-toggle *,
+        .mobile-menu-hint *,
+        .oath-close *,
+        .mobile-menu-link-active *,
+        .mobile-menu-link:hover * {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .premium-toggle-light,
+        .magnetic-btn,
+        .sticker-chip,
+        .trust-marquee-pill,
+        .eligibility-pill,
+        .auto-slide-word,
+        .oath-chip,
+        .apple-clean-pill,
+        select {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: none !important;
+          color: var(--premium-ink) !important;
+          border: 1px solid var(--premium-border) !important;
+          box-shadow: var(--premium-shadow-soft) !important;
+        }
+
+        .premium-toggle:hover,
+        .magnetic-btn:hover,
+        .sticker-chip:hover,
+        .reveal-card:hover,
+        .apple-clean-card:hover,
+        .glass-card:hover,
+        .category-report-card:hover,
+        .how-step-card:hover,
+        .faq-accordion-item:hover {
+          transform: translateY(-2px) !important;
+          box-shadow: 0 22px 56px rgba(0,0,0,0.075) !important;
+          border-color: var(--premium-border-strong) !important;
+        }
+
+        .apple-borderless::before,
+        .classic-section-card::before,
+        .public-audits-section::before,
+        .command-center::before {
+          content: none !important;
+          display: none !important;
+        }
+
+        .text-\[\#B6FF00\],
+        .text-\[\#64E986\],
+        .text-\[\#35D94A\],
+        .text-\[\#0B8F36\],
+        [class*="#B6FF00"],
+        [class*="#64E986"],
+        [class*="#35D94A"],
+        [class*="#0B8F36"],
+        .apple-gradient-text,
+        .public-audit-eyebrow,
+        .auto-slide-dark,
+        .auto-slide-dark .auto-slide-word,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        .oath-chip,
+        .quick-section-dot::after {
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+          background-image: none !important;
+          text-shadow: none !important;
+        }
+
+        .bg-\[\#B6FF00\],
+        .bg-\[\#64E986\],
+        .bg-\[\#35D94A\],
+        .bg-\[\#0B8F36\],
+        .premium-toggle::before,
+        .floating-join-icon,
+        .join-rules-number,
+        .status-step-number,
+        .faq-accordion-icon,
+        .manifesto-bullet,
+        .quick-section-dot:hover,
+        .quick-section-dot-active,
+        .svg-floating-node {
+          background: var(--premium-soft) !important;
+          background-color: var(--premium-soft) !important;
+          background-image: none !important;
+          color: var(--premium-ink) !important;
+          border: 1px solid var(--premium-border) !important;
+          box-shadow: none !important;
+          filter: none !important;
+        }
+
+        .premium-toggle::before {
+          height: 0.62rem !important;
+          width: 0.62rem !important;
+          border-radius: 9999px !important;
+          background: currentColor !important;
+          border: 0 !important;
+          opacity: 0.75 !important;
+        }
+
+        .premium-toggle-dark::before,
+        .floating-join-icon {
+          background: #ffffff !important;
+          color: var(--premium-ink) !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        span,
+        li,
+        .public-map-issue-title,
+        .status-step-title,
+        .status-step-label,
+        .public-audits-section h2,
+        .public-audits-section p,
+        .classic-section-card h2,
+        .classic-section-card h3,
+        .classic-section-card p,
+        .command-center h2,
+        .command-center p,
+        .legal-safety-bar p,
+        .join-rules-black-box h2,
+        .join-rules-black-box p,
+        .join-rules-big-pill p,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        footer h2,
+        footer p,
+        footer span {
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+          text-shadow: none !important;
+        }
+
+        .premium-toggle-dark,
+        .premium-toggle-dark span,
+        .floating-join-toggle,
+        .floating-join-toggle span,
+        .mobile-menu-hint,
+        .oath-close {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .text-white,
+        .text-white\/35,
+        .text-white\/40,
+        .text-white\/45,
+        .text-white\/55,
+        .text-white\/58,
+        .text-white\/60,
+        .text-white\/62,
+        .text-white\/68,
+        .text-white\/70,
+        .text-white\/72,
+        .text-white\/76,
+        .text-white\/82 {
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+        }
+
+        .text-black\/20,
+        .text-black\/35,
+        .text-black\/40,
+        .text-black\/42,
+        .text-black\/45,
+        .text-black\/50,
+        .text-black\/55,
+        .text-black\/58,
+        .text-black\/60,
+        .text-black\/62,
+        .text-black\/65,
+        .text-black\/66,
+        .text-black\/68,
+        .text-black\/70,
+        .text-black\/72,
+        .text-black\/75,
+        .text-black\/82 {
+          color: var(--premium-muted) !important;
+          -webkit-text-fill-color: var(--premium-muted) !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-black,
+        .font-bold,
+        strong,
+        b {
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+        }
+
+        .category-report-icon,
+        .oath-dept-icon,
+        .icon-bump,
+        .flex.h-16.w-16,
+        .flex.h-14.w-14,
+        .flex.h-20.w-20,
+        .premium-loader-mark {
+          background: var(--premium-soft) !important;
+          background-color: var(--premium-soft) !important;
+          color: var(--premium-ink) !important;
+          border: 1px solid var(--premium-border) !important;
+          box-shadow: none !important;
+        }
+
+        .hero-accountability-underline::after,
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar {
+          background: var(--premium-ink) !important;
+          background-image: none !important;
+        }
+
+        .trust-marquee-shell,
+        .auto-slide-banner,
+        .eligibility-marquee,
+        .premium-statement-banner {
+          border-radius: 9999px !important;
+          border: 1px solid var(--premium-border) !important;
+          box-shadow: var(--premium-shadow-soft) !important;
+          background: #ffffff !important;
+        }
+
+        .rounded-\[3\.75rem\],
+        .rounded-\[3\.25rem\],
+        .rounded-\[3rem\],
+        .rounded-\[2\.75rem\],
+        .rounded-\[2\.5rem\],
+        .rounded-\[2\.25rem\] {
+          border-radius: var(--premium-radius-lg) !important;
+        }
+
+        .rounded-\[2rem\],
+        .rounded-\[1\.75rem\],
+        .rounded-\[1\.65rem\],
+        .rounded-\[1\.55rem\],
+        .rounded-\[1\.45rem\] {
+          border-radius: var(--premium-radius) !important;
+        }
+
+        .PageEyebrow,
+        .public-audit-eyebrow,
+        .category-report-meta,
+        .oath-label,
+        .oath-card-index,
+        .join-rules-black-box > p:first-child,
+        p[class*="uppercase"],
+        span[class*="uppercase"] {
+          color: rgba(17,17,17,0.46) !important;
+          -webkit-text-fill-color: rgba(17,17,17,0.46) !important;
+          border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+          padding-bottom: 0.25rem !important;
+          letter-spacing: 0.02em !important;
+          text-transform: none !important;
+        }
+
+        .shine-card::before,
+        .magnetic-btn::after,
+        .premium-toggle::after,
+        .soft-gradient-glow,
+        .hero-emblem-card::after,
+        .parallax-grid,
+        .parallax-orb-one,
+        .parallax-orb-two,
+        .parallax-orb-three,
+        .svg-animated-background,
+        .cockroach-artwork-background {
+          display: none !important;
+        }
+
+        .running-cockroach-layer,
+        .running-cockroach {
+          opacity: 0.025 !important;
+          filter: none !important;
+          color: rgba(0,0,0,0.18) !important;
+          mix-blend-mode: multiply !important;
+        }
+
+        nav.sticky {
+          background: rgba(255,255,255,0.92) !important;
+          border-bottom: 1px solid var(--premium-border) !important;
+          box-shadow: 0 8px 28px rgba(0,0,0,0.035) !important;
+          backdrop-filter: blur(18px) !important;
+          -webkit-backdrop-filter: blur(18px) !important;
+        }
+
+        footer {
+          background: #ffffff !important;
+          border-top: 1px solid var(--premium-border) !important;
+        }
+
+        @media (max-width: 768px) {
+          .apple-borderless,
+          .glass-card,
+          .apple-clean-card,
+          .clay-card,
+          .reveal-card,
+          .faq-accordion-item,
+          .category-report-card,
+          .how-step-card,
+          .status-system-panel,
+          .join-oath-card,
+          .join-oath-mini-card,
+          .command-center,
+          .classic-section-card,
+          .public-audits-section,
+          .legal-safety-bar,
+          .join-rules-black-box {
+            border-radius: 20px !important;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.055) !important;
+          }
+        }
+
+        /* PREMIUM CTA + TOGGLE SYSTEM */
+        :root {
+          --cta-black: #111111;
+          --cta-black-hover: #262626;
+          --cta-white: #ffffff;
+          --cta-soft: #f5f5f5;
+          --cta-border: rgba(0,0,0,0.10);
+          --cta-shadow: 0 14px 36px rgba(0,0,0,0.12);
+          --cta-shadow-hover: 0 22px 54px rgba(0,0,0,0.16);
+          --cta-accent: #8B5CF6;
+          --cta-accent-soft: #F3E8FF;
+          --cta-blush: #FFE4EF;
+        }
+
+        .premium-toggle,
+        .magnetic-btn,
+        .sticker-chip,
+        .floating-join-toggle,
+        .mobile-menu-hint {
+          position: relative !important;
+          overflow: hidden !important;
+          isolation: isolate !important;
+          border-radius: 9999px !important;
+          min-height: 46px !important;
+          gap: 0.65rem !important;
+          font-weight: 800 !important;
+          letter-spacing: -0.018em !important;
+          transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms ease, background 220ms ease, color 220ms ease, border-color 220ms ease !important;
+        }
+
+        .premium-toggle::before {
+          content: "" !important;
+          display: inline-flex !important;
+          height: 0.58rem !important;
+          width: 0.58rem !important;
+          min-width: 0.58rem !important;
+          border-radius: 9999px !important;
+          background: currentColor !important;
+          border: 0 !important;
+          opacity: 0.78 !important;
+          box-shadow: none !important;
+          transform: none !important;
+        }
+
+        .premium-toggle-dark,
+        nav .premium-toggle-dark,
+        footer .premium-toggle-dark,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover {
+          background: var(--cta-black) !important;
+          background-color: var(--cta-black) !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid var(--cta-black) !important;
+          box-shadow: var(--cta-shadow) !important;
+        }
+
+        .premium-toggle-dark *,
+        nav .premium-toggle-dark *,
+        footer .premium-toggle-dark *,
+        .mobile-menu-link-active *,
+        .mobile-menu-link:hover * {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .premium-toggle-dark::before {
+          background: #ffffff !important;
+          color: #ffffff !important;
+          opacity: 0.92 !important;
+        }
+
+        .premium-toggle-dark:hover,
+        .premium-toggle-dark:focus-visible,
+        nav .premium-toggle-dark:hover,
+        footer .premium-toggle-dark:hover {
+          background: var(--cta-black-hover) !important;
+          background-color: var(--cta-black-hover) !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border-color: var(--cta-black-hover) !important;
+          box-shadow: var(--cta-shadow-hover) !important;
+          transform: translateY(-3px) scale(1.015) !important;
+        }
+
+        .premium-toggle-light,
+        .magnetic-btn,
+        .sticker-chip,
+        select {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: none !important;
+          color: var(--cta-black) !important;
+          -webkit-text-fill-color: var(--cta-black) !important;
+          border: 1px solid var(--cta-border) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.055) !important;
+        }
+
+        .premium-toggle-light::before {
+          background: var(--cta-black) !important;
+          opacity: 0.70 !important;
+        }
+
+        .premium-toggle-light:hover,
+        .premium-toggle-light:focus-visible,
+        .magnetic-btn:hover,
+        .sticker-chip:hover,
+        select:hover {
+          background: var(--cta-soft) !important;
+          background-color: var(--cta-soft) !important;
+          background-image: none !important;
+          color: var(--cta-black) !important;
+          -webkit-text-fill-color: var(--cta-black) !important;
+          border-color: rgba(0,0,0,0.16) !important;
+          box-shadow: 0 16px 40px rgba(0,0,0,0.08) !important;
+          transform: translateY(-2px) scale(1.01) !important;
+        }
+
+        .premium-toggle-follow {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: none !important;
+          color: var(--cta-black) !important;
+          -webkit-text-fill-color: var(--cta-black) !important;
+          border: 1px solid rgba(139,92,246,0.22) !important;
+          box-shadow: 0 12px 34px rgba(139,92,246,0.11), 0 8px 22px rgba(0,0,0,0.045) !important;
+        }
+
+        .premium-toggle-follow::before {
+          content: "" !important;
+          height: 1.15rem !important;
+          width: 1.15rem !important;
+          min-width: 1.15rem !important;
+          border-radius: 9999px !important;
+          background: radial-gradient(circle at 30% 30%, #ffffff 0 12%, transparent 13%), linear-gradient(135deg, #F97316 0%, #EC4899 45%, #8B5CF6 100%) !important;
+          opacity: 1 !important;
+          box-shadow: 0 0 0 5px rgba(139,92,246,0.10) !important;
+        }
+
+        .premium-toggle-follow:hover,
+        .premium-toggle-follow:focus-visible {
+          background: linear-gradient(135deg, #ffffff 0%, var(--cta-blush) 46%, var(--cta-accent-soft) 100%) !important;
+          color: var(--cta-black) !important;
+          -webkit-text-fill-color: var(--cta-black) !important;
+          border-color: rgba(139,92,246,0.34) !important;
+          box-shadow: 0 18px 50px rgba(139,92,246,0.16), 0 12px 30px rgba(0,0,0,0.07) !important;
+          transform: translateY(-3px) scale(1.015) !important;
+        }
+
+        .floating-join-toggle {
+          background: var(--cta-black) !important;
+          background-color: var(--cta-black) !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid var(--cta-black) !important;
+          box-shadow: 0 18px 52px rgba(0,0,0,0.18) !important;
+          padding: 0.68rem 1rem 0.68rem 0.68rem !important;
+        }
+
+        .floating-join-toggle:hover {
+          background: var(--cta-black-hover) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          transform: translateY(-4px) scale(1.035) !important;
+          box-shadow: 0 24px 70px rgba(0,0,0,0.22) !important;
+        }
+
+        .floating-join-icon {
+          background: #ffffff !important;
+          color: var(--cta-black) !important;
+          border: 0 !important;
+          box-shadow: none !important;
+        }
+
+        .floating-join-text,
+        .floating-join-toggle span:not(.floating-join-icon) {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .mobile-menu-hint {
+          background: var(--cta-black) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid var(--cta-black) !important;
+          box-shadow: 0 16px 44px rgba(0,0,0,0.16) !important;
+        }
+
+        .nav-link:hover,
+        .nav-link-active {
+          color: var(--cta-black) !important;
+          -webkit-text-fill-color: var(--cta-black) !important;
+        }
+
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar {
+          background: linear-gradient(90deg, var(--cta-black), var(--cta-accent), var(--cta-black)) !important;
+        }
+
+        .premium-toggle:active,
+        .magnetic-btn:active,
+        .sticker-chip:active,
+        .floating-join-toggle:active {
+          transform: translateY(1px) scale(0.98) !important;
+          box-shadow: 0 8px 22px rgba(0,0,0,0.10) !important;
+        }
+
+        /* FINAL FLOATING JOIN / REPORT POSITION FIX */
+        .floating-join-toggle {
+          position: fixed !important;
+          top: auto !important;
+          left: auto !important;
+          right: 22px !important;
+          bottom: 22px !important;
+          z-index: 120 !important;
+          display: inline-flex !important;
+          width: auto !important;
+          max-width: calc(100vw - 44px) !important;
+          align-items: center !important;
+          justify-content: center !important;
+          white-space: nowrap !important;
+          transform: translateZ(0) !important;
+        }
+
+        .floating-join-toggle:hover {
+          transform: translateY(-4px) scale(1.035) !important;
+        }
+
+        .floating-join-toggle:active {
+          transform: translateY(1px) scale(0.98) !important;
+        }
+
+        .floating-join-icon {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          flex: 0 0 auto !important;
+        }
+
+        @media (max-width: 768px) {
+          .floating-join-toggle {
+            right: 12px !important;
+            bottom: 14px !important;
+            z-index: 120 !important;
+            max-width: calc(100vw - 24px) !important;
+            padding: 0.62rem 0.86rem 0.62rem 0.64rem !important;
+            font-size: 0.76rem !important;
+          }
+        }
+
+        /* PREMIUM BLACK + RADIANT RED FINAL ACCENT */
+        :root {
+          --premium-ink: #0B0B0D;
+          --premium-white: #ffffff;
+          --premium-soft: #f7f7f8;
+          --premium-soft-2: #fbfbfc;
+          --premium-red: #E11D48;
+          --premium-red-dark: #9F1239;
+          --premium-red-soft: #FFF1F2;
+          --premium-red-glow: rgba(225, 29, 72, 0.18);
+          --premium-red-glow-strong: rgba(225, 29, 72, 0.28);
+          --cta-black: #0B0B0D;
+          --cta-black-hover: #17171A;
+          --cta-accent: #E11D48;
+          --cta-accent-soft: #FFF1F2;
+          --cta-blush: #FFE4E6;
+        }
+
+        body,
+        main {
+          background: #ffffff !important;
+        }
+
+        .premium-soft-background {
+          background:
+            radial-gradient(circle at 18% 8%, rgba(225,29,72,0.055), transparent 24%),
+            radial-gradient(circle at 88% 18%, rgba(159,18,57,0.045), transparent 28%),
+            linear-gradient(180deg, #ffffff 0%, #fbfbfc 48%, #ffffff 100%) !important;
+        }
+
+        .premium-toggle-dark,
+        nav .premium-toggle-dark,
+        footer .premium-toggle-dark,
+        .floating-join-toggle,
+        .mobile-menu-hint,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover,
+        .oath-close {
+          background: var(--premium-ink) !important;
+          background-color: var(--premium-ink) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border-color: rgba(11,11,13,0.96) !important;
+          box-shadow: 0 16px 42px rgba(0,0,0,0.16), 0 0 0 1px rgba(225,29,72,0.10), 0 0 34px rgba(225,29,72,0.12) !important;
+        }
+
+        .premium-toggle-dark::before,
+        .floating-join-icon {
+          background: #ffffff !important;
+          color: var(--premium-ink) !important;
+          box-shadow: 0 0 0 5px rgba(225,29,72,0.14) !important;
+        }
+
+        .premium-toggle-dark:hover,
+        .premium-toggle-dark:focus-visible,
+        nav .premium-toggle-dark:hover,
+        footer .premium-toggle-dark:hover,
+        .floating-join-toggle:hover,
+        .mobile-menu-hint:hover,
+        .oath-close:hover {
+          background:
+            radial-gradient(circle at 12% 8%, rgba(225,29,72,0.28), transparent 34%),
+            linear-gradient(135deg, #0B0B0D 0%, #16161A 52%, #300814 100%) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border-color: rgba(225,29,72,0.36) !important;
+          box-shadow: 0 24px 70px rgba(0,0,0,0.22), 0 0 0 1px rgba(225,29,72,0.18), 0 0 54px rgba(225,29,72,0.24) !important;
+        }
+
+        .floating-join-toggle {
+          box-shadow: 0 20px 56px rgba(0,0,0,0.20), 0 0 46px rgba(225,29,72,0.22) !important;
+        }
+
+        .floating-join-toggle::after {
+          content: "" !important;
+          position: absolute !important;
+          inset: -10px !important;
+          z-index: -1 !important;
+          border-radius: 9999px !important;
+          background: radial-gradient(circle, rgba(225,29,72,0.22), transparent 68%) !important;
+          opacity: 0.75 !important;
+          pointer-events: none !important;
+        }
+
+        .premium-toggle-light,
+        .magnetic-btn,
+        .sticker-chip,
+        select {
+          border-color: rgba(11,11,13,0.10) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045) !important;
+        }
+
+        .premium-toggle-light:hover,
+        .premium-toggle-light:focus-visible,
+        .magnetic-btn:hover,
+        .sticker-chip:hover,
+        select:hover {
+          background: linear-gradient(135deg, #ffffff 0%, #fff7f8 52%, #fff1f2 100%) !important;
+          border-color: rgba(225,29,72,0.22) !important;
+          box-shadow: 0 18px 48px rgba(0,0,0,0.075), 0 0 32px rgba(225,29,72,0.10) !important;
+        }
+
+        .premium-toggle-follow {
+          border-color: rgba(225,29,72,0.22) !important;
+          box-shadow: 0 12px 34px rgba(225,29,72,0.10), 0 8px 22px rgba(0,0,0,0.04) !important;
+        }
+
+        .premium-toggle-follow::before {
+          background: radial-gradient(circle at 30% 30%, #ffffff 0 12%, transparent 13%), linear-gradient(135deg, #9F1239 0%, #E11D48 50%, #FB7185 100%) !important;
+          box-shadow: 0 0 0 5px rgba(225,29,72,0.12) !important;
+        }
+
+        .premium-toggle-follow:hover,
+        .premium-toggle-follow:focus-visible {
+          background: linear-gradient(135deg, #ffffff 0%, #fff1f2 52%, #ffe4e6 100%) !important;
+          border-color: rgba(225,29,72,0.34) !important;
+          box-shadow: 0 20px 56px rgba(225,29,72,0.16), 0 12px 30px rgba(0,0,0,0.07) !important;
+        }
+
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar,
+        .hero-accountability-underline::after {
+          background: linear-gradient(90deg, var(--premium-ink), var(--premium-red), var(--premium-ink)) !important;
+          background-image: linear-gradient(90deg, var(--premium-ink), var(--premium-red), var(--premium-ink)) !important;
+        }
+
+        .hero-accountability-underline::after {
+          opacity: 0.85 !important;
+          box-shadow: 0 0 22px rgba(225,29,72,0.18) !important;
+        }
+
+        .nav-link:hover,
+        .nav-link-active {
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+        }
+
+        .quick-section-dot:hover,
+        .quick-section-dot-active,
+        .faq-accordion-icon,
+        .status-step-number,
+        .join-rules-number,
+        .manifesto-bullet {
+          background: var(--premium-red) !important;
+          background-color: var(--premium-red) !important;
+          color: #ffffff !important;
+          border-color: rgba(225,29,72,0.26) !important;
+          box-shadow: 0 0 0 5px rgba(225,29,72,0.10) !important;
+        }
+
+        .manifesto-bullet {
+          box-shadow: none !important;
+        }
+
+        .PageEyebrow,
+        .public-audit-eyebrow,
+        .category-report-meta,
+        .oath-label,
+        .oath-card-index,
+        .join-rules-black-box > p:first-child,
+        p[class*="uppercase"],
+        span[class*="uppercase"] {
+          color: rgba(159,18,57,0.72) !important;
+          -webkit-text-fill-color: rgba(159,18,57,0.72) !important;
+          border-bottom-color: rgba(225,29,72,0.14) !important;
+        }
+
+        .apple-borderless,
+        .glass-card,
+        .apple-clean-card,
+        .reveal-card,
+        .faq-accordion-item,
+        .category-report-card,
+        .how-step-card,
+        .status-system-panel,
+        .join-oath-card,
+        .join-oath-mini-card,
+        .oath-mini-card,
+        .oath-translation-card,
+        .oath-complaint-card,
+        .command-center,
+        .classic-section-card,
+        .public-audits-section,
+        .legal-safety-bar,
+        .join-rules-black-box {
+          border-color: rgba(11,11,13,0.075) !important;
+        }
+
+        .apple-borderless:hover,
+        .glass-card:hover,
+        .apple-clean-card:hover,
+        .reveal-card:hover,
+        .faq-accordion-item:hover,
+        .category-report-card:hover,
+        .how-step-card:hover,
+        .status-system-panel:hover,
+        .join-oath-card:hover,
+        .join-oath-mini-card:hover {
+          border-color: rgba(225,29,72,0.14) !important;
+          box-shadow: 0 24px 62px rgba(0,0,0,0.075), 0 0 34px rgba(225,29,72,0.055) !important;
+        }
+
+        .trust-marquee-pill:hover,
+        .eligibility-pill:hover,
+        .auto-slide-word:hover,
+        .oath-chip:hover,
+        .oath-dark-chip:hover,
+        .oath-rule-pill:hover {
+          border-color: rgba(225,29,72,0.20) !important;
+          box-shadow: 0 12px 34px rgba(225,29,72,0.09) !important;
+        }
+
+        .running-cockroach-layer,
+        .running-cockroach {
+          color: rgba(159,18,57,0.14) !important;
+          opacity: 0.035 !important;
+        }
+
+        .premium-loader-mark,
+        .icon-bump,
+        .category-report-icon,
+        .oath-dept-icon,
+        .flex.h-16.w-16,
+        .flex.h-14.w-14,
+        .flex.h-20.w-20 {
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045), 0 0 24px rgba(225,29,72,0.055) !important;
+        }
+
+        .auto-slide-dark,
+        .auto-slide-green,
+        .auto-slide-light,
+        .trust-marquee-shell,
+        .eligibility-marquee,
+        .premium-statement-banner {
+          background: #ffffff !important;
+          border-color: rgba(11,11,13,0.075) !important;
+          box-shadow: 0 12px 34px rgba(0,0,0,0.045), 0 0 32px rgba(225,29,72,0.045) !important;
+        }
+
+        .auto-slide-dark .auto-slide-word,
+        .auto-slide-green .auto-slide-word,
+        .auto-slide-light .auto-slide-word,
+        .trust-marquee-pill,
+        .eligibility-pill {
+          background: #ffffff !important;
+          color: var(--premium-ink) !important;
+          -webkit-text-fill-color: var(--premium-ink) !important;
+          border-color: rgba(11,11,13,0.075) !important;
+        }
+
+        /* FINAL PREMIUM CLEANUP: LESS NOISE, RARER RED, PRODUCT HERO */
+        section {
+          animation: none !important;
+          content-visibility: visible !important;
+          contain-intrinsic-size: auto !important;
+        }
+
+        .running-cockroach-layer,
+        .running-cockroach,
+        .premium-loader,
+        .premium-loader-card,
+        .premium-loader-mark,
+        .shine-card::before,
+        .magnetic-btn::after,
+        .premium-toggle::after,
+        .soft-gradient-glow,
+        .svg-animated-background,
+        .cockroach-artwork-background,
+        .parallax-grid,
+        .parallax-orb-one,
+        .parallax-orb-two,
+        .parallax-orb-three {
+          display: none !important;
+          animation: none !important;
+        }
+
+        .micro-lift,
+        .reveal-card,
+        .apple-clean-card,
+        .glass-card,
+        .category-report-card,
+        .how-step-card,
+        .faq-accordion-item,
+        .join-oath-card,
+        .join-oath-mini-card {
+          transform: none !important;
+          transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease !important;
+        }
+
+        .micro-lift:hover,
+        .reveal-card:hover,
+        .apple-clean-card:hover,
+        .glass-card:hover,
+        .category-report-card:hover,
+        .how-step-card:hover,
+        .faq-accordion-item:hover,
+        .join-oath-card:hover,
+        .join-oath-mini-card:hover {
+          transform: translateY(-2px) !important;
+          border-color: rgba(11,11,13,0.11) !important;
+          box-shadow: 0 20px 54px rgba(0,0,0,0.065) !important;
+        }
+
+        .hero-premium-shell {
+          text-align: left !important;
+        }
+
+        .hero-premium-grid {
+          display: grid !important;
+          grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.72fr) !important;
+          gap: clamp(2rem, 5vw, 5rem) !important;
+          align-items: center !important;
+          width: 100% !important;
+        }
+
+        .hero-premium-copy {
+          text-align: left !important;
+          display: block !important;
+        }
+
+        .hero-premium-copy h1,
+        .hero-premium-copy p,
+        .hero-premium-copy .word-reveal,
+        .hero-premium-copy .hero-accountability-underline {
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+          text-align: left !important;
+        }
+
+        .hero-premium-copy .mt-12.flex {
+          justify-content: flex-start !important;
+          align-items: flex-start !important;
+        }
+
+        .hero-trust-microcopy {
+          color: rgba(11,11,13,0.46) !important;
+          -webkit-text-fill-color: rgba(11,11,13,0.46) !important;
+        }
+
+        .hero-dashboard-card {
+          position: relative !important;
+          overflow: hidden !important;
+          border-radius: 34px !important;
+          border: 1px solid rgba(11,11,13,0.08) !important;
+          background:
+            radial-gradient(circle at 18% 0%, rgba(225,29,72,0.14), transparent 34%),
+            linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%) !important;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.10), 0 0 56px rgba(225,29,72,0.08) !important;
+          padding: clamp(1.25rem, 2.2vw, 2.25rem) !important;
+          color: var(--premium-ink) !important;
+        }
+
+        .hero-dashboard-topbar {
+          display: flex !important;
+          align-items: center !important;
+          gap: 0.65rem !important;
+          border-bottom: 1px solid rgba(0,0,0,0.075) !important;
+          padding-bottom: 1rem !important;
+        }
+
+        .hero-dashboard-dot {
+          height: 0.72rem !important;
+          width: 0.72rem !important;
+          border-radius: 9999px !important;
+          background: var(--premium-red) !important;
+          box-shadow: 0 0 0 6px rgba(225,29,72,0.10) !important;
+        }
+
+        .hero-dashboard-title {
+          font-size: 0.92rem !important;
+          font-weight: 850 !important;
+          color: rgba(11,11,13,0.68) !important;
+          -webkit-text-fill-color: rgba(11,11,13,0.68) !important;
+        }
+
+        .hero-dashboard-main-number {
+          margin-top: 1.4rem !important;
+          font-size: clamp(4.5rem, 8vw, 8.5rem) !important;
+          line-height: 0.85 !important;
+          font-weight: 900 !important;
+          letter-spacing: -0.09em !important;
+          color: var(--premium-ink) !important;
+        }
+
+        .hero-dashboard-label {
+          margin-top: 0.4rem !important;
+          color: rgba(159,18,57,0.72) !important;
+          -webkit-text-fill-color: rgba(159,18,57,0.72) !important;
+          font-size: 0.92rem !important;
+          font-weight: 850 !important;
+        }
+
+        .hero-dashboard-status-grid {
+          margin-top: 1.35rem !important;
+          display: grid !important;
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 0.75rem !important;
+        }
+
+        .hero-dashboard-status {
+          border-radius: 20px !important;
+          border: 1px solid rgba(0,0,0,0.07) !important;
+          background: #ffffff !important;
+          padding: 1rem !important;
+          box-shadow: 0 8px 22px rgba(0,0,0,0.035) !important;
+        }
+
+        .hero-dashboard-status strong {
+          display: block !important;
+          font-size: 1.35rem !important;
+          line-height: 1 !important;
+          font-weight: 900 !important;
+          color: var(--premium-ink) !important;
+        }
+
+        .hero-dashboard-status span {
+          display: block !important;
+          margin-top: 0.35rem !important;
+          font-size: 0.78rem !important;
+          font-weight: 750 !important;
+          color: rgba(11,11,13,0.48) !important;
+          -webkit-text-fill-color: rgba(11,11,13,0.48) !important;
+        }
+
+        .hero-dashboard-feed {
+          margin-top: 1rem !important;
+          display: grid !important;
+          gap: 0.55rem !important;
+        }
+
+        .hero-dashboard-feed div {
+          display: flex !important;
+          align-items: center !important;
+          gap: 0.55rem !important;
+          border-radius: 9999px !important;
+          background: #f7f7f8 !important;
+          padding: 0.8rem 1rem !important;
+          font-size: 0.86rem !important;
+          font-weight: 800 !important;
+          color: rgba(11,11,13,0.72) !important;
+          -webkit-text-fill-color: rgba(11,11,13,0.72) !important;
+        }
+
+        .hero-dashboard-feed b {
+          margin-left: auto !important;
+          color: var(--premium-red-dark) !important;
+          -webkit-text-fill-color: var(--premium-red-dark) !important;
+          font-size: 0.75rem !important;
+        }
+
+        .premium-toggle-dark,
+        .floating-join-toggle,
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar,
+        .hero-accountability-underline::after {
+          box-shadow: none !important;
+        }
+
+        .premium-toggle-dark,
+        .floating-join-toggle {
+          box-shadow: 0 16px 44px rgba(0,0,0,0.16), 0 0 34px rgba(225,29,72,0.14) !important;
+        }
+
+        .floating-join-toggle::after {
+          opacity: 0.46 !important;
+        }
+
+        .quick-section-dot:hover,
+        .quick-section-dot-active,
+        .faq-accordion-icon,
+        .status-step-number,
+        .join-rules-number,
+        .manifesto-bullet {
+          box-shadow: none !important;
+        }
+
+        .trust-marquee-track,
+        .eligibility-marquee-track,
+        .auto-slide-track,
+        .premium-statement-line {
+          animation-duration: 70s !important;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-premium-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .hero-dashboard-card {
+            max-width: 620px !important;
+            margin: 0 auto !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-premium-copy,
+          .hero-premium-copy h1,
+          .hero-premium-copy p,
+          .hero-premium-copy .word-reveal,
+          .hero-premium-copy .hero-accountability-underline {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+
+          .hero-premium-copy .mt-12.flex {
+            justify-content: center !important;
+            align-items: center !important;
+          }
+
+          .hero-dashboard-card {
+            border-radius: 24px !important;
+          }
+
+          .hero-dashboard-main-number {
+            font-size: 4rem !important;
+          }
+        }
+
+        /* FINAL GREEN KILL SWITCH - BLACK / WHITE / RED ONLY */
+        :root {
+          --old-green: #B6FF00;
+          --old-green-dark: #0B8F36;
+          --old-green-mid: #35D94A;
+          --old-green-soft: #64E986;
+          --final-ink: #0B0B0D;
+          --final-red: #E11D48;
+          --final-red-dark: #9F1239;
+          --final-white: #ffffff;
+          --final-soft: #f7f7f8;
+          --final-border: rgba(11,11,13,0.075);
+        }
+
+        /* remove hardcoded green text utilities */
+        .text-\[\#B6FF00\],
+        .text-\[\#64E986\],
+        .text-\[\#35D94A\],
+        .text-\[\#0B8F36\],
+        [class*="#B6FF00"],
+        [class*="#64E986"],
+        [class*="#35D94A"],
+        [class*="#0B8F36"],
+        [class*="182,255,0"],
+        [class*="88,255,120"],
+        [class*="124,255,107"],
+        .apple-gradient-text,
+        .public-audit-eyebrow,
+        .auto-slide-dark,
+        .auto-slide-dark .auto-slide-word,
+        .auto-slide-green,
+        .auto-slide-green .auto-slide-word,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        .oath-chip,
+        .quick-section-dot::after {
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          text-shadow: none !important;
+          background-image: none !important;
+        }
+
+        /* remove hardcoded green backgrounds */
+        .bg-\[\#B6FF00\],
+        .bg-\[\#64E986\],
+        .bg-\[\#35D94A\],
+        .bg-\[\#0B8F36\],
+        .from-\[\#0B8F36\],
+        .via-\[\#B6FF00\],
+        .to-\[\#64E986\],
+        .svg-floating-node,
+        .premium-loader-mark,
+        .status-step-number,
+        .join-rules-number,
+        .faq-accordion-icon,
+        .manifesto-bullet,
+        .quick-section-dot:hover,
+        .quick-section-dot-active {
+          background: var(--final-red) !important;
+          background-color: var(--final-red) !important;
+          background-image: none !important;
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+          border-color: rgba(225,29,72,0.22) !important;
+          box-shadow: none !important;
+          filter: none !important;
+        }
+
+        .manifesto-bullet {
+          height: 0.5rem !important;
+          width: 0.5rem !important;
+          min-width: 0.5rem !important;
+          border-radius: 9999px !important;
+          background: var(--final-red) !important;
+        }
+
+        /* replace old green gradients with clean white editorial/red light */
+        .apple-gradient-bg,
+        .apple-gradient-soft,
+        .premium-soft-background,
+        .auto-slide-green,
+        .oath-paper,
+        .eligibility-section::before,
+        .parallax-background,
+        .parallax-orb-one,
+        .parallax-orb-two,
+        .parallax-orb-three,
+        .hero-emblem-card::after {
+          background:
+            radial-gradient(circle at 18% 8%, rgba(225,29,72,0.045), transparent 24%),
+            radial-gradient(circle at 88% 18%, rgba(159,18,57,0.035), transparent 28%),
+            linear-gradient(180deg, #ffffff 0%, #fbfbfc 48%, #ffffff 100%) !important;
+          background-color: var(--final-white) !important;
+          color: var(--final-ink) !important;
+          filter: none !important;
+          box-shadow: none !important;
+        }
+
+        .auto-slide-dark,
+        .auto-slide-light,
+        .auto-slide-green,
+        .trust-marquee-shell,
+        .eligibility-marquee,
+        .premium-statement-banner {
+          background: var(--final-white) !important;
+          background-color: var(--final-white) !important;
+          color: var(--final-ink) !important;
+          border-color: var(--final-border) !important;
+          box-shadow: 0 12px 34px rgba(0,0,0,0.045), 0 0 32px rgba(225,29,72,0.045) !important;
+        }
+
+        .auto-slide-dark .auto-slide-word,
+        .auto-slide-light .auto-slide-word,
+        .auto-slide-green .auto-slide-word,
+        .trust-marquee-pill,
+        .eligibility-pill,
+        .apple-clean-pill,
+        .oath-chip,
+        .oath-dark-chip,
+        .oath-rule-pill {
+          background: var(--final-white) !important;
+          background-color: var(--final-white) !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          border: 1px solid var(--final-border) !important;
+          text-shadow: none !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.04) !important;
+        }
+
+        /* black CTAs stay black with red aura, never green */
+        .premium-toggle-dark,
+        .floating-join-toggle,
+        .mobile-menu-hint,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover,
+        .oath-close {
+          background: var(--final-ink) !important;
+          background-color: var(--final-ink) !important;
+          background-image: none !important;
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+          border-color: var(--final-ink) !important;
+          box-shadow: 0 16px 44px rgba(0,0,0,0.16), 0 0 34px rgba(225,29,72,0.14) !important;
+        }
+
+        .premium-toggle-dark *,
+        .floating-join-toggle *,
+        .mobile-menu-hint *,
+        .mobile-menu-link-active *,
+        .mobile-menu-link:hover *,
+        .oath-close * {
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+        }
+
+        .premium-toggle-dark:hover,
+        .premium-toggle-dark:focus-visible,
+        .floating-join-toggle:hover,
+        .mobile-menu-hint:hover,
+        .oath-close:hover {
+          background:
+            radial-gradient(circle at 12% 8%, rgba(225,29,72,0.28), transparent 34%),
+            linear-gradient(135deg, #0B0B0D 0%, #16161A 52%, #300814 100%) !important;
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+          border-color: rgba(225,29,72,0.36) !important;
+          box-shadow: 0 24px 70px rgba(0,0,0,0.22), 0 0 54px rgba(225,29,72,0.22) !important;
+        }
+
+        .premium-toggle::before {
+          background: currentColor !important;
+          box-shadow: none !important;
+          filter: none !important;
+        }
+
+        .premium-toggle-dark::before,
+        .floating-join-icon {
+          background: var(--final-white) !important;
+          background-color: var(--final-white) !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          box-shadow: 0 0 0 5px rgba(225,29,72,0.12) !important;
+          border: 0 !important;
+        }
+
+        /* secondary buttons: white with red hover, not green */
+        .premium-toggle-light,
+        .magnetic-btn,
+        .sticker-chip,
+        select {
+          background: var(--final-white) !important;
+          background-color: var(--final-white) !important;
+          background-image: none !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          border-color: rgba(11,11,13,0.10) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045) !important;
+        }
+
+        .premium-toggle-light:hover,
+        .premium-toggle-light:focus-visible,
+        .magnetic-btn:hover,
+        .sticker-chip:hover,
+        select:hover {
+          background: linear-gradient(135deg, #ffffff 0%, #fff7f8 52%, #fff1f2 100%) !important;
+          background-color: var(--final-white) !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          border-color: rgba(225,29,72,0.22) !important;
+          box-shadow: 0 18px 48px rgba(0,0,0,0.075), 0 0 32px rgba(225,29,72,0.10) !important;
+        }
+
+        /* remove green glow/shadow/filter from old patches */
+        .soft-gradient-glow,
+        .running-cockroach,
+        .running-cockroach-layer,
+        .svg-flow-line,
+        .svg-floating-node,
+        .premium-toggle::before,
+        .floating-join-icon,
+        .join-rules-number,
+        .status-step-number,
+        .faq-accordion-icon,
+        .quick-section-dot-active,
+        .quick-section-dot:hover,
+        .premium-loader-mark,
+        .hero-emblem-card::after,
+        .artwork-motion-trails path,
+        .artwork-soft-waves path,
+        .artwork-sparkles path,
+        .artwork-sparkles circle {
+          filter: none !important;
+          text-shadow: none !important;
+        }
+
+        .running-cockroach,
+        .running-cockroach-layer {
+          display: none !important;
+          color: rgba(159,18,57,0.14) !important;
+        }
+
+        .svg-flow-line,
+        .artwork-motion-trails path,
+        .artwork-soft-waves path {
+          stroke: rgba(225,29,72,0.16) !important;
+        }
+
+        .artwork-sparkles path,
+        .artwork-sparkles circle {
+          fill: rgba(225,29,72,0.18) !important;
+          stroke: rgba(255,255,255,0.8) !important;
+        }
+
+        /* all progress/nav/underline accents must be red-black */
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar,
+        .hero-accountability-underline::after {
+          background: linear-gradient(90deg, var(--final-ink), var(--final-red), var(--final-ink)) !important;
+          background-image: linear-gradient(90deg, var(--final-ink), var(--final-red), var(--final-ink)) !important;
+        }
+
+        .hero-accountability-underline::after {
+          box-shadow: 0 0 22px rgba(225,29,72,0.14) !important;
+        }
+
+        /* dark section chips and old white/green labels become clean white/red */
+        .rounded-full.bg-black,
+        span.rounded-full.bg-black,
+        .public-map-issue-card span.rounded-full,
+        .status-system-panel span.rounded-full,
+        .public-audits-section span.rounded-full {
+          background: var(--final-ink) !important;
+          background-color: var(--final-ink) !important;
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+          border-color: var(--final-ink) !important;
+        }
+
+        .PageEyebrow,
+        .public-audit-eyebrow,
+        .category-report-meta,
+        .oath-label,
+        .oath-card-index,
+        .join-rules-black-box > p:first-child,
+        p[class*="uppercase"],
+        span[class*="uppercase"] {
+          color: rgba(159,18,57,0.72) !important;
+          -webkit-text-fill-color: rgba(159,18,57,0.72) !important;
+          border-bottom-color: rgba(225,29,72,0.14) !important;
+        }
+
+        /* icon blocks should be black/white/red, never green */
+        .category-report-icon,
+        .oath-dept-icon,
+        .icon-bump,
+        .flex.h-16.w-16,
+        .flex.h-14.w-14,
+        .flex.h-20.w-20 {
+          background: var(--final-soft) !important;
+          background-color: var(--final-soft) !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          border: 1px solid var(--final-border) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045), 0 0 24px rgba(225,29,72,0.055) !important;
+        }
+
+        .public-map-issue-icon,
+        .hero-dashboard-dot {
+          color: var(--final-red) !important;
+          -webkit-text-fill-color: var(--final-red) !important;
+        }
+
+        /* black text on white always readable */
+        .apple-borderless,
+        .glass-card,
+        .apple-clean-card,
+        .reveal-card,
+        .faq-accordion-item,
+        .category-report-card,
+        .how-step-card,
+        .status-system-panel,
+        .join-oath-card,
+        .join-oath-mini-card,
+        .oath-mini-card,
+        .oath-translation-card,
+        .oath-complaint-card,
+        .public-map-issue-card,
+        .command-metric,
+        .classic-side-card,
+        .public-audits-left,
+        .join-rules-big-pill,
+        .status-step-card,
+        .legal-safety-chip {
+          background-color: var(--final-white) !important;
+          background-image: none !important;
+          color: var(--final-ink) !important;
+          -webkit-text-fill-color: var(--final-ink) !important;
+          border-color: var(--final-border) !important;
+        }
+
+        .apple-borderless *,
+        .glass-card *,
+        .apple-clean-card *,
+        .reveal-card *,
+        .faq-accordion-item *,
+        .category-report-card *,
+        .how-step-card *,
+        .status-system-panel *,
+        .join-oath-card *,
+        .join-oath-mini-card *,
+        .oath-mini-card *,
+        .oath-translation-card *,
+        .oath-complaint-card *,
+        .public-map-issue-card *,
+        .command-metric *,
+        .classic-side-card *,
+        .public-audits-left *,
+        .join-rules-big-pill *,
+        .status-step-card *,
+        .legal-safety-chip * {
+          text-shadow: none !important;
+        }
+
+        /* preserve white text only inside primary black buttons */
+        .premium-toggle-dark,
+        .premium-toggle-dark *,
+        .floating-join-toggle,
+        .floating-join-toggle *,
+        .mobile-menu-hint,
+        .mobile-menu-hint *,
+        .mobile-menu-link-active,
+        .mobile-menu-link-active *,
+        .mobile-menu-link:hover,
+        .mobile-menu-link:hover * {
+          color: var(--final-white) !important;
+          -webkit-text-fill-color: var(--final-white) !important;
+        }
+
+        /* FINAL TARGETED GREEN REMOVAL: JANTA ROLES + HOME MAP */
+        .janta-role-count-tile,
+        .public-map-count-tile {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: radial-gradient(circle at 18% 0%, rgba(225,29,72,0.10), transparent 34%), linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%) !important;
+          color: #0B0B0D !important;
+          -webkit-text-fill-color: #0B0B0D !important;
+          border: 1px solid rgba(11,11,13,0.08) !important;
+          box-shadow: 0 24px 70px rgba(0,0,0,0.08), 0 0 34px rgba(225,29,72,0.06) !important;
+        }
+
+        .janta-role-count-number,
+        .public-map-count-word {
+          color: #0B0B0D !important;
+          -webkit-text-fill-color: #0B0B0D !important;
+          text-shadow: none !important;
+        }
+
+        .janta-role-count-tile p:last-child,
+        .public-map-count-tile p:last-child {
+          color: rgba(159,18,57,0.72) !important;
+          -webkit-text-fill-color: rgba(159,18,57,0.72) !important;
+        }
+
+        .janta-role-icon,
+        .janta-role-icon:hover,
+        .group:hover .janta-role-icon {
+          background: #0B0B0D !important;
+          background-color: #0B0B0D !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid rgba(11,11,13,0.08) !important;
+          box-shadow: 0 16px 44px rgba(0,0,0,0.12) !important;
+        }
+
+        .group:hover .janta-role-icon {
+          background: #E11D48 !important;
+          background-color: #E11D48 !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .public-map-issue-card,
+        .public-map-issue-card * {
+          background-image: none !important;
+          text-shadow: none !important;
+          filter: none !important;
+        }
+
+        .public-map-issue-card {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          color: #0B0B0D !important;
+          -webkit-text-fill-color: #0B0B0D !important;
+          border: 1px solid rgba(11,11,13,0.08) !important;
+          box-shadow: 0 10px 28px rgba(0,0,0,0.045) !important;
+        }
+
+        .public-map-issue-icon {
+          color: #E11D48 !important;
+          -webkit-text-fill-color: #E11D48 !important;
+          background: transparent !important;
+          background-color: transparent !important;
+        }
+
+        .public-map-issue-title,
+        .public-map-issue-title * {
+          color: #0B0B0D !important;
+          -webkit-text-fill-color: #0B0B0D !important;
+        }
+
+        .status-system-panel .rounded-full,
+        .public-map-count-tile .rounded-full,
+        .public-map-count-tile span,
+        .public-map-count-tile b {
+          color: inherit !important;
+          -webkit-text-fill-color: inherit !important;
+        }
+
+        /* APPLE HD PLAIN WHITE FINAL PASS */
+        :root {
+          --apple-white: #ffffff;
+          --apple-soft: #f5f5f7;
+          --apple-soft-2: #fbfbfd;
+          --apple-ink: #1d1d1f;
+          --apple-muted: rgba(29,29,31,0.58);
+          --apple-muted-2: rgba(29,29,31,0.42);
+          --apple-border: rgba(0,0,0,0.06);
+          --apple-border-strong: rgba(0,0,0,0.10);
+          --apple-shadow: 0 18px 55px rgba(0,0,0,0.055);
+          --apple-shadow-soft: 0 10px 30px rgba(0,0,0,0.035);
+          --apple-radius: 28px;
+          --apple-radius-sm: 22px;
+          --apple-black: #1d1d1f;
+          --apple-red: #e11d48;
+        }
+
+        html,
+        body,
+        main {
+          background: var(--apple-white) !important;
+          background-color: var(--apple-white) !important;
+          color: var(--apple-ink) !important;
+        }
+
+        .premium-soft-background,
+        .parallax-background,
+        .webgl-background,
+        .svg-animated-background,
+        .cockroach-artwork-background,
+        .running-cockroach-layer,
+        .running-cockroach,
+        .soft-gradient-glow,
+        .parallax-grid,
+        .parallax-orb-one,
+        .parallax-orb-two,
+        .parallax-orb-three,
+        .hero-emblem-card::after,
+        .eligibility-section::before,
+        .floating-join-toggle::after {
+          display: none !important;
+          opacity: 0 !important;
+          animation: none !important;
+          background: transparent !important;
+          box-shadow: none !important;
+          filter: none !important;
+        }
+
+        section {
+          background: transparent !important;
+        }
+
+        .apple-gradient-bg,
+        .apple-gradient-soft,
+        .auto-slide-green,
+        .oath-paper,
+        .premium-statement-banner,
+        .hero-premium-shell,
+        .eligibility-section {
+          background: var(--apple-white) !important;
+          background-color: var(--apple-white) !important;
+          background-image: none !important;
+        }
+
+        .apple-borderless,
+        .glass-card,
+        .apple-clean-card,
+        .clay-card,
+        .reveal-card,
+        .faq-accordion-item,
+        .category-report-card,
+        .how-step-card,
+        .status-system-panel,
+        .join-oath-card,
+        .join-oath-mini-card,
+        .oath-mini-card,
+        .oath-translation-card,
+        .oath-complaint-card,
+        .trust-marquee-shell,
+        .premium-statement-banner,
+        .eligibility-marquee,
+        .command-center,
+        .classic-section-card,
+        .public-audits-section,
+        .legal-safety-bar,
+        .join-rules-black-box,
+        .oath-hero-card,
+        .oath-block,
+        .mobile-menu-card,
+        .hero-dashboard-card,
+        .janta-role-count-tile,
+        .public-map-count-tile,
+        footer .rounded-\[2rem\] {
+          background: rgba(255,255,255,0.96) !important;
+          background-color: rgba(255,255,255,0.96) !important;
+          background-image: none !important;
+          border: 1px solid var(--apple-border) !important;
+          border-radius: var(--apple-radius) !important;
+          box-shadow: var(--apple-shadow) !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: initial !important;
+          backdrop-filter: blur(20px) !important;
+          -webkit-backdrop-filter: blur(20px) !important;
+        }
+
+        .command-metric,
+        .classic-side-card,
+        .public-audits-left,
+        .join-rules-big-pill,
+        .status-step-card,
+        .legal-safety-chip,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        .public-map-issue-card,
+        .hero-dashboard-status,
+        .hero-dashboard-feed div,
+        .join-oath-line,
+        .oath-line-card,
+        .oath-chip,
+        [class*="bg-white/8"],
+        [class*="bg-white/10"],
+        [class*="bg-white/12"],
+        [class*="bg-white/14"],
+        [class*="bg-black/"] {
+          background: var(--apple-white) !important;
+          background-color: var(--apple-white) !important;
+          background-image: none !important;
+          border: 1px solid var(--apple-border) !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          box-shadow: var(--apple-shadow-soft) !important;
+        }
+
+        .bg-black,
+        [class*="bg-black"] {
+          background: var(--apple-white) !important;
+          background-color: var(--apple-white) !important;
+          background-image: none !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          border-color: var(--apple-border) !important;
+        }
+
+        .premium-toggle-dark,
+        .floating-join-toggle,
+        .mobile-menu-hint,
+        .mobile-menu-link-active,
+        .mobile-menu-link:hover,
+        .oath-close,
+        nav .premium-toggle-dark,
+        footer .premium-toggle-dark,
+        .premium-toggle-dark[class*="bg-black"],
+        .floating-join-toggle[class*="bg-black"] {
+          background: var(--apple-black) !important;
+          background-color: var(--apple-black) !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid var(--apple-black) !important;
+          box-shadow: 0 14px 34px rgba(0,0,0,0.14) !important;
+        }
+
+        .premium-toggle-dark *,
+        .floating-join-toggle *,
+        .mobile-menu-hint *,
+        .mobile-menu-link-active *,
+        .mobile-menu-link:hover *,
+        .oath-close * {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .premium-toggle-dark:hover,
+        .floating-join-toggle:hover,
+        .mobile-menu-hint:hover,
+        .oath-close:hover,
+        nav .premium-toggle-dark:hover,
+        footer .premium-toggle-dark:hover {
+          background: #000000 !important;
+          background-color: #000000 !important;
+          background-image: none !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border-color: #000000 !important;
+          box-shadow: 0 18px 42px rgba(0,0,0,0.18) !important;
+          transform: translateY(-2px) scale(1.01) !important;
+        }
+
+        .premium-toggle-light,
+        .premium-toggle-follow,
+        .magnetic-btn,
+        .sticker-chip,
+        select,
+        .trust-marquee-pill,
+        .eligibility-pill,
+        .auto-slide-word,
+        .apple-clean-pill {
+          background: var(--apple-white) !important;
+          background-color: var(--apple-white) !important;
+          background-image: none !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          border: 1px solid var(--apple-border) !important;
+          box-shadow: var(--apple-shadow-soft) !important;
+        }
+
+        .premium-toggle-light:hover,
+        .premium-toggle-follow:hover,
+        .magnetic-btn:hover,
+        .sticker-chip:hover,
+        select:hover,
+        .trust-marquee-pill:hover,
+        .eligibility-pill:hover,
+        .auto-slide-word:hover {
+          background: var(--apple-soft) !important;
+          background-color: var(--apple-soft) !important;
+          background-image: none !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          border-color: var(--apple-border-strong) !important;
+          box-shadow: 0 14px 38px rgba(0,0,0,0.055) !important;
+          transform: translateY(-1px) !important;
+        }
+
+        .premium-toggle::before {
+          height: 0.48rem !important;
+          width: 0.48rem !important;
+          min-width: 0.48rem !important;
+          background: currentColor !important;
+          box-shadow: none !important;
+          opacity: 0.72 !important;
+          border: 0 !important;
+        }
+
+        .premium-toggle-dark::before,
+        .floating-join-icon {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          color: var(--apple-black) !important;
+          -webkit-text-fill-color: var(--apple-black) !important;
+          box-shadow: none !important;
+          border: 0 !important;
+        }
+
+        .premium-toggle-follow::before {
+          background: var(--apple-red) !important;
+          background-color: var(--apple-red) !important;
+          background-image: none !important;
+          box-shadow: none !important;
+          height: 0.62rem !important;
+          width: 0.62rem !important;
+          min-width: 0.62rem !important;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        span,
+        li,
+        strong,
+        b,
+        .public-map-issue-title,
+        .status-step-title,
+        .status-step-label,
+        .public-audits-section h2,
+        .public-audits-section p,
+        .classic-section-card h2,
+        .classic-section-card h3,
+        .classic-section-card p,
+        .command-center h2,
+        .command-center p,
+        .legal-safety-bar p,
+        .join-rules-black-box h2,
+        .join-rules-black-box p,
+        .join-rules-big-pill p,
+        .oath-rule-pill,
+        .oath-dark-chip,
+        footer h2,
+        footer p,
+        footer span {
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          text-shadow: none !important;
+        }
+
+        .text-white,
+        .text-white\/35,
+        .text-white\/40,
+        .text-white\/45,
+        .text-white\/55,
+        .text-white\/58,
+        .text-white\/60,
+        .text-white\/62,
+        .text-white\/68,
+        .text-white\/70,
+        .text-white\/72,
+        .text-white\/76,
+        .text-white\/82 {
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+        }
+
+        .premium-toggle-dark,
+        .premium-toggle-dark span,
+        .premium-toggle-dark p,
+        .premium-toggle-dark svg,
+        .floating-join-toggle,
+        .floating-join-toggle span,
+        .floating-join-toggle p,
+        .floating-join-toggle svg,
+        .mobile-menu-hint,
+        .mobile-menu-link-active,
+        .mobile-menu-link-active span,
+        .mobile-menu-link:hover,
+        .mobile-menu-link:hover span,
+        .oath-close {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .text-black\/20,
+        .text-black\/35,
+        .text-black\/40,
+        .text-black\/42,
+        .text-black\/45,
+        .text-black\/50,
+        .text-black\/55,
+        .text-black\/58,
+        .text-black\/60,
+        .text-black\/62,
+        .text-black\/65,
+        .text-black\/66,
+        .text-black\/68,
+        .text-black\/70,
+        .text-black\/72,
+        .text-black\/75,
+        .text-black\/82,
+        .hero-trust-microcopy,
+        .hero-dashboard-title,
+        .hero-dashboard-status span {
+          color: var(--apple-muted) !important;
+          -webkit-text-fill-color: var(--apple-muted) !important;
+        }
+
+        .PageEyebrow,
+        .public-audit-eyebrow,
+        .category-report-meta,
+        .oath-label,
+        .oath-card-index,
+        p[class*="uppercase"],
+        span[class*="uppercase"] {
+          color: var(--apple-muted-2) !important;
+          -webkit-text-fill-color: var(--apple-muted-2) !important;
+          border-bottom: 0 !important;
+          padding-bottom: 0 !important;
+          letter-spacing: 0.06em !important;
+          text-transform: uppercase !important;
+        }
+
+        .hero-dashboard-dot,
+        .faq-accordion-icon,
+        .status-step-number,
+        .join-rules-number,
+        .manifesto-bullet,
+        .quick-section-dot-active,
+        .quick-section-dot:hover {
+          background: var(--apple-ink) !important;
+          background-color: var(--apple-ink) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border-color: var(--apple-ink) !important;
+          box-shadow: none !important;
+        }
+
+        .public-map-issue-icon {
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+        }
+
+        .nav-link::after,
+        .h-full.bg-gradient-to-r,
+        .ScrollProgressBar,
+        .hero-accountability-underline::after {
+          background: var(--apple-ink) !important;
+          background-image: none !important;
+          box-shadow: none !important;
+        }
+
+        .hero-accountability-underline::after {
+          height: 0.08em !important;
+          opacity: 0.22 !important;
+        }
+
+        .category-report-icon,
+        .oath-dept-icon,
+        .icon-bump,
+        .flex.h-16.w-16,
+        .flex.h-14.w-14,
+        .flex.h-20.w-20,
+        .premium-loader-mark,
+        .janta-role-icon {
+          background: var(--apple-soft) !important;
+          background-color: var(--apple-soft) !important;
+          color: var(--apple-ink) !important;
+          -webkit-text-fill-color: var(--apple-ink) !important;
+          border: 1px solid var(--apple-border) !important;
+          box-shadow: none !important;
+        }
+
+        .group:hover .janta-role-icon,
+        .janta-role-icon:hover {
+          background: var(--apple-ink) !important;
+          background-color: var(--apple-ink) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+        }
+
+        .apple-borderless:hover,
+        .glass-card:hover,
+        .apple-clean-card:hover,
+        .reveal-card:hover,
+        .faq-accordion-item:hover,
+        .category-report-card:hover,
+        .how-step-card:hover,
+        .status-system-panel:hover,
+        .join-oath-card:hover,
+        .join-oath-mini-card:hover {
+          transform: translateY(-1px) !important;
+          border-color: var(--apple-border-strong) !important;
+          box-shadow: 0 20px 62px rgba(0,0,0,0.065) !important;
+        }
+
+        .rounded-\[3\.75rem\],
+        .rounded-\[3\.25rem\],
+        .rounded-\[3rem\],
+        .rounded-\[2\.75rem\],
+        .rounded-\[2\.5rem\],
+        .rounded-\[2\.25rem\] {
+          border-radius: var(--apple-radius) !important;
+        }
+
+        .rounded-\[2rem\],
+        .rounded-\[1\.75rem\],
+        .rounded-\[1\.65rem\],
+        .rounded-\[1\.55rem\],
+        .rounded-\[1\.45rem\] {
+          border-radius: var(--apple-radius-sm) !important;
+        }
+
+        .font-black,
+        .font-bold {
+          font-weight: 760 !important;
+        }
+
+        h1.font-black,
+        h2.font-black,
+        h3.font-black,
+        .hero-dashboard-main-number,
+        .janta-role-count-number,
+        .public-map-count-word {
+          font-weight: 850 !important;
+        }
+
+        p.font-black,
+        li.font-bold,
+        .text-sm.font-bold,
+        .text-base.font-bold {
+          font-weight: 620 !important;
+        }
+
+        nav.sticky {
+          background: rgba(255,255,255,0.88) !important;
+          border-bottom: 1px solid var(--apple-border) !important;
+          box-shadow: 0 8px 28px rgba(0,0,0,0.025) !important;
+          backdrop-filter: blur(22px) saturate(170%) !important;
+          -webkit-backdrop-filter: blur(22px) saturate(170%) !important;
+        }
+
+        .floating-join-toggle {
+          position: fixed !important;
+          right: 22px !important;
+          bottom: 22px !important;
+          z-index: 120 !important;
+          box-shadow: 0 16px 42px rgba(0,0,0,0.16) !important;
+        }
+
+        footer {
+          background: #ffffff !important;
+          border-top: 1px solid var(--apple-border) !important;
+        }
+
+        @media (max-width: 768px) {
+          .apple-borderless,
+          .glass-card,
+          .apple-clean-card,
+          .clay-card,
+          .reveal-card,
+          .faq-accordion-item,
+          .category-report-card,
+          .how-step-card,
+          .status-system-panel,
+          .join-oath-card,
+          .join-oath-mini-card,
+          .command-center,
+          .classic-section-card,
+          .public-audits-section,
+          .legal-safety-bar,
+          .join-rules-black-box,
+          .hero-dashboard-card {
+            border-radius: 22px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.045) !important;
+          }
+
+          .floating-join-toggle {
+            right: 12px !important;
+            bottom: 14px !important;
+          }
+        }
+
+        /* FINAL HD READABILITY PASS: MINIMUM SMALL FONT SYSTEM */
+        :root {
+          --readable-micro: 12px;
+          --readable-hindi-min: 13px;
+          --readable-body: 15px;
+          --readable-line: 1.58;
+        }
+
+        .text-\[10px\],
+        .text-\[11px\],
+        .text-\[0\.62rem\],
+        .text-\[0\.65rem\],
+        .text-\[0\.68rem\],
+        .text-\[0\.72rem\],
+        .text-xs,
+        .oath-card-index,
+        .oath-label,
+        .category-report-meta,
+        .public-audit-eyebrow,
+        .hero-dashboard-feed b,
+        .status-step-label,
+        .quick-section-dot::after,
+        p[class*="uppercase"],
+        span[class*="uppercase"] {
+          font-size: var(--readable-micro) !important;
+          line-height: 1.45 !important;
+          font-weight: 650 !important;
+          letter-spacing: 0.045em !important;
+        }
+
+        [lang="hi"],
+        .hindi-shadow,
+        .bilingual-hi,
+        .join-oath-line .bilingual-hi,
+        .join-rules-big-pill .bilingual-hi,
+        .faq-accordion-answer [lang="hi"],
+        .trust-marquee-pill [lang="hi"],
+        .eligibility-pill [lang="hi"],
+        .category-report-title [lang="hi"],
+        .status-step-title [lang="hi"],
+        .status-step-label [lang="hi"] {
+          font-size: max(var(--readable-hindi-min), 0.86em) !important;
+          line-height: 1.62 !important;
+          font-weight: 600 !important;
+          letter-spacing: 0 !important;
+          word-break: normal !important;
+          overflow-wrap: anywhere !important;
+        }
+
+        .apple-clean-card p,
+        .glass-card p,
+        .reveal-card p,
+        .faq-accordion-answer p,
+        .join-oath-line p,
+        .oath-line-card p,
+        .oath-mini-card p,
+        .oath-complaint-card,
+        .oath-translation-card p,
+        .legal-safety-chip,
+        .public-map-issue-card,
+        .status-step-card,
+        .hero-dashboard-feed div {
+          font-size: max(var(--readable-body), 0.94rem) !important;
+          line-height: var(--readable-line) !important;
+        }
+
+        .premium-toggle,
+        .magnetic-btn,
+        .sticker-chip,
+        .floating-join-toggle,
+        nav button,
+        select {
+          font-size: max(14px, 0.875rem) !important;
+          line-height: 1.22 !important;
+          font-weight: 700 !important;
+        }
+
+        .nav-link,
+        .top-nav-segment button {
+          font-size: 14px !important;
+          line-height: 1.25 !important;
+          font-weight: 650 !important;
+        }
+
+        footer,
+        footer p,
+        footer span,
+        footer button,
+        footer a {
+          font-size: max(13px, 0.82rem) !important;
+          line-height: 1.55 !important;
+        }
+
+        .hero-dashboard-title,
+        .hero-dashboard-status span,
+        .hero-trust-microcopy,
+        .trust-marquee-pill,
+        .eligibility-pill,
+        .auto-slide-word {
+          font-size: max(12px, 0.86rem) !important;
+          line-height: 1.4 !important;
+        }
+
+        .category-report-title,
+        .status-step-title,
+        .oath-mini-card h3,
+        .oath-translation-card h4,
+        .join-oath-mini-card h3 {
+          line-height: 1.18 !important;
+          text-wrap: balance;
+        }
+
+        .HindiShadow,
+        .hindi-shadow,
+        [lang="hi"] {
+          text-rendering: optimizeLegibility !important;
+          -webkit-font-smoothing: antialiased !important;
+        }
+
+        @media (max-width: 768px) {
+          .text-\[10px\],
+          .text-\[11px\],
+          .text-xs,
+          .oath-card-index,
+          .oath-label,
+          .category-report-meta,
+          .status-step-label,
+          p[class*="uppercase"],
+          span[class*="uppercase"] {
+            font-size: 12px !important;
+            line-height: 1.42 !important;
+          }
+
+          [lang="hi"],
+          .hindi-shadow,
+          .bilingual-hi {
+            font-size: max(13px, 0.88em) !important;
+            line-height: 1.65 !important;
+          }
+
+          .apple-clean-card p,
+          .glass-card p,
+          .reveal-card p,
+          .faq-accordion-answer p,
+          .join-oath-line p,
+          .oath-line-card p,
+          .oath-mini-card p,
+          .oath-translation-card p,
+          .legal-safety-chip,
+          .public-map-issue-card,
+          .status-step-card {
+            font-size: max(14px, 0.88rem) !important;
+            line-height: 1.58 !important;
+          }
+        }
+
+        /* FINAL AUTO SLIDING TEXT SPACING FIX */
+        .auto-slide-banner,
+        .eligibility-marquee,
+        .trust-marquee-shell {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .auto-slide-banner .auto-slide-track,
+        .eligibility-marquee .eligibility-marquee-track,
+        .trust-marquee-shell .trust-marquee-track {
+          gap: 0.55rem !important;
+        }
+
+        section:has(.auto-slide-banner) {
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+          margin-top: -1.25rem !important;
+          margin-bottom: 0 !important;
+        }
+
+        .apple-borderless .eligibility-marquee,
+        .hero-premium-shell + .eligibility-marquee {
+          margin-bottom: 0 !important;
+        }
+
+        /* FINAL CONNECTED TILE PASS: REMOVE TILE GAPS */
+        :root {
+          --tile-seam: rgba(0,0,0,0.065);
+          --tile-group-radius: 28px;
+        }
+
+        .page-transition > section {
+          padding-top: 0.45rem !important;
+          padding-bottom: 0.45rem !important;
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .page-transition > section:first-child {
+          padding-top: 1.25rem !important;
+        }
+
+        .page-transition > section + section {
+          margin-top: 0 !important;
+        }
+
+        .page-transition > section > .apple-borderless,
+        .page-transition > section > .glass-card,
+        .page-transition > section > .classic-section-card,
+        .page-transition > section > .public-audits-section,
+        .page-transition > section > .command-center,
+        .page-transition > section > .legal-safety-bar {
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .grid:has(> .reveal-card),
+        .grid:has(> article.reveal-card),
+        .grid:has(> .category-report-card),
+        .grid:has(> .how-step-card),
+        .grid:has(> .oath-mini-card),
+        .grid:has(> .join-oath-mini-card),
+        .grid:has(> .public-map-issue-card),
+        .grid:has(> .command-metric),
+        .grid:has(> .legal-safety-chip),
+        .grid:has(> .status-step-card),
+        .status-system-flow,
+        .legal-safety-chip-grid,
+        .oath-grid,
+        .oath-chip-grid,
+        .oath-rule-grid,
+        .oath-translation-list,
+        .join-rules-grid {
+          gap: 1px !important;
+          padding: 1px !important;
+          border-radius: var(--tile-group-radius) !important;
+          background: var(--tile-seam) !important;
+          overflow: hidden !important;
+          border: 1px solid var(--tile-seam) !important;
+          box-shadow: 0 14px 42px rgba(0,0,0,0.035) !important;
+        }
+
+        .grid:has(> .reveal-card) > .reveal-card,
+        .grid:has(> article.reveal-card) > article.reveal-card,
+        .grid:has(> .category-report-card) > .category-report-card,
+        .grid:has(> .how-step-card) > .how-step-card,
+        .grid:has(> .oath-mini-card) > .oath-mini-card,
+        .grid:has(> .join-oath-mini-card) > .join-oath-mini-card,
+        .grid:has(> .public-map-issue-card) > .public-map-issue-card,
+        .grid:has(> .command-metric) > .command-metric,
+        .grid:has(> .legal-safety-chip) > .legal-safety-chip,
+        .grid:has(> .status-step-card) > .status-step-card,
+        .status-system-flow > .status-step-card,
+        .legal-safety-chip-grid > .legal-safety-chip,
+        .oath-grid > *,
+        .oath-chip-grid > *,
+        .oath-rule-grid > *,
+        .oath-translation-list > *,
+        .join-rules-grid > * {
+          margin: 0 !important;
+          border-radius: 0 !important;
+          border: 0 !important;
+          box-shadow: none !important;
+          outline: 0 !important;
+        }
+
+        .grid:has(> .reveal-card) > .reveal-card:hover,
+        .grid:has(> article.reveal-card) > article.reveal-card:hover,
+        .grid:has(> .category-report-card) > .category-report-card:hover,
+        .grid:has(> .how-step-card) > .how-step-card:hover,
+        .grid:has(> .oath-mini-card) > .oath-mini-card:hover,
+        .grid:has(> .join-oath-mini-card) > .join-oath-mini-card:hover,
+        .grid:has(> .public-map-issue-card) > .public-map-issue-card:hover,
+        .grid:has(> .command-metric) > .command-metric:hover,
+        .status-system-flow > .status-step-card:hover,
+        .join-rules-grid > *:hover {
+          transform: none !important;
+          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.045) !important;
+          background-color: #fafafa !important;
+        }
+
+        .grid:has(> .reveal-card) > .reveal-card:first-child,
+        .grid:has(> article.reveal-card) > article.reveal-card:first-child,
+        .grid:has(> .category-report-card) > .category-report-card:first-child,
+        .grid:has(> .how-step-card) > .how-step-card:first-child,
+        .grid:has(> .oath-mini-card) > .oath-mini-card:first-child,
+        .grid:has(> .join-oath-mini-card) > .join-oath-mini-card:first-child,
+        .grid:has(> .public-map-issue-card) > .public-map-issue-card:first-child,
+        .grid:has(> .command-metric) > .command-metric:first-child,
+        .status-system-flow > .status-step-card:first-child,
+        .legal-safety-chip-grid > .legal-safety-chip:first-child,
+        .oath-grid > *:first-child,
+        .oath-chip-grid > *:first-child,
+        .oath-rule-grid > *:first-child,
+        .oath-translation-list > *:first-child,
+        .join-rules-grid > *:first-child {
+          border-top-left-radius: calc(var(--tile-group-radius) - 2px) !important;
+        }
+
+        .grid:has(> .reveal-card) > .reveal-card:last-child,
+        .grid:has(> article.reveal-card) > article.reveal-card:last-child,
+        .grid:has(> .category-report-card) > .category-report-card:last-child,
+        .grid:has(> .how-step-card) > .how-step-card:last-child,
+        .grid:has(> .oath-mini-card) > .oath-mini-card:last-child,
+        .grid:has(> .join-oath-mini-card) > .join-oath-mini-card:last-child,
+        .grid:has(> .public-map-issue-card) > .public-map-issue-card:last-child,
+        .grid:has(> .command-metric) > .command-metric:last-child,
+        .status-system-flow > .status-step-card:last-child,
+        .legal-safety-chip-grid > .legal-safety-chip:last-child,
+        .oath-grid > *:last-child,
+        .oath-chip-grid > *:last-child,
+        .oath-rule-grid > *:last-child,
+        .oath-translation-list > *:last-child,
+        .join-rules-grid > *:last-child {
+          border-bottom-right-radius: calc(var(--tile-group-radius) - 2px) !important;
+        }
+
+        .apple-borderless .grid:has(> .reveal-card),
+        .apple-borderless .grid:has(> article.reveal-card),
+        .apple-borderless .grid:has(> .category-report-card),
+        .apple-borderless .grid:has(> .how-step-card),
+        .apple-borderless .grid:has(> .public-map-issue-card) {
+          margin-top: 1.25rem !important;
+        }
+
+        .status-system-panel {
+          padding: 1rem !important;
+        }
+
+        @media (max-width: 768px) {
+          :root {
+            --tile-group-radius: 20px;
+          }
+
+          .page-transition > section {
+            padding-top: 0.3rem !important;
+            padding-bottom: 0.3rem !important;
+          }
+
+          .grid:has(> .reveal-card),
+          .grid:has(> article.reveal-card),
+          .grid:has(> .category-report-card),
+          .grid:has(> .how-step-card),
+          .grid:has(> .oath-mini-card),
+          .grid:has(> .join-oath-mini-card),
+          .grid:has(> .public-map-issue-card),
+          .grid:has(> .command-metric),
+          .grid:has(> .legal-safety-chip),
+          .grid:has(> .status-step-card),
+          .status-system-flow,
+          .legal-safety-chip-grid,
+          .oath-grid,
+          .oath-chip-grid,
+          .oath-rule-grid,
+          .oath-translation-list,
+          .join-rules-grid {
+            gap: 1px !important;
+            padding: 1px !important;
+          }
+        }
+
+        /* FINAL MEMBERSHIP LEVELS APPLE HERO FIX */
+        .membership-levels-hero-card {
+          background: #0B0B0D !important;
+          background-color: #0B0B0D !important;
+          background-image: radial-gradient(circle at 18% 0%, rgba(255,255,255,0.14), transparent 34%), linear-gradient(145deg, #0B0B0D 0%, #151518 100%) !important;
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          border: 1px solid rgba(255,255,255,0.10) !important;
+          box-shadow: 0 22px 62px rgba(0,0,0,0.18) !important;
+          min-height: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+        }
+
+        .membership-levels-hero-card > p:first-child,
+        .membership-levels-hero-card > p:first-child *,
+        .membership-levels-hero-card .hindi-shadow {
+          color: rgba(255,255,255,0.62) !important;
+          -webkit-text-fill-color: rgba(255,255,255,0.62) !important;
+          font-size: clamp(0.95rem, 1.05vw, 1.15rem) !important;
+          line-height: 1.25 !important;
+          font-weight: 800 !important;
+          letter-spacing: 0.14em !important;
+          text-transform: uppercase !important;
+        }
+
+        .membership-levels-hero-title,
+        .membership-levels-hero-title * {
+          color: #ffffff !important;
+          -webkit-text-fill-color: #ffffff !important;
+          font-size: clamp(4.5rem, 8.6vw, 9.5rem) !important;
+          line-height: 0.82 !important;
+          font-weight: 900 !important;
+          letter-spacing: -0.085em !important;
+          text-wrap: balance !important;
+          max-width: 980px !important;
+        }
+
+        .membership-levels-hero-subtitle,
+        .membership-levels-hero-subtitle * {
+          color: rgba(255,255,255,0.72) !important;
+          -webkit-text-fill-color: rgba(255,255,255,0.72) !important;
+          font-size: clamp(1.15rem, 1.55vw, 1.7rem) !important;
+          line-height: 1.35 !important;
+          font-weight: 760 !important;
+          letter-spacing: -0.025em !important;
+          max-width: 720px !important;
+        }
+
+        .membership-levels-hero-subtitle [lang="hi"] {
+          color: rgba(255,255,255,0.58) !important;
+          -webkit-text-fill-color: rgba(255,255,255,0.58) !important;
+          font-size: clamp(1rem, 1.2vw, 1.25rem) !important;
+          line-height: 1.55 !important;
+          font-weight: 650 !important;
+        }
+
+        @media (max-width: 768px) {
+          .membership-levels-hero-card {
+            padding: 1.35rem !important;
+            border-radius: 22px !important;
+          }
+
+          .membership-levels-hero-title,
+          .membership-levels-hero-title * {
+            font-size: clamp(2.8rem, 14vw, 4.8rem) !important;
+            line-height: 0.88 !important;
+            letter-spacing: -0.065em !important;
+          }
+
+          .membership-levels-hero-subtitle,
+          .membership-levels-hero-subtitle * {
+            font-size: 1rem !important;
+            line-height: 1.45 !important;
+          }
+        }
+
+        /* FINAL CLEAN DESIGN SYSTEM LOCK */
+        .featured-issue-card,
+        .movement-index-shell,
+        .legal-trial-note {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: none !important;
+          border: 1px solid rgba(0,0,0,0.06) !important;
+          box-shadow: 0 18px 55px rgba(0,0,0,0.055) !important;
+          color: #1d1d1f !important;
+        }
+
+        .featured-issue-copy {
+          border: 1px solid rgba(0,0,0,0.06) !important;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.035) !important;
+        }
+
+        .featured-issue-tag {
+          display: inline-flex;
+          align-items: center;
+          border-radius: 9999px;
+          border: 1px solid rgba(0,0,0,0.07);
+          background: #f5f5f7;
+          padding: 0.65rem 0.9rem;
+          font-size: 0.82rem;
+          font-weight: 760;
+          color: rgba(29,29,31,0.72);
+        }
+
+        .movement-index-grid {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          gap: 1px;
+          overflow: hidden;
+          border-radius: 24px;
+          background: rgba(0,0,0,0.065);
+          border: 1px solid rgba(0,0,0,0.065);
+        }
+
+        .movement-index-card {
+          display: flex;
+          min-height: 180px;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 1rem;
+          background: #ffffff;
+          padding: 1.4rem;
+          text-align: left;
+          color: #1d1d1f;
+        }
+
+        .movement-index-card:hover {
+          background: #f5f5f7 !important;
+          transform: none !important;
+          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.045) !important;
+        }
+
+        .movement-index-number {
+          font-size: 0.82rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          color: rgba(29,29,31,0.42) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.42) !important;
+        }
+
+        .movement-index-card strong {
+          display: block;
+          font-size: clamp(1.35rem, 1.7vw, 2rem);
+          line-height: 1;
+          font-weight: 850;
+          letter-spacing: -0.055em;
+          color: #1d1d1f !important;
+          -webkit-text-fill-color: #1d1d1f !important;
+        }
+
+        .movement-index-card small {
+          display: block;
+          font-size: 0.92rem;
+          line-height: 1.45;
+          font-weight: 650;
+          color: rgba(29,29,31,0.58) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.58) !important;
+        }
+
+        .legal-trial-note {
+          border-left: 6px solid #1d1d1f !important;
+        }
+
+        @media (max-width: 1024px) {
+          .movement-index-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .movement-index-grid {
+            grid-template-columns: 1fr;
+            border-radius: 20px;
+          }
+
+          .movement-index-card {
+            min-height: 140px;
+          }
+        }
+
+        /* FINAL MEMBERSHIP HEADER: MATCH HOME HERO */
+        .membership-levels-section {
+          background: #ffffff !important;
+          background-color: #ffffff !important;
+          background-image: none !important;
+        }
+
+        .membership-levels-home-header {
+          padding: clamp(1.5rem, 3vw, 3.25rem) 0 clamp(1rem, 2vw, 2rem) !important;
+          text-align: center !important;
+        }
+
+        .membership-levels-home-header > p:first-child,
+        .membership-levels-home-header > p:first-child * {
+          color: rgba(29,29,31,0.42) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.42) !important;
+          font-size: clamp(0.86rem, 0.9vw, 1.05rem) !important;
+          line-height: 1.25 !important;
+          font-weight: 760 !important;
+          letter-spacing: 0.08em !important;
+          text-transform: uppercase !important;
+          border: 0 !important;
+          padding: 0 !important;
+        }
+
+        .membership-levels-home-title,
+        .membership-levels-home-title *,
+        .membership-levels-home-title .word-reveal,
+        .membership-levels-home-title .word-reveal-word {
+          color: #1d1d1f !important;
+          -webkit-text-fill-color: #1d1d1f !important;
+          font-size: clamp(4.6rem, 8.8vw, 9.4rem) !important;
+          line-height: 0.86 !important;
+          font-weight: 900 !important;
+          letter-spacing: -0.08em !important;
+          text-align: center !important;
+          text-wrap: balance !important;
+          max-width: 1180px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .membership-levels-home-subtitle,
+        .membership-levels-home-subtitle * {
+          color: rgba(29,29,31,0.64) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.64) !important;
+          font-size: clamp(1.25rem, 1.65vw, 1.85rem) !important;
+          line-height: 1.34 !important;
+          font-weight: 760 !important;
+          letter-spacing: -0.03em !important;
+          text-align: center !important;
+          max-width: 820px !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .membership-levels-home-subtitle [lang="hi"] {
+          color: rgba(29,29,31,0.48) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.48) !important;
+          font-size: clamp(1rem, 1.15vw, 1.25rem) !important;
+          line-height: 1.58 !important;
+          letter-spacing: 0 !important;
+        }
+
+        .membership-levels-home-grid {
+          margin-top: clamp(2rem, 4vw, 3.5rem) !important;
+        }
+
+        .membership-level-card {
+          min-height: 210px !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: space-between !important;
+          padding: clamp(1.15rem, 1.4vw, 1.6rem) !important;
+        }
+
+        .membership-level-card h3,
+        .membership-level-card h3 * {
+          font-size: clamp(1.35rem, 1.55vw, 1.75rem) !important;
+          line-height: 1.02 !important;
+          font-weight: 850 !important;
+          letter-spacing: -0.045em !important;
+          color: #1d1d1f !important;
+          -webkit-text-fill-color: #1d1d1f !important;
+        }
+
+        .membership-level-card p:last-child,
+        .membership-level-card p:last-child * {
+          font-size: clamp(0.95rem, 1vw, 1.05rem) !important;
+          line-height: 1.48 !important;
+          font-weight: 650 !important;
+          color: rgba(29,29,31,0.62) !important;
+          -webkit-text-fill-color: rgba(29,29,31,0.62) !important;
+        }
+
+        @media (max-width: 768px) {
+          .membership-levels-home-title,
+          .membership-levels-home-title *,
+          .membership-levels-home-title .word-reveal-word {
+            font-size: clamp(3.2rem, 16vw, 5rem) !important;
+            line-height: 0.9 !important;
+            letter-spacing: -0.065em !important;
+          }
+
+          .membership-levels-home-subtitle,
+          .membership-levels-home-subtitle * {
+            font-size: 1.05rem !important;
+            line-height: 1.45 !important;
+          }
+
+          .membership-level-card {
+            min-height: 170px !important;
+          }
+        }
       `}</style>
       {showLoader ? <PremiumPageLoader /> : null}
       <ScrollProgressBar progress={scrollProgress} />
@@ -6680,6 +10510,7 @@ export default function CockroachIndiaParty() {
           { id: "antiCorruption" as PageId, label: "Anti-Corruption" },
           { id: "noVip" as PageId, label: "No VIP" },
           { id: "constitution" as PageId, label: "Vision" },
+          { id: "reformOS" as PageId, label: "Reforms 2047" },
           { id: "greatIndia" as PageId, label: "India Mission" },
         ].map((item) => (
           <button
@@ -6759,6 +10590,7 @@ export default function CockroachIndiaParty() {
         )}
         {activePage === "antiCorruption" && <AntiCorruptionDetailedPage mode={mode} />}
         {activePage === "noVip" && <NoVIPCulturePage mode={mode} />}
+        {activePage === "reformOS" && <India2047ReformOSPage mode={mode} />}
         {activePage === "greatIndia" && <GreatIndiaMissionPage mode={mode} />}
         {activePage === "contact" && <ActionHubPage mode={mode} />}
         {activePage === "oath" && <ActionHubPage mode={mode} />}
@@ -6818,7 +10650,7 @@ export default function CockroachIndiaParty() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="premium-toggle premium-toggle-dark inline-flex rounded-full px-8 py-4 text-base font-black"
+              className="premium-toggle premium-toggle-follow inline-flex rounded-full px-8 py-4 text-base font-black"
             >
               Follow on Instagram
             </a>
