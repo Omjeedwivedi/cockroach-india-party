@@ -873,6 +873,27 @@ function MovementIndexSection({ mode, setPage }: { mode: LangMode; setPage: (pag
   );
 }
 
+function DomainSaleBottomSection() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-12">
+      <div className="apple-borderless rounded-[2.75rem] bg-white px-8 py-12 text-center shadow-sm md:px-12 md:py-16">
+        <p className="text-base font-black uppercase tracking-[0.16em] text-black/42 md:text-lg">
+          Domain For Sale
+        </p>
+        <h2 className="mx-auto mt-5 max-w-6xl text-5xl font-black leading-[0.9] tracking-[-0.07em] text-black md:text-8xl">
+          This domain is available for sale.
+        </h2>
+        <p className="mx-auto mt-7 max-w-4xl text-2xl font-black leading-9 tracking-[-0.035em] text-black/65 md:text-4xl md:leading-[3rem]">
+          Reach out at{" "}
+          <a href="mailto:adubey7722@gmail.com" className="font-black text-black underline decoration-black/20 underline-offset-4 hover:decoration-black">
+            adubey7722@gmail.com
+          </a>
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function CommandCenterSection({ mode }: { mode: LangMode }) {
   const metrics: { value: string; label: I18n }[] = [
     { value: "000", label: { en: "Reports", hi: "रिपोर्ट" } },
@@ -10600,6 +10621,7 @@ export default function CockroachIndiaParty() {
 
       <LegalSafetyBarSection mode={mode} />
       <FinalCinematicCTA mode={mode} onShare={shareMovement} />
+      <DomainSaleBottomSection />
 
       <footer className="border-t border-black/10 px-6 py-14 pb-28 text-center text-sm font-bold text-black/45 md:pb-14">
         <div className="mx-auto max-w-7xl">
